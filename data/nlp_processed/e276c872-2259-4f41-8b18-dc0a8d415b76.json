@@ -1,0 +1,109 @@
+{
+  "article_id": "e276c872-2259-4f41-8b18-dc0a8d415b76",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Retail Investors Are Selling Stocks to Raise Money for SpaceX",
+  "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-06-11-2026/card/retail-investors-are-selling-stocks-to-raise-money-for-spacex-HlfGReKH7KWZzHAChmsp?siteid=yhoof2&yptr=yahoo",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:36:37.395571",
+  "sentences": [
+    "Retail Investors Are Selling Stocks to Raise Money for SpaceX Retail investors are clearing the decks ahead of the SpaceX IPO.",
+    "For two straight days this week, ordinary investors dumped their single-stock holdings on a net basis, according to Vanda Research.",
+    "The moves suggests that mom-and-pop investors are amassing dry powder ahead of SpaceX's anticipated public debut tomorrow."
+  ],
+  "entities": [
+    {
+      "entity": "Retail Inves",
+      "raw_text": "Retail Inves",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 12,
+      "sentence_idx": 0,
+      "context_window": "Retail Investors Are Selling Stocks to Raise Money for SpaceX Retail investors are clearing the decks ahead of the SpaceX IPO. For two straight days this week, ordinary investors dumped their single-stock holdings on a net basis, according to Vanda Research. The moves suggests that mom-and-pop investors are amassing dry powder ahead of SpaceX's anticipated public debut tomorrow.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Spacex Re",
+      "raw_text": "SpaceX Re",
+      "label": "ORG",
+      "start_char": 55,
+      "end_char": 64,
+      "sentence_idx": 0,
+      "context_window": "Retail Investors Are Selling Stocks to Raise Money for SpaceX Retail investors are clearing the decks ahead of the SpaceX IPO. For two straight days this week, ordinary investors dumped their single-stock holdings on a net basis, according to Vanda Research. The moves suggests that mom-and-pop investors are amassing dry powder ahead of SpaceX's anticipated public debut tomorrow.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Vanda Research",
+      "raw_text": "Vanda Research",
+      "label": "ORG",
+      "start_char": 244,
+      "end_char": 258,
+      "sentence_idx": 1,
+      "context_window": "Retail Investors Are Selling Stocks to Raise Money for SpaceX Retail investors are clearing the decks ahead of the SpaceX IPO. For two straight days this week, ordinary investors dumped their single-stock holdings on a net basis, according to Vanda Research. The moves suggests that mom-and-pop investors are amassing dry powder ahead of SpaceX's anticipated public debut tomorrow.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Spacex",
+      "raw_text": "SpaceX",
+      "label": "ORG",
+      "start_char": 340,
+      "end_char": 346,
+      "sentence_idx": 2,
+      "context_window": "Retail Investors Are Selling Stocks to Raise Money for SpaceX Retail investors are clearing the decks ahead of the SpaceX IPO. For two straight days this week, ordinary investors dumped their single-stock holdings on a net basis, according to Vanda Research. The moves suggests that mom-and-pop investors are amassing dry powder ahead of SpaceX's anticipated public debut tomorrow.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Retail Inves": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Spacex Re": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Vanda Research": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Spacex": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "c87ab831-ab06-442d-8c4a-4661a96ddd3b"
+}

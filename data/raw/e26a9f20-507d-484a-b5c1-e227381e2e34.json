@@ -1,0 +1,72 @@
+{
+  "article_id": "e26a9f20-507d-484a-b5c1-e227381e2e34",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Dynex Capital amends stock distribution agreement, adds 60 million shares",
+  "url": "https://www.investing.com/news/sec-filings/dynex-capital-amends-stock-distribution-agreement-adds-60-million-shares-93CH-4467863",
+  "published_at": "2026-01-28T14:32:19Z",
+  "fetched_at": "2026-06-03T04:57:51.401140",
+  "full_text": "Dynex Capital, Inc. has amended its stock distribution agreement to increase the number of common shares available for sale by 60 million, bringing the total to over 221 million shares. This amendment allows sales agents to offer and sell common stock as \"at the market offerings\" under SEC rules. The company also recently reported strong financial results for Q4 2025, significantly exceeding earnings expectations with an EPS of $1.16.",
+  "summary": "Dynex Capital, Inc. has amended its stock distribution agreement to increase the number of common shares available for sale by 60 million, bringing the total to over 221 million shares. This amendment allows sales agents to offer and sell common stock as \"at the market offerings\" under SEC rules. The company also recently reported strong financial results for Q4 2025, significantly exceeding earnings expectations with an EPS of $1.16.",
+  "raw_payload": {
+    "title": "Dynex Capital amends stock distribution agreement, adds 60 million shares",
+    "url": "https://www.investing.com/news/sec-filings/dynex-capital-amends-stock-distribution-agreement-adds-60-million-shares-93CH-4467863",
+    "time_published": "20260128T143219",
+    "authors": [
+      "Investing.com"
+    ],
+    "summary": "Dynex Capital, Inc. has amended its stock distribution agreement to increase the number of common shares available for sale by 60 million, bringing the total to over 221 million shares. This amendment allows sales agents to offer and sell common stock as \"at the market offerings\" under SEC rules. The company also recently reported strong financial results for Q4 2025, significantly exceeding earnings expectations with an EPS of $1.16.",
+    "banner_image": "https://i-invdn-com.investing.com/news/World_News_9_800x533_L_1420026261.jpg",
+    "source": "Investing.com",
+    "category_within_source": "General",
+    "source_domain": "Investing.com",
+    "topics": [
+      {
+        "topic": "finance",
+        "relevance_score": "0.841561"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.840829"
+      },
+      {
+        "topic": "earnings",
+        "relevance_score": "0.704166"
+      }
+    ],
+    "overall_sentiment_score": -0.184991,
+    "overall_sentiment_label": "Somewhat-Bearish",
+    "ticker_sentiment": [
+      {
+        "ticker": "DX",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "-0.196021",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.630144",
+        "ticker_sentiment_score": "-0.757631",
+        "ticker_sentiment_label": "Bearish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.622999",
+        "ticker_sentiment_score": "-0.761755",
+        "ticker_sentiment_label": "Bearish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.611285",
+        "ticker_sentiment_score": "0.470893",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.622610",
+        "ticker_sentiment_score": "0.352581",
+        "ticker_sentiment_label": "Bullish"
+      }
+    ]
+  }
+}

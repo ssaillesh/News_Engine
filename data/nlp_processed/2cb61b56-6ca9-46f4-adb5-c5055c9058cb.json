@@ -1,0 +1,41 @@
+{
+  "article_id": "2cb61b56-6ca9-46f4-adb5-c5055c9058cb",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "Oracle Just Showed Wall Street the AI Boom, Then Handed It The Bill",
+  "url": "https://www.trefis.com/articles/602583/oracle-just-showed-wall-street-the-ai-boom-then-handed-it-the-bill/2026-06-11",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:36:56.322197",
+  "sentences": [
+    "Oracle Just Showed Wall Street the AI Boom, Then Handed It The Bill The company's backlog of future business is staggering, but the market is focused on the equally staggering cost of building it all."
+  ],
+  "entities": [
+    {
+      "entity": "Oracle",
+      "raw_text": "Oracle",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 6,
+      "sentence_idx": 0,
+      "context_window": "Oracle Just Showed Wall Street the AI Boom, Then Handed It The Bill The company's backlog of future business is staggering, but the market is focused on the equally staggering cost of building it all.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Oracle": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "8609a3f9-ab69-44af-8664-92a04492be14"
+}

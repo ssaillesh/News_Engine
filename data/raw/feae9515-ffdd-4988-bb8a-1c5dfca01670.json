@@ -1,0 +1,76 @@
+{
+  "article_id": "feae9515-ffdd-4988-bb8a-1c5dfca01670",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Apple Inc. $AAPL Holdings Decreased by TLW Wealth Management LLC",
+  "url": "https://www.marketbeat.com/instant-alerts/filing-apple-inc-aapl-holdings-decreased-by-tlw-wealth-management-llc-2026-02-10/",
+  "published_at": "2026-02-10T08:57:49Z",
+  "fetched_at": "2026-06-03T04:57:51.400987",
+  "full_text": "TLW Wealth Management LLC reduced its stake in Apple Inc. ($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+  "summary": "TLW Wealth Management LLC reduced its stake in Apple Inc. ($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+  "raw_payload": {
+    "title": "Apple Inc. $AAPL Holdings Decreased by TLW Wealth Management LLC",
+    "url": "https://www.marketbeat.com/instant-alerts/filing-apple-inc-aapl-holdings-decreased-by-tlw-wealth-management-llc-2026-02-10/",
+    "time_published": "20260210T085749",
+    "authors": [
+      "MarketBeat"
+    ],
+    "summary": "TLW Wealth Management LLC reduced its stake in Apple Inc. ($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+    "banner_image": "https://www.marketbeat.com/logos/apple-inc-logo-1200x675.png",
+    "source": "MarketBeat",
+    "category_within_source": "General",
+    "source_domain": "MarketBeat",
+    "topics": [
+      {
+        "topic": "earnings",
+        "relevance_score": "0.902774"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.823414"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.720094"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.622124"
+      }
+    ],
+    "overall_sentiment_score": 0.124589,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.230778",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.607811",
+        "ticker_sentiment_score": "0.132199",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "META",
+        "relevance_score": "0.601249",
+        "ticker_sentiment_score": "0.131570",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.612741",
+        "ticker_sentiment_score": "0.125396",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.622641",
+        "ticker_sentiment_score": "0.116599",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

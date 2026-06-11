@@ -1,0 +1,149 @@
+{
+  "event_id": "a06b14ce-246d-4b19-a209-0cdace1e86d7",
+  "cluster_id": 5,
+  "created_at": "2026-06-03T04:58:58.958646",
+  "article_ids": [
+    "54ac495f-2bd1-4f38-9f21-07fa22a586b8",
+    "72787213-96f7-435e-92fa-647cb8416a5c",
+    "a9c593cc-4b5b-4773-8327-8e985b2bab09",
+    "266beee2-056c-4412-9113-702eb5edfee4"
+  ],
+  "article_count": 4,
+  "sources": [
+    "yfinance",
+    "alphavantage"
+  ],
+  "representative_title": "AI bubble burst coming? Concerns jump after billionaire Peter Thiel's fund sells entire $100 million worth Nvidia stock",
+  "representative_url": "https://www.livemint.com/companies/news/ai-bubble-burst-concern-jump-billionaire-peter-thiel-macro-fund-sells-entire-100-million-nvidia-stock-q3-result-softbank-11763389474323.html",
+  "mention_volume": 4,
+  "velocity": 0.0,
+  "novelty_score": 0.0,
+  "sentiment_strength": 0.7941,
+  "hot_score": 0.4088,
+  "company_sentiments": [
+    {
+      "company": "Nvidia",
+      "mention_count": 6,
+      "positive_ratio": 0.1069,
+      "negative_ratio": 0.8208,
+      "neutral_ratio": 0.0722,
+      "weighted_score": -0.7138,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Thiel Macro",
+      "mention_count": 2,
+      "positive_ratio": 0.0536,
+      "negative_ratio": 0.86,
+      "neutral_ratio": 0.0863,
+      "weighted_score": -0.8065,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Softbank",
+      "mention_count": 2,
+      "positive_ratio": 0.0132,
+      "negative_ratio": 0.9611,
+      "neutral_ratio": 0.0257,
+      "weighted_score": -0.948,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Tesla",
+      "mention_count": 2,
+      "positive_ratio": 0.0486,
+      "negative_ratio": 0.8704,
+      "neutral_ratio": 0.0809,
+      "weighted_score": -0.8218,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Apple",
+      "mention_count": 2,
+      "positive_ratio": 0.0891,
+      "negative_ratio": 0.7693,
+      "neutral_ratio": 0.1415,
+      "weighted_score": -0.6802,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Paypal",
+      "mention_count": 1,
+      "positive_ratio": 0.0082,
+      "negative_ratio": 0.9715,
+      "neutral_ratio": 0.0203,
+      "weighted_score": -0.9633,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Palantir",
+      "mention_count": 1,
+      "positive_ratio": 0.0082,
+      "negative_ratio": 0.9715,
+      "neutral_ratio": 0.0203,
+      "weighted_score": -0.9633,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Cuts Tesla",
+      "mention_count": 1,
+      "positive_ratio": 0.0891,
+      "negative_ratio": 0.7693,
+      "neutral_ratio": 0.1415,
+      "weighted_score": -0.6802,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Move",
+      "mention_count": 1,
+      "positive_ratio": 0.0891,
+      "negative_ratio": 0.7693,
+      "neutral_ratio": 0.1415,
+      "weighted_score": -0.6802,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Meta Platforms",
+      "mention_count": 1,
+      "positive_ratio": 0.0891,
+      "negative_ratio": 0.7693,
+      "neutral_ratio": 0.1415,
+      "weighted_score": -0.6802,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Me",
+      "mention_count": 1,
+      "positive_ratio": 0.0891,
+      "negative_ratio": 0.7693,
+      "neutral_ratio": 0.1415,
+      "weighted_score": -0.6802,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Microsoft",
+      "mention_count": 1,
+      "positive_ratio": 0.0891,
+      "negative_ratio": 0.7693,
+      "neutral_ratio": 0.1415,
+      "weighted_score": -0.6802,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Marvell",
+      "mention_count": 1,
+      "positive_ratio": 0.4191,
+      "negative_ratio": 0.5129,
+      "neutral_ratio": 0.068,
+      "weighted_score": -0.0938,
+      "dominant_label": "negative"
+    }
+  ],
+  "top_companies": [
+    "Nvidia",
+    "Thiel Macro",
+    "Softbank",
+    "Tesla",
+    "Apple"
+  ]
+}

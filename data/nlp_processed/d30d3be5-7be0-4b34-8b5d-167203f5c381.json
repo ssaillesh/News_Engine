@@ -1,0 +1,42 @@
+{
+  "article_id": "d30d3be5-7be0-4b34-8b5d-167203f5c381",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "What Is Google Hiding Behind Its AI Silence?",
+  "url": "https://www.trefis.com/articles/602496/what-is-google-hiding-behind-its-ai-silence/2026-06-11",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:36:33.020509",
+  "sentences": [
+    "What Is Google Hiding Behind Its AI Silence?",
+    "Management has shifted the spotlight from mass-market AI adoption to a massive enterprise backlog, leaving investors with a critical question: which engine still pays the bills."
+  ],
+  "entities": [
+    {
+      "entity": "Google",
+      "raw_text": "Google",
+      "label": "ORG",
+      "start_char": 8,
+      "end_char": 14,
+      "sentence_idx": 0,
+      "context_window": "What Is Google Hiding Behind Its AI Silence? Management has shifted the spotlight from mass-market AI adoption to a massive enterprise backlog, leaving investors with a critical question: which engine still pays the bills.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Google": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "d088f085-9e14-4646-af6a-2b2d4ee447c7"
+}

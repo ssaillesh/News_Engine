@@ -1,0 +1,147 @@
+{
+  "event_id": "757185f9-9f90-4883-af5d-00bc89f142dd",
+  "cluster_id": 0,
+  "created_at": "2026-06-03T04:58:58.958412",
+  "article_ids": [
+    "e4cc70a2-b393-4376-b678-14d50cee18ea",
+    "74f34860-e4c7-462d-b9e4-940d32dfdf1e",
+    "f4562327-4768-441d-8478-4b5aca0e078c"
+  ],
+  "article_count": 3,
+  "sources": [
+    "alphavantage"
+  ],
+  "representative_title": "IsoEnergy Ltd. R (I010.DU) stock price, news, quote and history",
+  "representative_url": "https://uk.finance.yahoo.com/quote/I010.DU/sec-filing/",
+  "mention_volume": 3,
+  "velocity": 0.0,
+  "novelty_score": 0.0,
+  "sentiment_strength": 0.7734,
+  "hot_score": 0.3172,
+  "company_sentiments": [
+    {
+      "company": "1",
+      "mention_count": 3,
+      "positive_ratio": 0.0088,
+      "negative_ratio": 0.9477,
+      "neutral_ratio": 0.0435,
+      "weighted_score": -0.9389,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Isoenergy",
+      "mention_count": 2,
+      "positive_ratio": 0.0143,
+      "negative_ratio": 0.488,
+      "neutral_ratio": 0.4977,
+      "weighted_score": -0.4737,
+      "dominant_label": "neutral"
+    },
+    {
+      "company": "##U. Mi",
+      "mention_count": 2,
+      "positive_ratio": 0.0084,
+      "negative_ratio": 0.9578,
+      "neutral_ratio": 0.0338,
+      "weighted_score": -0.9494,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Anebulo Pharmaceuticals",
+      "mention_count": 2,
+      "positive_ratio": 0.0154,
+      "negative_ratio": 0.5981,
+      "neutral_ratio": 0.3864,
+      "weighted_score": -0.5827,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "S & P",
+      "mention_count": 1,
+      "positive_ratio": 0.0085,
+      "negative_ratio": 0.9306,
+      "neutral_ratio": 0.0608,
+      "weighted_score": -0.9221,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Prudential Financial",
+      "mention_count": 1,
+      "positive_ratio": 0.0223,
+      "negative_ratio": 0.04,
+      "neutral_ratio": 0.9377,
+      "weighted_score": -0.0177,
+      "dominant_label": "neutral"
+    },
+    {
+      "company": "Prud",
+      "mention_count": 1,
+      "positive_ratio": 0.0074,
+      "negative_ratio": 0.9477,
+      "neutral_ratio": 0.045,
+      "weighted_score": -0.9403,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "##Ential Financial",
+      "mention_count": 1,
+      "positive_ratio": 0.0074,
+      "negative_ratio": 0.9477,
+      "neutral_ratio": 0.045,
+      "weighted_score": -0.9403,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "##U",
+      "mention_count": 1,
+      "positive_ratio": 0.0097,
+      "negative_ratio": 0.9273,
+      "neutral_ratio": 0.063,
+      "weighted_score": -0.9176,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Mi",
+      "mention_count": 1,
+      "positive_ratio": 0.0097,
+      "negative_ratio": 0.9273,
+      "neutral_ratio": 0.063,
+      "weighted_score": -0.9176,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "&",
+      "mention_count": 1,
+      "positive_ratio": 0.0095,
+      "negative_ratio": 0.968,
+      "neutral_ratio": 0.0226,
+      "weighted_score": -0.9585,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Yahoo Finance",
+      "mention_count": 1,
+      "positive_ratio": 0.0092,
+      "negative_ratio": 0.9537,
+      "neutral_ratio": 0.0371,
+      "weighted_score": -0.9445,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "& P",
+      "mention_count": 1,
+      "positive_ratio": 0.0126,
+      "negative_ratio": 0.8827,
+      "neutral_ratio": 0.1047,
+      "weighted_score": -0.8701,
+      "dominant_label": "negative"
+    }
+  ],
+  "top_companies": [
+    "1",
+    "Isoenergy",
+    "##U. Mi",
+    "Anebulo Pharmaceuticals",
+    "S & P"
+  ]
+}

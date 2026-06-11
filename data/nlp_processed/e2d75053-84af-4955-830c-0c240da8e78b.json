@@ -1,0 +1,41 @@
+{
+  "article_id": "e2d75053-84af-4955-830c-0c240da8e78b",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Reddit Is Down 28% This Year, but It Won't Stay That Way For Long",
+  "url": "https://www.fool.com/investing/2026/06/11/reddit-is-down-28-this-year-but-it-wont-stay-that/",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:31.735595",
+  "sentences": [
+    "Reddit Is Down 28% This Year, but It Won't Stay That Way For Long Reddit's year-to-date drop presents a compelling buying opportunity for patient investors."
+  ],
+  "entities": [
+    {
+      "entity": "Reddit",
+      "raw_text": "Reddit",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 6,
+      "sentence_idx": 0,
+      "context_window": "Reddit Is Down 28% This Year, but It Won't Stay That Way For Long Reddit's year-to-date drop presents a compelling buying opportunity for patient investors.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Reddit": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "11b0c4ee-e5c2-47cc-9a7e-775641fa31e7"
+}

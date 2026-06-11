@@ -1,0 +1,68 @@
+{
+  "article_id": "7bde2679-4f1c-4897-b776-08c55c26f785",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "The Tech Download: How Apple's new chief could shake things up",
+  "url": "https://www.cnbc.com/2026/04/24/the-tech-download-how-apples-new-chief-could-shake-things-up.html",
+  "published_at": "2026-04-24T10:59:59Z",
+  "fetched_at": "2026-06-03T04:57:51.400463",
+  "full_text": "Apple announced that Tim Cook will step down as CEO, with John Ternus, Senior Vice President of Hardware Engineering, taking over in September. Cook will remain involved as executive chairman, focusing on policymaker engagement. This leadership change signals Apple's continued focus on its internal innovation, functional management, and integrated product strategy, particularly in hardware and AI.",
+  "summary": "Apple announced that Tim Cook will step down as CEO, with John Ternus, Senior Vice President of Hardware Engineering, taking over in September. Cook will remain involved as executive chairman, focusing on policymaker engagement. This leadership change signals Apple's continued focus on its internal innovation, functional management, and integrated product strategy, particularly in hardware and AI.",
+  "raw_payload": {
+    "title": "The Tech Download: How Apple's new chief could shake things up",
+    "url": "https://www.cnbc.com/2026/04/24/the-tech-download-how-apples-new-chief-could-shake-things-up.html",
+    "time_published": "20260424T105959",
+    "authors": [
+      "Kai Nicol-Schwarz"
+    ],
+    "summary": "Apple announced that Tim Cook will step down as CEO, with John Ternus, Senior Vice President of Hardware Engineering, taking over in September. Cook will remain involved as executive chairman, focusing on policymaker engagement. This leadership change signals Apple's continued focus on its internal innovation, functional management, and integrated product strategy, particularly in hardware and AI.",
+    "banner_image": "https://image.cnbcfm.com/api/v1/image/108252159-1768390917044-The_Tech_Download_Section_Header_02.png?v=1768390925&h=80",
+    "source": "CNBC",
+    "category_within_source": "General",
+    "source_domain": "CNBC",
+    "topics": [
+      {
+        "topic": "technology",
+        "relevance_score": "0.902303"
+      },
+      {
+        "topic": "earnings",
+        "relevance_score": "0.721626"
+      }
+    ],
+    "overall_sentiment_score": 0.033473,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.952167",
+        "ticker_sentiment_score": "0.260925",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.632935",
+        "ticker_sentiment_score": "-0.301880",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.579217",
+        "ticker_sentiment_score": "0.101808",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.556458",
+        "ticker_sentiment_score": "0.107950",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "GOOGL",
+        "relevance_score": "0.580009",
+        "ticker_sentiment_score": "0.026340",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

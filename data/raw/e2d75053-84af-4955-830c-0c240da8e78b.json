@@ -1,0 +1,73 @@
+{
+  "article_id": "e2d75053-84af-4955-830c-0c240da8e78b",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Reddit Is Down 28% This Year, but It Won't Stay That Way For Long",
+  "url": "https://www.fool.com/investing/2026/06/11/reddit-is-down-28-this-year-but-it-wont-stay-that/",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.696132",
+  "full_text": "Reddit's year-to-date drop presents a compelling buying opportunity for patient investors.",
+  "summary": "Reddit's year-to-date drop presents a compelling buying opportunity for patient investors.",
+  "raw_payload": {
+    "id": "e91986aa-911f-3644-b25b-c0786fb5b2ae",
+    "content": {
+      "id": "e91986aa-911f-3644-b25b-c0786fb5b2ae",
+      "contentType": "STORY",
+      "title": "Reddit Is Down 28% This Year, but It Won't Stay That Way For Long",
+      "description": "",
+      "summary": "Reddit's year-to-date drop presents a compelling buying opportunity for patient investors.",
+      "pubDate": "2026-06-11T14:20:00Z",
+      "displayTime": "2026-06-11T14:20:00Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/motleyfool.com/b5d323be6377c609d0701f948a2c874e",
+        "originalWidth": 1200,
+        "originalHeight": 800,
+        "caption": "A person on a smart phone. ",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/voRCN4kPWISdCaPSl2kqHw--~B/aD04MDA7dz0xMjAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/motleyfool.com/b5d323be6377c609d0701f948a2c874e",
+            "width": 1200,
+            "height": 800,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/UjQO.HzJoviR44x029_P7Q--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/motleyfool.com/b5d323be6377c609d0701f948a2c874e",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Motley Fool",
+        "url": "http://www.fool.com/",
+        "sourceId": "motleyfool.com"
+      },
+      "canonicalUrl": {
+        "url": "https://www.fool.com/investing/2026/06/11/reddit-is-down-28-this-year-but-it-wont-stay-that/",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/reddit-down-28-wont-stay-142000521.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

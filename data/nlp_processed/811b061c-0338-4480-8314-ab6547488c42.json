@@ -1,0 +1,233 @@
+{
+  "article_id": "811b061c-0338-4480-8314-ab6547488c42",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga",
+  "url": "https://www.benzinga.com/markets/tech/25/10/48170317/nvidia-tesla-surge-nearly-4-as-apple-microsoft-and-other-mag-7-stocks-rally-in-monday-pre-market-whats-going-on",
+  "published_at": "2025-10-13T09:14:51Z",
+  "processed_at": "2026-06-03T04:58:40.302277",
+  "sentences": [
+    "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs.",
+    "Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains.",
+    "The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities."
+  ],
+  "entities": [
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 5,
+      "sentence_idx": 0,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    },
+    {
+      "entity": "Nvidia",
+      "raw_text": "Nvidia",
+      "label": "ORG",
+      "start_char": 7,
+      "end_char": 13,
+      "sentence_idx": 0,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 84,
+      "end_char": 89,
+      "sentence_idx": 0,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    },
+    {
+      "entity": "Amazon. Com",
+      "raw_text": "Amazon. com",
+      "label": "ORG",
+      "start_char": 105,
+      "end_char": 115,
+      "sentence_idx": 0,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    },
+    {
+      "entity": "Benzinga Nvidia",
+      "raw_text": "Benzinga Nvidia",
+      "label": "ORG",
+      "start_char": 132,
+      "end_char": 147,
+      "sentence_idx": 0,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    },
+    {
+      "entity": "Amazon",
+      "raw_text": "Amazon",
+      "label": "ORG",
+      "start_char": 316,
+      "end_char": 322,
+      "sentence_idx": 1,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 324,
+      "end_char": 329,
+      "sentence_idx": 1,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    },
+    {
+      "entity": "Microsoft",
+      "raw_text": "Microsoft",
+      "label": "ORG",
+      "start_char": 331,
+      "end_char": 340,
+      "sentence_idx": 1,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    },
+    {
+      "entity": "Alphabet",
+      "raw_text": "Alphabet",
+      "label": "ORG",
+      "start_char": 342,
+      "end_char": 350,
+      "sentence_idx": 1,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    },
+    {
+      "entity": "Meta Platform",
+      "raw_text": "Meta Platform",
+      "label": "ORG",
+      "start_char": 356,
+      "end_char": 369,
+      "sentence_idx": 1,
+      "context_window": "Tesla, Nvidia And Other Mag 7 Stocks Rally In Monday Pre-Market: What's Going On? - Apple (NASDAQ:AAPL), Amazon.com (NASDAQ:AMZN) - Benzinga Nvidia and Tesla shares surged in pre-market trading on Monday following President Donald Trump's softened stance on China tariffs. Other \"Magnificent Seven\" stocks including Amazon, Apple, Microsoft, Alphabet, and Meta Platforms also saw gains. The market reaction indicates a potential de-escalation of U.S.-China trade tensions, despite China's firm position on its export controls and trade war capabilities.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8779380917549133,
+      "positive_score": 0.8779380917549133,
+      "negative_score": 0.09490402787923813,
+      "neutral_score": 0.027157941833138466
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.8779,
+  "company_sentiments": {
+    "Tesla": {
+      "label": "positive",
+      "score": 0.8779380917549133,
+      "positive_score": 0.8779,
+      "negative_score": 0.0949,
+      "neutral_score": 0.0272,
+      "mentions": 1
+    },
+    "Nvidia": {
+      "label": "positive",
+      "score": 0.8779380917549133,
+      "positive_score": 0.8779,
+      "negative_score": 0.0949,
+      "neutral_score": 0.0272,
+      "mentions": 1
+    },
+    "Apple": {
+      "label": "positive",
+      "score": 0.8779380917549133,
+      "positive_score": 0.8779,
+      "negative_score": 0.0949,
+      "neutral_score": 0.0272,
+      "mentions": 2
+    },
+    "Amazon. Com": {
+      "label": "positive",
+      "score": 0.8779380917549133,
+      "positive_score": 0.8779,
+      "negative_score": 0.0949,
+      "neutral_score": 0.0272,
+      "mentions": 1
+    },
+    "Benzinga Nvidia": {
+      "label": "positive",
+      "score": 0.8779380917549133,
+      "positive_score": 0.8779,
+      "negative_score": 0.0949,
+      "neutral_score": 0.0272,
+      "mentions": 1
+    },
+    "Amazon": {
+      "label": "positive",
+      "score": 0.8779380917549133,
+      "positive_score": 0.8779,
+      "negative_score": 0.0949,
+      "neutral_score": 0.0272,
+      "mentions": 1
+    },
+    "Microsoft": {
+      "label": "positive",
+      "score": 0.8779380917549133,
+      "positive_score": 0.8779,
+      "negative_score": 0.0949,
+      "neutral_score": 0.0272,
+      "mentions": 1
+    },
+    "Alphabet": {
+      "label": "positive",
+      "score": 0.8779380917549133,
+      "positive_score": 0.8779,
+      "negative_score": 0.0949,
+      "neutral_score": 0.0272,
+      "mentions": 1
+    },
+    "Meta Platform": {
+      "label": "positive",
+      "score": 0.8779380917549133,
+      "positive_score": 0.8779,
+      "negative_score": 0.0949,
+      "neutral_score": 0.0272,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "bbff1bf9-7e02-47c5-b06c-943114bf24e8"
+}

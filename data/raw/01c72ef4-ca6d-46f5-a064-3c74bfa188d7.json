@@ -1,0 +1,73 @@
+{
+  "article_id": "01c72ef4-ca6d-46f5-a064-3c74bfa188d7",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Ondo is bringing leveraged stock trading on-chain with Ondo Perps, live June 9",
+  "url": "https://www.thestreet.com/crypto/innovation/ondo-is-bringing-leveraged-stock-trading-on-chain",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:52.817224",
+  "full_text": "Ondo Finance is launching Ondo Perps on June 9, 2026, a platform that will let users outside the United States trade leading U.S. stocks and ETFs with leverage, all on-chain. A perpetual contract, or \"perp,\" lets a trader bet on whether an asset's price will rise or fall, with leverage and no ...",
+  "summary": "Ondo Finance is launching Ondo Perps on June 9, 2026, a platform that will let users outside the United States trade leading U.S. stocks and ETFs with leverage, all on-chain. A perpetual contract, or \"perp,\" lets a trader bet on whether an asset's price will rise or fall, with leverage and no ...",
+  "raw_payload": {
+    "id": "2b929b9a-8401-36c7-b8c9-7687aea07513",
+    "content": {
+      "id": "2b929b9a-8401-36c7-b8c9-7687aea07513",
+      "contentType": "STORY",
+      "title": "Ondo is bringing leveraged stock trading on-chain with Ondo Perps, live June 9",
+      "description": "",
+      "summary": "Ondo Finance is launching Ondo Perps on June 9, 2026, a platform that will let users outside the United States trade leading U.S. stocks and ETFs with leverage, all on-chain. A perpetual contract, or \"perp,\" lets a trader bet on whether an asset's price will rise or fall, with leverage and no ...",
+      "pubDate": "2026-06-02T20:19:41Z",
+      "displayTime": "2026-06-02T20:19:41Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/thestreet_881/e7c84f6e158ba233db041f7f4e780932",
+        "originalWidth": 1536,
+        "originalHeight": 864,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/JnJMoQPU8q8ozKWfGD7EIA--~B/aD04NjQ7dz0xNTM2O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/thestreet_881/e7c84f6e158ba233db041f7f4e780932",
+            "width": 1536,
+            "height": 864,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/xKeEx5yfKvSnvI4_lGcBuQ--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/thestreet_881/e7c84f6e158ba233db041f7f4e780932",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "TheStreet",
+        "url": "https://www.thestreet.com/",
+        "sourceId": "thestreet_881"
+      },
+      "canonicalUrl": {
+        "url": "https://www.thestreet.com/crypto/innovation/ondo-is-bringing-leveraged-stock-trading-on-chain",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/crypto/articles/ondo-bringing-leveraged-stock-trading-201941479.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

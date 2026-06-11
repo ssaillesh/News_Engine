@@ -1,0 +1,79 @@
+{
+  "article_id": "7bde2679-4f1c-4897-b776-08c55c26f785",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "The Tech Download: How Apple's new chief could shake things up",
+  "url": "https://www.cnbc.com/2026/04/24/the-tech-download-how-apples-new-chief-could-shake-things-up.html",
+  "published_at": "2026-04-24T10:59:59Z",
+  "processed_at": "2026-06-03T04:58:22.070840",
+  "sentences": [
+    "The Tech Download: How Apple's new chief could shake things up Apple announced that Tim Cook will step down as CEO, with John Ternus, Senior Vice President of Hardware Engineering, taking over in September.",
+    "Cook will remain involved as executive chairman, focusing on policymaker engagement.",
+    "This leadership change signals Apple's continued focus on its internal innovation, functional management, and integrated product strategy, particularly in hardware and AI."
+  ],
+  "entities": [
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 23,
+      "end_char": 28,
+      "sentence_idx": 0,
+      "context_window": "The Tech Download: How Apple's new chief could shake things up Apple announced that Tim Cook will step down as CEO, with John Ternus, Senior Vice President of Hardware Engineering, taking over in September. Cook will remain involved as executive chairman, focusing on policymaker engagement. This leadership change signals Apple's continued focus on its internal innovation, functional management, and integrated product strategy, particularly in hardware and AI.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8313225507736206,
+      "positive_score": 0.046668581664562225,
+      "negative_score": 0.12200889736413956,
+      "neutral_score": 0.8313225507736206
+    },
+    {
+      "entity": "Hardware Engineering",
+      "raw_text": "Hardware Engineering",
+      "label": "ORG",
+      "start_char": 159,
+      "end_char": 179,
+      "sentence_idx": 0,
+      "context_window": "The Tech Download: How Apple's new chief could shake things up Apple announced that Tim Cook will step down as CEO, with John Ternus, Senior Vice President of Hardware Engineering, taking over in September. Cook will remain involved as executive chairman, focusing on policymaker engagement. This leadership change signals Apple's continued focus on its internal innovation, functional management, and integrated product strategy, particularly in hardware and AI.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8313225507736206,
+      "positive_score": 0.046668581664562225,
+      "negative_score": 0.12200889736413956,
+      "neutral_score": 0.8313225507736206
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 323,
+      "end_char": 328,
+      "sentence_idx": 2,
+      "context_window": "The Tech Download: How Apple's new chief could shake things up Apple announced that Tim Cook will step down as CEO, with John Ternus, Senior Vice President of Hardware Engineering, taking over in September. Cook will remain involved as executive chairman, focusing on policymaker engagement. This leadership change signals Apple's continued focus on its internal innovation, functional management, and integrated product strategy, particularly in hardware and AI.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8313225507736206,
+      "positive_score": 0.046668581664562225,
+      "negative_score": 0.12200889736413956,
+      "neutral_score": 0.8313225507736206
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.8313,
+  "company_sentiments": {
+    "Apple": {
+      "label": "neutral",
+      "score": 0.8313225507736206,
+      "positive_score": 0.0467,
+      "negative_score": 0.122,
+      "neutral_score": 0.8313,
+      "mentions": 2
+    },
+    "Hardware Engineering": {
+      "label": "neutral",
+      "score": 0.8313225507736206,
+      "positive_score": 0.0467,
+      "negative_score": 0.122,
+      "neutral_score": 0.8313,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "10511945-1b6d-49a3-8ef6-d2d04875754d"
+}

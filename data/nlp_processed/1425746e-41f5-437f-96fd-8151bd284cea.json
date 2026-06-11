@@ -1,0 +1,17 @@
+{
+  "article_id": "1425746e-41f5-437f-96fd-8151bd284cea",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "'Magnificent 7' stocks have lost $2 trillion so far this month, driving the S&P 500 decline: Chart of the Day",
+  "url": "https://finance.yahoo.com/markets/article/magnificent-7-stocks-have-lost-2-trillion-so-far-this-month-driving-the-sp-500-decline-chart-of-the-day-100000483.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:36:21.351699",
+  "sentences": [
+    "'Magnificent 7' stocks have lost $2 trillion so far this month, driving the S&P 500 decline: Chart of the Day The group has erased roughly $1.8 trillion in market value this month, while the rest of the S&P 500 is still holding up."
+  ],
+  "entities": [],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.0,
+  "company_sentiments": {},
+  "embedding_id": "becf9946-f0b6-4c65-9e8b-9e68c1cecb3c"
+}

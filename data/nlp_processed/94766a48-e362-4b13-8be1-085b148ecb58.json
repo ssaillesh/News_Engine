@@ -1,0 +1,205 @@
+{
+  "article_id": "94766a48-e362-4b13-8be1-085b148ecb58",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history",
+  "url": "https://uk.finance.yahoo.com/quote/ZAP/sec-filing/",
+  "published_at": "2026-04-03T19:11:24Z",
+  "processed_at": "2026-06-03T04:58:24.173891",
+  "sentences": [
+    "Global X U.S.",
+    "Electrification ETF (ZAP) stock price, news, quote and history This article provides financial information for the Global X U.S.",
+    "Electrification ETF (ZAP), including its stock price, news, and historical data.",
+    "As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading.",
+    "The ETF has shown positive trailing returns, significantly outperforming its category over a 1-year period."
+  ],
+  "entities": [
+    {
+      "entity": "Global X U. S. Elec",
+      "raw_text": "Global X U. S. Elec",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 18,
+      "sentence_idx": 0,
+      "context_window": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9354139566421509,
+      "positive_score": 0.021272102370858192,
+      "negative_score": 0.043313972651958466,
+      "neutral_score": 0.9354139566421509
+    },
+    {
+      "entity": "##Fication Etf",
+      "raw_text": "##fication ETF",
+      "label": "ORG",
+      "start_char": 21,
+      "end_char": 33,
+      "sentence_idx": 1,
+      "context_window": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8299129009246826,
+      "positive_score": 0.15198388695716858,
+      "negative_score": 0.018103187903761864,
+      "neutral_score": 0.8299129009246826
+    },
+    {
+      "entity": "Zap",
+      "raw_text": "ZAP",
+      "label": "ORG",
+      "start_char": 35,
+      "end_char": 38,
+      "sentence_idx": 1,
+      "context_window": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8299129009246826,
+      "positive_score": 0.15198388695716858,
+      "negative_score": 0.018103187903761864,
+      "neutral_score": 0.8299129009246826
+    },
+    {
+      "entity": "X U. S",
+      "raw_text": "X U. S",
+      "label": "ORG",
+      "start_char": 136,
+      "end_char": 141,
+      "sentence_idx": 1,
+      "context_window": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8299129009246826,
+      "positive_score": 0.15198388695716858,
+      "negative_score": 0.018103187903761864,
+      "neutral_score": 0.8299129009246826
+    },
+    {
+      "entity": "Elec",
+      "raw_text": "Elec",
+      "label": "ORG",
+      "start_char": 143,
+      "end_char": 147,
+      "sentence_idx": 2,
+      "context_window": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading. The ETF has shown positive trailing returns, significantly outperforming its category over a 1-year period.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.942592203617096,
+      "positive_score": 0.942592203617096,
+      "negative_score": 0.017967894673347473,
+      "neutral_score": 0.039439935237169266
+    },
+    {
+      "entity": "Et",
+      "raw_text": "ET",
+      "label": "ORG",
+      "start_char": 159,
+      "end_char": 161,
+      "sentence_idx": 2,
+      "context_window": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading. The ETF has shown positive trailing returns, significantly outperforming its category over a 1-year period.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.942592203617096,
+      "positive_score": 0.942592203617096,
+      "negative_score": 0.017967894673347473,
+      "neutral_score": 0.039439935237169266
+    },
+    {
+      "entity": "Zap",
+      "raw_text": "ZAP",
+      "label": "ORG",
+      "start_char": 164,
+      "end_char": 167,
+      "sentence_idx": 2,
+      "context_window": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading. The ETF has shown positive trailing returns, significantly outperforming its category over a 1-year period.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.942592203617096,
+      "positive_score": 0.942592203617096,
+      "negative_score": 0.017967894673347473,
+      "neutral_score": 0.039439935237169266
+    },
+    {
+      "entity": "Zap",
+      "raw_text": "ZAP",
+      "label": "ORG",
+      "start_char": 247,
+      "end_char": 250,
+      "sentence_idx": 3,
+      "context_window": "Electrification ETF (ZAP) stock price, news, quote and history This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading. The ETF has shown positive trailing returns, significantly outperforming its category over a 1-year period.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9457818269729614,
+      "positive_score": 0.9457818269729614,
+      "negative_score": 0.017136596143245697,
+      "neutral_score": 0.037081606686115265
+    },
+    {
+      "entity": "Etf",
+      "raw_text": "ETF",
+      "label": "ORG",
+      "start_char": 325,
+      "end_char": 328,
+      "sentence_idx": 4,
+      "context_window": "Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading. The ETF has shown positive trailing returns, significantly outperforming its category over a 1-year period.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9544907808303833,
+      "positive_score": 0.9544907808303833,
+      "negative_score": 0.018656844273209572,
+      "neutral_score": 0.02685236930847168
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.5784,
+  "company_sentiments": {
+    "Global X U. S. Elec": {
+      "label": "neutral",
+      "score": 0.9354139566421509,
+      "positive_score": 0.0213,
+      "negative_score": 0.0433,
+      "neutral_score": 0.9354,
+      "mentions": 1
+    },
+    "##Fication Etf": {
+      "label": "neutral",
+      "score": 0.8299129009246826,
+      "positive_score": 0.152,
+      "negative_score": 0.0181,
+      "neutral_score": 0.8299,
+      "mentions": 1
+    },
+    "Zap": {
+      "label": "positive",
+      "score": 0.6801193058490753,
+      "positive_score": 0.6801,
+      "negative_score": 0.0177,
+      "neutral_score": 0.3021,
+      "mentions": 3
+    },
+    "X U. S": {
+      "label": "neutral",
+      "score": 0.8299129009246826,
+      "positive_score": 0.152,
+      "negative_score": 0.0181,
+      "neutral_score": 0.8299,
+      "mentions": 1
+    },
+    "Elec": {
+      "label": "positive",
+      "score": 0.942592203617096,
+      "positive_score": 0.9426,
+      "negative_score": 0.018,
+      "neutral_score": 0.0394,
+      "mentions": 1
+    },
+    "Et": {
+      "label": "positive",
+      "score": 0.942592203617096,
+      "positive_score": 0.9426,
+      "negative_score": 0.018,
+      "neutral_score": 0.0394,
+      "mentions": 1
+    },
+    "Etf": {
+      "label": "positive",
+      "score": 0.9544907808303833,
+      "positive_score": 0.9545,
+      "negative_score": 0.0187,
+      "neutral_score": 0.0269,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "84aaa454-007a-496f-b8f2-968d8593cc02"
+}

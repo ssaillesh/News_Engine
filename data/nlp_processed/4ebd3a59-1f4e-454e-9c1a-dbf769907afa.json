@@ -1,0 +1,41 @@
+{
+  "article_id": "4ebd3a59-1f4e-454e-9c1a-dbf769907afa",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Update: US Equity Futures Rise Pre-Bell After US Says Strikes Completed Against Iran",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-futures-rise-pre-125805554.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:13.486103",
+  "sentences": [
+    "Update: US Equity Futures Rise Pre-Bell After US Says Strikes Completed Against Iran (Updates with economic data, recent oil price movement, world markets' overview and corporate stock"
+  ],
+  "entities": [
+    {
+      "entity": "Us Equity Futures",
+      "raw_text": "US Equity Futures",
+      "label": "ORG",
+      "start_char": 8,
+      "end_char": 25,
+      "sentence_idx": 0,
+      "context_window": "Update: US Equity Futures Rise Pre-Bell After US Says Strikes Completed Against Iran (Updates with economic data, recent oil price movement, world markets' overview and corporate stock",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Us Equity Futures": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "c074731d-2d0f-4eb2-9142-44481cc7eb46"
+}

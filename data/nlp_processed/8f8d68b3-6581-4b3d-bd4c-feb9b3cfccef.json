@@ -1,0 +1,41 @@
+{
+  "article_id": "8f8d68b3-6581-4b3d-bd4c-feb9b3cfccef",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "SpaceX's $1.75T IPO Valuation Draws Chanos Warning",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/spacexs-1-75t-ipo-valuation-135810442.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:07.806452",
+  "sentences": [
+    "SpaceX's $1.75T IPO Valuation Draws Chanos Warning Jim Chanos questions SpaceX's valuation as its New York IPO seeks to raise $75B on Friday."
+  ],
+  "entities": [
+    {
+      "entity": "Spacex",
+      "raw_text": "SpaceX",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 6,
+      "sentence_idx": 0,
+      "context_window": "SpaceX's $1.75T IPO Valuation Draws Chanos Warning Jim Chanos questions SpaceX's valuation as its New York IPO seeks to raise $75B on Friday.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Spacex": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "61593a9e-2e87-4dee-a647-9ffb054cf711"
+}

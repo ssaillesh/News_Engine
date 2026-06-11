@@ -1,0 +1,73 @@
+{
+  "article_id": "03750f5f-098a-4f67-b9c7-553f4e335d1a",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "Billionaire Bill Gates' Foundation Dumped Microsoft but Loaded Up on This Dividend Champion",
+  "url": "https://www.fool.com/investing/2026/06/02/billionaire-bill-gates-foundation-dumped-microsoft/",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:52.681245",
+  "full_text": "The Microsoft founder's foundation recently added this healthcare stock to its portfolio.",
+  "summary": "The Microsoft founder's foundation recently added this healthcare stock to its portfolio.",
+  "raw_payload": {
+    "id": "824c5cd5-d926-379a-bf76-46ef6be81cd8",
+    "content": {
+      "id": "824c5cd5-d926-379a-bf76-46ef6be81cd8",
+      "contentType": "STORY",
+      "title": "Billionaire Bill Gates' Foundation Dumped Microsoft but Loaded Up on This Dividend Champion",
+      "description": "",
+      "summary": "The Microsoft founder's foundation recently added this healthcare stock to its portfolio.",
+      "pubDate": "2026-06-02T22:50:00Z",
+      "displayTime": "2026-06-02T22:50:00Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/motleyfool.com/6b974b48eb087dc4ca81ffbbf02a4288",
+        "originalWidth": 1200,
+        "originalHeight": 800,
+        "caption": "A medical patient receives injectable drugs.",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/SKYAP2eNmmfe8UTA4Xe.Iw--~B/aD04MDA7dz0xMjAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/motleyfool.com/6b974b48eb087dc4ca81ffbbf02a4288",
+            "width": 1200,
+            "height": 800,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/OV5bqVbeeqROS5uCaCOWQA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/motleyfool.com/6b974b48eb087dc4ca81ffbbf02a4288",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Motley Fool",
+        "url": "http://www.fool.com/",
+        "sourceId": "motleyfool.com"
+      },
+      "canonicalUrl": {
+        "url": "https://www.fool.com/investing/2026/06/02/billionaire-bill-gates-foundation-dumped-microsoft/",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/billionaire-bill-gates-foundation-dumped-225000410.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "article_id": "6b201291-788d-4ca1-9000-9f64dc5fd373",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Timur Turlov: The Future of the Market and How Entrepreneurs Can Stay One Step Ahead",
+  "url": "https://www.stvincenttimes.com/timur-turlov-the-future-of-the-market-and-how-entrepreneurs-can-stay-one-step-ahead/",
+  "published_at": "2025-03-10T08:20:00Z",
+  "fetched_at": "2026-06-03T04:57:51.401903",
+  "full_text": "Timur Turlov, CEO of Freedom Holding Corp., shares his insights on navigating the future market as an entrepreneur. He emphasizes adaptability, investing in technology and AI, viewing money as a tool, building trust over marketing, self-education, and balancing family and business. Turlov's company has seen significant growth, achieving $655.2 million in revenue and a market capitalization exceeding $9.5 billion.",
+  "summary": "Timur Turlov, CEO of Freedom Holding Corp., shares his insights on navigating the future market as an entrepreneur. He emphasizes adaptability, investing in technology and AI, viewing money as a tool, building trust over marketing, self-education, and balancing family and business. Turlov's company has seen significant growth, achieving $655.2 million in revenue and a market capitalization exceeding $9.5 billion.",
+  "raw_payload": {
+    "title": "Timur Turlov: The Future of the Market and How Entrepreneurs Can Stay One Step Ahead",
+    "url": "https://www.stvincenttimes.com/timur-turlov-the-future-of-the-market-and-how-entrepreneurs-can-stay-one-step-ahead/",
+    "time_published": "20250310T082000",
+    "authors": [
+      "Times Staff"
+    ],
+    "summary": "Timur Turlov, CEO of Freedom Holding Corp., shares his insights on navigating the future market as an entrepreneur. He emphasizes adaptability, investing in technology and AI, viewing money as a tool, building trust over marketing, self-education, and balancing family and business. Turlov's company has seen significant growth, achieving $655.2 million in revenue and a market capitalization exceeding $9.5 billion.",
+    "banner_image": null,
+    "source": "St Vincent Times",
+    "category_within_source": "General",
+    "source_domain": "St Vincent Times",
+    "topics": [
+      {
+        "topic": "earnings",
+        "relevance_score": "0.922957"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.837727"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.721919"
+      }
+    ],
+    "overall_sentiment_score": 0.735346,
+    "overall_sentiment_label": "Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "FRHC",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.885287",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.676989",
+        "ticker_sentiment_score": "0.731264",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.678413",
+        "ticker_sentiment_score": "0.743072",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.674348",
+        "ticker_sentiment_score": "0.716880",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.688102",
+        "ticker_sentiment_score": "0.720476",
+        "ticker_sentiment_label": "Bullish"
+      }
+    ]
+  }
+}

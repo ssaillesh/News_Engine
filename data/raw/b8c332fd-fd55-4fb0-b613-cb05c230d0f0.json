@@ -1,0 +1,130 @@
+{
+  "article_id": "b8c332fd-fd55-4fb0-b613-cb05c230d0f0",
+  "source": "yfinance",
+  "ticker": "GOOGL",
+  "title": "AI stocks: MANGOS ascends, replacing FAANG position",
+  "url": "https://finance.yahoo.com/video/ai-stocks-mangos-ascends-replacing-faang-position-200651767.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:19.071340",
+  "full_text": "Long live the new tech. Wall Street investors are adopting the latest acronym grouping Big Tech leaders: MANGOS. MANGOS consists of Meta Platforms (META), Anthropic (ANTH.PVT), Nvidia (NVDA), Alphabet (GOOG, GOOGL), OpenAI (OPAI.PVT), and SpaceX (SPCX, SPAX.PVT). Yahoo Finance Senior Reporters Ines Ferré and Brooke DiPalma come on Market Domination to talk about how MANGOS is the newest iteration of FAANG.",
+  "summary": "Long live the new tech. Wall Street investors are adopting the latest acronym grouping Big Tech leaders: MANGOS. MANGOS consists of Meta Platforms (META), Anthropic (ANTH.PVT), Nvidia (NVDA), Alphabet (GOOG, GOOGL), OpenAI (OPAI.PVT), and SpaceX (SPCX, SPAX.PVT). Yahoo Finance Senior Reporters Ines Ferré and Brooke DiPalma come on Market Domination to talk about how MANGOS is the newest iteration of FAANG.",
+  "raw_payload": {
+    "id": "ce74f754-0447-4d45-a410-7954f81afe7b",
+    "content": {
+      "id": "ce74f754-0447-4d45-a410-7954f81afe7b",
+      "contentType": "VIDEO",
+      "title": "AI stocks: MANGOS ascends, replacing FAANG position",
+      "description": "<p>Long live the new tech. Wall Street investors are adopting the latest acronym grouping Big Tech leaders: MANGOS.</p>\n<p>MANGOS consists of Meta Platforms (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/META/\" data-i13n=\"slk:META;cpos:1;pos:1\">META</a>), Anthropic (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/ANTH.PVT/\" data-i13n=\"slk:ANTH.PVT;cpos:2;pos:1\">ANTH.PVT</a>), Nvidia (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/NVDA/\" data-i13n=\"slk:NVDA;cpos:3;pos:1\">NVDA</a>), Alphabet (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/GOOG/\" data-i13n=\"slk:GOOG;cpos:4;pos:1\">GOOG</a>, <a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/GOOGL/\" data-i13n=\"slk:GOOGL;cpos:5;pos:1\">GOOGL</a>), OpenAI (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/OPAI.PVT/\" data-i13n=\"slk:OPAI.PVT;cpos:6;pos:1\">OPAI.PVT</a>), and SpaceX (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/SPCX/\" data-i13n=\"slk:SPCX;cpos:7;pos:1\">SPCX</a>, <a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/SPAX.PVT/\" data-i13n=\"slk:SPAX.PVT;cpos:8;pos:1\">SPAX.PVT</a>).</p>\n<p>Yahoo Finance Senior Reporters Ines Ferré and Brooke DiPalma come on Market Domination to talk about how MANGOS is the newest iteration of FAANG.</p>",
+      "summary": "Long live the new tech. Wall Street investors are adopting the latest acronym grouping Big Tech leaders: MANGOS. MANGOS consists of Meta Platforms (META), Anthropic (ANTH.PVT), Nvidia (NVDA), Alphabet (GOOG, GOOGL), OpenAI (OPAI.PVT), and SpaceX (SPCX, SPAX.PVT). Yahoo Finance Senior Reporters Ines Ferré and Brooke DiPalma come on Market Domination to talk about how MANGOS is the newest iteration of FAANG.",
+      "pubDate": "2026-06-10T20:06:51Z",
+      "displayTime": "",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://s.yimg.com/uu/api/res/1.2/PwVspNp2mp.TY6BW1VIeLA--~B/aD0yODEyO3c9NTAwMDthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/b906f5bf-33a7-4774-a866-175861196ba0_89bf9df4cc2333dbd39c22edddffbf8234ec768a33df227c6a73d3153515d043.jpg",
+        "originalWidth": 5000,
+        "originalHeight": 2812,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/PwVspNp2mp.TY6BW1VIeLA--~B/aD0yODEyO3c9NTAwMDthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/b906f5bf-33a7-4774-a866-175861196ba0_89bf9df4cc2333dbd39c22edddffbf8234ec768a33df227c6a73d3153515d043.jpg",
+            "width": 5000,
+            "height": 2812,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/R7fmgHWZFSg0r754HFkISw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/b906f5bf-33a7-4774-a866-175861196ba0_89bf9df4cc2333dbd39c22edddffbf8234ec768a33df227c6a73d3153515d043.jpg",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Yahoo Finance Video",
+        "url": "https://finance.yahoo.com/",
+        "sourceId": "video.yahoofinance.com"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/video/ai-stocks-mangos-ascends-replacing-faang-position-200651767.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/video/ai-stocks-mangos-ascends-replacing-faang-position-200651767.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": true
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": {
+        "storylineItems": [
+          {
+            "content": {
+              "id": "a4e09ff1-f219-421d-b411-afe82d15f020",
+              "contentType": "VIDEO",
+              "isHosted": true,
+              "title": "Amazon vs. transport stocks, DraftKings sees prediction markets boost",
+              "thumbnail": {
+                "originalUrl": "https://s.yimg.com/uu/api/res/1.2/OFMbcFf4nkiG31_zD_axgg--~B/aD0xOTMxO3c9MzQzNDthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/b64e236a-eedf-4597-a303-f35f7d130db1_b38ed0f32fcf11b1426ba98968bf51d5f38c4aec0db049a17feef7d41327e712.jpg",
+                "originalWidth": 3434,
+                "originalHeight": 1931,
+                "caption": "",
+                "resolutions": null
+              },
+              "provider": {
+                "displayName": "Yahoo Finance Video",
+                "sourceId": "video.yahoofinance.com"
+              },
+              "previewUrl": null,
+              "providerContentUrl": "",
+              "canonicalUrl": {
+                "url": "https://finance.yahoo.com/video/amazon-vs-transport-stocks-draftkings-sees-prediction-markets-boost-200152313.html"
+              },
+              "clickThroughUrl": {
+                "url": "https://finance.yahoo.com/video/amazon-vs-transport-stocks-draftkings-sees-prediction-markets-boost-200152313.html"
+              }
+            }
+          },
+          {
+            "content": {
+              "id": "41111764-cb9e-4a17-913b-067a1caaa674",
+              "contentType": "STORY",
+              "isHosted": true,
+              "title": "Supermicro Computer stock sinks on $7 billion equity raise",
+              "thumbnail": {
+                "originalUrl": "https://s.yimg.com/uu/api/res/1.2/ZcE8oVM21Vc4fbL_CWGQWA--~B/aD0yMDAwO3c9MzAwMDthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/adae2438-142c-4536-bdea-3eafa994fb0c",
+                "originalWidth": 3000,
+                "originalHeight": 2000,
+                "caption": "",
+                "resolutions": null
+              },
+              "provider": {
+                "displayName": "Yahoo Finance",
+                "sourceId": "yahoofinance.com"
+              },
+              "previewUrl": null,
+              "providerContentUrl": "",
+              "canonicalUrl": {
+                "url": "https://finance.yahoo.com/markets/stocks/article/supermicro-computer-stock-sinks-on-7-billion-equity-raise-124041144.html"
+              },
+              "clickThroughUrl": {
+                "url": "https://finance.yahoo.com/markets/stocks/article/supermicro-computer-stock-sinks-on-7-billion-equity-raise-124041144.html"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

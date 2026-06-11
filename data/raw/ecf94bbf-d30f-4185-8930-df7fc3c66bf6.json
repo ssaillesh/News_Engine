@@ -1,0 +1,68 @@
+{
+  "article_id": "ecf94bbf-d30f-4185-8930-df7fc3c66bf6",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Alliance Global Keeps a Neutral Rating on Canopy Growth Corporation (CGC)",
+  "url": "https://uk.finance.yahoo.com/news/alliance-global-keeps-neutral-rating-082518292.html",
+  "published_at": "2026-02-15T08:28:10Z",
+  "fetched_at": "2026-06-03T04:57:51.400916",
+  "full_text": "Alliance Global has maintained a Neutral rating on Canopy Growth Corporation (CGC) but reduced its price objective from C$2.50 to C$1.80 after the company's fiscal third-quarter report. Canopy Growth reported a loss of C$0.18 per share, an improvement from the previous year, with revenue increasing to C$90.39 million. The company noted stronger fundamentals, particularly in Canada, and is focused on improving execution and the upcoming acquisition of MTL Cannabis.",
+  "summary": "Alliance Global has maintained a Neutral rating on Canopy Growth Corporation (CGC) but reduced its price objective from C$2.50 to C$1.80 after the company's fiscal third-quarter report. Canopy Growth reported a loss of C$0.18 per share, an improvement from the previous year, with revenue increasing to C$90.39 million. The company noted stronger fundamentals, particularly in Canada, and is focused on improving execution and the upcoming acquisition of MTL Cannabis.",
+  "raw_payload": {
+    "title": "Alliance Global Keeps a Neutral Rating on Canopy Growth Corporation (CGC)",
+    "url": "https://uk.finance.yahoo.com/news/alliance-global-keeps-neutral-rating-082518292.html",
+    "time_published": "20260215T082810",
+    "authors": [
+      "Fatima Gulzar"
+    ],
+    "summary": "Alliance Global has maintained a Neutral rating on Canopy Growth Corporation (CGC) but reduced its price objective from C$2.50 to C$1.80 after the company's fiscal third-quarter report. Canopy Growth reported a loss of C$0.18 per share, an improvement from the previous year, with revenue increasing to C$90.39 million. The company noted stronger fundamentals, particularly in Canada, and is focused on improving execution and the upcoming acquisition of MTL Cannabis.",
+    "banner_image": "https://s.yimg.com/ny/api/res/1.2/U1wZpcghQKZUxvZYuAVlmQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTUzOA--/https://media.zenfs.com/en/insidermonkey.com/f98455a860da5e28d29c812bf3e1b7c2",
+    "source": "Yahoo Finance UK",
+    "category_within_source": "General",
+    "source_domain": "Yahoo Finance UK",
+    "topics": [
+      {
+        "topic": "earnings",
+        "relevance_score": "0.943484"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.832655"
+      }
+    ],
+    "overall_sentiment_score": 0.02531,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "CGC",
+        "relevance_score": "0.997096",
+        "ticker_sentiment_score": "-0.195849",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.600389",
+        "ticker_sentiment_score": "0.125561",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.569908",
+        "ticker_sentiment_score": "0.057135",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.567759",
+        "ticker_sentiment_score": "0.149655",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.583301",
+        "ticker_sentiment_score": "0.082180",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

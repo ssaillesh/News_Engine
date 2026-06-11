@@ -1,0 +1,68 @@
+{
+  "article_id": "e276c872-2259-4f41-8b18-dc0a8d415b76",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Retail Investors Are Selling Stocks to Raise Money for SpaceX",
+  "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-06-11-2026/card/retail-investors-are-selling-stocks-to-raise-money-for-spacex-HlfGReKH7KWZzHAChmsp?siteid=yhoof2&yptr=yahoo",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:17.893484",
+  "full_text": "Retail investors are clearing the decks ahead of the SpaceX IPO.  For two straight days this week, ordinary investors dumped their single-stock holdings on a net basis, according to Vanda Research.  The moves suggests that mom-and-pop investors are amassing dry powder ahead of SpaceX's anticipated public debut tomorrow.",
+  "summary": "Retail investors are clearing the decks ahead of the SpaceX IPO.  For two straight days this week, ordinary investors dumped their single-stock holdings on a net basis, according to Vanda Research.  The moves suggests that mom-and-pop investors are amassing dry powder ahead of SpaceX's anticipated public debut tomorrow.",
+  "raw_payload": {
+    "id": "e59fa7e7-625c-35d9-a072-d8810d74b5a0",
+    "content": {
+      "id": "e59fa7e7-625c-35d9-a072-d8810d74b5a0",
+      "contentType": "STORY",
+      "title": "Retail Investors Are Selling Stocks to Raise Money for SpaceX",
+      "description": "",
+      "summary": "Retail investors are clearing the decks ahead of the SpaceX IPO.  For two straight days this week, ordinary investors dumped their single-stock holdings on a net basis, according to Vanda Research.  The moves suggests that mom-and-pop investors are amassing dry powder ahead of SpaceX's anticipated public debut tomorrow.",
+      "pubDate": "2026-06-11T12:47:13Z",
+      "displayTime": "2026-06-11T12:47:13Z",
+      "isHosted": false,
+      "bypassModal": false,
+      "previewUrl": "https://finance.yahoo.com/m/e59fa7e7-625c-35d9-a072-d8810d74b5a0/retail-investors-are-selling.html",
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/wsj.com/7b2c285183be07ca3c4e8242b25a59a8",
+        "originalWidth": 1200,
+        "originalHeight": 630,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/Fwf5HL4GsEGPbDfR3MJBPg--~B/aD02MzA7dz0xMjAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/wsj.com/7b2c285183be07ca3c4e8242b25a59a8",
+            "width": 1200,
+            "height": 630,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/c34MZxHLZOfDYN2BBjM9ww--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/wsj.com/7b2c285183be07ca3c4e8242b25a59a8",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "The Wall Street Journal",
+        "url": "http://www.wsj.com/",
+        "sourceId": "wsj.com"
+      },
+      "canonicalUrl": {
+        "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-06-11-2026/card/retail-investors-are-selling-stocks-to-raise-money-for-spacex-HlfGReKH7KWZzHAChmsp?siteid=yhoof2&yptr=yahoo",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": null,
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

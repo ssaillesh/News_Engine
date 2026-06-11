@@ -1,0 +1,82 @@
+version: "3.9"
+
+services:
+
+  # ── PostgreSQL (structured storage layers 1-3) ───────────────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: nlp_postgres
+    environment:
+      POSTGRES_USER:     nlp_user
+      POSTGRES_PASSWORD: nlp_password
+      POSTGRES_DB:       nlp_pipeline
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nlp_user -d nlp_pipeline"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # ── Redis (queue layer) ──────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: nlp_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ── NLP API server ───────────────────────────────────────────────────────
+  api:
+    build: .
+    container_name: nlp_api
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      REDIS_HOST:    redis
+      DATABASE_URL:  postgresql://nlp_user:nlp_password@postgres:5432/nlp_pipeline
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: python main.py serve --host 0.0.0.0 --port 8000
+
+  # ── NLP consumer worker (streaming mode) ────────────────────────────────
+  worker:
+    build: .
+    container_name: nlp_worker
+    env_file:
+      - .env
+    environment:
+      REDIS_HOST:    redis
+      DATABASE_URL:  postgresql://nlp_user:nlp_password@postgres:5432/nlp_pipeline
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: python main.py consume --worker-name worker-1
+    profiles:
+      - streaming   # only starts with: docker-compose --profile streaming up
+
+volumes:
+  postgres_data:
+  redis_data:

@@ -1,0 +1,72 @@
+{
+  "article_id": "2b0dab31-232d-4ea3-8411-e41ac015c264",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "ZenaTech begins assembly of quantum computing prototype for defense",
+  "url": "https://www.investing.com/news/company-news/zenatech-begins-assembly-of-quantum-computing-prototype-for-defense-93CH-4460260",
+  "published_at": "2026-01-22T13:28:26Z",
+  "fetched_at": "2026-06-03T04:57:51.401257",
+  "full_text": "ZenaTech, Inc. has begun procuring components for its first quantum computing prototype, aiming to complete a five-qubit system later in 2026. This prototype is designed to process data from the company's AI drone systems for military and government applications, supporting autonomous operations, research projects, weather forecasting, and traffic management. Despite current unprofitability, ZenaTech boasts strong liquidity and has been actively expanding its market presence through new drone launches and acquisitions, while also aligning with U.S. government regulations on foreign-made drone equipment.",
+  "summary": "ZenaTech, Inc. has begun procuring components for its first quantum computing prototype, aiming to complete a five-qubit system later in 2026. This prototype is designed to process data from the company's AI drone systems for military and government applications, supporting autonomous operations, research projects, weather forecasting, and traffic management. Despite current unprofitability, ZenaTech boasts strong liquidity and has been actively expanding its market presence through new drone launches and acquisitions, while also aligning with U.S. government regulations on foreign-made drone equipment.",
+  "raw_payload": {
+    "title": "ZenaTech begins assembly of quantum computing prototype for defense",
+    "url": "https://www.investing.com/news/company-news/zenatech-begins-assembly-of-quantum-computing-prototype-for-defense-93CH-4460260",
+    "time_published": "20260122T132826",
+    "authors": [
+      "Investing.com"
+    ],
+    "summary": "ZenaTech, Inc. has begun procuring components for its first quantum computing prototype, aiming to complete a five-qubit system later in 2026. This prototype is designed to process data from the company's AI drone systems for military and government applications, supporting autonomous operations, research projects, weather forecasting, and traffic management. Despite current unprofitability, ZenaTech boasts strong liquidity and has been actively expanding its market presence through new drone launches and acquisitions, while also aligning with U.S. government regulations on foreign-made drone equipment.",
+    "banner_image": "https://i-invdn-com.investing.com/news/world_news_2_69x52._800x533_L_1419494365.jpg",
+    "source": "Investing.com",
+    "category_within_source": "General",
+    "source_domain": "Investing.com",
+    "topics": [
+      {
+        "topic": "technology",
+        "relevance_score": "0.808505"
+      },
+      {
+        "topic": "earnings",
+        "relevance_score": "0.711654"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.645292"
+      }
+    ],
+    "overall_sentiment_score": 0.110681,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "ZENA",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.106578",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.638553",
+        "ticker_sentiment_score": "0.101468",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.622210",
+        "ticker_sentiment_score": "0.148284",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.637374",
+        "ticker_sentiment_score": "0.111971",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.602378",
+        "ticker_sentiment_score": "0.116849",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

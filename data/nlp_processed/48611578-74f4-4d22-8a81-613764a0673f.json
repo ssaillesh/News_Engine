@@ -1,0 +1,130 @@
+{
+  "article_id": "48611578-74f4-4d22-8a81-613764a0673f",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Jensen Huang Delivers Products to Elon Musk Again After Nine - Year Hiatus: Delayed AI Personal Supercomputer Finally Arrives - 36Kr",
+  "url": "https://eu.36kr.com/en/p/3508745212107905",
+  "published_at": "2025-10-14T08:43:39Z",
+  "processed_at": "2026-06-03T04:58:37.267870",
+  "sentences": [
+    "Jensen Huang Delivers Products to Elon Musk Again After Nine - Year Hiatus: Delayed AI Personal Supercomputer Finally Arrives - 36Kr Jensen Huang personally delivered NVIDIA's DGX Spark Personal AI Supercomputer to Elon Musk at Starbase, marking a reunion nine years after the delivery of the DGX-1.",
+    "This new \"performance monster,\" previously delayed, integrates a Grace Blackwell GB10 superchip and aims to bring data center-level AI power to the desktop, targeting developers with its robust hardware and software ecosystem."
+  ],
+  "entities": [
+    {
+      "entity": "Jensen Huang Delivers Products",
+      "raw_text": "Jensen Huang Delivers Products",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 30,
+      "sentence_idx": 0,
+      "context_window": "Jensen Huang Delivers Products to Elon Musk Again After Nine - Year Hiatus: Delayed AI Personal Supercomputer Finally Arrives - 36Kr Jensen Huang personally delivered NVIDIA's DGX Spark Personal AI Supercomputer to Elon Musk at Starbase, marking a reunion nine years after the delivery of the DGX-1. This new \"performance monster,\" previously delayed, integrates a Grace Blackwell GB10 superchip and aims to bring data center-level AI power to the desktop, targeting developers with its robust hardware and software ecosystem.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.6825133562088013,
+      "positive_score": 0.3081515431404114,
+      "negative_score": 0.009335107170045376,
+      "neutral_score": 0.6825133562088013
+    },
+    {
+      "entity": "Elon Musk",
+      "raw_text": "Elon Musk",
+      "label": "ORG",
+      "start_char": 34,
+      "end_char": 43,
+      "sentence_idx": 0,
+      "context_window": "Jensen Huang Delivers Products to Elon Musk Again After Nine - Year Hiatus: Delayed AI Personal Supercomputer Finally Arrives - 36Kr Jensen Huang personally delivered NVIDIA's DGX Spark Personal AI Supercomputer to Elon Musk at Starbase, marking a reunion nine years after the delivery of the DGX-1. This new \"performance monster,\" previously delayed, integrates a Grace Blackwell GB10 superchip and aims to bring data center-level AI power to the desktop, targeting developers with its robust hardware and software ecosystem.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.6825133562088013,
+      "positive_score": 0.3081515431404114,
+      "negative_score": 0.009335107170045376,
+      "neutral_score": 0.6825133562088013
+    },
+    {
+      "entity": "N",
+      "raw_text": "N",
+      "label": "ORG",
+      "start_char": 167,
+      "end_char": 168,
+      "sentence_idx": 0,
+      "context_window": "Jensen Huang Delivers Products to Elon Musk Again After Nine - Year Hiatus: Delayed AI Personal Supercomputer Finally Arrives - 36Kr Jensen Huang personally delivered NVIDIA's DGX Spark Personal AI Supercomputer to Elon Musk at Starbase, marking a reunion nine years after the delivery of the DGX-1. This new \"performance monster,\" previously delayed, integrates a Grace Blackwell GB10 superchip and aims to bring data center-level AI power to the desktop, targeting developers with its robust hardware and software ecosystem.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.6825133562088013,
+      "positive_score": 0.3081515431404114,
+      "negative_score": 0.009335107170045376,
+      "neutral_score": 0.6825133562088013
+    },
+    {
+      "entity": "##Vidia",
+      "raw_text": "##VIDIA",
+      "label": "ORG",
+      "start_char": 168,
+      "end_char": 173,
+      "sentence_idx": 0,
+      "context_window": "Jensen Huang Delivers Products to Elon Musk Again After Nine - Year Hiatus: Delayed AI Personal Supercomputer Finally Arrives - 36Kr Jensen Huang personally delivered NVIDIA's DGX Spark Personal AI Supercomputer to Elon Musk at Starbase, marking a reunion nine years after the delivery of the DGX-1. This new \"performance monster,\" previously delayed, integrates a Grace Blackwell GB10 superchip and aims to bring data center-level AI power to the desktop, targeting developers with its robust hardware and software ecosystem.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.6825133562088013,
+      "positive_score": 0.3081515431404114,
+      "negative_score": 0.009335107170045376,
+      "neutral_score": 0.6825133562088013
+    },
+    {
+      "entity": "Starbase",
+      "raw_text": "Starbase",
+      "label": "ORG",
+      "start_char": 228,
+      "end_char": 236,
+      "sentence_idx": 0,
+      "context_window": "Jensen Huang Delivers Products to Elon Musk Again After Nine - Year Hiatus: Delayed AI Personal Supercomputer Finally Arrives - 36Kr Jensen Huang personally delivered NVIDIA's DGX Spark Personal AI Supercomputer to Elon Musk at Starbase, marking a reunion nine years after the delivery of the DGX-1. This new \"performance monster,\" previously delayed, integrates a Grace Blackwell GB10 superchip and aims to bring data center-level AI power to the desktop, targeting developers with its robust hardware and software ecosystem.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.6825133562088013,
+      "positive_score": 0.3081515431404114,
+      "negative_score": 0.009335107170045376,
+      "neutral_score": 0.6825133562088013
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.6825,
+  "company_sentiments": {
+    "Jensen Huang Delivers Products": {
+      "label": "neutral",
+      "score": 0.6825133562088013,
+      "positive_score": 0.3082,
+      "negative_score": 0.0093,
+      "neutral_score": 0.6825,
+      "mentions": 1
+    },
+    "Elon Musk": {
+      "label": "neutral",
+      "score": 0.6825133562088013,
+      "positive_score": 0.3082,
+      "negative_score": 0.0093,
+      "neutral_score": 0.6825,
+      "mentions": 1
+    },
+    "N": {
+      "label": "neutral",
+      "score": 0.6825133562088013,
+      "positive_score": 0.3082,
+      "negative_score": 0.0093,
+      "neutral_score": 0.6825,
+      "mentions": 1
+    },
+    "##Vidia": {
+      "label": "neutral",
+      "score": 0.6825133562088013,
+      "positive_score": 0.3082,
+      "negative_score": 0.0093,
+      "neutral_score": 0.6825,
+      "mentions": 1
+    },
+    "Starbase": {
+      "label": "neutral",
+      "score": 0.6825133562088013,
+      "positive_score": 0.3082,
+      "negative_score": 0.0093,
+      "neutral_score": 0.6825,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "307bdb52-1c25-4416-bc29-9301682a9bc2"
+}

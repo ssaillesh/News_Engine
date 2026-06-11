@@ -1,0 +1,123 @@
+{
+  "article_id": "74d810ca-89d6-47e6-a5ff-df78bd440b3d",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Universal exchange: how South Africans can access Crypto, tokenized US stocks and ETFs in one place - IOL",
+  "url": "https://iol.co.za/the-star/partnered/2025-10-13-universal-exchange-how-south-africans-can-access-crypto-tokenized-us-stocks-and-etfs-in-one-place/",
+  "published_at": "2025-10-13T07:01:04Z",
+  "processed_at": "2026-06-03T04:58:40.721350",
+  "sentences": [
+    "Universal exchange: how South Africans can access Crypto, tokenized US stocks and ETFs in one place - IOL Bitget's Universal Exchange (UEX) now allows South African traders to access crypto, tokenized US stock futures, and ETFs from a single platform, eliminating the need for multiple services and foreign accounts.",
+    "This platform offers local funding options in Rand (ZAR) through major South African banks and fintechs, enabling users to start with small investments and providing optional leverage tools.",
+    "The UEX is presented as a unified gateway bridging on-chain and off-chain utility, signifying a shift from fragmented trading tools to integrated financial access."
+  ],
+  "entities": [
+    {
+      "entity": "Iol Bitget",
+      "raw_text": "IOL Bitget",
+      "label": "ORG",
+      "start_char": 102,
+      "end_char": 112,
+      "sentence_idx": 0,
+      "context_window": "Universal exchange: how South Africans can access Crypto, tokenized US stocks and ETFs in one place - IOL Bitget's Universal Exchange (UEX) now allows South African traders to access crypto, tokenized US stock futures, and ETFs from a single platform, eliminating the need for multiple services and foreign accounts. This platform offers local funding options in Rand (ZAR) through major South African banks and fintechs, enabling users to start with small investments and providing optional leverage tools. The UEX is presented as a unified gateway bridging on-chain and off-chain utility, signifying a shift from fragmented trading tools to integrated financial access.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.7683138847351074,
+      "positive_score": 0.2206133008003235,
+      "negative_score": 0.01107280794531107,
+      "neutral_score": 0.7683138847351074
+    },
+    {
+      "entity": "Universal Exchange",
+      "raw_text": "Universal Exchange",
+      "label": "ORG",
+      "start_char": 115,
+      "end_char": 133,
+      "sentence_idx": 0,
+      "context_window": "Universal exchange: how South Africans can access Crypto, tokenized US stocks and ETFs in one place - IOL Bitget's Universal Exchange (UEX) now allows South African traders to access crypto, tokenized US stock futures, and ETFs from a single platform, eliminating the need for multiple services and foreign accounts. This platform offers local funding options in Rand (ZAR) through major South African banks and fintechs, enabling users to start with small investments and providing optional leverage tools. The UEX is presented as a unified gateway bridging on-chain and off-chain utility, signifying a shift from fragmented trading tools to integrated financial access.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.7683138847351074,
+      "positive_score": 0.2206133008003235,
+      "negative_score": 0.01107280794531107,
+      "neutral_score": 0.7683138847351074
+    },
+    {
+      "entity": "Uex",
+      "raw_text": "UEX",
+      "label": "ORG",
+      "start_char": 135,
+      "end_char": 138,
+      "sentence_idx": 0,
+      "context_window": "Universal exchange: how South Africans can access Crypto, tokenized US stocks and ETFs in one place - IOL Bitget's Universal Exchange (UEX) now allows South African traders to access crypto, tokenized US stock futures, and ETFs from a single platform, eliminating the need for multiple services and foreign accounts. This platform offers local funding options in Rand (ZAR) through major South African banks and fintechs, enabling users to start with small investments and providing optional leverage tools. The UEX is presented as a unified gateway bridging on-chain and off-chain utility, signifying a shift from fragmented trading tools to integrated financial access.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.7683138847351074,
+      "positive_score": 0.2206133008003235,
+      "negative_score": 0.01107280794531107,
+      "neutral_score": 0.7683138847351074
+    },
+    {
+      "entity": "Zar",
+      "raw_text": "ZAR",
+      "label": "ORG",
+      "start_char": 369,
+      "end_char": 372,
+      "sentence_idx": 1,
+      "context_window": "Universal exchange: how South Africans can access Crypto, tokenized US stocks and ETFs in one place - IOL Bitget's Universal Exchange (UEX) now allows South African traders to access crypto, tokenized US stock futures, and ETFs from a single platform, eliminating the need for multiple services and foreign accounts. This platform offers local funding options in Rand (ZAR) through major South African banks and fintechs, enabling users to start with small investments and providing optional leverage tools. The UEX is presented as a unified gateway bridging on-chain and off-chain utility, signifying a shift from fragmented trading tools to integrated financial access.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.7683138847351074,
+      "positive_score": 0.2206133008003235,
+      "negative_score": 0.01107280794531107,
+      "neutral_score": 0.7683138847351074
+    },
+    {
+      "entity": "Uex",
+      "raw_text": "UEX",
+      "label": "ORG",
+      "start_char": 512,
+      "end_char": 515,
+      "sentence_idx": 2,
+      "context_window": "Universal exchange: how South Africans can access Crypto, tokenized US stocks and ETFs in one place - IOL Bitget's Universal Exchange (UEX) now allows South African traders to access crypto, tokenized US stock futures, and ETFs from a single platform, eliminating the need for multiple services and foreign accounts. This platform offers local funding options in Rand (ZAR) through major South African banks and fintechs, enabling users to start with small investments and providing optional leverage tools. The UEX is presented as a unified gateway bridging on-chain and off-chain utility, signifying a shift from fragmented trading tools to integrated financial access.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.7683138847351074,
+      "positive_score": 0.2206133008003235,
+      "negative_score": 0.01107280794531107,
+      "neutral_score": 0.7683138847351074
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.7683,
+  "company_sentiments": {
+    "Iol Bitget": {
+      "label": "neutral",
+      "score": 0.7683138847351074,
+      "positive_score": 0.2206,
+      "negative_score": 0.0111,
+      "neutral_score": 0.7683,
+      "mentions": 1
+    },
+    "Universal Exchange": {
+      "label": "neutral",
+      "score": 0.7683138847351074,
+      "positive_score": 0.2206,
+      "negative_score": 0.0111,
+      "neutral_score": 0.7683,
+      "mentions": 1
+    },
+    "Uex": {
+      "label": "neutral",
+      "score": 0.7683138847351074,
+      "positive_score": 0.2206,
+      "negative_score": 0.0111,
+      "neutral_score": 0.7683,
+      "mentions": 2
+    },
+    "Zar": {
+      "label": "neutral",
+      "score": 0.7683138847351074,
+      "positive_score": 0.2206,
+      "negative_score": 0.0111,
+      "neutral_score": 0.7683,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "ad492de4-a0db-4c75-b7cf-1a9a7f5709e8"
+}

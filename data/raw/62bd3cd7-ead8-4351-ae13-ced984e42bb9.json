@@ -1,0 +1,73 @@
+{
+  "article_id": "62bd3cd7-ead8-4351-ae13-ced984e42bb9",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "Dan Ives Says ‘Market Is Mispricing’ MSFT Stock — Here’s Why",
+  "url": "https://stocktwits.com/news-articles/markets/equity/why-dan-ives-says-market-is-mispricing-microsoft-stock/cZ00hf9ReDl",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:52.681191",
+  "full_text": "Wedbush’s Dan Ives stays bullish on Microsoft, Alphabet and the broader AI trade, calling current market sentiment an underestimation of the next phase of Big Tech growth.",
+  "summary": "Wedbush’s Dan Ives stays bullish on Microsoft, Alphabet and the broader AI trade, calling current market sentiment an underestimation of the next phase of Big Tech growth.",
+  "raw_payload": {
+    "id": "e74a9743-b3c8-3eb2-9511-33e4c5770e8d",
+    "content": {
+      "id": "e74a9743-b3c8-3eb2-9511-33e4c5770e8d",
+      "contentType": "STORY",
+      "title": "Dan Ives Says ‘Market Is Mispricing’ MSFT Stock — Here’s Why",
+      "description": "",
+      "summary": "Wedbush’s Dan Ives stays bullish on Microsoft, Alphabet and the broader AI trade, calling current market sentiment an underestimation of the next phase of Big Tech growth.",
+      "pubDate": "2026-06-02T23:22:37Z",
+      "displayTime": "2026-06-02T23:22:37Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/stocktwits_383/664bb1f38ded8b9a756794890b4a7a5a",
+        "originalWidth": 1280,
+        "originalHeight": 815,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/vF2M8ZT6P6T8vpBWSVelDg--~B/aD04MTU7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/stocktwits_383/664bb1f38ded8b9a756794890b4a7a5a",
+            "width": 1280,
+            "height": 815,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/RLOa9822ZRaKrl7Ru0XuYA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/stocktwits_383/664bb1f38ded8b9a756794890b4a7a5a",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Stocktwits",
+        "url": "Stocktwits",
+        "sourceId": "stocktwits_383"
+      },
+      "canonicalUrl": {
+        "url": "https://stocktwits.com/news-articles/markets/equity/why-dan-ives-says-market-is-mispricing-microsoft-stock/cZ00hf9ReDl",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/dan-ives-says-market-mispricing-232237125.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

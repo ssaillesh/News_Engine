@@ -1,0 +1,68 @@
+{
+  "article_id": "407622e1-fcf2-48d2-80fb-f51d567f3e84",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks",
+  "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-us-iran-talks-marvell-stock-mrvl/?src=A00220&yptr=yahoo",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:52.452829",
+  "full_text": "Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+  "summary": "Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+  "raw_payload": {
+    "id": "e9a1df49-5d6a-3354-98ff-6a1e7c41f5e4",
+    "content": {
+      "id": "e9a1df49-5d6a-3354-98ff-6a1e7c41f5e4",
+      "contentType": "STORY",
+      "title": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks",
+      "description": "",
+      "summary": "Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+      "pubDate": "2026-06-02T20:25:18Z",
+      "displayTime": "2026-06-02T20:25:18Z",
+      "isHosted": false,
+      "bypassModal": false,
+      "previewUrl": "https://finance.yahoo.com/m/e9a1df49-5d6a-3354-98ff-6a1e7c41f5e4/stock-market-today-dow-s-p.html",
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/ibd.com/63d92fcd01ffb99464c6745e212b7302",
+        "originalWidth": 1000,
+        "originalHeight": 563,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/Rg_gGb2iuC8x8HrNn8_9Bg--~B/aD01NjM7dz0xMDAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/ibd.com/63d92fcd01ffb99464c6745e212b7302",
+            "width": 1000,
+            "height": 563,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/_H.rfE.hSK_8hC69nPBMlw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/ibd.com/63d92fcd01ffb99464c6745e212b7302",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Investor's Business Daily",
+        "url": "http://www.investors.com/",
+        "sourceId": "ibd.com"
+      },
+      "canonicalUrl": {
+        "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-us-iran-talks-marvell-stock-mrvl/?src=A00220&yptr=yahoo",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": null,
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

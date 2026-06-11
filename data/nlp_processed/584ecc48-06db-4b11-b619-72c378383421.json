@@ -1,0 +1,110 @@
+{
+  "article_id": "584ecc48-06db-4b11-b619-72c378383421",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Prediction: Elon Musk Will Target 2 Trillion-Dollar Acquisitions After the SpaceX IPO",
+  "url": "https://247wallst.com/investing/2026/06/11/prediction-elon-musk-will-target-2-trillion-dollar-acquisitions-after-the-spacex-ipo/",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:15.841600",
+  "sentences": [
+    "Prediction: Elon Musk Will Target 2 Trillion-Dollar Acquisitions After the SpaceX IPO The market is already treating tomorrow’s SpaceX IPO as one of the most important public offerings in decades.",
+    "Investors are focused on valuation, demand, and whether the company can justify the excitement surrounding a business that spans launch services, Starlink internet, artificial intelligence, robotics, and advanced manufacturing.",
+    "Yet the bigger story may be what happens ...",
+    "Prediction: Elon Musk Will Target 2 Trillion-Dollar Acquisitions After the SpaceX IPO"
+  ],
+  "entities": [
+    {
+      "entity": "El",
+      "raw_text": "El",
+      "label": "ORG",
+      "start_char": 12,
+      "end_char": 14,
+      "sentence_idx": 0,
+      "context_window": "Prediction: Elon Musk Will Target 2 Trillion-Dollar Acquisitions After the SpaceX IPO The market is already treating tomorrow’s SpaceX IPO as one of the most important public offerings in decades. Investors are focused on valuation, demand, and whether the company can justify the excitement surrounding a business that spans launch services, Starlink internet, artificial intelligence, robotics, and advanced manufacturing. Yet the bigger story may be what happens ...",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "##On Musk",
+      "raw_text": "##on Musk",
+      "label": "ORG",
+      "start_char": 14,
+      "end_char": 21,
+      "sentence_idx": 0,
+      "context_window": "Prediction: Elon Musk Will Target 2 Trillion-Dollar Acquisitions After the SpaceX IPO The market is already treating tomorrow’s SpaceX IPO as one of the most important public offerings in decades. Investors are focused on valuation, demand, and whether the company can justify the excitement surrounding a business that spans launch services, Starlink internet, artificial intelligence, robotics, and advanced manufacturing. Yet the bigger story may be what happens ...",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "##Link",
+      "raw_text": "##link",
+      "label": "ORG",
+      "start_char": 347,
+      "end_char": 351,
+      "sentence_idx": 1,
+      "context_window": "Prediction: Elon Musk Will Target 2 Trillion-Dollar Acquisitions After the SpaceX IPO The market is already treating tomorrow’s SpaceX IPO as one of the most important public offerings in decades. Investors are focused on valuation, demand, and whether the company can justify the excitement surrounding a business that spans launch services, Starlink internet, artificial intelligence, robotics, and advanced manufacturing. Yet the bigger story may be what happens ... Prediction: Elon Musk Will Target 2 Trillion-Dollar Acquisitions After the SpaceX IPO",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Elon Musk",
+      "raw_text": "Elon Musk",
+      "label": "ORG",
+      "start_char": 482,
+      "end_char": 491,
+      "sentence_idx": 3,
+      "context_window": "Investors are focused on valuation, demand, and whether the company can justify the excitement surrounding a business that spans launch services, Starlink internet, artificial intelligence, robotics, and advanced manufacturing. Yet the bigger story may be what happens ... Prediction: Elon Musk Will Target 2 Trillion-Dollar Acquisitions After the SpaceX IPO",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "El": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "##On Musk": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "##Link": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Elon Musk": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "18a6a022-8605-485b-a90d-47a3fd7c5fd6"
+}

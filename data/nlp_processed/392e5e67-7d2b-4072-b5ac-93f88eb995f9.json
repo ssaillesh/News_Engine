@@ -1,0 +1,102 @@
+{
+  "article_id": "392e5e67-7d2b-4072-b5ac-93f88eb995f9",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "iShares MSCI World ETF: Rekordjagd!",
+  "url": "https://www.boerse-express.com/news/articles/ishares-msci-world-etf-rekordjagd-834346",
+  "published_at": "2025-11-08T05:02:36Z",
+  "processed_at": "2026-06-03T04:58:36.390545",
+  "sentences": [
+    "iShares MSCI World ETF: Rekordjagd!",
+    "The iShares MSCI World ETF is nearing all-time highs driven by robust global equity markets and tech dominance, but faces valuation challenges.",
+    "While beneficiaries of synchronized markets and tech growth, the concentration in large US tech stocks introduces cluster risks.",
+    "Investors are advised to consider potential overvaluation despite strong fundamentals, with future performance hinging on upcoming quarterly reports."
+  ],
+  "entities": [
+    {
+      "entity": "I",
+      "raw_text": "i",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 1,
+      "sentence_idx": 0,
+      "context_window": "iShares MSCI World ETF: Rekordjagd! The iShares MSCI World ETF is nearing all-time highs driven by robust global equity markets and tech dominance, but faces valuation challenges. While beneficiaries of synchronized markets and tech growth, the concentration in large US tech stocks introduces cluster risks.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.6350851058959961,
+      "positive_score": 0.6350851058959961,
+      "negative_score": 0.27167564630508423,
+      "neutral_score": 0.09323925524950027
+    },
+    {
+      "entity": "Msci",
+      "raw_text": "MSCI",
+      "label": "ORG",
+      "start_char": 8,
+      "end_char": 12,
+      "sentence_idx": 0,
+      "context_window": "iShares MSCI World ETF: Rekordjagd! The iShares MSCI World ETF is nearing all-time highs driven by robust global equity markets and tech dominance, but faces valuation challenges. While beneficiaries of synchronized markets and tech growth, the concentration in large US tech stocks introduces cluster risks.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.6350851058959961,
+      "positive_score": 0.6350851058959961,
+      "negative_score": 0.27167564630508423,
+      "neutral_score": 0.09323925524950027
+    },
+    {
+      "entity": "Msci",
+      "raw_text": "MSCI",
+      "label": "ORG",
+      "start_char": 48,
+      "end_char": 52,
+      "sentence_idx": 1,
+      "context_window": "iShares MSCI World ETF: Rekordjagd! The iShares MSCI World ETF is nearing all-time highs driven by robust global equity markets and tech dominance, but faces valuation challenges. While beneficiaries of synchronized markets and tech growth, the concentration in large US tech stocks introduces cluster risks. Investors are advised to consider potential overvaluation despite strong fundamentals, with future performance hinging on upcoming quarterly reports.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.499498575925827,
+      "positive_score": 0.499498575925827,
+      "negative_score": 0.44148164987564087,
+      "neutral_score": 0.05901985988020897
+    },
+    {
+      "entity": "Et",
+      "raw_text": "ET",
+      "label": "ORG",
+      "start_char": 59,
+      "end_char": 61,
+      "sentence_idx": 1,
+      "context_window": "iShares MSCI World ETF: Rekordjagd! The iShares MSCI World ETF is nearing all-time highs driven by robust global equity markets and tech dominance, but faces valuation challenges. While beneficiaries of synchronized markets and tech growth, the concentration in large US tech stocks introduces cluster risks. Investors are advised to consider potential overvaluation despite strong fundamentals, with future performance hinging on upcoming quarterly reports.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.499498575925827,
+      "positive_score": 0.499498575925827,
+      "negative_score": 0.44148164987564087,
+      "neutral_score": 0.05901985988020897
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.5673,
+  "company_sentiments": {
+    "I": {
+      "label": "positive",
+      "score": 0.6350851058959961,
+      "positive_score": 0.6351,
+      "negative_score": 0.2717,
+      "neutral_score": 0.0932,
+      "mentions": 1
+    },
+    "Msci": {
+      "label": "positive",
+      "score": 0.5672918409109116,
+      "positive_score": 0.5673,
+      "negative_score": 0.3566,
+      "neutral_score": 0.0761,
+      "mentions": 2
+    },
+    "Et": {
+      "label": "positive",
+      "score": 0.499498575925827,
+      "positive_score": 0.4995,
+      "negative_score": 0.4415,
+      "neutral_score": 0.059,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "2d32c46e-98ca-42e6-b920-5c298cb0e2c1"
+}

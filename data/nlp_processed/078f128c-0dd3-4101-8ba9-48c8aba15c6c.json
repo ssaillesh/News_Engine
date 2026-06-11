@@ -1,0 +1,63 @@
+{
+  "article_id": "078f128c-0dd3-4101-8ba9-48c8aba15c6c",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Tesla Expands FSD Footprint in Europe",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/tesla-expands-fsd-footprint-europe-135954789.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:07.158387",
+  "sentences": [
+    "Tesla Expands FSD Footprint in Europe New approvals in Belgium and Denmark strengthen Tesla's autonomous driving push."
+  ],
+  "entities": [
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 5,
+      "sentence_idx": 0,
+      "context_window": "Tesla Expands FSD Footprint in Europe New approvals in Belgium and Denmark strengthen Tesla's autonomous driving push.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Fsd",
+      "raw_text": "FSD",
+      "label": "ORG",
+      "start_char": 14,
+      "end_char": 17,
+      "sentence_idx": 0,
+      "context_window": "Tesla Expands FSD Footprint in Europe New approvals in Belgium and Denmark strengthen Tesla's autonomous driving push.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Tesla": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Fsd": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "9e0a336a-4ed9-42ab-9d2e-f682b27adbf6"
+}

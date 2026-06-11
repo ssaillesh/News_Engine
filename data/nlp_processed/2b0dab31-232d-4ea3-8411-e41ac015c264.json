@@ -1,0 +1,57 @@
+{
+  "article_id": "2b0dab31-232d-4ea3-8411-e41ac015c264",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "ZenaTech begins assembly of quantum computing prototype for defense",
+  "url": "https://www.investing.com/news/company-news/zenatech-begins-assembly-of-quantum-computing-prototype-for-defense-93CH-4460260",
+  "published_at": "2026-01-22T13:28:26Z",
+  "processed_at": "2026-06-03T04:58:33.620522",
+  "sentences": [
+    "ZenaTech begins assembly of quantum computing prototype for defense ZenaTech, Inc. has begun procuring components for its first quantum computing prototype, aiming to complete a five-qubit system later in 2026.",
+    "This prototype is designed to process data from the company's AI drone systems for military and government applications, supporting autonomous operations, research projects, weather forecasting, and traffic management.",
+    "Despite current unprofitability, ZenaTech boasts strong liquidity and has been actively expanding its market presence through new drone launches and acquisitions, while also aligning with U.S. government regulations on foreign-made drone equipment."
+  ],
+  "entities": [
+    {
+      "entity": "Zenatech",
+      "raw_text": "ZenaTech",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 8,
+      "sentence_idx": 0,
+      "context_window": "ZenaTech begins assembly of quantum computing prototype for defense ZenaTech, Inc. has begun procuring components for its first quantum computing prototype, aiming to complete a five-qubit system later in 2026. This prototype is designed to process data from the company's AI drone systems for military and government applications, supporting autonomous operations, research projects, weather forecasting, and traffic management. Despite current unprofitability, ZenaTech boasts strong liquidity and has been actively expanding its market presence through new drone launches and acquisitions, while also aligning with U.S. government regulations on foreign-made drone equipment.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8860189914703369,
+      "positive_score": 0.8860189914703369,
+      "negative_score": 0.00817396491765976,
+      "neutral_score": 0.10580705851316452
+    },
+    {
+      "entity": "Zenatech",
+      "raw_text": "ZenaTech",
+      "label": "ORG",
+      "start_char": 463,
+      "end_char": 471,
+      "sentence_idx": 2,
+      "context_window": "ZenaTech begins assembly of quantum computing prototype for defense ZenaTech, Inc. has begun procuring components for its first quantum computing prototype, aiming to complete a five-qubit system later in 2026. This prototype is designed to process data from the company's AI drone systems for military and government applications, supporting autonomous operations, research projects, weather forecasting, and traffic management. Despite current unprofitability, ZenaTech boasts strong liquidity and has been actively expanding its market presence through new drone launches and acquisitions, while also aligning with U.S. government regulations on foreign-made drone equipment.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8860189914703369,
+      "positive_score": 0.8860189914703369,
+      "negative_score": 0.00817396491765976,
+      "neutral_score": 0.10580705851316452
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.886,
+  "company_sentiments": {
+    "Zenatech": {
+      "label": "positive",
+      "score": 0.8860189914703369,
+      "positive_score": 0.886,
+      "negative_score": 0.0082,
+      "neutral_score": 0.1058,
+      "mentions": 2
+    }
+  },
+  "embedding_id": "3ebd39ce-b75d-4bfe-8bd6-5a0561be82a7"
+}

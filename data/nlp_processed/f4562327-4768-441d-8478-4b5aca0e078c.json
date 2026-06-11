@@ -1,0 +1,103 @@
+{
+  "article_id": "f4562327-4768-441d-8478-4b5aca0e078c",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Anebulo Pharmaceuticals, Inc. (214.F) stock price, news, quote and history",
+  "url": "https://uk.finance.yahoo.com/quote/214.F/latest-news/",
+  "published_at": "2026-03-29T19:40:49Z",
+  "processed_at": "2026-06-03T04:58:27.238255",
+  "sentences": [
+    "Anebulo Pharmaceuticals, Inc.",
+    "(214.F) stock price, news, quote and history This Yahoo Finance page provides detailed information on Anebulo Pharmaceuticals, Inc.",
+    "(214.F), including its current stock price (0.7450 EUR, down 29.72%), news headlines, historical data, and performance overview.",
+    "The company's stock has shown significant negative returns YTD, 1-year, and 3-year periods compared to the S&P 500.",
+    "The article also lists top gainers, losers, and most active stocks on the UK markets."
+  ],
+  "entities": [
+    {
+      "entity": "Anebulo Pharmaceuticals",
+      "raw_text": "Anebulo Pharmaceuticals, Inc",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 28,
+      "sentence_idx": 0,
+      "context_window": "Anebulo Pharmaceuticals, Inc. (214.F) stock price, news, quote and history This Yahoo Finance page provides detailed information on Anebulo Pharmaceuticals, Inc. (214.F), including its current stock price (0.7450 EUR, down 29.72%), news headlines, historical data, and performance overview.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.735673189163208,
+      "positive_score": 0.021736402064561844,
+      "negative_score": 0.24259039759635925,
+      "neutral_score": 0.735673189163208
+    },
+    {
+      "entity": "Yahoo Finance",
+      "raw_text": "Yahoo Finance",
+      "label": "ORG",
+      "start_char": 80,
+      "end_char": 93,
+      "sentence_idx": 1,
+      "context_window": "Anebulo Pharmaceuticals, Inc. (214.F) stock price, news, quote and history This Yahoo Finance page provides detailed information on Anebulo Pharmaceuticals, Inc. (214.F), including its current stock price (0.7450 EUR, down 29.72%), news headlines, historical data, and performance overview. The company's stock has shown significant negative returns YTD, 1-year, and 3-year periods compared to the S&P 500.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9537094235420227,
+      "positive_score": 0.009154701605439186,
+      "negative_score": 0.9537094235420227,
+      "neutral_score": 0.037135835736989975
+    },
+    {
+      "entity": "Anebulo Pharmaceuticals",
+      "raw_text": "Anebulo Pharmaceuticals, Inc",
+      "label": "ORG",
+      "start_char": 132,
+      "end_char": 160,
+      "sentence_idx": 1,
+      "context_window": "Anebulo Pharmaceuticals, Inc. (214.F) stock price, news, quote and history This Yahoo Finance page provides detailed information on Anebulo Pharmaceuticals, Inc. (214.F), including its current stock price (0.7450 EUR, down 29.72%), news headlines, historical data, and performance overview. The company's stock has shown significant negative returns YTD, 1-year, and 3-year periods compared to the S&P 500.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9537094235420227,
+      "positive_score": 0.009154701605439186,
+      "negative_score": 0.9537094235420227,
+      "neutral_score": 0.037135835736989975
+    },
+    {
+      "entity": "& P",
+      "raw_text": "& P",
+      "label": "ORG",
+      "start_char": 399,
+      "end_char": 401,
+      "sentence_idx": 3,
+      "context_window": "(214.F) stock price, news, quote and history This Yahoo Finance page provides detailed information on Anebulo Pharmaceuticals, Inc. (214.F), including its current stock price (0.7450 EUR, down 29.72%), news headlines, historical data, and performance overview. The company's stock has shown significant negative returns YTD, 1-year, and 3-year periods compared to the S&P 500. The article also lists top gainers, losers, and most active stocks on the UK markets.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.882671594619751,
+      "positive_score": 0.012588533572852612,
+      "negative_score": 0.882671594619751,
+      "neutral_score": 0.10473985224962234
+    }
+  ],
+  "article_sentiment_label": "negative",
+  "article_sentiment_score": 0.7581,
+  "company_sentiments": {
+    "Anebulo Pharmaceuticals": {
+      "label": "negative",
+      "score": 0.598149910569191,
+      "positive_score": 0.0154,
+      "negative_score": 0.5981,
+      "neutral_score": 0.3864,
+      "mentions": 2
+    },
+    "Yahoo Finance": {
+      "label": "negative",
+      "score": 0.9537094235420227,
+      "positive_score": 0.0092,
+      "negative_score": 0.9537,
+      "neutral_score": 0.0371,
+      "mentions": 1
+    },
+    "& P": {
+      "label": "negative",
+      "score": 0.882671594619751,
+      "positive_score": 0.0126,
+      "negative_score": 0.8827,
+      "neutral_score": 0.1047,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "a5727227-e018-4c82-a18d-14e29446ded5"
+}

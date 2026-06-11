@@ -1,0 +1,129 @@
+{
+  "article_id": "f7968b98-1d3a-4d87-b94b-85cfec377ba3",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Super Micro initiated at Neutral as AI boom offset by margin, legal risk",
+  "url": "https://finance.yahoo.com/sectors/technology/articles/super-micro-initiated-neutral-ai-134642787.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:10.395416",
+  "sentences": [
+    "Super Micro initiated at Neutral as AI boom offset by margin, legal risk Investing.com -- Super Micro Computer shares were in focus Thursday after Wolfe Research initiated coverage of the AI server maker with a Peer Perform rating, arguing that while the company is well positioned to benefit from surging demand for artificial intelligence infrastructure, a range of operational, financial and regulatory risks could limit upside."
+  ],
+  "entities": [
+    {
+      "entity": "Super Micro",
+      "raw_text": "Super Micro",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 11,
+      "sentence_idx": 0,
+      "context_window": "Super Micro initiated at Neutral as AI boom offset by margin, legal risk Investing.com -- Super Micro Computer shares were in focus Thursday after Wolfe Research initiated coverage of the AI server maker with a Peer Perform rating, arguing that while the company is well positioned to benefit from surging demand for artificial intelligence infrastructure, a range of operational, financial and regulatory risks could limit upside.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Neutral",
+      "raw_text": "Neutral",
+      "label": "ORG",
+      "start_char": 25,
+      "end_char": 32,
+      "sentence_idx": 0,
+      "context_window": "Super Micro initiated at Neutral as AI boom offset by margin, legal risk Investing.com -- Super Micro Computer shares were in focus Thursday after Wolfe Research initiated coverage of the AI server maker with a Peer Perform rating, arguing that while the company is well positioned to benefit from surging demand for artificial intelligence infrastructure, a range of operational, financial and regulatory risks could limit upside.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Ai",
+      "raw_text": "AI",
+      "label": "ORG",
+      "start_char": 36,
+      "end_char": 38,
+      "sentence_idx": 0,
+      "context_window": "Super Micro initiated at Neutral as AI boom offset by margin, legal risk Investing.com -- Super Micro Computer shares were in focus Thursday after Wolfe Research initiated coverage of the AI server maker with a Peer Perform rating, arguing that while the company is well positioned to benefit from surging demand for artificial intelligence infrastructure, a range of operational, financial and regulatory risks could limit upside.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Super Micro Computer",
+      "raw_text": "Super Micro Computer",
+      "label": "ORG",
+      "start_char": 90,
+      "end_char": 110,
+      "sentence_idx": 0,
+      "context_window": "Super Micro initiated at Neutral as AI boom offset by margin, legal risk Investing.com -- Super Micro Computer shares were in focus Thursday after Wolfe Research initiated coverage of the AI server maker with a Peer Perform rating, arguing that while the company is well positioned to benefit from surging demand for artificial intelligence infrastructure, a range of operational, financial and regulatory risks could limit upside.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Wolfe Research",
+      "raw_text": "Wolfe Research",
+      "label": "ORG",
+      "start_char": 147,
+      "end_char": 161,
+      "sentence_idx": 0,
+      "context_window": "Super Micro initiated at Neutral as AI boom offset by margin, legal risk Investing.com -- Super Micro Computer shares were in focus Thursday after Wolfe Research initiated coverage of the AI server maker with a Peer Perform rating, arguing that while the company is well positioned to benefit from surging demand for artificial intelligence infrastructure, a range of operational, financial and regulatory risks could limit upside.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Super Micro": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Neutral": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Ai": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Super Micro Computer": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Wolfe Research": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "dce5d8f8-4d26-42b8-981f-a03f1d77e56f"
+}

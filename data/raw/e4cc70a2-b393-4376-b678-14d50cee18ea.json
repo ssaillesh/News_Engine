@@ -1,0 +1,70 @@
+{
+  "article_id": "e4cc70a2-b393-4376-b678-14d50cee18ea",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "IsoEnergy Ltd. R (I010.DU) stock price, news, quote and history",
+  "url": "https://uk.finance.yahoo.com/quote/I010.DU/sec-filing/",
+  "published_at": "2026-04-03T00:40:33Z",
+  "fetched_at": "2026-06-03T04:57:51.400672",
+  "full_text": "This page provides an overview of IsoEnergy Ltd. R (I010.DU) stock, including its current stock price, news, and historical data. As of April 2nd, the stock closed at 9.03 EUR, down 2.90%, and its year-to-date return was +24.38%. The article also features performance comparisons against the S&P/TSX Composite index.",
+  "summary": "This page provides an overview of IsoEnergy Ltd. R (I010.DU) stock, including its current stock price, news, and historical data. As of April 2nd, the stock closed at 9.03 EUR, down 2.90%, and its year-to-date return was +24.38%. The article also features performance comparisons against the S&P/TSX Composite index.",
+  "raw_payload": {
+    "title": "IsoEnergy Ltd. R (I010.DU) stock price, news, quote and history",
+    "url": "https://uk.finance.yahoo.com/quote/I010.DU/sec-filing/",
+    "time_published": "20260403T004033",
+    "authors": [],
+    "summary": "This page provides an overview of IsoEnergy Ltd. R (I010.DU) stock, including its current stock price, news, and historical data. As of April 2nd, the stock closed at 9.03 EUR, down 2.90%, and its year-to-date return was +24.38%. The article also features performance comparisons against the S&P/TSX Composite index.",
+    "banner_image": null,
+    "source": "Yahoo Finance UK",
+    "category_within_source": "General",
+    "source_domain": "Yahoo Finance UK",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.938435"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.715376"
+      },
+      {
+        "topic": "earnings",
+        "relevance_score": "0.637609"
+      }
+    ],
+    "overall_sentiment_score": 0.032449,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "ISOU",
+        "relevance_score": "0.342176",
+        "ticker_sentiment_score": "0.046701",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.638959",
+        "ticker_sentiment_score": "0.125967",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.611896",
+        "ticker_sentiment_score": "-0.235606",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.606206",
+        "ticker_sentiment_score": "0.101487",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.631547",
+        "ticker_sentiment_score": "0.141075",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

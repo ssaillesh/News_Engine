@@ -1,0 +1,116 @@
+{
+  "article_id": "6a8829d0-0fb4-49d0-acb0-08c1051e36d3",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "'Nobody wants to be left behind' in AI adoption: HPE CEO on Q2 earnings",
+  "url": "https://finance.yahoo.com/video/nobody-wants-left-behind-ai-193657066.html",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:49.998002",
+  "sentences": [
+    "'Nobody wants to be left behind' in AI adoption: HPE CEO on Q2 earnings Hewlett Packard Enterprise (HPE) is holding onto major gains ahead of Tuesday's close after topping fiscal second quarter estimates for adjusted earnings ($0.79 per share vs. forecasts of $0.54) and revenue ($10.68 billion vs. forecasts of $9.74 billion).",
+    "The tech company's stock moves are driven by the growth of its AI server business, now being considered a new contender in the AI infrastructure race.",
+    "HPE CEO Antonio Neri sits down with Yahoo Finance Executive Editor Brian Sozzi to talk more about the earnings results, 2027 guidance, AI infrastructure, and supply constraints.",
+    "This was HPE's biggest earnings beat seen since 2018, on top of record revenue."
+  ],
+  "entities": [
+    {
+      "entity": "Hpe",
+      "raw_text": "HPE",
+      "label": "ORG",
+      "start_char": 49,
+      "end_char": 52,
+      "sentence_idx": 0,
+      "context_window": "'Nobody wants to be left behind' in AI adoption: HPE CEO on Q2 earnings Hewlett Packard Enterprise (HPE) is holding onto major gains ahead of Tuesday's close after topping fiscal second quarter estimates for adjusted earnings ($0.79 per share vs. forecasts of $0.54) and revenue ($10.68 billion vs. forecasts of $9.74 billion). The tech company's stock moves are driven by the growth of its AI server business, now being considered a new contender in the AI infrastructure race. HPE CEO Antonio Neri sits down with Yahoo Finance Executive Editor Brian Sozzi to talk more about the earnings results, 2027 guidance, AI infrastructure, and supply constraints.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.5703909993171692,
+      "positive_score": 0.03335392475128174,
+      "negative_score": 0.5703909993171692,
+      "neutral_score": 0.39625510573387146
+    },
+    {
+      "entity": "Hewlett Packard",
+      "raw_text": "Hewlett Packard Enterprise",
+      "label": "ORG",
+      "start_char": 72,
+      "end_char": 98,
+      "sentence_idx": 0,
+      "context_window": "'Nobody wants to be left behind' in AI adoption: HPE CEO on Q2 earnings Hewlett Packard Enterprise (HPE) is holding onto major gains ahead of Tuesday's close after topping fiscal second quarter estimates for adjusted earnings ($0.79 per share vs. forecasts of $0.54) and revenue ($10.68 billion vs. forecasts of $9.74 billion). The tech company's stock moves are driven by the growth of its AI server business, now being considered a new contender in the AI infrastructure race. HPE CEO Antonio Neri sits down with Yahoo Finance Executive Editor Brian Sozzi to talk more about the earnings results, 2027 guidance, AI infrastructure, and supply constraints.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.5703909993171692,
+      "positive_score": 0.03335392475128174,
+      "negative_score": 0.5703909993171692,
+      "neutral_score": 0.39625510573387146
+    },
+    {
+      "entity": "Hpe",
+      "raw_text": "HPE",
+      "label": "ORG",
+      "start_char": 480,
+      "end_char": 483,
+      "sentence_idx": 2,
+      "context_window": "'Nobody wants to be left behind' in AI adoption: HPE CEO on Q2 earnings Hewlett Packard Enterprise (HPE) is holding onto major gains ahead of Tuesday's close after topping fiscal second quarter estimates for adjusted earnings ($0.79 per share vs. forecasts of $0.54) and revenue ($10.68 billion vs. forecasts of $9.74 billion). The tech company's stock moves are driven by the growth of its AI server business, now being considered a new contender in the AI infrastructure race. HPE CEO Antonio Neri sits down with Yahoo Finance Executive Editor Brian Sozzi to talk more about the earnings results, 2027 guidance, AI infrastructure, and supply constraints. This was HPE's biggest earnings beat seen since 2018, on top of record revenue.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6767146587371826,
+      "positive_score": 0.09267124533653259,
+      "negative_score": 0.6767146587371826,
+      "neutral_score": 0.2306140959262848
+    },
+    {
+      "entity": "Yahoo Finance",
+      "raw_text": "Yahoo Finance",
+      "label": "ORG",
+      "start_char": 516,
+      "end_char": 529,
+      "sentence_idx": 2,
+      "context_window": "'Nobody wants to be left behind' in AI adoption: HPE CEO on Q2 earnings Hewlett Packard Enterprise (HPE) is holding onto major gains ahead of Tuesday's close after topping fiscal second quarter estimates for adjusted earnings ($0.79 per share vs. forecasts of $0.54) and revenue ($10.68 billion vs. forecasts of $9.74 billion). The tech company's stock moves are driven by the growth of its AI server business, now being considered a new contender in the AI infrastructure race. HPE CEO Antonio Neri sits down with Yahoo Finance Executive Editor Brian Sozzi to talk more about the earnings results, 2027 guidance, AI infrastructure, and supply constraints. This was HPE's biggest earnings beat seen since 2018, on top of record revenue.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6767146587371826,
+      "positive_score": 0.09267124533653259,
+      "negative_score": 0.6767146587371826,
+      "neutral_score": 0.2306140959262848
+    },
+    {
+      "entity": "Hpe",
+      "raw_text": "HPE",
+      "label": "ORG",
+      "start_char": 667,
+      "end_char": 670,
+      "sentence_idx": 3,
+      "context_window": "The tech company's stock moves are driven by the growth of its AI server business, now being considered a new contender in the AI infrastructure race. HPE CEO Antonio Neri sits down with Yahoo Finance Executive Editor Brian Sozzi to talk more about the earnings results, 2027 guidance, AI infrastructure, and supply constraints. This was HPE's biggest earnings beat seen since 2018, on top of record revenue.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.8687351942062378,
+      "positive_score": 0.02293674647808075,
+      "negative_score": 0.8687351942062378,
+      "neutral_score": 0.10832799226045609
+    }
+  ],
+  "article_sentiment_label": "negative",
+  "article_sentiment_score": 0.6726,
+  "company_sentiments": {
+    "Hpe": {
+      "label": "negative",
+      "score": 0.7052802840868632,
+      "positive_score": 0.0497,
+      "negative_score": 0.7053,
+      "neutral_score": 0.2451,
+      "mentions": 3
+    },
+    "Hewlett Packard": {
+      "label": "negative",
+      "score": 0.5703909993171692,
+      "positive_score": 0.0334,
+      "negative_score": 0.5704,
+      "neutral_score": 0.3963,
+      "mentions": 1
+    },
+    "Yahoo Finance": {
+      "label": "negative",
+      "score": 0.6767146587371826,
+      "positive_score": 0.0927,
+      "negative_score": 0.6767,
+      "neutral_score": 0.2306,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "ad4a4ec0-3516-45f5-81b2-40456aa9075d"
+}

@@ -1,0 +1,130 @@
+{
+  "article_id": "850fc42b-4c8a-4875-8145-4e9468688078",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "Microsoft is turning to AI to combat cyber threats",
+  "url": "https://finance.yahoo.com/markets/article/microsoft-is-turning-to-ai-to-combat-cyber-threats-181500134.html",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:52.681026",
+  "full_text": "Microsoft is leaning on AI to help it fight back against hackers.",
+  "summary": "Microsoft is leaning on AI to help it fight back against hackers.",
+  "raw_payload": {
+    "id": "3f88a2df-4947-4223-982d-0245ed6d54e1",
+    "content": {
+      "id": "3f88a2df-4947-4223-982d-0245ed6d54e1",
+      "contentType": "STORY",
+      "title": "Microsoft is turning to AI to combat cyber threats",
+      "description": "",
+      "summary": "Microsoft is leaning on AI to help it fight back against hackers.",
+      "pubDate": "2026-06-02T18:15:00Z",
+      "displayTime": "2026-06-02T18:15:00Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://s.yimg.com/uu/api/res/1.2/EBazsC.pAlkwRKIRlqE5Ug--~B/aD0zODUyO3c9NTc0OTthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/5d865bcb-106a-4f01-a7cb-57af669bf2a1",
+        "originalWidth": 5749,
+        "originalHeight": 3852,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/EBazsC.pAlkwRKIRlqE5Ug--~B/aD0zODUyO3c9NTc0OTthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/5d865bcb-106a-4f01-a7cb-57af669bf2a1",
+            "width": 5749,
+            "height": 3852,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/cOR5sGo7pmyxQbpkgpOQUg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://d29szjachogqwa.cloudfront.net/images/2026-06/5d865bcb-106a-4f01-a7cb-57af669bf2a1",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Yahoo Finance",
+        "url": "http://finance.yahoo.com/",
+        "sourceId": "yahoofinance.com"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/markets/article/microsoft-is-turning-to-ai-to-combat-cyber-threats-181500134.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/article/microsoft-is-turning-to-ai-to-combat-cyber-threats-181500134.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": true
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": {
+        "storylineItems": [
+          {
+            "content": {
+              "id": "d3df680f-eb36-4920-81cb-1b52248e0dab",
+              "contentType": "VIDEO",
+              "isHosted": true,
+              "title": "How Google is funding its AI push",
+              "thumbnail": {
+                "originalUrl": "https://s.yimg.com/uu/api/res/1.2/C814oD4ZSPzHpsIJ8VzS2A--~B/aD0zMDI0O3c9NDAzMjthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/5f7fb691-aa51-461d-9b46-99762b42e163",
+                "originalWidth": 4032,
+                "originalHeight": 3024,
+                "caption": "",
+                "resolutions": null
+              },
+              "provider": {
+                "displayName": "Yahoo Finance Video",
+                "sourceId": "video.yahoofinance.com"
+              },
+              "previewUrl": null,
+              "providerContentUrl": "",
+              "canonicalUrl": {
+                "url": "https://finance.yahoo.com/video/google-funding-ai-push-143912627.html"
+              },
+              "clickThroughUrl": {
+                "url": "https://finance.yahoo.com/video/google-funding-ai-push-143912627.html"
+              }
+            }
+          },
+          {
+            "content": {
+              "id": "1770a565-d048-4c13-80db-231e2e058829",
+              "contentType": "STORY",
+              "isHosted": true,
+              "title": "AI is carrying the S&P 500 rally: Chart of the Day",
+              "thumbnail": {
+                "originalUrl": "https://s.yimg.com/uu/api/res/1.2/l.YgyCXHUn83Eg03i7Rxgw--~B/aD0yNDAxO3c9MzYwODthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/1c0c8161-7a22-4c0d-b327-e2178cf60bf9",
+                "originalWidth": 3608,
+                "originalHeight": 2401,
+                "caption": "",
+                "resolutions": null
+              },
+              "provider": {
+                "displayName": "Yahoo Finance",
+                "sourceId": "yahoofinance.com"
+              },
+              "previewUrl": null,
+              "providerContentUrl": "",
+              "canonicalUrl": {
+                "url": "https://finance.yahoo.com/markets/article/ai-is-carrying-the-sp-500-rally-chart-of-the-day-100000546.html"
+              },
+              "clickThroughUrl": {
+                "url": "https://finance.yahoo.com/markets/article/ai-is-carrying-the-sp-500-rally-chart-of-the-day-100000546.html"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

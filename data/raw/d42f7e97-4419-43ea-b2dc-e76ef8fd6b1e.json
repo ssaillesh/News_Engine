@@ -1,0 +1,73 @@
+{
+  "article_id": "d42f7e97-4419-43ea-b2dc-e76ef8fd6b1e",
+  "source": "yfinance",
+  "ticker": "META",
+  "title": "Wall Street’s $800 Billion AI Data Center Bet Is Showing Cracks. Only 84 of 157 Gigawatts Will Be Built by 2030",
+  "url": "https://247wallst.com/investing/2026/06/11/wall-streets-800-billion-ai-data-center-bet-is-showing-cracks-only-84-of-157-gigawatts-will-be-built-by-2030/",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:19.249880",
+  "full_text": "Although Wall Street has rewarded every hyperscaler willing to pledge more silicon, more concrete, and more megawatts over the past 24 months, the math behind the AI data center boom is finally drawing scrutiny. Combined 2026 capital expenditure guidance from Alphabet (NASDAQ:GOOGL), Meta Platforms (NASDAQ:META), Amazon (NASDAQ:AMZN), and Microsoft (NASDAQ:MSFT) now sums to roughly $800 ... Wall Street’s $800 Billion AI Data Center Bet Is Showing Cracks. Only 84 of 157 Gigawatts Will Be Built by",
+  "summary": "Although Wall Street has rewarded every hyperscaler willing to pledge more silicon, more concrete, and more megawatts over the past 24 months, the math behind the AI data center boom is finally drawing scrutiny. Combined 2026 capital expenditure guidance from Alphabet (NASDAQ:GOOGL), Meta Platforms (NASDAQ:META), Amazon (NASDAQ:AMZN), and Microsoft (NASDAQ:MSFT) now sums to roughly $800 ... Wall Street’s $800 Billion AI Data Center Bet Is Showing Cracks. Only 84 of 157 Gigawatts Will Be Built by",
+  "raw_payload": {
+    "id": "77510816-084d-359a-a3a8-db5d8fd259ff",
+    "content": {
+      "id": "77510816-084d-359a-a3a8-db5d8fd259ff",
+      "contentType": "STORY",
+      "title": "Wall Street’s $800 Billion AI Data Center Bet Is Showing Cracks. Only 84 of 157 Gigawatts Will Be Built by 2030",
+      "description": "",
+      "summary": "Although Wall Street has rewarded every hyperscaler willing to pledge more silicon, more concrete, and more megawatts over the past 24 months, the math behind the AI data center boom is finally drawing scrutiny. Combined 2026 capital expenditure guidance from Alphabet (NASDAQ:GOOGL), Meta Platforms (NASDAQ:META), Amazon (NASDAQ:AMZN), and Microsoft (NASDAQ:MSFT) now sums to roughly $800 ... Wall Street’s $800 Billion AI Data Center Bet Is Showing Cracks. Only 84 of 157 Gigawatts Will Be Built by",
+      "pubDate": "2026-06-11T11:03:45Z",
+      "displayTime": "2026-06-11T11:03:45Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/24_7_wall_st__718/110fd25c95192734dfce4e386cf0b8f0",
+        "originalWidth": 1366,
+        "originalHeight": 767,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/j8QSg1Z2hyJy2ghW5OwAYA--~B/aD03Njc7dz0xMzY2O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/24_7_wall_st__718/110fd25c95192734dfce4e386cf0b8f0",
+            "width": 1366,
+            "height": 767,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/hZAfZBGqgh7Xu7Ayrh_.fA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/24_7_wall_st__718/110fd25c95192734dfce4e386cf0b8f0",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "24/7 Wall St.",
+        "url": "https://247wallst.com/",
+        "sourceId": "24_7_wall_st__718"
+      },
+      "canonicalUrl": {
+        "url": "https://247wallst.com/investing/2026/06/11/wall-streets-800-billion-ai-data-center-bet-is-showing-cracks-only-84-of-157-gigawatts-will-be-built-by-2030/",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/wall-street-800-billion-ai-110345432.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "article_id": "ba25ce4e-c14f-4a91-800d-0d5eb14c1456",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Morning Bid: Marvell, a fitting name for the latest AI darling",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/morning-bid-marvell-fitting-name-043542710.html",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:50.237001",
+  "sentences": [
+    "Morning Bid: Marvell, a fitting name for the latest AI darling A look at the day ahead in European and global markets from Tom Westbrook Notwithstanding fresh hostilities in the Middle East, AI shares drove equity markets in Asia to new records on Wednesday."
+  ],
+  "entities": [
+    {
+      "entity": "Ai",
+      "raw_text": "AI",
+      "label": "ORG",
+      "start_char": 191,
+      "end_char": 193,
+      "sentence_idx": 0,
+      "context_window": "Morning Bid: Marvell, a fitting name for the latest AI darling A look at the day ahead in European and global markets from Tom Westbrook Notwithstanding fresh hostilities in the Middle East, AI shares drove equity markets in Asia to new records on Wednesday.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9185807704925537,
+      "positive_score": 0.9185807704925537,
+      "negative_score": 0.019506342709064484,
+      "neutral_score": 0.061912864446640015
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.9186,
+  "company_sentiments": {
+    "Ai": {
+      "label": "positive",
+      "score": 0.9185807704925537,
+      "positive_score": 0.9186,
+      "negative_score": 0.0195,
+      "neutral_score": 0.0619,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "6f1734b4-bb09-4cbc-a570-ad2a7428e34f"
+}

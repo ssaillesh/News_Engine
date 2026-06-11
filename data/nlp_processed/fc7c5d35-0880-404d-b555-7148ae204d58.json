@@ -1,0 +1,218 @@
+{
+  "article_id": "fc7c5d35-0880-404d-b555-7148ae204d58",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus",
+  "url": "https://stocktwits.com/news-articles/markets/equity/sp500-nasdaq-dow-futures-ease-after-another-record-close-ai-momentum-cushions-iran-strikes/cZ0SoqTReDV",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:46.205589",
+  "sentences": [
+    "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S.",
+    "President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries."
+  ],
+  "entities": [
+    {
+      "entity": "S & P",
+      "raw_text": "S & P",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 3,
+      "sentence_idx": 0,
+      "context_window": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7057339549064636,
+      "positive_score": 0.24152807891368866,
+      "negative_score": 0.7057339549064636,
+      "neutral_score": 0.052737895399332047
+    },
+    {
+      "entity": "##Da",
+      "raw_text": "##da",
+      "label": "ORG",
+      "start_char": 12,
+      "end_char": 14,
+      "sentence_idx": 0,
+      "context_window": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7057339549064636,
+      "positive_score": 0.24152807891368866,
+      "negative_score": 0.7057339549064636,
+      "neutral_score": 0.052737895399332047
+    },
+    {
+      "entity": "Future",
+      "raw_text": "Future",
+      "label": "ORG",
+      "start_char": 21,
+      "end_char": 27,
+      "sentence_idx": 0,
+      "context_window": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7057339549064636,
+      "positive_score": 0.24152807891368866,
+      "negative_score": 0.7057339549064636,
+      "neutral_score": 0.052737895399332047
+    },
+    {
+      "entity": "Mrvl",
+      "raw_text": "MRVL",
+      "label": "ORG",
+      "start_char": 111,
+      "end_char": 115,
+      "sentence_idx": 0,
+      "context_window": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7057339549064636,
+      "positive_score": 0.24152807891368866,
+      "negative_score": 0.7057339549064636,
+      "neutral_score": 0.052737895399332047
+    },
+    {
+      "entity": "A",
+      "raw_text": "A",
+      "label": "ORG",
+      "start_char": 117,
+      "end_char": 118,
+      "sentence_idx": 0,
+      "context_window": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7057339549064636,
+      "positive_score": 0.24152807891368866,
+      "negative_score": 0.7057339549064636,
+      "neutral_score": 0.052737895399332047
+    },
+    {
+      "entity": "##Vgo",
+      "raw_text": "##VGO",
+      "label": "ORG",
+      "start_char": 118,
+      "end_char": 121,
+      "sentence_idx": 0,
+      "context_window": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7057339549064636,
+      "positive_score": 0.24152807891368866,
+      "negative_score": 0.7057339549064636,
+      "neutral_score": 0.052737895399332047
+    },
+    {
+      "entity": "Msft",
+      "raw_text": "MSFT",
+      "label": "ORG",
+      "start_char": 123,
+      "end_char": 127,
+      "sentence_idx": 0,
+      "context_window": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7057339549064636,
+      "positive_score": 0.24152807891368866,
+      "negative_score": 0.7057339549064636,
+      "neutral_score": 0.052737895399332047
+    },
+    {
+      "entity": "Panw In Focus",
+      "raw_text": "PANW In Focus",
+      "label": "ORG",
+      "start_char": 129,
+      "end_char": 142,
+      "sentence_idx": 0,
+      "context_window": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7057339549064636,
+      "positive_score": 0.24152807891368866,
+      "negative_score": 0.7057339549064636,
+      "neutral_score": 0.052737895399332047
+    },
+    {
+      "entity": "Truth Social",
+      "raw_text": "Truth Social",
+      "label": "ORG",
+      "start_char": 189,
+      "end_char": 201,
+      "sentence_idx": 1,
+      "context_window": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7057339549064636,
+      "positive_score": 0.24152807891368866,
+      "negative_score": 0.7057339549064636,
+      "neutral_score": 0.052737895399332047
+    }
+  ],
+  "article_sentiment_label": "negative",
+  "article_sentiment_score": 0.7057,
+  "company_sentiments": {
+    "S & P": {
+      "label": "negative",
+      "score": 0.7057339549064636,
+      "positive_score": 0.2415,
+      "negative_score": 0.7057,
+      "neutral_score": 0.0527,
+      "mentions": 1
+    },
+    "##Da": {
+      "label": "negative",
+      "score": 0.7057339549064636,
+      "positive_score": 0.2415,
+      "negative_score": 0.7057,
+      "neutral_score": 0.0527,
+      "mentions": 1
+    },
+    "Future": {
+      "label": "negative",
+      "score": 0.7057339549064636,
+      "positive_score": 0.2415,
+      "negative_score": 0.7057,
+      "neutral_score": 0.0527,
+      "mentions": 1
+    },
+    "Mrvl": {
+      "label": "negative",
+      "score": 0.7057339549064636,
+      "positive_score": 0.2415,
+      "negative_score": 0.7057,
+      "neutral_score": 0.0527,
+      "mentions": 1
+    },
+    "A": {
+      "label": "negative",
+      "score": 0.7057339549064636,
+      "positive_score": 0.2415,
+      "negative_score": 0.7057,
+      "neutral_score": 0.0527,
+      "mentions": 1
+    },
+    "##Vgo": {
+      "label": "negative",
+      "score": 0.7057339549064636,
+      "positive_score": 0.2415,
+      "negative_score": 0.7057,
+      "neutral_score": 0.0527,
+      "mentions": 1
+    },
+    "Msft": {
+      "label": "negative",
+      "score": 0.7057339549064636,
+      "positive_score": 0.2415,
+      "negative_score": 0.7057,
+      "neutral_score": 0.0527,
+      "mentions": 1
+    },
+    "Panw In Focus": {
+      "label": "negative",
+      "score": 0.7057339549064636,
+      "positive_score": 0.2415,
+      "negative_score": 0.7057,
+      "neutral_score": 0.0527,
+      "mentions": 1
+    },
+    "Truth Social": {
+      "label": "negative",
+      "score": 0.7057339549064636,
+      "positive_score": 0.2415,
+      "negative_score": 0.7057,
+      "neutral_score": 0.0527,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "207a9b59-1977-4a55-b095-4bb135176fab"
+}

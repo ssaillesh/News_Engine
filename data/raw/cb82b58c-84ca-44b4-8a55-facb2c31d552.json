@@ -1,0 +1,66 @@
+{
+  "article_id": "cb82b58c-84ca-44b4-8a55-facb2c31d552",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "TTM Technologies Inc (TT1.HM) Analyst insights, Price targets and Recommendations",
+  "url": "https://uk.finance.yahoo.com/quote/TT1.HM/analyst-insights/",
+  "published_at": "2026-04-02T17:40:54Z",
+  "fetched_at": "2026-06-03T04:57:51.400733",
+  "full_text": "This article provides analyst insights, price targets, and recommendations for TTM Technologies Inc (TT1.HM). It highlights that several firms, including Needham, B. Riley Securities, and Truist Securities, have consistently maintained a \"Buy\" rating for the company over recent months. The stock was last recorded at 82.00, showing a decrease of 4.09%.",
+  "summary": "This article provides analyst insights, price targets, and recommendations for TTM Technologies Inc (TT1.HM). It highlights that several firms, including Needham, B. Riley Securities, and Truist Securities, have consistently maintained a \"Buy\" rating for the company over recent months. The stock was last recorded at 82.00, showing a decrease of 4.09%.",
+  "raw_payload": {
+    "title": "TTM Technologies Inc (TT1.HM) Analyst insights, Price targets and Recommendations",
+    "url": "https://uk.finance.yahoo.com/quote/TT1.HM/analyst-insights/",
+    "time_published": "20260402T174054",
+    "authors": [],
+    "summary": "This article provides analyst insights, price targets, and recommendations for TTM Technologies Inc (TT1.HM). It highlights that several firms, including Needham, B. Riley Securities, and Truist Securities, have consistently maintained a \"Buy\" rating for the company over recent months. The stock was last recorded at 82.00, showing a decrease of 4.09%.",
+    "banner_image": null,
+    "source": "Yahoo Finance UK",
+    "category_within_source": "General",
+    "source_domain": "Yahoo Finance UK",
+    "topics": [
+      {
+        "topic": "earnings",
+        "relevance_score": "0.946842"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.822592"
+      }
+    ],
+    "overall_sentiment_score": 0.105893,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "TTMI",
+        "relevance_score": "0.981636",
+        "ticker_sentiment_score": "0.341544",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.642431",
+        "ticker_sentiment_score": "0.228733",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.625518",
+        "ticker_sentiment_score": "-0.300760",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.553001",
+        "ticker_sentiment_score": "0.145567",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.578922",
+        "ticker_sentiment_score": "0.156944",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      }
+    ]
+  }
+}

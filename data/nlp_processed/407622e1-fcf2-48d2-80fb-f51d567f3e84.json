@@ -1,0 +1,175 @@
+{
+  "article_id": "407622e1-fcf2-48d2-80fb-f51d567f3e84",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks",
+  "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-us-iran-talks-marvell-stock-mrvl/?src=A00220&yptr=yahoo",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:44.387856",
+  "sentences": [
+    "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing.",
+    "Celestica shows a giant move.",
+    "Nvidia falls."
+  ],
+  "entities": [
+    {
+      "entity": "S & P",
+      "raw_text": "S & P",
+      "label": "ORG",
+      "start_char": 25,
+      "end_char": 28,
+      "sentence_idx": 0,
+      "context_window": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8279134631156921,
+      "positive_score": 0.8279134631156921,
+      "negative_score": 0.09778030961751938,
+      "neutral_score": 0.07430622726678848
+    },
+    {
+      "entity": "Streak",
+      "raw_text": "Streak",
+      "label": "ORG",
+      "start_char": 44,
+      "end_char": 50,
+      "sentence_idx": 0,
+      "context_window": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8279134631156921,
+      "positive_score": 0.8279134631156921,
+      "negative_score": 0.09778030961751938,
+      "neutral_score": 0.07430622726678848
+    },
+    {
+      "entity": "Apple Rises",
+      "raw_text": "Apple Rises",
+      "label": "ORG",
+      "start_char": 53,
+      "end_char": 64,
+      "sentence_idx": 0,
+      "context_window": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8279134631156921,
+      "positive_score": 0.8279134631156921,
+      "negative_score": 0.09778030961751938,
+      "neutral_score": 0.07430622726678848
+    },
+    {
+      "entity": "Nvidia Sin",
+      "raw_text": "Nvidia Sin",
+      "label": "ORG",
+      "start_char": 66,
+      "end_char": 76,
+      "sentence_idx": 0,
+      "context_window": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8279134631156921,
+      "positive_score": 0.8279134631156921,
+      "negative_score": 0.09778030961751938,
+      "neutral_score": 0.07430622726678848
+    },
+    {
+      "entity": "Stock",
+      "raw_text": "Stock",
+      "label": "ORG",
+      "start_char": 79,
+      "end_char": 84,
+      "sentence_idx": 0,
+      "context_window": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8279134631156921,
+      "positive_score": 0.8279134631156921,
+      "negative_score": 0.09778030961751938,
+      "neutral_score": 0.07430622726678848
+    },
+    {
+      "entity": "Celestica",
+      "raw_text": "Celestica",
+      "label": "ORG",
+      "start_char": 164,
+      "end_char": 173,
+      "sentence_idx": 1,
+      "context_window": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8279134631156921,
+      "positive_score": 0.8279134631156921,
+      "negative_score": 0.09778030961751938,
+      "neutral_score": 0.07430622726678848
+    },
+    {
+      "entity": "Nvidia",
+      "raw_text": "Nvidia",
+      "label": "ORG",
+      "start_char": 194,
+      "end_char": 200,
+      "sentence_idx": 2,
+      "context_window": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.8279134631156921,
+      "positive_score": 0.8279134631156921,
+      "negative_score": 0.09778030961751938,
+      "neutral_score": 0.07430622726678848
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.8279,
+  "company_sentiments": {
+    "S & P": {
+      "label": "positive",
+      "score": 0.8279134631156921,
+      "positive_score": 0.8279,
+      "negative_score": 0.0978,
+      "neutral_score": 0.0743,
+      "mentions": 1
+    },
+    "Streak": {
+      "label": "positive",
+      "score": 0.8279134631156921,
+      "positive_score": 0.8279,
+      "negative_score": 0.0978,
+      "neutral_score": 0.0743,
+      "mentions": 1
+    },
+    "Apple Rises": {
+      "label": "positive",
+      "score": 0.8279134631156921,
+      "positive_score": 0.8279,
+      "negative_score": 0.0978,
+      "neutral_score": 0.0743,
+      "mentions": 1
+    },
+    "Nvidia Sin": {
+      "label": "positive",
+      "score": 0.8279134631156921,
+      "positive_score": 0.8279,
+      "negative_score": 0.0978,
+      "neutral_score": 0.0743,
+      "mentions": 1
+    },
+    "Stock": {
+      "label": "positive",
+      "score": 0.8279134631156921,
+      "positive_score": 0.8279,
+      "negative_score": 0.0978,
+      "neutral_score": 0.0743,
+      "mentions": 1
+    },
+    "Celestica": {
+      "label": "positive",
+      "score": 0.8279134631156921,
+      "positive_score": 0.8279,
+      "negative_score": 0.0978,
+      "neutral_score": 0.0743,
+      "mentions": 1
+    },
+    "Nvidia": {
+      "label": "positive",
+      "score": 0.8279134631156921,
+      "positive_score": 0.8279,
+      "negative_score": 0.0978,
+      "neutral_score": 0.0743,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "41bafe51-41b6-4c7a-bcd9-df4c287d3d84"
+}

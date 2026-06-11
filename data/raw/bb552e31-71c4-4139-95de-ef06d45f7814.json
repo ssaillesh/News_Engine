@@ -1,0 +1,73 @@
+{
+  "article_id": "bb552e31-71c4-4139-95de-ef06d45f7814",
+  "source": "yfinance",
+  "ticker": "AMZN",
+  "title": "South Korea hits Coupang with $400M+ fine for data breach that affected millions",
+  "url": "https://finance.yahoo.com/sectors/technology/articles/south-korea-hits-coupang-400m-131851008.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.894962",
+  "full_text": "South Korean authorities issued the record-breaking fine following a data breach that affected over 30 million customers.",
+  "summary": "South Korean authorities issued the record-breaking fine following a data breach that affected over 30 million customers.",
+  "raw_payload": {
+    "id": "7eabef1e-dd31-3285-b8f9-19743125ed82",
+    "content": {
+      "id": "7eabef1e-dd31-3285-b8f9-19743125ed82",
+      "contentType": "STORY",
+      "title": "South Korea hits Coupang with $400M+ fine for data breach that affected millions",
+      "description": "",
+      "summary": "South Korean authorities issued the record-breaking fine following a data breach that affected over 30 million customers.",
+      "pubDate": "2026-06-11T13:18:51Z",
+      "displayTime": "2026-06-11T13:18:51Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/techcrunch_finance_785/6882bfc24ff36391c512120fbf7896af",
+        "originalWidth": 2000,
+        "originalHeight": 1334,
+        "caption": "A delivery driver for Coupang's Dawn Delivery service",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/ZWAfe_LZAM6rFWC35XnFfA--~B/aD0xMzM0O3c9MjAwMDthcHBpZD15dGFjaHlvbg--/https://media.zenfs.com/en/techcrunch_finance_785/6882bfc24ff36391c512120fbf7896af",
+            "width": 2000,
+            "height": 1334,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/cgNx5po5RqFhJDGFk5_UUw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/techcrunch_finance_785/6882bfc24ff36391c512120fbf7896af",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "TechCrunch",
+        "url": "https://techcrunch.com/",
+        "sourceId": "techcrunch_finance_785"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/south-korea-hits-coupang-400m-131851008.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/south-korea-hits-coupang-400m-131851008.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

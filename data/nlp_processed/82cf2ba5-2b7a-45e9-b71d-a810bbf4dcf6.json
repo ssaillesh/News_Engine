@@ -1,0 +1,43 @@
+{
+  "article_id": "82cf2ba5-2b7a-45e9-b71d-a810bbf4dcf6",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Meta Platforms Inc Class A",
+  "url": "https://www.tradingview.com/symbols/BVL-METAUS/ideas/page-39/",
+  "published_at": "2026-05-27T10:08:11Z",
+  "processed_at": "2026-06-03T04:58:19.350543",
+  "sentences": [
+    "Meta Platforms Inc Class A This article compiles various trading ideas and analyses for Meta Platforms Inc Class A (METAUS) stock.",
+    "It highlights technical analysis indicating potential reversals and corrections despite a long-term upward trend, with some analysts predicting a significant downward correction in the coming months.",
+    "Other analyses suggest short-term buying opportunities at support levels or identify potential resistance points."
+  ],
+  "entities": [
+    {
+      "entity": "Meta Platforms",
+      "raw_text": "Meta Platforms Inc",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 18,
+      "sentence_idx": 0,
+      "context_window": "Meta Platforms Inc Class A This article compiles various trading ideas and analyses for Meta Platforms Inc Class A (METAUS) stock. It highlights technical analysis indicating potential reversals and corrections despite a long-term upward trend, with some analysts predicting a significant downward correction in the coming months. Other analyses suggest short-term buying opportunities at support levels or identify potential resistance points.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6273436546325684,
+      "positive_score": 0.0635649636387825,
+      "negative_score": 0.6273436546325684,
+      "neutral_score": 0.3090914189815521
+    }
+  ],
+  "article_sentiment_label": "negative",
+  "article_sentiment_score": 0.6273,
+  "company_sentiments": {
+    "Meta Platforms": {
+      "label": "negative",
+      "score": 0.6273436546325684,
+      "positive_score": 0.0636,
+      "negative_score": 0.6273,
+      "neutral_score": 0.3091,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "d69b3d6c-c909-46ab-a6c5-66d487dc7c82"
+}

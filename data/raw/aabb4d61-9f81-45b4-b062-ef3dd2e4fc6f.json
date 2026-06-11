@@ -1,0 +1,73 @@
+{
+  "article_id": "aabb4d61-9f81-45b4-b062-ef3dd2e4fc6f",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Why Coherent (COHR) Is Up 11.9% After Nvidia’s AI Optics Deal And Equity Investment",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/why-coherent-cohr-11-9-043123374.html",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:53.049684",
+  "full_text": "In recent days, Coherent Corp. reported strong growth in its Data Center & Communications segment and secured a multibillion‑dollar AI datacenter infrastructure partnership with Nvidia, which also took an equity stake to support expanded photonics capacity. These developments coincided with broader enthusiasm for optical networking after Nvidia CEO Jensen Huang highlighted high‑speed optical connectivity as critical for AI data centers. An especially important detail for investors is that...",
+  "summary": "In recent days, Coherent Corp. reported strong growth in its Data Center & Communications segment and secured a multibillion‑dollar AI datacenter infrastructure partnership with Nvidia, which also took an equity stake to support expanded photonics capacity. These developments coincided with broader enthusiasm for optical networking after Nvidia CEO Jensen Huang highlighted high‑speed optical connectivity as critical for AI data centers. An especially important detail for investors is that...",
+  "raw_payload": {
+    "id": "7a1c1092-4c7b-3ab0-aa27-e463493b7874",
+    "content": {
+      "id": "7a1c1092-4c7b-3ab0-aa27-e463493b7874",
+      "contentType": "STORY",
+      "title": "Why Coherent (COHR) Is Up 11.9% After Nvidia’s AI Optics Deal And Equity Investment",
+      "description": "",
+      "summary": "In recent days, Coherent Corp. reported strong growth in its Data Center & Communications segment and secured a multibillion‑dollar AI datacenter infrastructure partnership with Nvidia, which also took an equity stake to support expanded photonics capacity. These developments coincided with broader enthusiasm for optical networking after Nvidia CEO Jensen Huang highlighted high‑speed optical connectivity as critical for AI data centers. An especially important detail for investors is that...",
+      "pubDate": "2026-06-03T04:31:23Z",
+      "displayTime": "2026-06-03T04:31:23Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/simply_wall_st__316/c9021a6b56b6d46879d8b105f9ba3ef8",
+        "originalWidth": 1194,
+        "originalHeight": 432,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/6uAsO.rEcrE.nmLBY.t5jw--~B/aD00MzI7dz0xMTk0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/simply_wall_st__316/c9021a6b56b6d46879d8b105f9ba3ef8",
+            "width": 1194,
+            "height": 432,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/rqlbN5RiPu1vlRU9ouAYXA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/simply_wall_st__316/c9021a6b56b6d46879d8b105f9ba3ef8",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Simply Wall St.",
+        "url": "https://simplywall.st/",
+        "sourceId": "simply_wall_st__316"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/why-coherent-cohr-11-9-043123374.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/why-coherent-cohr-11-9-043123374.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "article_id": "f372a012-d993-4e72-b7b5-6c8cf9e95acb",
+  "source": "yfinance",
+  "ticker": "AMZN",
+  "title": "Tether Leads $1.4 Billion Funding Round for NEURA Robotics",
+  "url": "https://beincrypto.com/tether-neura-robotics-funding-round/",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.894630",
+  "full_text": "Tether leads a $1.4 billion Series C for NEURA Robotics, adding wallets and edge AI to power a machine economy.",
+  "summary": "Tether leads a $1.4 billion Series C for NEURA Robotics, adding wallets and edge AI to power a machine economy.",
+  "raw_payload": {
+    "id": "2c1267e8-e2b7-3aac-81b1-ee872b6789b0",
+    "content": {
+      "id": "2c1267e8-e2b7-3aac-81b1-ee872b6789b0",
+      "contentType": "STORY",
+      "title": "Tether Leads $1.4 Billion Funding Round for NEURA Robotics",
+      "description": "",
+      "summary": "Tether leads a $1.4 billion Series C for NEURA Robotics, adding wallets and edge AI to power a machine economy.",
+      "pubDate": "2026-06-11T13:42:51Z",
+      "displayTime": "2026-06-11T13:42:51Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/beincrypto_us_662/a9230ef10db1ae14b6cf9678414e70a5",
+        "originalWidth": 1280,
+        "originalHeight": 720,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/yvoOnwnQZKTOqO0x0UzB2Q--~B/aD03MjA7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/beincrypto_us_662/a9230ef10db1ae14b6cf9678414e70a5",
+            "width": 1280,
+            "height": 720,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/irv6HvbA8BnjK4kHvXMxgA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/beincrypto_us_662/a9230ef10db1ae14b6cf9678414e70a5",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "BeInCrypto",
+        "url": "https://beincrypto.com/",
+        "sourceId": "beincrypto_us_662"
+      },
+      "canonicalUrl": {
+        "url": "https://beincrypto.com/tether-neura-robotics-funding-round/",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/crypto/articles/tether-leads-1-4-billion-134251619.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

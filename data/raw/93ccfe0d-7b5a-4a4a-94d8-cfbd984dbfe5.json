@@ -1,0 +1,68 @@
+{
+  "article_id": "93ccfe0d-7b5a-4a4a-94d8-cfbd984dbfe5",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Berkshire Hathaway Got a Sweet Deal on Alphabet Stock",
+  "url": "https://www.barrons.com/articles/berkshire-hathaway-alphabet-stock-deal-discount-0371c682?siteid=yhoof2&yptr=yahoo",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:52.452866",
+  "full_text": "Alphabet, Google’s parent, gave Berkshire a 6% discount off its Monday closing stock price. It isn’t that unusual—for very good reasons.",
+  "summary": "Alphabet, Google’s parent, gave Berkshire a 6% discount off its Monday closing stock price. It isn’t that unusual—for very good reasons.",
+  "raw_payload": {
+    "id": "79b0b18f-e371-365f-8785-9ac1ab4cb40c",
+    "content": {
+      "id": "79b0b18f-e371-365f-8785-9ac1ab4cb40c",
+      "contentType": "STORY",
+      "title": "Berkshire Hathaway Got a Sweet Deal on Alphabet Stock",
+      "description": "",
+      "summary": "Alphabet, Google’s parent, gave Berkshire a 6% discount off its Monday closing stock price. It isn’t that unusual—for very good reasons.",
+      "pubDate": "2026-06-02T20:25:00Z",
+      "displayTime": "2026-06-02T20:25:00Z",
+      "isHosted": false,
+      "bypassModal": false,
+      "previewUrl": "https://finance.yahoo.com/m/79b0b18f-e371-365f-8785-9ac1ab4cb40c/berkshire-hathaway-got-a.html",
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/Barrons.com/7d0180d80b317d80670b07a24d48c807",
+        "originalWidth": 1280,
+        "originalHeight": 640,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/goFizVppRIYKtb2LAnWGOg--~B/aD02NDA7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/Barrons.com/7d0180d80b317d80670b07a24d48c807",
+            "width": 1280,
+            "height": 640,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/KX1695pwHqeP8jwT2HG4nw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/Barrons.com/7d0180d80b317d80670b07a24d48c807",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Barrons.com",
+        "url": "http://www.barrons.com/",
+        "sourceId": "Barrons.com"
+      },
+      "canonicalUrl": {
+        "url": "https://www.barrons.com/articles/berkshire-hathaway-alphabet-stock-deal-discount-0371c682?siteid=yhoof2&yptr=yahoo",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": null,
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

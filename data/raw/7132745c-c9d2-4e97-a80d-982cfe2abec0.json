@@ -1,0 +1,78 @@
+{
+  "article_id": "7132745c-c9d2-4e97-a80d-982cfe2abec0",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "iShares MSCI World ETF's Tech-Heavy Bet Faces a Critical Week",
+  "url": "https://www.ad-hoc-news.de/boerse/ueberblick/ishares-msci-world-etf-s-tech-heavy-bet-faces-a-critical-week/69237347",
+  "published_at": "2026-04-23T03:08:55Z",
+  "fetched_at": "2026-06-03T04:57:51.400495",
+  "full_text": "The iShares MSCI World ETF, heavily weighted in technology, faces a critical week as key tech companies like Tesla, Apple, and Microsoft report earnings. Tesla's recent struggles put pressure on the ETF, which allocates a significant portion to the information technology sector. Additionally, a major overhaul of MSCI's index methodology in May 2026 is expected to cause significant portfolio adjustments for the fund.",
+  "summary": "The iShares MSCI World ETF, heavily weighted in technology, faces a critical week as key tech companies like Tesla, Apple, and Microsoft report earnings. Tesla's recent struggles put pressure on the ETF, which allocates a significant portion to the information technology sector. Additionally, a major overhaul of MSCI's index methodology in May 2026 is expected to cause significant portfolio adjustments for the fund.",
+  "raw_payload": {
+    "title": "iShares MSCI World ETF's Tech-Heavy Bet Faces a Critical Week",
+    "url": "https://www.ad-hoc-news.de/boerse/ueberblick/ishares-msci-world-etf-s-tech-heavy-bet-faces-a-critical-week/69237347",
+    "time_published": "20260423T030855",
+    "authors": [],
+    "summary": "The iShares MSCI World ETF, heavily weighted in technology, faces a critical week as key tech companies like Tesla, Apple, and Microsoft report earnings. Tesla's recent struggles put pressure on the ETF, which allocates a significant portion to the information technology sector. Additionally, a major overhaul of MSCI's index methodology in May 2026 is expected to cause significant portfolio adjustments for the fund.",
+    "banner_image": "https://mdb.ad-hoc-news.de/bild/bild-2569510_480_300.webp",
+    "source": "AD HOC NEWS",
+    "category_within_source": "General",
+    "source_domain": "AD HOC NEWS",
+    "topics": [
+      {
+        "topic": "earnings",
+        "relevance_score": "0.914950"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.940049"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.802556"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.710991"
+      },
+      {
+        "topic": "economy_macro",
+        "relevance_score": "0.640476"
+      }
+    ],
+    "overall_sentiment_score": -0.096277,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "URTH",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "-0.245962",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.987361",
+        "ticker_sentiment_score": "-0.698700",
+        "ticker_sentiment_label": "Bearish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.731903",
+        "ticker_sentiment_score": "0.291637",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.747634",
+        "ticker_sentiment_score": "0.143681",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.634779",
+        "ticker_sentiment_score": "0.145552",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

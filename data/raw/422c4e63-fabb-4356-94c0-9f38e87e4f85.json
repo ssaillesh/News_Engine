@@ -1,0 +1,80 @@
+{
+  "article_id": "422c4e63-fabb-4356-94c0-9f38e87e4f85",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Here are Tuesday's biggest analyst calls: Nvidia, Apple, Tesla, Microsoft, Oracle, Live Nation, Coinbase & more",
+  "url": "https://www.cnbc.com/2025/11/25/biggest-stocks-from-analyst-calls-tuesday-include-nvidia-oracle-apple.html",
+  "published_at": "2025-11-25T08:38:00Z",
+  "fetched_at": "2026-06-03T04:57:51.401328",
+  "full_text": "This article details significant analyst calls made on Tuesday by various investment firms for major companies like Nvidia, Apple, Tesla, Microsoft, and Oracle. Analysts reiterated, upgraded, or initiated coverage on several stocks, providing their outlooks and price targets based on company performance, market conditions, and future growth prospects. Key themes include optimism around AI, recovery in certain sectors, and concerns over declining crypto trading volumes.",
+  "summary": "This article details significant analyst calls made on Tuesday by various investment firms for major companies like Nvidia, Apple, Tesla, Microsoft, and Oracle. Analysts reiterated, upgraded, or initiated coverage on several stocks, providing their outlooks and price targets based on company performance, market conditions, and future growth prospects. Key themes include optimism around AI, recovery in certain sectors, and concerns over declining crypto trading volumes.",
+  "raw_payload": {
+    "title": "Here are Tuesday's biggest analyst calls: Nvidia, Apple, Tesla, Microsoft, Oracle, Live Nation, Coinbase & more",
+    "url": "https://www.cnbc.com/2025/11/25/biggest-stocks-from-analyst-calls-tuesday-include-nvidia-oracle-apple.html",
+    "time_published": "20251125T083800",
+    "authors": [
+      "Michael Bloom"
+    ],
+    "summary": "This article details significant analyst calls made on Tuesday by various investment firms for major companies like Nvidia, Apple, Tesla, Microsoft, and Oracle. Analysts reiterated, upgraded, or initiated coverage on several stocks, providing their outlooks and price targets based on company performance, market conditions, and future growth prospects. Key themes include optimism around AI, recovery in certain sectors, and concerns over declining crypto trading volumes.",
+    "banner_image": "https://image.cnbcfm.com/api/v1/image/108191238-17562967732025-08-27t115414z_639445813_rc2nfgaaamj8_rtrmadp_0_nvidia-results-china.jpeg?v=1757605494&w=600&h=300&vtcrop=y",
+    "source": "CNBC",
+    "category_within_source": "General",
+    "source_domain": "CNBC",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.921633"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.823370"
+      },
+      {
+        "topic": "life_sciences",
+        "relevance_score": "0.708521"
+      },
+      {
+        "topic": "retail_wholesale",
+        "relevance_score": "0.644802"
+      },
+      {
+        "topic": "blockchain",
+        "relevance_score": "0.643512"
+      }
+    ],
+    "overall_sentiment_score": 0.344758,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "ORCL",
+        "relevance_score": "0.993095",
+        "ticker_sentiment_score": "0.402112",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.910478",
+        "ticker_sentiment_score": "0.470971",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.895591",
+        "ticker_sentiment_score": "0.332993",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.717812",
+        "ticker_sentiment_score": "0.112005",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.698632",
+        "ticker_sentiment_score": "0.427158",
+        "ticker_sentiment_label": "Bullish"
+      }
+    ]
+  }
+}

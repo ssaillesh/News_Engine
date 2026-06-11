@@ -1,0 +1,85 @@
+{
+  "article_id": "03750f5f-098a-4f67-b9c7-553f4e335d1a",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "Billionaire Bill Gates' Foundation Dumped Microsoft but Loaded Up on This Dividend Champion",
+  "url": "https://www.fool.com/investing/2026/06/02/billionaire-bill-gates-foundation-dumped-microsoft/",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:46.585063",
+  "sentences": [
+    "Billionaire Bill Gates' Foundation Dumped Microsoft but Loaded Up on This Dividend Champion The Microsoft founder's foundation recently added this healthcare stock to its portfolio."
+  ],
+  "entities": [
+    {
+      "entity": "'",
+      "raw_text": "'",
+      "label": "ORG",
+      "start_char": 22,
+      "end_char": 23,
+      "sentence_idx": 0,
+      "context_window": "Billionaire Bill Gates' Foundation Dumped Microsoft but Loaded Up on This Dividend Champion The Microsoft founder's foundation recently added this healthcare stock to its portfolio.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9221768975257874,
+      "positive_score": 0.0502525232732296,
+      "negative_score": 0.02757061831653118,
+      "neutral_score": 0.9221768975257874
+    },
+    {
+      "entity": "Foundation",
+      "raw_text": "Foundation",
+      "label": "ORG",
+      "start_char": 24,
+      "end_char": 34,
+      "sentence_idx": 0,
+      "context_window": "Billionaire Bill Gates' Foundation Dumped Microsoft but Loaded Up on This Dividend Champion The Microsoft founder's foundation recently added this healthcare stock to its portfolio.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9221768975257874,
+      "positive_score": 0.0502525232732296,
+      "negative_score": 0.02757061831653118,
+      "neutral_score": 0.9221768975257874
+    },
+    {
+      "entity": "Microsoft",
+      "raw_text": "Microsoft",
+      "label": "ORG",
+      "start_char": 42,
+      "end_char": 51,
+      "sentence_idx": 0,
+      "context_window": "Billionaire Bill Gates' Foundation Dumped Microsoft but Loaded Up on This Dividend Champion The Microsoft founder's foundation recently added this healthcare stock to its portfolio.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9221768975257874,
+      "positive_score": 0.0502525232732296,
+      "negative_score": 0.02757061831653118,
+      "neutral_score": 0.9221768975257874
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.9222,
+  "company_sentiments": {
+    "'": {
+      "label": "neutral",
+      "score": 0.9221768975257874,
+      "positive_score": 0.0503,
+      "negative_score": 0.0276,
+      "neutral_score": 0.9222,
+      "mentions": 1
+    },
+    "Foundation": {
+      "label": "neutral",
+      "score": 0.9221768975257874,
+      "positive_score": 0.0503,
+      "negative_score": 0.0276,
+      "neutral_score": 0.9222,
+      "mentions": 1
+    },
+    "Microsoft": {
+      "label": "neutral",
+      "score": 0.9221768975257874,
+      "positive_score": 0.0503,
+      "negative_score": 0.0276,
+      "neutral_score": 0.9222,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "beb43eb5-c2db-4802-916a-02da9b396a69"
+}

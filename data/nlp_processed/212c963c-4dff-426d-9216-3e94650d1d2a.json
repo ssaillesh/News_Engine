@@ -1,0 +1,63 @@
+{
+  "article_id": "212c963c-4dff-426d-9216-3e94650d1d2a",
+  "source": "yfinance",
+  "ticker": "AMZN",
+  "title": "Ceasefire 'teeters on a knife-edge', threatening global shipping",
+  "url": "https://finance.yahoo.com/video/ceasefire-teeters-on-a-knife-edge-threatening-global-shipping-200044375.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:51.563136",
+  "sentences": [
+    "Ceasefire 'teeters on a knife-edge', threatening global shipping Yahoo Finance Breaking News Reporter Jake Conley joins Josh Lipton on Market Domination to discuss the latest developments in the Middle East and what a potential collapse of peace talks means for global shipping and marine fuel."
+  ],
+  "entities": [
+    {
+      "entity": "Ceasefire",
+      "raw_text": "Ceasefire",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 9,
+      "sentence_idx": 0,
+      "context_window": "Ceasefire 'teeters on a knife-edge', threatening global shipping Yahoo Finance Breaking News Reporter Jake Conley joins Josh Lipton on Market Domination to discuss the latest developments in the Middle East and what a potential collapse of peace talks means for global shipping and marine fuel.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Yahoo Finance Breaking News Reporter",
+      "raw_text": "Yahoo Finance Breaking News Reporter",
+      "label": "ORG",
+      "start_char": 65,
+      "end_char": 101,
+      "sentence_idx": 0,
+      "context_window": "Ceasefire 'teeters on a knife-edge', threatening global shipping Yahoo Finance Breaking News Reporter Jake Conley joins Josh Lipton on Market Domination to discuss the latest developments in the Middle East and what a potential collapse of peace talks means for global shipping and marine fuel.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Ceasefire": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Yahoo Finance Breaking News Reporter": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "2aed3e2e-ded7-4006-82bc-abb5ab38b074"
+}

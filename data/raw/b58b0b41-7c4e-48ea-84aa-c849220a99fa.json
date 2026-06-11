@@ -1,0 +1,73 @@
+{
+  "article_id": "b58b0b41-7c4e-48ea-84aa-c849220a99fa",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B",
+  "url": "https://stocktwits.com/news-articles/markets/equity/amd-arm-intc-nvda-agentic-ai-server-cpu-market-170-billion-bofa/cZKTp9LR72O",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:17.893623",
+  "full_text": "Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+  "summary": "Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+  "raw_payload": {
+    "id": "0c424726-1eea-3194-8d65-354ee086b857",
+    "content": {
+      "id": "0c424726-1eea-3194-8d65-354ee086b857",
+      "contentType": "STORY",
+      "title": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B",
+      "description": "",
+      "summary": "Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+      "pubDate": "2026-06-11T12:32:32Z",
+      "displayTime": "2026-06-11T12:32:32Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/stocktwits_383/568ca8cdcf7c31bb1b35727c962650eb",
+        "originalWidth": 1280,
+        "originalHeight": 853,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/W6WZtcfzS3FGWZ9c0tNICA--~B/aD04NTM7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/stocktwits_383/568ca8cdcf7c31bb1b35727c962650eb",
+            "width": 1280,
+            "height": 853,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/ZwG5RXvlRmTdOtmxQdTQtw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/stocktwits_383/568ca8cdcf7c31bb1b35727c962650eb",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Stocktwits",
+        "url": "Stocktwits",
+        "sourceId": "stocktwits_383"
+      },
+      "canonicalUrl": {
+        "url": "https://stocktwits.com/news-articles/markets/equity/amd-arm-intc-nvda-agentic-ai-server-cpu-market-170-billion-bofa/cZKTp9LR72O",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/amd-arm-intc-nvda-fresh-123232388.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

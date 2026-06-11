@@ -1,0 +1,73 @@
+{
+  "article_id": "ba25ce4e-c14f-4a91-800d-0d5eb14c1456",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Morning Bid: Marvell, a fitting name for the latest AI darling",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/morning-bid-marvell-fitting-name-043542710.html",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:53.049591",
+  "full_text": "A look at the day ahead in European and global markets from Tom Westbrook Notwithstanding fresh hostilities in the Middle East, AI shares drove equity markets in Asia to new records on Wednesday.",
+  "summary": "A look at the day ahead in European and global markets from Tom Westbrook Notwithstanding fresh hostilities in the Middle East, AI shares drove equity markets in Asia to new records on Wednesday.",
+  "raw_payload": {
+    "id": "74be6495-8583-3575-a9c5-5806314dd1ac",
+    "content": {
+      "id": "74be6495-8583-3575-a9c5-5806314dd1ac",
+      "contentType": "STORY",
+      "title": "Morning Bid: Marvell, a fitting name for the latest AI darling",
+      "description": "",
+      "summary": "A look at the day ahead in European and global markets from Tom Westbrook Notwithstanding fresh hostilities in the Middle East, AI shares drove equity markets in Asia to new records on Wednesday.",
+      "pubDate": "2026-06-03T04:35:42Z",
+      "displayTime": "2026-06-03T04:35:42Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/reuters.com/dcc9312804b3458fd0c909ceb3e71dd1",
+        "originalWidth": 800,
+        "originalHeight": 533,
+        "caption": "The Canadian minister responsible for Canada-U.S. relations, Dominic LeBlanc, and Canada's chief trade negotiator to the United States, Janice Charette, speak to the media at the Embassy of Canada in Washington, D.C., U.S., June 2, 2026. REUTERS/Anna Rose Layden",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/a4zrvO04ZQ.VZN8ldg6Gyg--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/dcc9312804b3458fd0c909ceb3e71dd1",
+            "width": 800,
+            "height": 533,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/QtTPoDf_IXUt29Xqprq1oQ--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters.com/dcc9312804b3458fd0c909ceb3e71dd1",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Reuters",
+        "url": "https://www.reuters.com/",
+        "sourceId": "reuters.com"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/morning-bid-marvell-fitting-name-043542710.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/morning-bid-marvell-fitting-name-043542710.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

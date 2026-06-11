@@ -1,0 +1,41 @@
+{
+  "article_id": "9ae21758-23ee-4c31-ae81-408a6d3ff097",
+  "source": "yfinance",
+  "ticker": "AMZN",
+  "title": "Amazon opens Northampton site and plans Kettering facility",
+  "url": "https://www.retail-insight-network.com/news/amazon-northampton-site-kettering-facility/",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:52.275303",
+  "sentences": [
+    "Amazon opens Northampton site and plans Kettering facility The Kettering project is a £500m site and is due to become the UK's “largest” cross-dock facility when it opens later this year."
+  ],
+  "entities": [
+    {
+      "entity": "Amazon",
+      "raw_text": "Amazon",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 6,
+      "sentence_idx": 0,
+      "context_window": "Amazon opens Northampton site and plans Kettering facility The Kettering project is a £500m site and is due to become the UK's “largest” cross-dock facility when it opens later this year.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Amazon": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "33b1d13c-12b3-434d-a223-e18bfde40506"
+}

@@ -1,0 +1,153 @@
+{
+  "article_id": "7488269f-ec1f-47f8-999f-61527a5135d0",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Invesco NASDAQ 100 ETF (QQQM.MX) stock price, news, quote and history",
+  "url": "https://uk.finance.yahoo.com/quote/QQQM.MX/sec-filing/",
+  "published_at": "2026-04-02T16:09:25Z",
+  "processed_at": "2026-06-03T04:58:26.928382",
+  "sentences": [
+    "Invesco NASDAQ 100 ETF (QQQM.MX) stock price, news, quote and history The Yahoo Finance page for the Invesco NASDAQ 100 ETF (QQQM.MX) provides its stock price, news, quotes, and historical performance.",
+    "The ETF's Mexican quote shows a price of 4,291.22 MXN, up 0.91%, with trailing returns against its category also listed.",
+    "The page also includes broader market data, trending tickers, and top gainers/losers."
+  ],
+  "entities": [
+    {
+      "entity": "Invesco",
+      "raw_text": "Invesco",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 7,
+      "sentence_idx": 0,
+      "context_window": "Invesco NASDAQ 100 ETF (QQQM.MX) stock price, news, quote and history The Yahoo Finance page for the Invesco NASDAQ 100 ETF (QQQM.MX) provides its stock price, news, quotes, and historical performance. The ETF's Mexican quote shows a price of 4,291.22 MXN, up 0.91%, with trailing returns against its category also listed. The page also includes broader market data, trending tickers, and top gainers/losers.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.5764032602310181,
+      "positive_score": 0.4044865667819977,
+      "negative_score": 0.01911018230021,
+      "neutral_score": 0.5764032602310181
+    },
+    {
+      "entity": "##Da",
+      "raw_text": "##DA",
+      "label": "ORG",
+      "start_char": 11,
+      "end_char": 13,
+      "sentence_idx": 0,
+      "context_window": "Invesco NASDAQ 100 ETF (QQQM.MX) stock price, news, quote and history The Yahoo Finance page for the Invesco NASDAQ 100 ETF (QQQM.MX) provides its stock price, news, quotes, and historical performance. The ETF's Mexican quote shows a price of 4,291.22 MXN, up 0.91%, with trailing returns against its category also listed. The page also includes broader market data, trending tickers, and top gainers/losers.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.5764032602310181,
+      "positive_score": 0.4044865667819977,
+      "negative_score": 0.01911018230021,
+      "neutral_score": 0.5764032602310181
+    },
+    {
+      "entity": "Yahoo Finance",
+      "raw_text": "Yahoo Finance",
+      "label": "ORG",
+      "start_char": 74,
+      "end_char": 87,
+      "sentence_idx": 0,
+      "context_window": "Invesco NASDAQ 100 ETF (QQQM.MX) stock price, news, quote and history The Yahoo Finance page for the Invesco NASDAQ 100 ETF (QQQM.MX) provides its stock price, news, quotes, and historical performance. The ETF's Mexican quote shows a price of 4,291.22 MXN, up 0.91%, with trailing returns against its category also listed. The page also includes broader market data, trending tickers, and top gainers/losers.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.5764032602310181,
+      "positive_score": 0.4044865667819977,
+      "negative_score": 0.01911018230021,
+      "neutral_score": 0.5764032602310181
+    },
+    {
+      "entity": "In",
+      "raw_text": "In",
+      "label": "ORG",
+      "start_char": 101,
+      "end_char": 103,
+      "sentence_idx": 0,
+      "context_window": "Invesco NASDAQ 100 ETF (QQQM.MX) stock price, news, quote and history The Yahoo Finance page for the Invesco NASDAQ 100 ETF (QQQM.MX) provides its stock price, news, quotes, and historical performance. The ETF's Mexican quote shows a price of 4,291.22 MXN, up 0.91%, with trailing returns against its category also listed. The page also includes broader market data, trending tickers, and top gainers/losers.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.5764032602310181,
+      "positive_score": 0.4044865667819977,
+      "negative_score": 0.01911018230021,
+      "neutral_score": 0.5764032602310181
+    },
+    {
+      "entity": "##Vesco",
+      "raw_text": "##vesco",
+      "label": "ORG",
+      "start_char": 103,
+      "end_char": 108,
+      "sentence_idx": 0,
+      "context_window": "Invesco NASDAQ 100 ETF (QQQM.MX) stock price, news, quote and history The Yahoo Finance page for the Invesco NASDAQ 100 ETF (QQQM.MX) provides its stock price, news, quotes, and historical performance. The ETF's Mexican quote shows a price of 4,291.22 MXN, up 0.91%, with trailing returns against its category also listed. The page also includes broader market data, trending tickers, and top gainers/losers.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.5764032602310181,
+      "positive_score": 0.4044865667819977,
+      "negative_score": 0.01911018230021,
+      "neutral_score": 0.5764032602310181
+    },
+    {
+      "entity": "Etf",
+      "raw_text": "ETF",
+      "label": "ORG",
+      "start_char": 206,
+      "end_char": 209,
+      "sentence_idx": 1,
+      "context_window": "Invesco NASDAQ 100 ETF (QQQM.MX) stock price, news, quote and history The Yahoo Finance page for the Invesco NASDAQ 100 ETF (QQQM.MX) provides its stock price, news, quotes, and historical performance. The ETF's Mexican quote shows a price of 4,291.22 MXN, up 0.91%, with trailing returns against its category also listed. The page also includes broader market data, trending tickers, and top gainers/losers.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.5764032602310181,
+      "positive_score": 0.4044865667819977,
+      "negative_score": 0.01911018230021,
+      "neutral_score": 0.5764032602310181
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.5764,
+  "company_sentiments": {
+    "Invesco": {
+      "label": "neutral",
+      "score": 0.5764032602310181,
+      "positive_score": 0.4045,
+      "negative_score": 0.0191,
+      "neutral_score": 0.5764,
+      "mentions": 1
+    },
+    "##Da": {
+      "label": "neutral",
+      "score": 0.5764032602310181,
+      "positive_score": 0.4045,
+      "negative_score": 0.0191,
+      "neutral_score": 0.5764,
+      "mentions": 1
+    },
+    "Yahoo Finance": {
+      "label": "neutral",
+      "score": 0.5764032602310181,
+      "positive_score": 0.4045,
+      "negative_score": 0.0191,
+      "neutral_score": 0.5764,
+      "mentions": 1
+    },
+    "In": {
+      "label": "neutral",
+      "score": 0.5764032602310181,
+      "positive_score": 0.4045,
+      "negative_score": 0.0191,
+      "neutral_score": 0.5764,
+      "mentions": 1
+    },
+    "##Vesco": {
+      "label": "neutral",
+      "score": 0.5764032602310181,
+      "positive_score": 0.4045,
+      "negative_score": 0.0191,
+      "neutral_score": 0.5764,
+      "mentions": 1
+    },
+    "Etf": {
+      "label": "neutral",
+      "score": 0.5764032602310181,
+      "positive_score": 0.4045,
+      "negative_score": 0.0191,
+      "neutral_score": 0.5764,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "ea875fb5-1630-4a46-8c66-2f711083ce92"
+}

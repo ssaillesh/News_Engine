@@ -1,0 +1,66 @@
+{
+  "article_id": "94766a48-e362-4b13-8be1-085b148ecb58",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history",
+  "url": "https://uk.finance.yahoo.com/quote/ZAP/sec-filing/",
+  "published_at": "2026-04-03T19:11:24Z",
+  "fetched_at": "2026-06-03T04:57:51.400630",
+  "full_text": "This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading. The ETF has shown positive trailing returns, significantly outperforming its category over a 1-year period.",
+  "summary": "This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading. The ETF has shown positive trailing returns, significantly outperforming its category over a 1-year period.",
+  "raw_payload": {
+    "title": "Global X U.S. Electrification ETF (ZAP) stock price, news, quote and history",
+    "url": "https://uk.finance.yahoo.com/quote/ZAP/sec-filing/",
+    "time_published": "20260403T191124",
+    "authors": [],
+    "summary": "This article provides financial information for the Global X U.S. Electrification ETF (ZAP), including its stock price, news, and historical data. As of April 2nd, 2026, ZAP was trading at $32.60, with a slight increase in after-hours trading. The ETF has shown positive trailing returns, significantly outperforming its category over a 1-year period.",
+    "banner_image": null,
+    "source": "Yahoo Finance UK",
+    "category_within_source": "General",
+    "source_domain": "Yahoo Finance UK",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.903236"
+      },
+      {
+        "topic": "energy_transportation",
+        "relevance_score": "0.735333"
+      }
+    ],
+    "overall_sentiment_score": 0.056722,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "ZAP",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "-0.106562",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.624065",
+        "ticker_sentiment_score": "0.100832",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.613368",
+        "ticker_sentiment_score": "-0.137931",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.613145",
+        "ticker_sentiment_score": "0.147368",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.601290",
+        "ticker_sentiment_score": "0.125055",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "article_id": "b908e9ab-abd2-44f2-927a-236b563b8eea",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "EdgeRock Capital LLC Sells 4,794 Shares of Apple Inc. $AAPL",
+  "url": "https://www.marketbeat.com/instant-alerts/filing-edgerock-capital-llc-sells-4794-shares-of-apple-inc-aapl-2026-02-10/",
+  "published_at": "2026-02-10T08:36:54Z",
+  "processed_at": "2026-06-03T04:58:31.063436",
+  "sentences": [
+    "EdgeRock Capital LLC Sells 4,794 Shares of Apple Inc. $AAPL EdgeRock Capital LLC reduced its stake in Apple Inc.",
+    "(NASDAQ:AAPL) by 15.1% in the third quarter, selling 4,794 shares and now owning 26,971 shares valued at $6.87 million.",
+    "Despite this sale, Apple remains the 17th largest holding for EdgeRock Capital LLC, making up 1.9% of its portfolio.",
+    "Other institutional investors have varied their positions, while analyst sentiment towards Apple remains \"Moderate Buy\" with a consensus price target of $291.70."
+  ],
+  "entities": [
+    {
+      "entity": "Edgerock Capital",
+      "raw_text": "EdgeRock Capital LLC",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 20,
+      "sentence_idx": 0,
+      "context_window": "EdgeRock Capital LLC Sells 4,794 Shares of Apple Inc. $AAPL EdgeRock Capital LLC reduced its stake in Apple Inc. (NASDAQ:AAPL) by 15.1% in the third quarter, selling 4,794 shares and now owning 26,971 shares valued at $6.87 million. Despite this sale, Apple remains the 17th largest holding for EdgeRock Capital LLC, making up 1.9% of its portfolio.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9572595357894897,
+      "positive_score": 0.012962772510945797,
+      "negative_score": 0.9572595357894897,
+      "neutral_score": 0.029777608811855316
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple Inc",
+      "label": "ORG",
+      "start_char": 43,
+      "end_char": 52,
+      "sentence_idx": 0,
+      "context_window": "EdgeRock Capital LLC Sells 4,794 Shares of Apple Inc. $AAPL EdgeRock Capital LLC reduced its stake in Apple Inc. (NASDAQ:AAPL) by 15.1% in the third quarter, selling 4,794 shares and now owning 26,971 shares valued at $6.87 million. Despite this sale, Apple remains the 17th largest holding for EdgeRock Capital LLC, making up 1.9% of its portfolio.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9572595357894897,
+      "positive_score": 0.012962772510945797,
+      "negative_score": 0.9572595357894897,
+      "neutral_score": 0.029777608811855316
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 252,
+      "end_char": 257,
+      "sentence_idx": 2,
+      "context_window": "EdgeRock Capital LLC Sells 4,794 Shares of Apple Inc. $AAPL EdgeRock Capital LLC reduced its stake in Apple Inc. (NASDAQ:AAPL) by 15.1% in the third quarter, selling 4,794 shares and now owning 26,971 shares valued at $6.87 million. Despite this sale, Apple remains the 17th largest holding for EdgeRock Capital LLC, making up 1.9% of its portfolio. Other institutional investors have varied their positions, while analyst sentiment towards Apple remains \"Moderate Buy\" with a consensus price target of $291.70.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9643992781639099,
+      "positive_score": 0.01183229312300682,
+      "negative_score": 0.9643992781639099,
+      "neutral_score": 0.023768367245793343
+    },
+    {
+      "entity": "Edgerock Capital",
+      "raw_text": "EdgeRock Capital LLC",
+      "label": "ORG",
+      "start_char": 295,
+      "end_char": 315,
+      "sentence_idx": 2,
+      "context_window": "EdgeRock Capital LLC Sells 4,794 Shares of Apple Inc. $AAPL EdgeRock Capital LLC reduced its stake in Apple Inc. (NASDAQ:AAPL) by 15.1% in the third quarter, selling 4,794 shares and now owning 26,971 shares valued at $6.87 million. Despite this sale, Apple remains the 17th largest holding for EdgeRock Capital LLC, making up 1.9% of its portfolio. Other institutional investors have varied their positions, while analyst sentiment towards Apple remains \"Moderate Buy\" with a consensus price target of $291.70.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9643992781639099,
+      "positive_score": 0.01183229312300682,
+      "negative_score": 0.9643992781639099,
+      "neutral_score": 0.023768367245793343
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 441,
+      "end_char": 446,
+      "sentence_idx": 3,
+      "context_window": "(NASDAQ:AAPL) by 15.1% in the third quarter, selling 4,794 shares and now owning 26,971 shares valued at $6.87 million. Despite this sale, Apple remains the 17th largest holding for EdgeRock Capital LLC, making up 1.9% of its portfolio. Other institutional investors have varied their positions, while analyst sentiment towards Apple remains \"Moderate Buy\" with a consensus price target of $291.70.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.809181272983551,
+      "positive_score": 0.0782943144440651,
+      "negative_score": 0.809181272983551,
+      "neutral_score": 0.11252447962760925
+    }
+  ],
+  "article_sentiment_label": "negative",
+  "article_sentiment_score": 0.9305,
+  "company_sentiments": {
+    "Edgerock Capital": {
+      "label": "negative",
+      "score": 0.9608294069766998,
+      "positive_score": 0.0124,
+      "negative_score": 0.9608,
+      "neutral_score": 0.0268,
+      "mentions": 2
+    },
+    "Apple": {
+      "label": "negative",
+      "score": 0.9102800289789835,
+      "positive_score": 0.0344,
+      "negative_score": 0.9103,
+      "neutral_score": 0.0554,
+      "mentions": 3
+    }
+  },
+  "embedding_id": "ad3ae854-f9fe-4398-a307-1cf978dea2df"
+}

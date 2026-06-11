@@ -1,0 +1,70 @@
+{
+  "article_id": "18920183-a4a9-4f9a-9af1-907ed46f0bc5",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc.",
+  "url": "https://www.marketbeat.com/instant-alerts/filing-apple-inc-aapl-stock-holdings-reduced-by-adams-diversified-equity-fund-inc-2026-01-27/",
+  "published_at": "2026-01-27T08:23:12Z",
+  "fetched_at": "2026-06-03T04:57:51.401174",
+  "full_text": "Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio. The article also details other institutional investor activities, analyst ratings, financial data, and recent news impacting Apple's stock.",
+  "summary": "Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio. The article also details other institutional investor activities, analyst ratings, financial data, and recent news impacting Apple's stock.",
+  "raw_payload": {
+    "title": "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc.",
+    "url": "https://www.marketbeat.com/instant-alerts/filing-apple-inc-aapl-stock-holdings-reduced-by-adams-diversified-equity-fund-inc-2026-01-27/",
+    "time_published": "20260127T082312",
+    "authors": [
+      "MarketBeat"
+    ],
+    "summary": "Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio. The article also details other institutional investor activities, analyst ratings, financial data, and recent news impacting Apple's stock.",
+    "banner_image": "https://www.marketbeat.com/logos/apple-inc-logo-1200x675.png",
+    "source": "MarketBeat",
+    "category_within_source": "General",
+    "source_domain": "MarketBeat",
+    "topics": [
+      {
+        "topic": "earnings",
+        "relevance_score": "0.911957"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.803034"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.712358"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.647089"
+      }
+    ],
+    "overall_sentiment_score": 0.035026,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.110179",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.644813",
+        "ticker_sentiment_score": "0.022203",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.602201",
+        "ticker_sentiment_score": "0.021540",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.645815",
+        "ticker_sentiment_score": "0.042814",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "article_id": "58af49f1-11af-4db7-b771-93e0fd74b7eb",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Coinbase Launches 24/7 Stock Trading For Tesla, Apple, Nvidia With 10X Leverage",
+  "url": "https://www.benzinga.com/crypto/cryptocurrency/26/03/51375063/coinbase-launches-24-7-stock-trading-for-tesla-apple-nvidia-with-10x-leverage",
+  "published_at": "2026-03-20T11:44:04Z",
+  "fetched_at": "2026-06-03T04:57:51.400860",
+  "full_text": "Coinbase has introduced 24/7 perpetual futures trading for eligible non-U.S. users, offering up to 10x leverage on single-name stocks like Tesla, Apple, and Nvidia, and up to 20x leverage on ETF products. This move expands Coinbase's vision of an \"Everything Exchange\" where users can trade crypto, traditional, and emerging assets on one platform. The initiative addresses the growing demand for continuous equity exposure and capital-efficient access to U.S. markets, setting it apart from traditional 24/5 stock markets.",
+  "summary": "Coinbase has introduced 24/7 perpetual futures trading for eligible non-U.S. users, offering up to 10x leverage on single-name stocks like Tesla, Apple, and Nvidia, and up to 20x leverage on ETF products. This move expands Coinbase's vision of an \"Everything Exchange\" where users can trade crypto, traditional, and emerging assets on one platform. The initiative addresses the growing demand for continuous equity exposure and capital-efficient access to U.S. markets, setting it apart from traditional 24/5 stock markets.",
+  "raw_payload": {
+    "title": "Coinbase Launches 24/7 Stock Trading For Tesla, Apple, Nvidia With 10X Leverage",
+    "url": "https://www.benzinga.com/crypto/cryptocurrency/26/03/51375063/coinbase-launches-24-7-stock-trading-for-tesla-apple-nvidia-with-10x-leverage",
+    "time_published": "20260320T114404",
+    "authors": [
+      "Parshwa Turakhiya"
+    ],
+    "summary": "Coinbase has introduced 24/7 perpetual futures trading for eligible non-U.S. users, offering up to 10x leverage on single-name stocks like Tesla, Apple, and Nvidia, and up to 20x leverage on ETF products. This move expands Coinbase's vision of an \"Everything Exchange\" where users can trade crypto, traditional, and emerging assets on one platform. The initiative addresses the growing demand for continuous equity exposure and capital-efficient access to U.S. markets, setting it apart from traditional 24/5 stock markets.",
+    "banner_image": "https://cdn.benzinga.com/files/images/story/2025/07/24/article-header-background-image.png?quality=85&auto=webp&width=1300",
+    "source": "Benzinga",
+    "category_within_source": "General",
+    "source_domain": "Benzinga",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.908076"
+      },
+      {
+        "topic": "blockchain",
+        "relevance_score": "0.823473"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.746100"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.622382"
+      }
+    ],
+    "overall_sentiment_score": 0.286729,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.994365",
+        "ticker_sentiment_score": "0.302524",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.948746",
+        "ticker_sentiment_score": "0.318273",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.905635",
+        "ticker_sentiment_score": "0.302603",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "COIN",
+        "relevance_score": "0.806147",
+        "ticker_sentiment_score": "0.270697",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.715007",
+        "ticker_sentiment_score": "0.273477",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      }
+    ]
+  }
+}

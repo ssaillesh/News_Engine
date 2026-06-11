@@ -1,0 +1,63 @@
+{
+  "article_id": "8613df1b-1f7d-4411-8145-75a003deffe8",
+  "source": "yfinance",
+  "ticker": "GOOGL",
+  "title": "Prometheus, the industrial AI startup from Jeff Bezos, is now worth $41 billion",
+  "url": "https://www.axios.com/2026/06/11/prometheus-bezos-industrial-ai#utm_source=yahoo_finance&utm_medium=partner&utm_campaign=subs-partner-yahoo-finance-AI",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:38:13.698640",
+  "sentences": [
+    "Prometheus, the industrial AI startup from Jeff Bezos, is now worth $41 billion Prometheus, the industrial AI startup led by Jeff Bezos and former Google exec Vik Bajaj, today will announce that it's raised $12 billion in Series B funding at a $41 billion valuation."
+  ],
+  "entities": [
+    {
+      "entity": "Prometheus",
+      "raw_text": "Prometheus",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 10,
+      "sentence_idx": 0,
+      "context_window": "Prometheus, the industrial AI startup from Jeff Bezos, is now worth $41 billion Prometheus, the industrial AI startup led by Jeff Bezos and former Google exec Vik Bajaj, today will announce that it's raised $12 billion in Series B funding at a $41 billion valuation.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Google",
+      "raw_text": "Google",
+      "label": "ORG",
+      "start_char": 147,
+      "end_char": 153,
+      "sentence_idx": 0,
+      "context_window": "Prometheus, the industrial AI startup from Jeff Bezos, is now worth $41 billion Prometheus, the industrial AI startup led by Jeff Bezos and former Google exec Vik Bajaj, today will announce that it's raised $12 billion in Series B funding at a $41 billion valuation.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Prometheus": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Google": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "72d014a7-64d4-4a37-b930-7d7116f900ca"
+}

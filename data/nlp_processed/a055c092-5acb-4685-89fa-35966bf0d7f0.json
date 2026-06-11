@@ -1,0 +1,41 @@
+{
+  "article_id": "a055c092-5acb-4685-89fa-35966bf0d7f0",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Walmart+: The Shopping Edge That Leads to 4X More Spending",
+  "url": "https://www.fool.com/investing/2026/06/02/walmart-stock-the-shopping-edge-that-leads-to-4x-m/",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:51.120069",
+  "sentences": [
+    "Walmart+: The Shopping Edge That Leads to 4X More Spending The retailer figured out how to generate recurring revenue and get people to spend more."
+  ],
+  "entities": [
+    {
+      "entity": "Walmart",
+      "raw_text": "Walmart",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 7,
+      "sentence_idx": 0,
+      "context_window": "Walmart+: The Shopping Edge That Leads to 4X More Spending The retailer figured out how to generate recurring revenue and get people to spend more.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.750418484210968,
+      "positive_score": 0.2366849035024643,
+      "negative_score": 0.0128965824842453,
+      "neutral_score": 0.750418484210968
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.7504,
+  "company_sentiments": {
+    "Walmart": {
+      "label": "neutral",
+      "score": 0.750418484210968,
+      "positive_score": 0.2367,
+      "negative_score": 0.0129,
+      "neutral_score": 0.7504,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "5c0ddd84-6acc-4198-bbb5-c94ab2261bb8"
+}

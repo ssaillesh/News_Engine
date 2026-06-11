@@ -1,0 +1,159 @@
+{
+  "article_id": "1c37c978-667f-426b-a4a1-38fa60ac5cdb",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next",
+  "url": "https://ts2.tech/en/apple-stock-steadies-after-hours-as-year-end-trading-turns-choppy-fed-minutes-next/",
+  "published_at": "2025-12-29T21:50:17Z",
+  "processed_at": "2026-06-03T04:58:34.151778",
+  "sentences": [
+    "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes.",
+    "While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq.",
+    "Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings."
+  ],
+  "entities": [
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 5,
+      "sentence_idx": 0,
+      "context_window": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.940136730670929,
+      "positive_score": 0.940136730670929,
+      "negative_score": 0.031304847449064255,
+      "neutral_score": 0.02855842374265194
+    },
+    {
+      "entity": "Fed Minutes",
+      "raw_text": "Fed Minutes",
+      "label": "ORG",
+      "start_char": 67,
+      "end_char": 78,
+      "sentence_idx": 0,
+      "context_window": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.940136730670929,
+      "positive_score": 0.940136730670929,
+      "negative_score": 0.031304847449064255,
+      "neutral_score": 0.02855842374265194
+    },
+    {
+      "entity": "Fed",
+      "raw_text": "Fed",
+      "label": "ORG",
+      "start_char": 241,
+      "end_char": 244,
+      "sentence_idx": 0,
+      "context_window": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.940136730670929,
+      "positive_score": 0.940136730670929,
+      "negative_score": 0.031304847449064255,
+      "neutral_score": 0.02855842374265194
+    },
+    {
+      "entity": "Nvidia",
+      "raw_text": "Nvidia",
+      "label": "ORG",
+      "start_char": 298,
+      "end_char": 304,
+      "sentence_idx": 1,
+      "context_window": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.940136730670929,
+      "positive_score": 0.940136730670929,
+      "negative_score": 0.031304847449064255,
+      "neutral_score": 0.02855842374265194
+    },
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 309,
+      "end_char": 314,
+      "sentence_idx": 1,
+      "context_window": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.940136730670929,
+      "positive_score": 0.940136730670929,
+      "negative_score": 0.031304847449064255,
+      "neutral_score": 0.02855842374265194
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 334,
+      "end_char": 339,
+      "sentence_idx": 1,
+      "context_window": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.940136730670929,
+      "positive_score": 0.940136730670929,
+      "negative_score": 0.031304847449064255,
+      "neutral_score": 0.02855842374265194
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 437,
+      "end_char": 442,
+      "sentence_idx": 2,
+      "context_window": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.940136730670929,
+      "positive_score": 0.940136730670929,
+      "negative_score": 0.031304847449064255,
+      "neutral_score": 0.02855842374265194
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.9401,
+  "company_sentiments": {
+    "Apple": {
+      "label": "positive",
+      "score": 0.940136730670929,
+      "positive_score": 0.9401,
+      "negative_score": 0.0313,
+      "neutral_score": 0.0286,
+      "mentions": 3
+    },
+    "Fed Minutes": {
+      "label": "positive",
+      "score": 0.940136730670929,
+      "positive_score": 0.9401,
+      "negative_score": 0.0313,
+      "neutral_score": 0.0286,
+      "mentions": 1
+    },
+    "Fed": {
+      "label": "positive",
+      "score": 0.940136730670929,
+      "positive_score": 0.9401,
+      "negative_score": 0.0313,
+      "neutral_score": 0.0286,
+      "mentions": 1
+    },
+    "Nvidia": {
+      "label": "positive",
+      "score": 0.940136730670929,
+      "positive_score": 0.9401,
+      "negative_score": 0.0313,
+      "neutral_score": 0.0286,
+      "mentions": 1
+    },
+    "Tesla": {
+      "label": "positive",
+      "score": 0.940136730670929,
+      "positive_score": 0.9401,
+      "negative_score": 0.0313,
+      "neutral_score": 0.0286,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "f003ff5f-6817-4774-bea6-2ff0a910e5b3"
+}

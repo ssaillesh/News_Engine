@@ -1,0 +1,73 @@
+{
+  "article_id": "0c545c48-9e62-414b-91c5-49dea5023945",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "General Motors follows Ford's lead into the battery business",
+  "url": "https://finance.yahoo.com/video/general-motors-follows-fords-lead-into-the-battery-business-152500628.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.379184",
+  "full_text": "Yahoo Finance Senior Autos Reporter Pras Subramanian joins Julie Hyman on Market Catalysts to discuss General Motors' (GM) partnership with Peak Energy, placing a big bet on sodium-ion batteries. This comes one month after Ford (F) launched Ford Energy to develop energy storage batteries.",
+  "summary": "Yahoo Finance Senior Autos Reporter Pras Subramanian joins Julie Hyman on Market Catalysts to discuss General Motors' (GM) partnership with Peak Energy, placing a big bet on sodium-ion batteries. This comes one month after Ford (F) launched Ford Energy to develop energy storage batteries.",
+  "raw_payload": {
+    "id": "823105a8-6d77-485d-8974-788787750a19",
+    "content": {
+      "id": "823105a8-6d77-485d-8974-788787750a19",
+      "contentType": "VIDEO",
+      "title": "General Motors follows Ford's lead into the battery business",
+      "description": "<p>Yahoo Finance Senior Autos Reporter Pras Subramanian joins Julie Hyman on Market Catalysts to discuss General Motors' (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/GM/\" data-i13n=\"cpos:1;pos:1\">GM</a>) partnership with Peak Energy, placing a big bet on sodium-ion batteries. This comes one month after Ford (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/F/\" data-i13n=\"cpos:2;pos:1\">F</a>) launched Ford Energy to develop energy storage batteries.</p>",
+      "summary": "Yahoo Finance Senior Autos Reporter Pras Subramanian joins Julie Hyman on Market Catalysts to discuss General Motors' (GM) partnership with Peak Energy, placing a big bet on sodium-ion batteries. This comes one month after Ford (F) launched Ford Energy to develop energy storage batteries.",
+      "pubDate": "2026-06-10T15:25:00Z",
+      "displayTime": "",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://s.yimg.com/uu/api/res/1.2/mbC6dJM0VYgsjqQEaJ__kg--~B/aD0zMjg0O3c9NDkyNjthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/2be03b35-cd11-4e19-88cc-1c4441b5799d",
+        "originalWidth": 4926,
+        "originalHeight": 3284,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/mbC6dJM0VYgsjqQEaJ__kg--~B/aD0zMjg0O3c9NDkyNjthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/2be03b35-cd11-4e19-88cc-1c4441b5799d",
+            "width": 4926,
+            "height": 3284,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/6tQzcSvC7KkDLm8Eh8hfrg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://d29szjachogqwa.cloudfront.net/images/2026-06/2be03b35-cd11-4e19-88cc-1c4441b5799d",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Yahoo Finance Video",
+        "url": "https://finance.yahoo.com/",
+        "sourceId": "video.yahoofinance.com"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/video/general-motors-follows-fords-lead-into-the-battery-business-152500628.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/video/general-motors-follows-fords-lead-into-the-battery-business-152500628.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": true
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

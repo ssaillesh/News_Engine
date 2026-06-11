@@ -1,0 +1,195 @@
+{
+  "article_id": "045cc554-3b9d-4873-bf49-342f02f7b4d9",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Why Super Micro stock is plunging & Cracker Barrel stock is surging",
+  "url": "https://finance.yahoo.com/video/why-super-micro-stock-is-plunging--cracker-barrel-stock-is-surging-150815558.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:27.480765",
+  "sentences": [
+    "Why Super Micro stock is plunging & Cracker Barrel stock is surging Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging."
+  ],
+  "entities": [
+    {
+      "entity": "Super Micro",
+      "raw_text": "Super Micro",
+      "label": "ORG",
+      "start_char": 4,
+      "end_char": 15,
+      "sentence_idx": 0,
+      "context_window": "Why Super Micro stock is plunging & Cracker Barrel stock is surging Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Cracker Barrel",
+      "raw_text": "Cracker Barrel",
+      "label": "ORG",
+      "start_char": 36,
+      "end_char": 50,
+      "sentence_idx": 0,
+      "context_window": "Why Super Micro stock is plunging & Cracker Barrel stock is surging Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Yahoo Finance",
+      "raw_text": "Yahoo Finance",
+      "label": "ORG",
+      "start_char": 68,
+      "end_char": 81,
+      "sentence_idx": 0,
+      "context_window": "Why Super Micro stock is plunging & Cracker Barrel stock is surging Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Super Micro Computer",
+      "raw_text": "Super Micro Computer",
+      "label": "ORG",
+      "start_char": 179,
+      "end_char": 199,
+      "sentence_idx": 0,
+      "context_window": "Why Super Micro stock is plunging & Cracker Barrel stock is surging Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Smci",
+      "raw_text": "SMCI",
+      "label": "ORG",
+      "start_char": 201,
+      "end_char": 205,
+      "sentence_idx": 0,
+      "context_window": "Why Super Micro stock is plunging & Cracker Barrel stock is surging Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Chewy",
+      "raw_text": "Chewy",
+      "label": "ORG",
+      "start_char": 223,
+      "end_char": 228,
+      "sentence_idx": 0,
+      "context_window": "Why Super Micro stock is plunging & Cracker Barrel stock is surging Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Chwy",
+      "raw_text": "CHWY",
+      "label": "ORG",
+      "start_char": 230,
+      "end_char": 234,
+      "sentence_idx": 0,
+      "context_window": "Why Super Micro stock is plunging & Cracker Barrel stock is surging Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Cbrl",
+      "raw_text": "CBRL",
+      "label": "ORG",
+      "start_char": 287,
+      "end_char": 291,
+      "sentence_idx": 0,
+      "context_window": "Why Super Micro stock is plunging & Cracker Barrel stock is surging Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Super Micro": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Cracker Barrel": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Yahoo Finance": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Super Micro Computer": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Smci": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Chewy": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Chwy": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Cbrl": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "42afd424-c3a3-4841-bb10-4f5e998741be"
+}

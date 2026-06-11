@@ -1,0 +1,93 @@
+{
+  "article_id": "3125d3a1-d6b8-4a69-8d80-c338bb0fdd2a",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Montis Financial LLC Has $19.84 Million Stake in Apple Inc. $AAPL",
+  "url": "https://www.marketbeat.com/instant-alerts/filing-montis-financial-llc-has-1984-million-stake-in-apple-inc-aapl-2026-02-10/",
+  "published_at": "2026-02-10T08:40:53Z",
+  "processed_at": "2026-06-03T04:58:30.696226",
+  "sentences": [
+    "Montis Financial LLC Has $19.84 Million Stake in Apple Inc. $AAPL Montis Financial LLC increased its stake in Apple Inc. by 15.8% to 77,919 shares, valued at $19.84 million, making Apple its seventh-largest holding.",
+    "This comes as Apple surpassed quarterly expectations with robust EPS and revenue figures, revenue growth, and a declared dividend.",
+    "Analyst sentiment toward Apple remains largely positive, with a consensus \"Moderate Buy\" rating and upward adjustments to price targets from several brokerages."
+  ],
+  "entities": [
+    {
+      "entity": "Montis Financial",
+      "raw_text": "Montis Financial LLC",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 20,
+      "sentence_idx": 0,
+      "context_window": "Montis Financial LLC Has $19.84 Million Stake in Apple Inc. $AAPL Montis Financial LLC increased its stake in Apple Inc. by 15.8% to 77,919 shares, valued at $19.84 million, making Apple its seventh-largest holding. This comes as Apple surpassed quarterly expectations with robust EPS and revenue figures, revenue growth, and a declared dividend. Analyst sentiment toward Apple remains largely positive, with a consensus \"Moderate Buy\" rating and upward adjustments to price targets from several brokerages.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9573243260383606,
+      "positive_score": 0.9573243260383606,
+      "negative_score": 0.019060201942920685,
+      "neutral_score": 0.023615475744009018
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple Inc",
+      "label": "ORG",
+      "start_char": 49,
+      "end_char": 58,
+      "sentence_idx": 0,
+      "context_window": "Montis Financial LLC Has $19.84 Million Stake in Apple Inc. $AAPL Montis Financial LLC increased its stake in Apple Inc. by 15.8% to 77,919 shares, valued at $19.84 million, making Apple its seventh-largest holding. This comes as Apple surpassed quarterly expectations with robust EPS and revenue figures, revenue growth, and a declared dividend. Analyst sentiment toward Apple remains largely positive, with a consensus \"Moderate Buy\" rating and upward adjustments to price targets from several brokerages.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9573243260383606,
+      "positive_score": 0.9573243260383606,
+      "negative_score": 0.019060201942920685,
+      "neutral_score": 0.023615475744009018
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 230,
+      "end_char": 235,
+      "sentence_idx": 1,
+      "context_window": "Montis Financial LLC Has $19.84 Million Stake in Apple Inc. $AAPL Montis Financial LLC increased its stake in Apple Inc. by 15.8% to 77,919 shares, valued at $19.84 million, making Apple its seventh-largest holding. This comes as Apple surpassed quarterly expectations with robust EPS and revenue figures, revenue growth, and a declared dividend. Analyst sentiment toward Apple remains largely positive, with a consensus \"Moderate Buy\" rating and upward adjustments to price targets from several brokerages.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9573243260383606,
+      "positive_score": 0.9573243260383606,
+      "negative_score": 0.019060201942920685,
+      "neutral_score": 0.023615475744009018
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 372,
+      "end_char": 377,
+      "sentence_idx": 2,
+      "context_window": "Montis Financial LLC Has $19.84 Million Stake in Apple Inc. $AAPL Montis Financial LLC increased its stake in Apple Inc. by 15.8% to 77,919 shares, valued at $19.84 million, making Apple its seventh-largest holding. This comes as Apple surpassed quarterly expectations with robust EPS and revenue figures, revenue growth, and a declared dividend. Analyst sentiment toward Apple remains largely positive, with a consensus \"Moderate Buy\" rating and upward adjustments to price targets from several brokerages.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9573243260383606,
+      "positive_score": 0.9573243260383606,
+      "negative_score": 0.019060201942920685,
+      "neutral_score": 0.023615475744009018
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.9573,
+  "company_sentiments": {
+    "Montis Financial": {
+      "label": "positive",
+      "score": 0.9573243260383606,
+      "positive_score": 0.9573,
+      "negative_score": 0.0191,
+      "neutral_score": 0.0236,
+      "mentions": 1
+    },
+    "Apple": {
+      "label": "positive",
+      "score": 0.9573243260383606,
+      "positive_score": 0.9573,
+      "negative_score": 0.0191,
+      "neutral_score": 0.0236,
+      "mentions": 3
+    }
+  },
+  "embedding_id": "b9f6be56-2c82-4c85-a213-2279a199cf08"
+}

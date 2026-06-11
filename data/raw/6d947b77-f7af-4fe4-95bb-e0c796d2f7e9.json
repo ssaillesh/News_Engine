@@ -1,0 +1,70 @@
+{
+  "article_id": "6d947b77-f7af-4fe4-95bb-e0c796d2f7e9",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting",
+  "url": "https://finance.yahoo.com/sectors/technology/live/tech-stocks-today-chipmaker-cerebras-to-stage-blockbuster-ipo-ai-in-focus-for-trump-xi-meeting-100000457.html",
+  "published_at": "2026-05-11T20:58:00Z",
+  "fetched_at": "2026-06-03T04:57:51.400417",
+  "full_text": "Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v. OpenAI trial continues, revealing details about OpenAI's internal dealings and CEO Sam Altman's November 2023 ouster.",
+  "summary": "Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v. OpenAI trial continues, revealing details about OpenAI's internal dealings and CEO Sam Altman's November 2023 ouster.",
+  "raw_payload": {
+    "title": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting",
+    "url": "https://finance.yahoo.com/sectors/technology/live/tech-stocks-today-chipmaker-cerebras-to-stage-blockbuster-ipo-ai-in-focus-for-trump-xi-meeting-100000457.html",
+    "time_published": "20260511T205800",
+    "authors": [],
+    "summary": "Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v. OpenAI trial continues, revealing details about OpenAI's internal dealings and CEO Sam Altman's November 2023 ouster.",
+    "banner_image": "https://s.yimg.com/ny/api/res/1.2/nt5dGx4HiuaxJyO1G5ipxw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTIzMjtoPTQ4/https://s.yimg.com/os/creatr-uploaded-images/2020-12/02246f50-3412-11eb-bfdd-de89f8b3b8b8",
+    "source": "Yahoo Finance",
+    "category_within_source": "General",
+    "source_domain": "Yahoo Finance",
+    "topics": [
+      {
+        "topic": "ipo",
+        "relevance_score": "0.942698"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.829797"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.730423"
+      }
+    ],
+    "overall_sentiment_score": 0.188378,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "NVDA",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.429411",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "INTC",
+        "relevance_score": "0.940867",
+        "ticker_sentiment_score": "0.328935",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.746020",
+        "ticker_sentiment_score": "0.257719",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.641439",
+        "ticker_sentiment_score": "-0.126123",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.628575",
+        "ticker_sentiment_score": "0.066402",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "article_id": "5e357644-cfd9-4131-9ae7-cc48b9dfde8f",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Trump's latest China flare up presents chance to buy big tech names - analyst",
+  "url": "https://www.proactiveinvestors.co.uk/companies/news/1080220?SNAPI",
+  "published_at": "2025-10-13T14:28:00Z",
+  "fetched_at": "2026-06-03T04:57:51.401696",
+  "full_text": "Wedbush Securities views the latest US-China tensions as a buying opportunity for big tech names, expecting a quick resolution to the diplomatic flare-up. Analyst Dan Ives believes fears of a renewed trade war are exaggerated and points to signs of diplomatic cooling. The investment firm maintains a bullish stance on the sector, predicting a 10% rally by year-end, with top picks including Microsoft, Nvidia, Apple, Palantir, Tesla, and Alphabet.",
+  "summary": "Wedbush Securities views the latest US-China tensions as a buying opportunity for big tech names, expecting a quick resolution to the diplomatic flare-up. Analyst Dan Ives believes fears of a renewed trade war are exaggerated and points to signs of diplomatic cooling. The investment firm maintains a bullish stance on the sector, predicting a 10% rally by year-end, with top picks including Microsoft, Nvidia, Apple, Palantir, Tesla, and Alphabet.",
+  "raw_payload": {
+    "title": "Trump's latest China flare up presents chance to buy big tech names - analyst",
+    "url": "https://www.proactiveinvestors.co.uk/companies/news/1080220?SNAPI",
+    "time_published": "20251013T142800",
+    "authors": [
+      "Jamie Ashcroft"
+    ],
+    "summary": "Wedbush Securities views the latest US-China tensions as a buying opportunity for big tech names, expecting a quick resolution to the diplomatic flare-up. Analyst Dan Ives believes fears of a renewed trade war are exaggerated and points to signs of diplomatic cooling. The investment firm maintains a bullish stance on the sector, predicting a 10% rally by year-end, with top picks including Microsoft, Nvidia, Apple, Palantir, Tesla, and Alphabet.",
+    "banner_image": "https://cdn.proactiveinvestors.com/eyJidWNrZXQiOiJwYS1jZG4iLCJrZXkiOiJ1cGxvYWRcL05ld3NcL0ltYWdlXC8yMDI1XzEwXC8yMDI1LTEwLTEzLTE0LTEwLTMyLWZiZDJlYjE5YjRmZTdmNzQyZTYyNmE0Mjk2NDZiYjMzLmpwZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NjExLCJoZWlnaHQiOjM1NSwiZml0IjoiY292ZXIifX19",
+    "source": "Proactive Investors",
+    "category_within_source": "General",
+    "source_domain": "Proactive Investors",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.907415"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.817375"
+      },
+      {
+        "topic": "economy_macro",
+        "relevance_score": "0.637074"
+      },
+      {
+        "topic": "economy_fiscal",
+        "relevance_score": "0.526780"
+      }
+    ],
+    "overall_sentiment_score": 0.442834,
+    "overall_sentiment_label": "Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.713133",
+        "ticker_sentiment_score": "0.445499",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.605479",
+        "ticker_sentiment_score": "0.436815",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.611320",
+        "ticker_sentiment_score": "0.440733",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "PLTR",
+        "relevance_score": "0.607936",
+        "ticker_sentiment_score": "0.412064",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.638655",
+        "ticker_sentiment_score": "0.410179",
+        "ticker_sentiment_label": "Bullish"
+      }
+    ]
+  }
+}

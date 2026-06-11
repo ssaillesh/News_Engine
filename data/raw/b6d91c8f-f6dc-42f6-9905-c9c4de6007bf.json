@@ -1,0 +1,62 @@
+{
+  "article_id": "b6d91c8f-f6dc-42f6-9905-c9c4de6007bf",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "GMOC Stock Price | GMO ULTRA SHORT INCOME ETF",
+  "url": "https://www.investing.com/etfs/gmoc",
+  "published_at": "2026-04-15T12:10:18Z",
+  "fetched_at": "2026-06-03T04:57:51.400571",
+  "full_text": "This article provides detailed financial information for the GMO ULTRA SHORT INCOME ETF (GMOC), including its current stock price of 50.09, trading venue (NYSE), and expense ratio of 0.20%. It also covers key statistics such as total assets, shares outstanding, and inception date, alongside performance data, top holdings, and technical analysis indicators. The content aims to help investors assess GMOC's potential by presenting comprehensive data and tools.",
+  "summary": "This article provides detailed financial information for the GMO ULTRA SHORT INCOME ETF (GMOC), including its current stock price of 50.09, trading venue (NYSE), and expense ratio of 0.20%. It also covers key statistics such as total assets, shares outstanding, and inception date, alongside performance data, top holdings, and technical analysis indicators. The content aims to help investors assess GMOC's potential by presenting comprehensive data and tools.",
+  "raw_payload": {
+    "title": "GMOC Stock Price | GMO ULTRA SHORT INCOME ETF",
+    "url": "https://www.investing.com/etfs/gmoc",
+    "time_published": "20260415T121018",
+    "authors": [],
+    "summary": "This article provides detailed financial information for the GMO ULTRA SHORT INCOME ETF (GMOC), including its current stock price of 50.09, trading venue (NYSE), and expense ratio of 0.20%. It also covers key statistics such as total assets, shares outstanding, and inception date, alongside performance data, top holdings, and technical analysis indicators. The content aims to help investors assess GMOC's potential by presenting comprehensive data and tools.",
+    "banner_image": null,
+    "source": "Investing.com",
+    "category_within_source": "General",
+    "source_domain": "Investing.com",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.916976"
+      }
+    ],
+    "overall_sentiment_score": 0.336781,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "GMOC",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.145962",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.614336",
+        "ticker_sentiment_score": "0.316208",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.618412",
+        "ticker_sentiment_score": "0.516563",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.602493",
+        "ticker_sentiment_score": "0.332464",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.643000",
+        "ticker_sentiment_score": "0.328144",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      }
+    ]
+  }
+}

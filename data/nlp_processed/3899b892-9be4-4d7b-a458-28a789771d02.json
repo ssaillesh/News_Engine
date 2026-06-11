@@ -1,0 +1,203 @@
+{
+  "article_id": "3899b892-9be4-4d7b-a458-28a789771d02",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com",
+  "url": "https://www.aol.com/articles/wall-street-10-trillion-dollar-070600279.html",
+  "published_at": "2025-10-14T07:33:28Z",
+  "processed_at": "2026-06-03T04:58:37.948151",
+  "sentences": [
+    "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla.",
+    "While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises.",
+    "The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion."
+  ],
+  "entities": [
+    {
+      "entity": "##R",
+      "raw_text": "##r",
+      "label": "ORG",
+      "start_char": 129,
+      "end_char": 130,
+      "sentence_idx": 0,
+      "context_window": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla. While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises. The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6547366976737976,
+      "positive_score": 0.09240428358316422,
+      "negative_score": 0.6547366976737976,
+      "neutral_score": 0.2528589963912964
+    },
+    {
+      "entity": "A",
+      "raw_text": "A",
+      "label": "ORG",
+      "start_char": 140,
+      "end_char": 141,
+      "sentence_idx": 0,
+      "context_window": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla. While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises. The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6547366976737976,
+      "positive_score": 0.09240428358316422,
+      "negative_score": 0.6547366976737976,
+      "neutral_score": 0.2528589963912964
+    },
+    {
+      "entity": "##Ol. Com",
+      "raw_text": "##OL. com",
+      "label": "ORG",
+      "start_char": 141,
+      "end_char": 147,
+      "sentence_idx": 0,
+      "context_window": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla. While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises. The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6547366976737976,
+      "positive_score": 0.09240428358316422,
+      "negative_score": 0.6547366976737976,
+      "neutral_score": 0.2528589963912964
+    },
+    {
+      "entity": "Nvidia",
+      "raw_text": "Nvidia",
+      "label": "ORG",
+      "start_char": 235,
+      "end_char": 241,
+      "sentence_idx": 0,
+      "context_window": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla. While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises. The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6547366976737976,
+      "positive_score": 0.09240428358316422,
+      "negative_score": 0.6547366976737976,
+      "neutral_score": 0.2528589963912964
+    },
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 246,
+      "end_char": 251,
+      "sentence_idx": 0,
+      "context_window": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla. While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises. The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6547366976737976,
+      "positive_score": 0.09240428358316422,
+      "negative_score": 0.6547366976737976,
+      "neutral_score": 0.2528589963912964
+    },
+    {
+      "entity": "Nvidia",
+      "raw_text": "Nvidia",
+      "label": "ORG",
+      "start_char": 297,
+      "end_char": 303,
+      "sentence_idx": 1,
+      "context_window": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla. While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises. The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6547366976737976,
+      "positive_score": 0.09240428358316422,
+      "negative_score": 0.6547366976737976,
+      "neutral_score": 0.2528589963912964
+    },
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 380,
+      "end_char": 385,
+      "sentence_idx": 1,
+      "context_window": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla. While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises. The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6547366976737976,
+      "positive_score": 0.09240428358316422,
+      "negative_score": 0.6547366976737976,
+      "neutral_score": 0.2528589963912964
+    },
+    {
+      "entity": "El",
+      "raw_text": "El",
+      "label": "ORG",
+      "start_char": 456,
+      "end_char": 458,
+      "sentence_idx": 1,
+      "context_window": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla. While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises. The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6547366976737976,
+      "positive_score": 0.09240428358316422,
+      "negative_score": 0.6547366976737976,
+      "neutral_score": 0.2528589963912964
+    },
+    {
+      "entity": "##Sk",
+      "raw_text": "##sk",
+      "label": "ORG",
+      "start_char": 463,
+      "end_char": 465,
+      "sentence_idx": 1,
+      "context_window": "Wall Street Has 10 Trillion-Dollar Stocks: Select Analysts See One Adding 64% Over the Next Year, With Another Projected to Crater by 95% - AOL.com This article examines the divergent analyst opinions on two trillion-dollar companies: Nvidia and Tesla. While one analyst predicts a 64% upside for Nvidia due to its leadership in AI infrastructure, another foresee a 95% crash for Tesla's stock, citing structural disadvantages, valuation concerns, and CEO Elon Musk's unfulfilled promises. The piece highlights that only 10 U.S.-listed companies currently hold a market cap exceeding $1 trillion.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6547366976737976,
+      "positive_score": 0.09240428358316422,
+      "negative_score": 0.6547366976737976,
+      "neutral_score": 0.2528589963912964
+    }
+  ],
+  "article_sentiment_label": "negative",
+  "article_sentiment_score": 0.6547,
+  "company_sentiments": {
+    "##R": {
+      "label": "negative",
+      "score": 0.6547366976737976,
+      "positive_score": 0.0924,
+      "negative_score": 0.6547,
+      "neutral_score": 0.2529,
+      "mentions": 1
+    },
+    "A": {
+      "label": "negative",
+      "score": 0.6547366976737976,
+      "positive_score": 0.0924,
+      "negative_score": 0.6547,
+      "neutral_score": 0.2529,
+      "mentions": 1
+    },
+    "##Ol. Com": {
+      "label": "negative",
+      "score": 0.6547366976737976,
+      "positive_score": 0.0924,
+      "negative_score": 0.6547,
+      "neutral_score": 0.2529,
+      "mentions": 1
+    },
+    "Nvidia": {
+      "label": "negative",
+      "score": 0.6547366976737976,
+      "positive_score": 0.0924,
+      "negative_score": 0.6547,
+      "neutral_score": 0.2529,
+      "mentions": 2
+    },
+    "Tesla": {
+      "label": "negative",
+      "score": 0.6547366976737976,
+      "positive_score": 0.0924,
+      "negative_score": 0.6547,
+      "neutral_score": 0.2529,
+      "mentions": 2
+    },
+    "El": {
+      "label": "negative",
+      "score": 0.6547366976737976,
+      "positive_score": 0.0924,
+      "negative_score": 0.6547,
+      "neutral_score": 0.2529,
+      "mentions": 1
+    },
+    "##Sk": {
+      "label": "negative",
+      "score": 0.6547366976737976,
+      "positive_score": 0.0924,
+      "negative_score": 0.6547,
+      "neutral_score": 0.2529,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "d3999ce2-9fbe-46db-88e3-3dd1ff6bad44"
+}

@@ -1,0 +1,239 @@
+{
+  "article_id": "88447200-0b15-4ab2-b7c7-ac0aa014e696",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Palantir, XAI, PayPal, and Robinhood stock analysis",
+  "url": "https://finance.yahoo.com/video/palantir-xai-paypal-robinhood-stock-150033501.html",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:49.583924",
+  "sentences": [
+    "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance.",
+    "He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders.",
+    "Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'."
+  ],
+  "entities": [
+    {
+      "entity": "Palantir",
+      "raw_text": "Palantir",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 8,
+      "sentence_idx": 0,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Xai",
+      "raw_text": "XAI",
+      "label": "ORG",
+      "start_char": 10,
+      "end_char": 13,
+      "sentence_idx": 0,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Paypal",
+      "raw_text": "PayPal",
+      "label": "ORG",
+      "start_char": 15,
+      "end_char": 21,
+      "sentence_idx": 0,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Robinhood",
+      "raw_text": "Robinhood",
+      "label": "ORG",
+      "start_char": 27,
+      "end_char": 36,
+      "sentence_idx": 0,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Futurum",
+      "raw_text": "Futurum",
+      "label": "ORG",
+      "start_char": 92,
+      "end_char": 99,
+      "sentence_idx": 0,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Elon Musk",
+      "raw_text": "Elon Musk",
+      "label": "ORG",
+      "start_char": 185,
+      "end_char": 194,
+      "sentence_idx": 1,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Xai",
+      "raw_text": "XAI",
+      "label": "ORG",
+      "start_char": 215,
+      "end_char": 218,
+      "sentence_idx": 1,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Spacex",
+      "raw_text": "SpaceX",
+      "label": "ORG",
+      "start_char": 223,
+      "end_char": 229,
+      "sentence_idx": 1,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 256,
+      "end_char": 261,
+      "sentence_idx": 1,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Paypal",
+      "raw_text": "PayPal",
+      "label": "ORG",
+      "start_char": 329,
+      "end_char": 335,
+      "sentence_idx": 2,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    },
+    {
+      "entity": "Robinhood",
+      "raw_text": "Robinhood",
+      "label": "ORG",
+      "start_char": 357,
+      "end_char": 366,
+      "sentence_idx": 2,
+      "context_window": "Palantir, XAI, PayPal, and Robinhood stock analysis Shay Boloor, chief market strategist at Futurum, breaks down Palantir's strong earnings report and future guidance. He also analyzes Elon Musk's decision to merge XAI and SpaceX, and the implications for Tesla shareholders. Finally, Balor offers insights into the struggles of PayPal and the potential of Robinhood as a 'super app'.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8957323431968689,
+      "positive_score": 0.08024609833955765,
+      "negative_score": 0.02402150072157383,
+      "neutral_score": 0.8957323431968689
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.8957,
+  "company_sentiments": {
+    "Palantir": {
+      "label": "neutral",
+      "score": 0.8957323431968689,
+      "positive_score": 0.0802,
+      "negative_score": 0.024,
+      "neutral_score": 0.8957,
+      "mentions": 1
+    },
+    "Xai": {
+      "label": "neutral",
+      "score": 0.8957323431968689,
+      "positive_score": 0.0802,
+      "negative_score": 0.024,
+      "neutral_score": 0.8957,
+      "mentions": 2
+    },
+    "Paypal": {
+      "label": "neutral",
+      "score": 0.8957323431968689,
+      "positive_score": 0.0802,
+      "negative_score": 0.024,
+      "neutral_score": 0.8957,
+      "mentions": 2
+    },
+    "Robinhood": {
+      "label": "neutral",
+      "score": 0.8957323431968689,
+      "positive_score": 0.0802,
+      "negative_score": 0.024,
+      "neutral_score": 0.8957,
+      "mentions": 2
+    },
+    "Futurum": {
+      "label": "neutral",
+      "score": 0.8957323431968689,
+      "positive_score": 0.0802,
+      "negative_score": 0.024,
+      "neutral_score": 0.8957,
+      "mentions": 1
+    },
+    "Elon Musk": {
+      "label": "neutral",
+      "score": 0.8957323431968689,
+      "positive_score": 0.0802,
+      "negative_score": 0.024,
+      "neutral_score": 0.8957,
+      "mentions": 1
+    },
+    "Spacex": {
+      "label": "neutral",
+      "score": 0.8957323431968689,
+      "positive_score": 0.0802,
+      "negative_score": 0.024,
+      "neutral_score": 0.8957,
+      "mentions": 1
+    },
+    "Tesla": {
+      "label": "neutral",
+      "score": 0.8957323431968689,
+      "positive_score": 0.0802,
+      "negative_score": 0.024,
+      "neutral_score": 0.8957,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "79ae6035-13ef-43e7-9285-5464f4bdc4ab"
+}

@@ -1,0 +1,130 @@
+{
+  "article_id": "3f116674-727c-4e61-ade0-a86b239e211d",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Why the SpaceX, OpenAI, and Anthropic IPOs won't derail the bull market",
+  "url": "https://finance.yahoo.com/markets/article/why-the-spacex-openai-and-anthropic-ipos-wont-derail-the-bull-market-112903023.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.695460",
+  "full_text": "Don't fret about a lot of stock coming to market, Goldman Sachs contends.",
+  "summary": "Don't fret about a lot of stock coming to market, Goldman Sachs contends.",
+  "raw_payload": {
+    "id": "e0abc63c-bd32-4c17-afd4-597edda9f39a",
+    "content": {
+      "id": "e0abc63c-bd32-4c17-afd4-597edda9f39a",
+      "contentType": "STORY",
+      "title": "Why the SpaceX, OpenAI, and Anthropic IPOs won't derail the bull market",
+      "description": "",
+      "summary": "Don't fret about a lot of stock coming to market, Goldman Sachs contends.",
+      "pubDate": "2026-06-11T11:29:03Z",
+      "displayTime": "2026-06-11T11:29:03Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://s.yimg.com/uu/api/res/1.2/.Hb5GghsdxJbYBoCgfigDg--~B/aD01MjUwO3c9NzM0OTthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/44bc2e81-7dfb-40cf-bff2-cb21f0480f79",
+        "originalWidth": 7349,
+        "originalHeight": 5250,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/.Hb5GghsdxJbYBoCgfigDg--~B/aD01MjUwO3c9NzM0OTthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/44bc2e81-7dfb-40cf-bff2-cb21f0480f79",
+            "width": 7349,
+            "height": 5250,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/.QXmuNdDhUkWnCWPs1gVRg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://d29szjachogqwa.cloudfront.net/images/2026-06/44bc2e81-7dfb-40cf-bff2-cb21f0480f79",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Yahoo Finance",
+        "url": "http://finance.yahoo.com/",
+        "sourceId": "yahoofinance.com"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/markets/article/why-the-spacex-openai-and-anthropic-ipos-wont-derail-the-bull-market-112903023.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/article/why-the-spacex-openai-and-anthropic-ipos-wont-derail-the-bull-market-112903023.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": true
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": {
+        "storylineItems": [
+          {
+            "content": {
+              "id": "5b508880-42bd-4fc4-bd7a-a95922b2fa65",
+              "contentType": "STORY",
+              "isHosted": true,
+              "title": "'Magnificent 7' stocks have lost $2 trillion so far this month, driving the S&P 500 decline: Chart of the Day",
+              "thumbnail": {
+                "originalUrl": "https://s.yimg.com/uu/api/res/1.2/ypYQ6UZrkjylHodCBCUa.A--~B/aD00MzM1O3c9NjUwMDthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/2026-06/ccb75022-9e79-49ad-94ed-6388cb2810c8",
+                "originalWidth": 6500,
+                "originalHeight": 4335,
+                "caption": "",
+                "resolutions": null
+              },
+              "provider": {
+                "displayName": "Yahoo Finance",
+                "sourceId": "yahoofinance.com"
+              },
+              "previewUrl": null,
+              "providerContentUrl": "",
+              "canonicalUrl": {
+                "url": "https://finance.yahoo.com/markets/article/magnificent-7-stocks-have-lost-2-trillion-so-far-this-month-driving-the-sp-500-decline-chart-of-the-day-100000483.html"
+              },
+              "clickThroughUrl": {
+                "url": "https://finance.yahoo.com/markets/article/magnificent-7-stocks-have-lost-2-trillion-so-far-this-month-driving-the-sp-500-decline-chart-of-the-day-100000483.html"
+              }
+            }
+          },
+          {
+            "content": {
+              "id": "ce74f754-0447-4d45-a410-7954f81afe7b",
+              "contentType": "VIDEO",
+              "isHosted": true,
+              "title": "AI stocks: MANGOS ascends, replacing FAANG position",
+              "thumbnail": {
+                "originalUrl": "https://s.yimg.com/uu/api/res/1.2/PwVspNp2mp.TY6BW1VIeLA--~B/aD0yODEyO3c9NTAwMDthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/b906f5bf-33a7-4774-a866-175861196ba0_89bf9df4cc2333dbd39c22edddffbf8234ec768a33df227c6a73d3153515d043.jpg",
+                "originalWidth": 5000,
+                "originalHeight": 2812,
+                "caption": "",
+                "resolutions": null
+              },
+              "provider": {
+                "displayName": "Yahoo Finance Video",
+                "sourceId": "video.yahoofinance.com"
+              },
+              "previewUrl": null,
+              "providerContentUrl": "",
+              "canonicalUrl": {
+                "url": "https://finance.yahoo.com/video/ai-stocks-mangos-ascends-replacing-faang-position-200651767.html"
+              },
+              "clickThroughUrl": {
+                "url": "https://finance.yahoo.com/video/ai-stocks-mangos-ascends-replacing-faang-position-200651767.html"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

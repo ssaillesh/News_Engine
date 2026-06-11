@@ -1,0 +1,63 @@
+{
+  "article_id": "f372a012-d993-4e72-b7b5-6c8cf9e95acb",
+  "source": "yfinance",
+  "ticker": "AMZN",
+  "title": "Tether Leads $1.4 Billion Funding Round for NEURA Robotics",
+  "url": "https://beincrypto.com/tether-neura-robotics-funding-round/",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:54.510496",
+  "sentences": [
+    "Tether Leads $1.4 Billion Funding Round for NEURA Robotics Tether leads a $1.4 billion Series C for NEURA Robotics, adding wallets and edge AI to power a machine economy."
+  ],
+  "entities": [
+    {
+      "entity": "Neura Robotics Tether",
+      "raw_text": "NEURA Robotics Tether",
+      "label": "ORG",
+      "start_char": 44,
+      "end_char": 65,
+      "sentence_idx": 0,
+      "context_window": "Tether Leads $1.4 Billion Funding Round for NEURA Robotics Tether leads a $1.4 billion Series C for NEURA Robotics, adding wallets and edge AI to power a machine economy.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Neura Robotics",
+      "raw_text": "NEURA Robotics",
+      "label": "ORG",
+      "start_char": 100,
+      "end_char": 114,
+      "sentence_idx": 0,
+      "context_window": "Tether Leads $1.4 Billion Funding Round for NEURA Robotics Tether leads a $1.4 billion Series C for NEURA Robotics, adding wallets and edge AI to power a machine economy.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Neura Robotics Tether": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Neura Robotics": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "4ed43794-afd1-47e6-89a3-d87ad692b531"
+}

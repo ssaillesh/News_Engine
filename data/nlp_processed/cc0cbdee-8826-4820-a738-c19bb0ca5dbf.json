@@ -1,0 +1,154 @@
+{
+  "article_id": "cc0cbdee-8826-4820-a738-c19bb0ca5dbf",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Tetra Technologies stock hits 52-week high at 11.9 USD By Investing.com",
+  "url": "https://ca.investing.com/news/company-news/tetra-technologies-stock-hits-52week-high-at-119-usd-93CH-4414903",
+  "published_at": "2026-01-22T20:58:11Z",
+  "processed_at": "2026-06-03T04:58:33.414389",
+  "sentences": [
+    "Tetra Technologies stock hits 52-week high at 11.9 USD By Investing.com Tetra Technologies Inc.",
+    "(TTI) stock reached a new 52-week high of $11.9 USD, reflecting a 152.14% increase over the past year.",
+    "This surge is attributed to strong investor confidence, strategic initiatives, favorable industry conditions, and recent positive third-quarter earnings for 2025.",
+    "Analysts have mixed views, with Clear Street downgrading to Hold (target $11.00) and Stifel maintaining Buy (target $13.00), in light of the company's performance and a new joint venture with Magrathea Metals, Inc."
+  ],
+  "entities": [
+    {
+      "entity": "Tetra",
+      "raw_text": "Tetra Technologies",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 18,
+      "sentence_idx": 0,
+      "context_window": "Tetra Technologies stock hits 52-week high at 11.9 USD By Investing.com Tetra Technologies Inc. (TTI) stock reached a new 52-week high of $11.9 USD, reflecting a 152.14% increase over the past year. This surge is attributed to strong investor confidence, strategic initiatives, favorable industry conditions, and recent positive third-quarter earnings for 2025.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9534033536911011,
+      "positive_score": 0.9534033536911011,
+      "negative_score": 0.02015731856226921,
+      "neutral_score": 0.026439299806952477
+    },
+    {
+      "entity": "##Ting",
+      "raw_text": "##ting",
+      "label": "ORG",
+      "start_char": 63,
+      "end_char": 67,
+      "sentence_idx": 0,
+      "context_window": "Tetra Technologies stock hits 52-week high at 11.9 USD By Investing.com Tetra Technologies Inc. (TTI) stock reached a new 52-week high of $11.9 USD, reflecting a 152.14% increase over the past year. This surge is attributed to strong investor confidence, strategic initiatives, favorable industry conditions, and recent positive third-quarter earnings for 2025.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9534033536911011,
+      "positive_score": 0.9534033536911011,
+      "negative_score": 0.02015731856226921,
+      "neutral_score": 0.026439299806952477
+    },
+    {
+      "entity": "Tti",
+      "raw_text": "TTI",
+      "label": "ORG",
+      "start_char": 97,
+      "end_char": 100,
+      "sentence_idx": 1,
+      "context_window": "Tetra Technologies stock hits 52-week high at 11.9 USD By Investing.com Tetra Technologies Inc. (TTI) stock reached a new 52-week high of $11.9 USD, reflecting a 152.14% increase over the past year. This surge is attributed to strong investor confidence, strategic initiatives, favorable industry conditions, and recent positive third-quarter earnings for 2025. Analysts have mixed views, with Clear Street downgrading to Hold (target $11.00) and Stifel maintaining Buy (target $13.00), in light of the company's performance and a new joint venture with Magrathea Metals, Inc.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.5890929102897644,
+      "positive_score": 0.36008012294769287,
+      "negative_score": 0.5890929102897644,
+      "neutral_score": 0.05082695186138153
+    },
+    {
+      "entity": "Clear Street",
+      "raw_text": "Clear Street",
+      "label": "ORG",
+      "start_char": 394,
+      "end_char": 406,
+      "sentence_idx": 3,
+      "context_window": "(TTI) stock reached a new 52-week high of $11.9 USD, reflecting a 152.14% increase over the past year. This surge is attributed to strong investor confidence, strategic initiatives, favorable industry conditions, and recent positive third-quarter earnings for 2025. Analysts have mixed views, with Clear Street downgrading to Hold (target $11.00) and Stifel maintaining Buy (target $13.00), in light of the company's performance and a new joint venture with Magrathea Metals, Inc.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6303203105926514,
+      "positive_score": 0.3211302161216736,
+      "negative_score": 0.6303203105926514,
+      "neutral_score": 0.048549506813287735
+    },
+    {
+      "entity": "Stifel",
+      "raw_text": "Stifel",
+      "label": "ORG",
+      "start_char": 447,
+      "end_char": 453,
+      "sentence_idx": 3,
+      "context_window": "(TTI) stock reached a new 52-week high of $11.9 USD, reflecting a 152.14% increase over the past year. This surge is attributed to strong investor confidence, strategic initiatives, favorable industry conditions, and recent positive third-quarter earnings for 2025. Analysts have mixed views, with Clear Street downgrading to Hold (target $11.00) and Stifel maintaining Buy (target $13.00), in light of the company's performance and a new joint venture with Magrathea Metals, Inc.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6303203105926514,
+      "positive_score": 0.3211302161216736,
+      "negative_score": 0.6303203105926514,
+      "neutral_score": 0.048549506813287735
+    },
+    {
+      "entity": "Magrathea Metals",
+      "raw_text": "Magrathea Metals, Inc",
+      "label": "ORG",
+      "start_char": 554,
+      "end_char": 575,
+      "sentence_idx": 3,
+      "context_window": "(TTI) stock reached a new 52-week high of $11.9 USD, reflecting a 152.14% increase over the past year. This surge is attributed to strong investor confidence, strategic initiatives, favorable industry conditions, and recent positive third-quarter earnings for 2025. Analysts have mixed views, with Clear Street downgrading to Hold (target $11.00) and Stifel maintaining Buy (target $13.00), in light of the company's performance and a new joint venture with Magrathea Metals, Inc.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.6303203105926514,
+      "positive_score": 0.3211302161216736,
+      "negative_score": 0.6303203105926514,
+      "neutral_score": 0.048549506813287735
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.5384,
+  "company_sentiments": {
+    "Tetra": {
+      "label": "positive",
+      "score": 0.9534033536911011,
+      "positive_score": 0.9534,
+      "negative_score": 0.0202,
+      "neutral_score": 0.0264,
+      "mentions": 1
+    },
+    "##Ting": {
+      "label": "positive",
+      "score": 0.9534033536911011,
+      "positive_score": 0.9534,
+      "negative_score": 0.0202,
+      "neutral_score": 0.0264,
+      "mentions": 1
+    },
+    "Tti": {
+      "label": "negative",
+      "score": 0.5890929102897644,
+      "positive_score": 0.3601,
+      "negative_score": 0.5891,
+      "neutral_score": 0.0508,
+      "mentions": 1
+    },
+    "Clear Street": {
+      "label": "negative",
+      "score": 0.6303203105926514,
+      "positive_score": 0.3211,
+      "negative_score": 0.6303,
+      "neutral_score": 0.0485,
+      "mentions": 1
+    },
+    "Stifel": {
+      "label": "negative",
+      "score": 0.6303203105926514,
+      "positive_score": 0.3211,
+      "negative_score": 0.6303,
+      "neutral_score": 0.0485,
+      "mentions": 1
+    },
+    "Magrathea Metals": {
+      "label": "negative",
+      "score": 0.6303203105926514,
+      "positive_score": 0.3211,
+      "negative_score": 0.6303,
+      "neutral_score": 0.0485,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "62f83c65-b59b-48ef-af96-1b5eda5c38f8"
+}

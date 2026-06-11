@@ -1,0 +1,70 @@
+{
+  "article_id": "aba4ae0b-ffd9-4c4d-a34b-6b29a044db75",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "WF Holding Limited (WFF) stock price, news, quote and history",
+  "url": "https://uk.finance.yahoo.com/quote/WFF/latest-news/",
+  "published_at": "2025-10-16T18:40:13Z",
+  "fetched_at": "2026-06-03T04:57:51.401580",
+  "full_text": "This page provides a financial overview of WF Holding Limited (WFF), including its current stock price, recent news headlines, and performance data. It shows the stock's closing price, after-hours trading, and total returns compared to the S&P 500 benchmark. The article also lists related news from Simply Wall St. and key market indices.",
+  "summary": "This page provides a financial overview of WF Holding Limited (WFF), including its current stock price, recent news headlines, and performance data. It shows the stock's closing price, after-hours trading, and total returns compared to the S&P 500 benchmark. The article also lists related news from Simply Wall St. and key market indices.",
+  "raw_payload": {
+    "title": "WF Holding Limited (WFF) stock price, news, quote and history",
+    "url": "https://uk.finance.yahoo.com/quote/WFF/latest-news/",
+    "time_published": "20251016T184013",
+    "authors": [],
+    "summary": "This page provides a financial overview of WF Holding Limited (WFF), including its current stock price, recent news headlines, and performance data. It shows the stock's closing price, after-hours trading, and total returns compared to the S&P 500 benchmark. The article also lists related news from Simply Wall St. and key market indices.",
+    "banner_image": null,
+    "source": "Yahoo Finance UK",
+    "category_within_source": "General",
+    "source_domain": "Yahoo Finance UK",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.905822"
+      },
+      {
+        "topic": "earnings",
+        "relevance_score": "0.846720"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.747192"
+      }
+    ],
+    "overall_sentiment_score": 0.012653,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "WFF",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "-0.388520",
+        "ticker_sentiment_label": "Bearish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.627666",
+        "ticker_sentiment_score": "0.100008",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.624744",
+        "ticker_sentiment_score": "0.144634",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.601276",
+        "ticker_sentiment_score": "0.129908",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.622520",
+        "ticker_sentiment_score": "0.111560",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

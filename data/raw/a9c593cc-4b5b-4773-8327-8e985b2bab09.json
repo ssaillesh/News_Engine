@@ -1,0 +1,72 @@
+{
+  "article_id": "a9c593cc-4b5b-4773-8327-8e985b2bab09",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Peter Thiel Fully Exits Nvidia, Cuts Tesla, Moves Into Fresh Tech Plays With These Stocks - Meta Platforms (NASDAQ:META), Apple (NASDAQ:AAPL)",
+  "url": "https://www.benzinga.com/markets/tech/25/11/48891922/peter-thiel-dumps-entire-nvidia-stake-slashes-tesla-holdings-as-fears-of-an-ai-bubble-grow-shifts-billions-toward-these-2-mag-7-stocks",
+  "published_at": "2025-11-17T02:51:00Z",
+  "fetched_at": "2026-06-03T04:57:51.401411",
+  "full_text": "Billionaire Peter Thiel has completely sold off his Nvidia stake and significantly reduced his Tesla holdings, citing concerns about a potential AI bubble. His fund, Thiel Macro, subsequently invested billions into Apple and Microsoft, increasing holdings in these \"Mag 7\" stocks. This strategic shift follows Thiel's previous endorsement of Nvidia and comes amid broader discussions in the tech industry regarding AI valuation.",
+  "summary": "Billionaire Peter Thiel has completely sold off his Nvidia stake and significantly reduced his Tesla holdings, citing concerns about a potential AI bubble. His fund, Thiel Macro, subsequently invested billions into Apple and Microsoft, increasing holdings in these \"Mag 7\" stocks. This strategic shift follows Thiel's previous endorsement of Nvidia and comes amid broader discussions in the tech industry regarding AI valuation.",
+  "raw_payload": {
+    "title": "Peter Thiel Fully Exits Nvidia, Cuts Tesla, Moves Into Fresh Tech Plays With These Stocks - Meta Platforms (NASDAQ:META), Apple (NASDAQ:AAPL)",
+    "url": "https://www.benzinga.com/markets/tech/25/11/48891922/peter-thiel-dumps-entire-nvidia-stake-slashes-tesla-holdings-as-fears-of-an-ai-bubble-grow-shifts-billions-toward-these-2-mag-7-stocks",
+    "time_published": "20251117T025100",
+    "authors": [
+      "Namrata Sen"
+    ],
+    "summary": "Billionaire Peter Thiel has completely sold off his Nvidia stake and significantly reduced his Tesla holdings, citing concerns about a potential AI bubble. His fund, Thiel Macro, subsequently invested billions into Apple and Microsoft, increasing holdings in these \"Mag 7\" stocks. This strategic shift follows Thiel's previous endorsement of Nvidia and comes amid broader discussions in the tech industry regarding AI valuation.",
+    "banner_image": null,
+    "source": "Benzinga",
+    "category_within_source": "General",
+    "source_domain": "Benzinga",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.916590"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.803802"
+      },
+      {
+        "topic": "economy_macro",
+        "relevance_score": "0.643595"
+      }
+    ],
+    "overall_sentiment_score": -0.162498,
+    "overall_sentiment_label": "Somewhat-Bearish",
+    "ticker_sentiment": [
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.905452",
+        "ticker_sentiment_score": "-0.631153",
+        "ticker_sentiment_label": "Bearish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.825717",
+        "ticker_sentiment_score": "-0.532752",
+        "ticker_sentiment_label": "Bearish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.713907",
+        "ticker_sentiment_score": "0.416294",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.615007",
+        "ticker_sentiment_score": "0.416191",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "VST",
+        "relevance_score": "0.627329",
+        "ticker_sentiment_score": "-0.527296",
+        "ticker_sentiment_label": "Bearish"
+      }
+    ]
+  }
+}

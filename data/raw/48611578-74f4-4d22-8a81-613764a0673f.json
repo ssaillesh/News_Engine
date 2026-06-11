@@ -1,0 +1,64 @@
+{
+  "article_id": "48611578-74f4-4d22-8a81-613764a0673f",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Jensen Huang Delivers Products to Elon Musk Again After Nine - Year Hiatus: Delayed AI Personal Supercomputer Finally Arrives - 36Kr",
+  "url": "https://eu.36kr.com/en/p/3508745212107905",
+  "published_at": "2025-10-14T08:43:39Z",
+  "fetched_at": "2026-06-03T04:57:51.401608",
+  "full_text": "Jensen Huang personally delivered NVIDIA's DGX Spark Personal AI Supercomputer to Elon Musk at Starbase, marking a reunion nine years after the delivery of the DGX-1. This new \"performance monster,\" previously delayed, integrates a Grace Blackwell GB10 superchip and aims to bring data center-level AI power to the desktop, targeting developers with its robust hardware and software ecosystem.",
+  "summary": "Jensen Huang personally delivered NVIDIA's DGX Spark Personal AI Supercomputer to Elon Musk at Starbase, marking a reunion nine years after the delivery of the DGX-1. This new \"performance monster,\" previously delayed, integrates a Grace Blackwell GB10 superchip and aims to bring data center-level AI power to the desktop, targeting developers with its robust hardware and software ecosystem.",
+  "raw_payload": {
+    "title": "Jensen Huang Delivers Products to Elon Musk Again After Nine - Year Hiatus: Delayed AI Personal Supercomputer Finally Arrives - 36Kr",
+    "url": "https://eu.36kr.com/en/p/3508745212107905",
+    "time_published": "20251014T084339",
+    "authors": [
+      "爱范儿"
+    ],
+    "summary": "Jensen Huang personally delivered NVIDIA's DGX Spark Personal AI Supercomputer to Elon Musk at Starbase, marking a reunion nine years after the delivery of the DGX-1. This new \"performance monster,\" previously delayed, integrates a Grace Blackwell GB10 superchip and aims to bring data center-level AI power to the desktop, targeting developers with its robust hardware and software ecosystem.",
+    "banner_image": "https://img.36krcdn.com/hsossms/20251014/v2_21b7e0ca5b2548b9a3fc7ff899ed601b@46958_oswg67206oswg1080oswg574_img_000?x-oss-process=image/format,jpg/interlace,1",
+    "source": "36Kr",
+    "category_within_source": "General",
+    "source_domain": "36Kr",
+    "topics": [
+      {
+        "topic": "technology",
+        "relevance_score": "1.000000"
+      }
+    ],
+    "overall_sentiment_score": 0.210647,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "NVDA",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.426533",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.534404",
+        "ticker_sentiment_score": "0.224987",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.304474",
+        "ticker_sentiment_score": "0.116774",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "AMD",
+        "relevance_score": "0.333191",
+        "ticker_sentiment_score": "0.131828",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.323482",
+        "ticker_sentiment_score": "0.126621",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "article_id": "b908e9ab-abd2-44f2-927a-236b563b8eea",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "EdgeRock Capital LLC Sells 4,794 Shares of Apple Inc. $AAPL",
+  "url": "https://www.marketbeat.com/instant-alerts/filing-edgerock-capital-llc-sells-4794-shares-of-apple-inc-aapl-2026-02-10/",
+  "published_at": "2026-02-10T08:36:54Z",
+  "fetched_at": "2026-06-03T04:57:51.401042",
+  "full_text": "EdgeRock Capital LLC reduced its stake in Apple Inc. (NASDAQ:AAPL) by 15.1% in the third quarter, selling 4,794 shares and now owning 26,971 shares valued at $6.87 million. Despite this sale, Apple remains the 17th largest holding for EdgeRock Capital LLC, making up 1.9% of its portfolio. Other institutional investors have varied their positions, while analyst sentiment towards Apple remains \"Moderate Buy\" with a consensus price target of $291.70.",
+  "summary": "EdgeRock Capital LLC reduced its stake in Apple Inc. (NASDAQ:AAPL) by 15.1% in the third quarter, selling 4,794 shares and now owning 26,971 shares valued at $6.87 million. Despite this sale, Apple remains the 17th largest holding for EdgeRock Capital LLC, making up 1.9% of its portfolio. Other institutional investors have varied their positions, while analyst sentiment towards Apple remains \"Moderate Buy\" with a consensus price target of $291.70.",
+  "raw_payload": {
+    "title": "EdgeRock Capital LLC Sells 4,794 Shares of Apple Inc. $AAPL",
+    "url": "https://www.marketbeat.com/instant-alerts/filing-edgerock-capital-llc-sells-4794-shares-of-apple-inc-aapl-2026-02-10/",
+    "time_published": "20260210T083654",
+    "authors": [
+      "MarketBeat"
+    ],
+    "summary": "EdgeRock Capital LLC reduced its stake in Apple Inc. (NASDAQ:AAPL) by 15.1% in the third quarter, selling 4,794 shares and now owning 26,971 shares valued at $6.87 million. Despite this sale, Apple remains the 17th largest holding for EdgeRock Capital LLC, making up 1.9% of its portfolio. Other institutional investors have varied their positions, while analyst sentiment towards Apple remains \"Moderate Buy\" with a consensus price target of $291.70.",
+    "banner_image": "https://www.marketbeat.com/logos/apple-inc-logo-1200x675.png",
+    "source": "MarketBeat",
+    "category_within_source": "General",
+    "source_domain": "MarketBeat",
+    "topics": [
+      {
+        "topic": "earnings",
+        "relevance_score": "0.942806"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.832629"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.733125"
+      }
+    ],
+    "overall_sentiment_score": 0.111676,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.074960",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.608698",
+        "ticker_sentiment_score": "0.102742",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.622389",
+        "ticker_sentiment_score": "0.122366",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "META",
+        "relevance_score": "0.638709",
+        "ticker_sentiment_score": "0.124622",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.633794",
+        "ticker_sentiment_score": "0.127506",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

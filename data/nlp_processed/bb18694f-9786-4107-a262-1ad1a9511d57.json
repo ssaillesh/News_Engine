@@ -1,0 +1,131 @@
+{
+  "article_id": "bb18694f-9786-4107-a262-1ad1a9511d57",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Tesla’s IPO Was One of the Greatest Ever. Why SpaceX Can’t Hope to Repeat Its Success.",
+  "url": "https://www.barrons.com/articles/spacex-ipo-tesla-stock-price-012631fc?siteid=yhoof2&yptr=yahoo",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:48.521613",
+  "sentences": [
+    "Tesla’s IPO Was One of the Greatest Ever.",
+    "Why SpaceX Can’t Hope to Repeat Its Success.",
+    "Tesla  stock bounced on Tuesday as CEO Elon Musk reminded investors about where his EV company started and how far it’s come.",
+    "Don’t expect SpaceX to follow the same trajectory even as Musk tries to justify SpaceX’s valuation.",
+    "The move came after Musk tweeted that Tesla’s IPO market cap was only 0.1% of its current market cap."
+  ],
+  "entities": [
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 5,
+      "sentence_idx": 0,
+      "context_window": "Tesla’s IPO Was One of the Greatest Ever. Why SpaceX Can’t Hope to Repeat Its Success. Tesla  stock bounced on Tuesday as CEO Elon Musk reminded investors about where his EV company started and how far it’s come.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.7222735285758972,
+      "positive_score": 0.7222735285758972,
+      "negative_score": 0.21715664863586426,
+      "neutral_score": 0.0605698898434639
+    },
+    {
+      "entity": "Spacex",
+      "raw_text": "SpaceX",
+      "label": "ORG",
+      "start_char": 46,
+      "end_char": 52,
+      "sentence_idx": 1,
+      "context_window": "Tesla’s IPO Was One of the Greatest Ever. Why SpaceX Can’t Hope to Repeat Its Success. Tesla  stock bounced on Tuesday as CEO Elon Musk reminded investors about where his EV company started and how far it’s come. Don’t expect SpaceX to follow the same trajectory even as Musk tries to justify SpaceX’s valuation.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.5495586395263672,
+      "positive_score": 0.41252294182777405,
+      "negative_score": 0.037918396294116974,
+      "neutral_score": 0.5495586395263672
+    },
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 87,
+      "end_char": 92,
+      "sentence_idx": 2,
+      "context_window": "Tesla’s IPO Was One of the Greatest Ever. Why SpaceX Can’t Hope to Repeat Its Success. Tesla  stock bounced on Tuesday as CEO Elon Musk reminded investors about where his EV company started and how far it’s come. Don’t expect SpaceX to follow the same trajectory even as Musk tries to justify SpaceX’s valuation. The move came after Musk tweeted that Tesla’s IPO market cap was only 0.1% of its current market cap.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.5648269057273865,
+      "positive_score": 0.2053268998861313,
+      "negative_score": 0.5648269057273865,
+      "neutral_score": 0.22984613478183746
+    },
+    {
+      "entity": "Spacex",
+      "raw_text": "SpaceX",
+      "label": "ORG",
+      "start_char": 227,
+      "end_char": 233,
+      "sentence_idx": 3,
+      "context_window": "Why SpaceX Can’t Hope to Repeat Its Success. Tesla  stock bounced on Tuesday as CEO Elon Musk reminded investors about where his EV company started and how far it’s come. Don’t expect SpaceX to follow the same trajectory even as Musk tries to justify SpaceX’s valuation. The move came after Musk tweeted that Tesla’s IPO market cap was only 0.1% of its current market cap.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7359559535980225,
+      "positive_score": 0.11986641585826874,
+      "negative_score": 0.7359559535980225,
+      "neutral_score": 0.14417757093906403
+    },
+    {
+      "entity": "##Sk",
+      "raw_text": "##sk",
+      "label": "ORG",
+      "start_char": 337,
+      "end_char": 339,
+      "sentence_idx": 4,
+      "context_window": "Tesla  stock bounced on Tuesday as CEO Elon Musk reminded investors about where his EV company started and how far it’s come. Don’t expect SpaceX to follow the same trajectory even as Musk tries to justify SpaceX’s valuation. The move came after Musk tweeted that Tesla’s IPO market cap was only 0.1% of its current market cap.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7702538371086121,
+      "positive_score": 0.09253717958927155,
+      "negative_score": 0.7702538371086121,
+      "neutral_score": 0.1372089684009552
+    },
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 353,
+      "end_char": 358,
+      "sentence_idx": 4,
+      "context_window": "Tesla  stock bounced on Tuesday as CEO Elon Musk reminded investors about where his EV company started and how far it’s come. Don’t expect SpaceX to follow the same trajectory even as Musk tries to justify SpaceX’s valuation. The move came after Musk tweeted that Tesla’s IPO market cap was only 0.1% of its current market cap.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.7702538371086121,
+      "positive_score": 0.09253717958927155,
+      "negative_score": 0.7702538371086121,
+      "neutral_score": 0.1372089684009552
+    }
+  ],
+  "article_sentiment_label": "negative",
+  "article_sentiment_score": 0.5161,
+  "company_sentiments": {
+    "Tesla": {
+      "label": "negative",
+      "score": 0.5174124638239542,
+      "positive_score": 0.34,
+      "negative_score": 0.5174,
+      "neutral_score": 0.1425,
+      "mentions": 3
+    },
+    "Spacex": {
+      "label": "negative",
+      "score": 0.3869371749460697,
+      "positive_score": 0.2662,
+      "negative_score": 0.3869,
+      "neutral_score": 0.3469,
+      "mentions": 2
+    },
+    "##Sk": {
+      "label": "negative",
+      "score": 0.7702538371086121,
+      "positive_score": 0.0925,
+      "negative_score": 0.7703,
+      "neutral_score": 0.1372,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "78a33c68-5b19-4e8d-8c36-36d0ffd68388"
+}

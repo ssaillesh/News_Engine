@@ -1,0 +1,80 @@
+{
+  "article_id": "1c37c978-667f-426b-a4a1-38fa60ac5cdb",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next",
+  "url": "https://ts2.tech/en/apple-stock-steadies-after-hours-as-year-end-trading-turns-choppy-fed-minutes-next/",
+  "published_at": "2025-12-29T21:50:17Z",
+  "fetched_at": "2026-06-03T04:57:51.401285",
+  "full_text": "Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+  "summary": "Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+  "raw_payload": {
+    "title": "Apple Stock Steadies After Hours as Year-End Trading Turns Choppy; Fed Minutes Next",
+    "url": "https://ts2.tech/en/apple-stock-steadies-after-hours-as-year-end-trading-turns-choppy-fed-minutes-next/",
+    "time_published": "20251229T215017",
+    "authors": [
+      "Khadija Saeed"
+    ],
+    "summary": "Apple shares saw a slight increase in after-hours trading after a small dip in the regular session, amid choppy year-end trading and ahead of the release of Fed minutes. While other \"Magnificent Seven\" stocks like Nvidia and Tesla saw sharper drops, Apple's stability is significant due to its weight in the S&P 500 and Nasdaq. Investors are looking at Apple's support level at $270 and its premium valuation ahead of upcoming macroeconomic catalysts and unconfirmed Q1 2026 earnings.",
+    "banner_image": "NULL",
+    "source": "ts2.tech",
+    "category_within_source": "General",
+    "source_domain": "ts2.tech",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.932014"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.828283"
+      },
+      {
+        "topic": "economy_monetary",
+        "relevance_score": "0.701345"
+      },
+      {
+        "topic": "earnings",
+        "relevance_score": "0.646640"
+      },
+      {
+        "topic": "economy_macro",
+        "relevance_score": "0.621721"
+      }
+    ],
+    "overall_sentiment_score": -0.202224,
+    "overall_sentiment_label": "Somewhat-Bearish",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.048618",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.610181",
+        "ticker_sentiment_score": "-0.306072",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.632864",
+        "ticker_sentiment_score": "-0.428920",
+        "ticker_sentiment_label": "Bearish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.626597",
+        "ticker_sentiment_score": "-0.060868",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "PLTR",
+        "relevance_score": "0.631111",
+        "ticker_sentiment_score": "-0.289739",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      }
+    ]
+  }
+}

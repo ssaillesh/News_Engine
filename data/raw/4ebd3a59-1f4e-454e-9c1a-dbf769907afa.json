@@ -1,0 +1,54 @@
+{
+  "article_id": "4ebd3a59-1f4e-454e-9c1a-dbf769907afa",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Update: US Equity Futures Rise Pre-Bell After US Says Strikes Completed Against Iran",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-futures-rise-pre-125805554.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.379420",
+  "full_text": "(Updates with economic data, recent oil price movement, world markets' overview and corporate stock",
+  "summary": "(Updates with economic data, recent oil price movement, world markets' overview and corporate stock",
+  "raw_payload": {
+    "id": "74e88a88-c997-3cca-82f8-9c93336d4010",
+    "content": {
+      "id": "74e88a88-c997-3cca-82f8-9c93336d4010",
+      "contentType": "STORY",
+      "title": "Update: US Equity Futures Rise Pre-Bell After US Says Strikes Completed Against Iran",
+      "description": "",
+      "summary": "(Updates with economic data, recent oil price movement, world markets' overview and corporate stock",
+      "pubDate": "2026-06-11T12:58:05Z",
+      "displayTime": "2026-06-11T12:58:05Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": null,
+      "provider": {
+        "displayName": "MT Newswires",
+        "url": "https://www.mtnewswires.com/",
+        "sourceId": "mt_newswires_premium_news_706"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-futures-rise-pre-125805554.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-futures-rise-pre-125805554.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": true,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

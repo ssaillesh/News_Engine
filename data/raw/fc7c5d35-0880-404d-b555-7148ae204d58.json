@@ -1,0 +1,73 @@
+{
+  "article_id": "fc7c5d35-0880-404d-b555-7148ae204d58",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus",
+  "url": "https://stocktwits.com/news-articles/markets/equity/sp500-nasdaq-dow-futures-ease-after-another-record-close-ai-momentum-cushions-iran-strikes/cZ0SoqTReDV",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:52.681137",
+  "full_text": "U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+  "summary": "U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+  "raw_payload": {
+    "id": "4c5f2e87-75f6-3c2a-98e5-584a48d7067c",
+    "content": {
+      "id": "4c5f2e87-75f6-3c2a-98e5-584a48d7067c",
+      "contentType": "STORY",
+      "title": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus",
+      "description": "",
+      "summary": "U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+      "pubDate": "2026-06-03T01:41:05Z",
+      "displayTime": "2026-06-03T01:41:05Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/stocktwits_383/a3585568b20d76c866d6e2b51c9220cb",
+        "originalWidth": 1280,
+        "originalHeight": 853,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/4k_TrekDLCbXmbwCSfcpiA--~B/aD04NTM7dz0xMjgwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/stocktwits_383/a3585568b20d76c866d6e2b51c9220cb",
+            "width": 1280,
+            "height": 853,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/9LyRPLyWTMd00xEaO71hbg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/stocktwits_383/a3585568b20d76c866d6e2b51c9220cb",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Stocktwits",
+        "url": "Stocktwits",
+        "sourceId": "stocktwits_383"
+      },
+      "canonicalUrl": {
+        "url": "https://stocktwits.com/news-articles/markets/equity/sp500-nasdaq-dow-futures-ease-after-another-record-close-ai-momentum-cushions-iran-strikes/cZ0SoqTReDV",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-nasdaq-dow-futures-014105049.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

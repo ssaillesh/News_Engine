@@ -1,0 +1,101 @@
+{
+  "article_id": "b6d91c8f-f6dc-42f6-9905-c9c4de6007bf",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "GMOC Stock Price | GMO ULTRA SHORT INCOME ETF",
+  "url": "https://www.investing.com/etfs/gmoc",
+  "published_at": "2026-04-15T12:10:18Z",
+  "processed_at": "2026-06-03T04:58:22.926708",
+  "sentences": [
+    "GMOC Stock Price | GMO ULTRA SHORT INCOME ETF This article provides detailed financial information for the GMO ULTRA SHORT INCOME ETF (GMOC), including its current stock price of 50.09, trading venue (NYSE), and expense ratio of 0.20%.",
+    "It also covers key statistics such as total assets, shares outstanding, and inception date, alongside performance data, top holdings, and technical analysis indicators.",
+    "The content aims to help investors assess GMOC's potential by presenting comprehensive data and tools."
+  ],
+  "entities": [
+    {
+      "entity": "Gm",
+      "raw_text": "GM",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 2,
+      "sentence_idx": 0,
+      "context_window": "GMOC Stock Price | GMO ULTRA SHORT INCOME ETF This article provides detailed financial information for the GMO ULTRA SHORT INCOME ETF (GMOC), including its current stock price of 50.09, trading venue (NYSE), and expense ratio of 0.20%. It also covers key statistics such as total assets, shares outstanding, and inception date, alongside performance data, top holdings, and technical analysis indicators. The content aims to help investors assess GMOC's potential by presenting comprehensive data and tools.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9408640265464783,
+      "positive_score": 0.04347170144319534,
+      "negative_score": 0.015664348378777504,
+      "neutral_score": 0.9408640265464783
+    },
+    {
+      "entity": "Gmo",
+      "raw_text": "GMO",
+      "label": "ORG",
+      "start_char": 19,
+      "end_char": 22,
+      "sentence_idx": 0,
+      "context_window": "GMOC Stock Price | GMO ULTRA SHORT INCOME ETF This article provides detailed financial information for the GMO ULTRA SHORT INCOME ETF (GMOC), including its current stock price of 50.09, trading venue (NYSE), and expense ratio of 0.20%. It also covers key statistics such as total assets, shares outstanding, and inception date, alongside performance data, top holdings, and technical analysis indicators. The content aims to help investors assess GMOC's potential by presenting comprehensive data and tools.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9408640265464783,
+      "positive_score": 0.04347170144319534,
+      "negative_score": 0.015664348378777504,
+      "neutral_score": 0.9408640265464783
+    },
+    {
+      "entity": "Gmoc",
+      "raw_text": "GMOC",
+      "label": "ORG",
+      "start_char": 135,
+      "end_char": 139,
+      "sentence_idx": 0,
+      "context_window": "GMOC Stock Price | GMO ULTRA SHORT INCOME ETF This article provides detailed financial information for the GMO ULTRA SHORT INCOME ETF (GMOC), including its current stock price of 50.09, trading venue (NYSE), and expense ratio of 0.20%. It also covers key statistics such as total assets, shares outstanding, and inception date, alongside performance data, top holdings, and technical analysis indicators. The content aims to help investors assess GMOC's potential by presenting comprehensive data and tools.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9408640265464783,
+      "positive_score": 0.04347170144319534,
+      "negative_score": 0.015664348378777504,
+      "neutral_score": 0.9408640265464783
+    },
+    {
+      "entity": "Gmoc",
+      "raw_text": "GMOC",
+      "label": "ORG",
+      "start_char": 447,
+      "end_char": 451,
+      "sentence_idx": 2,
+      "context_window": "GMOC Stock Price | GMO ULTRA SHORT INCOME ETF This article provides detailed financial information for the GMO ULTRA SHORT INCOME ETF (GMOC), including its current stock price of 50.09, trading venue (NYSE), and expense ratio of 0.20%. It also covers key statistics such as total assets, shares outstanding, and inception date, alongside performance data, top holdings, and technical analysis indicators. The content aims to help investors assess GMOC's potential by presenting comprehensive data and tools.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.9408640265464783,
+      "positive_score": 0.04347170144319534,
+      "negative_score": 0.015664348378777504,
+      "neutral_score": 0.9408640265464783
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.9409,
+  "company_sentiments": {
+    "Gm": {
+      "label": "neutral",
+      "score": 0.9408640265464783,
+      "positive_score": 0.0435,
+      "negative_score": 0.0157,
+      "neutral_score": 0.9409,
+      "mentions": 1
+    },
+    "Gmo": {
+      "label": "neutral",
+      "score": 0.9408640265464783,
+      "positive_score": 0.0435,
+      "negative_score": 0.0157,
+      "neutral_score": 0.9409,
+      "mentions": 1
+    },
+    "Gmoc": {
+      "label": "neutral",
+      "score": 0.9408640265464783,
+      "positive_score": 0.0435,
+      "negative_score": 0.0157,
+      "neutral_score": 0.9409,
+      "mentions": 2
+    }
+  },
+  "embedding_id": "c2349b05-c8cc-4712-839f-43823a87314b"
+}

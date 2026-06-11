@@ -1,0 +1,68 @@
+{
+  "article_id": "c3b600bc-7012-47c5-9f9e-6a3fb40737cb",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Musk To Pitch Terafab Semiconductor Factory To ASML Ahead Of SpaceX IPO",
+  "url": "https://www.investors.com/news/spacex-tesla-elon-musk-asml-semiconductor-terafab-ai-chips/?src=A00220&yptr=yahoo",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.379560",
+  "full_text": "Elon Musk will attend an ASML event on Thursday to discuss his plans for the Terafab semiconductor factory.",
+  "summary": "Elon Musk will attend an ASML event on Thursday to discuss his plans for the Terafab semiconductor factory.",
+  "raw_payload": {
+    "id": "83bf31cc-ce34-3428-afb6-56763bc7e967",
+    "content": {
+      "id": "83bf31cc-ce34-3428-afb6-56763bc7e967",
+      "contentType": "STORY",
+      "title": "Musk To Pitch Terafab Semiconductor Factory To ASML Ahead Of SpaceX IPO",
+      "description": "",
+      "summary": "Elon Musk will attend an ASML event on Thursday to discuss his plans for the Terafab semiconductor factory.",
+      "pubDate": "2026-06-11T12:41:29Z",
+      "displayTime": "2026-06-11T12:41:29Z",
+      "isHosted": false,
+      "bypassModal": false,
+      "previewUrl": "https://finance.yahoo.com/m/83bf31cc-ce34-3428-afb6-56763bc7e967/musk-to-pitch-terafab.html",
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/ibd.com/24d64fd18b50aae5a00211516ebd6bec",
+        "originalWidth": 1000,
+        "originalHeight": 563,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/JAJH4GKymrttSz.RddX_eg--~B/aD01NjM7dz0xMDAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/ibd.com/24d64fd18b50aae5a00211516ebd6bec",
+            "width": 1000,
+            "height": 563,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/z3WawxkWGMxsRIIQMVQLjA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/ibd.com/24d64fd18b50aae5a00211516ebd6bec",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Investor's Business Daily",
+        "url": "http://www.investors.com/",
+        "sourceId": "ibd.com"
+      },
+      "canonicalUrl": {
+        "url": "https://www.investors.com/news/spacex-tesla-elon-musk-asml-semiconductor-terafab-ai-chips/?src=A00220&yptr=yahoo",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": null,
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

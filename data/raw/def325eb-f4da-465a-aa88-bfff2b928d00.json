@@ -1,0 +1,73 @@
+{
+  "article_id": "def325eb-f4da-465a-aa88-bfff2b928d00",
+  "source": "yfinance",
+  "ticker": "GOOGL",
+  "title": "Google in talks with Samsung to make part of next-gen chip, The Information reports",
+  "url": "https://finance.yahoo.com/sectors/technology/articles/google-talks-samsung-next-generation-131006391.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:19.071892",
+  "full_text": "Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter.  Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said.  The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+  "summary": "Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter.  Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said.  The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+  "raw_payload": {
+    "id": "6ea7a70a-347b-3593-a54b-d02acbf1f724",
+    "content": {
+      "id": "6ea7a70a-347b-3593-a54b-d02acbf1f724",
+      "contentType": "STORY",
+      "title": "Google in talks with Samsung to make part of next-gen chip, The Information reports",
+      "description": "",
+      "summary": "Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter.  Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said.  The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "pubDate": "2026-06-11T13:10:06Z",
+      "displayTime": "2026-06-11T13:10:06Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/reuters-finance.com/84bfe1deeb172c936eeccea2ee833df3",
+        "originalWidth": 800,
+        "originalHeight": 533,
+        "caption": "FILE PHOTO: The Google logo is seen outside the company's office in London",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/NhaEIc8rIFo.d6n02zGo1Q--~B/aD01MzM7dz04MDA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters-finance.com/84bfe1deeb172c936eeccea2ee833df3",
+            "width": 800,
+            "height": 533,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/ex4ghuvkfyqvhjrMj9ntxg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/reuters-finance.com/84bfe1deeb172c936eeccea2ee833df3",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Reuters",
+        "url": "http://www.reuters.com/",
+        "sourceId": "reuters-finance.com"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/google-talks-samsung-next-generation-131006391.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/google-talks-samsung-next-generation-131006391.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "article_id": "640c5e32-f350-4f9d-b96d-1fc01ec93d39",
+  "source": "yfinance",
+  "ticker": "AMZN",
+  "title": "CAT Stock Hikes Dividend 8%, Leads Dow Jones Rebound",
+  "url": "https://www.investors.com/news/cat-stock-caterpillar-raises-dividend-dow-jones/?src=A00220&yptr=yahoo",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.894733",
+  "full_text": "Caterpillar announced an 8% dividend hike after Wednesday's close, extending its streak of dividend increases to 32 years.  CAT stock led Dow Jones Industrial Average winners early Thursday, rebounding from a key support level after suffering its sharpest loss since April 3, 2025, the day after President Donald Trump unveiled \"Liberation Day\" tariffs.  Caterpillar is among 69 members of the S&P 500 that have increased dividends every year for the last 25 years.",
+  "summary": "Caterpillar announced an 8% dividend hike after Wednesday's close, extending its streak of dividend increases to 32 years.  CAT stock led Dow Jones Industrial Average winners early Thursday, rebounding from a key support level after suffering its sharpest loss since April 3, 2025, the day after President Donald Trump unveiled \"Liberation Day\" tariffs.  Caterpillar is among 69 members of the S&P 500 that have increased dividends every year for the last 25 years.",
+  "raw_payload": {
+    "id": "967386ea-e922-3ae4-9c2d-bc5490965721",
+    "content": {
+      "id": "967386ea-e922-3ae4-9c2d-bc5490965721",
+      "contentType": "STORY",
+      "title": "CAT Stock Hikes Dividend 8%, Leads Dow Jones Rebound",
+      "description": "",
+      "summary": "Caterpillar announced an 8% dividend hike after Wednesday's close, extending its streak of dividend increases to 32 years.  CAT stock led Dow Jones Industrial Average winners early Thursday, rebounding from a key support level after suffering its sharpest loss since April 3, 2025, the day after President Donald Trump unveiled \"Liberation Day\" tariffs.  Caterpillar is among 69 members of the S&P 500 that have increased dividends every year for the last 25 years.",
+      "pubDate": "2026-06-11T13:33:31Z",
+      "displayTime": "2026-06-11T13:33:31Z",
+      "isHosted": false,
+      "bypassModal": false,
+      "previewUrl": "https://finance.yahoo.com/m/967386ea-e922-3ae4-9c2d-bc5490965721/cat-stock-hikes-dividend-8-.html",
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/ibd.com/9d9d8ec365e2bfb44dd6ee6ecf614ac5",
+        "originalWidth": 1000,
+        "originalHeight": 563,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/NaoRTjscOS.xyGrZWI_XIA--~B/aD01NjM7dz0xMDAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/ibd.com/9d9d8ec365e2bfb44dd6ee6ecf614ac5",
+            "width": 1000,
+            "height": 563,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/16fWOGFJhlzEzClS6HlqTw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/ibd.com/9d9d8ec365e2bfb44dd6ee6ecf614ac5",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Investor's Business Daily",
+        "url": "http://www.investors.com/",
+        "sourceId": "ibd.com"
+      },
+      "canonicalUrl": {
+        "url": "https://www.investors.com/news/cat-stock-caterpillar-raises-dividend-dow-jones/?src=A00220&yptr=yahoo",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": null,
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

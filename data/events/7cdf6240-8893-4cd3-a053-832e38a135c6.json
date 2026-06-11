@@ -1,0 +1,111 @@
+{
+  "event_id": "7cdf6240-8893-4cd3-a053-832e38a135c6",
+  "cluster_id": 2,
+  "created_at": "2026-06-03T04:58:58.958687",
+  "article_ids": [
+    "93ccfe0d-7b5a-4a4a-94d8-cfbd984dbfe5",
+    "62bd3cd7-ead8-4351-ae13-ced984e42bb9",
+    "d8816595-9b48-413b-91b5-3bc75e0d5b08"
+  ],
+  "article_count": 3,
+  "sources": [
+    "yfinance"
+  ],
+  "representative_title": "Berkshire Hathaway Got a Sweet Deal on Alphabet Stock",
+  "representative_url": "https://www.barrons.com/articles/berkshire-hathaway-alphabet-stock-deal-discount-0371c682?siteid=yhoof2&yptr=yahoo",
+  "mention_volume": 3,
+  "velocity": 0.0,
+  "novelty_score": 0.5,
+  "sentiment_strength": 0.558,
+  "hot_score": 0.3241,
+  "company_sentiments": [
+    {
+      "company": "Berkshire Hathaway",
+      "mention_count": 1,
+      "positive_ratio": 0.5257,
+      "negative_ratio": 0.0218,
+      "neutral_ratio": 0.4525,
+      "weighted_score": 0.5039,
+      "dominant_label": "positive"
+    },
+    {
+      "company": "Alphabet Stock Alphabet",
+      "mention_count": 1,
+      "positive_ratio": 0.5257,
+      "negative_ratio": 0.0218,
+      "neutral_ratio": 0.4525,
+      "weighted_score": 0.5039,
+      "dominant_label": "positive"
+    },
+    {
+      "company": "Google",
+      "mention_count": 1,
+      "positive_ratio": 0.5257,
+      "negative_ratio": 0.0218,
+      "neutral_ratio": 0.4525,
+      "weighted_score": 0.5039,
+      "dominant_label": "positive"
+    },
+    {
+      "company": "Berkshire",
+      "mention_count": 1,
+      "positive_ratio": 0.5257,
+      "negative_ratio": 0.0218,
+      "neutral_ratio": 0.4525,
+      "weighted_score": 0.5039,
+      "dominant_label": "positive"
+    },
+    {
+      "company": "We",
+      "mention_count": 1,
+      "positive_ratio": 0.0266,
+      "negative_ratio": 0.8009,
+      "neutral_ratio": 0.1725,
+      "weighted_score": -0.7743,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Microsoft",
+      "mention_count": 1,
+      "positive_ratio": 0.0266,
+      "negative_ratio": 0.8009,
+      "neutral_ratio": 0.1725,
+      "weighted_score": -0.7743,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Alphabet",
+      "mention_count": 1,
+      "positive_ratio": 0.0266,
+      "negative_ratio": 0.8009,
+      "neutral_ratio": 0.1725,
+      "weighted_score": -0.7743,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "Big Tech",
+      "mention_count": 1,
+      "positive_ratio": 0.0266,
+      "negative_ratio": 0.8009,
+      "neutral_ratio": 0.1725,
+      "weighted_score": -0.7743,
+      "dominant_label": "negative"
+    },
+    {
+      "company": "##Bet",
+      "mention_count": 1,
+      "positive_ratio": 0.0563,
+      "negative_ratio": 0.1052,
+      "neutral_ratio": 0.8384,
+      "weighted_score": -0.0489,
+      "dominant_label": "neutral"
+    }
+  ],
+  "top_companies": [
+    "Berkshire Hathaway",
+    "Alphabet Stock Alphabet",
+    "Google",
+    "Berkshire",
+    "We"
+  ]
+}

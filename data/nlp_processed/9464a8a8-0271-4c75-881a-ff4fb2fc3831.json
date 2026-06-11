@@ -1,0 +1,63 @@
+{
+  "article_id": "9464a8a8-0271-4c75-881a-ff4fb2fc3831",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "AI must 'accelerate the core' of your business: Snowflake CEO",
+  "url": "https://finance.yahoo.com/video/ai-must-accelerate-core-business-140722316.html",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:50.148714",
+  "sentences": [
+    "AI must 'accelerate the core' of your business: Snowflake CEO Snowflake (SNOW) CEO Sridhar Ramaswamy sits down with Yahoo Finance Executive Editor Brian Sozzi to explain how the software company has leveraged artificial intelligence (AI) to avoid the SaaSpocalypse and come out ahead amid the AI boom."
+  ],
+  "entities": [
+    {
+      "entity": "##Flake",
+      "raw_text": "##flake",
+      "label": "ORG",
+      "start_char": 52,
+      "end_char": 57,
+      "sentence_idx": 0,
+      "context_window": "AI must 'accelerate the core' of your business: Snowflake CEO Snowflake (SNOW) CEO Sridhar Ramaswamy sits down with Yahoo Finance Executive Editor Brian Sozzi to explain how the software company has leveraged artificial intelligence (AI) to avoid the SaaSpocalypse and come out ahead amid the AI boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.89128577709198,
+      "positive_score": 0.0715034157037735,
+      "negative_score": 0.03721076250076294,
+      "neutral_score": 0.89128577709198
+    },
+    {
+      "entity": "Yahoo Finance",
+      "raw_text": "Yahoo Finance",
+      "label": "ORG",
+      "start_char": 116,
+      "end_char": 129,
+      "sentence_idx": 0,
+      "context_window": "AI must 'accelerate the core' of your business: Snowflake CEO Snowflake (SNOW) CEO Sridhar Ramaswamy sits down with Yahoo Finance Executive Editor Brian Sozzi to explain how the software company has leveraged artificial intelligence (AI) to avoid the SaaSpocalypse and come out ahead amid the AI boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.89128577709198,
+      "positive_score": 0.0715034157037735,
+      "negative_score": 0.03721076250076294,
+      "neutral_score": 0.89128577709198
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.8913,
+  "company_sentiments": {
+    "##Flake": {
+      "label": "neutral",
+      "score": 0.89128577709198,
+      "positive_score": 0.0715,
+      "negative_score": 0.0372,
+      "neutral_score": 0.8913,
+      "mentions": 1
+    },
+    "Yahoo Finance": {
+      "label": "neutral",
+      "score": 0.89128577709198,
+      "positive_score": 0.0715,
+      "negative_score": 0.0372,
+      "neutral_score": 0.8913,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "dcc2fa61-2fe2-4d7c-9524-e6c9b0e39b88"
+}

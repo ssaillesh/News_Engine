@@ -1,0 +1,226 @@
+{
+  "article_id": "6d947b77-f7af-4fe4-95bb-e0c796d2f7e9",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting",
+  "url": "https://finance.yahoo.com/sectors/technology/live/tech-stocks-today-chipmaker-cerebras-to-stage-blockbuster-ipo-ai-in-focus-for-trump-xi-meeting-100000457.html",
+  "published_at": "2026-05-11T20:58:00Z",
+  "processed_at": "2026-06-03T04:58:21.763590",
+  "sentences": [
+    "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers.",
+    "Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points.",
+    "Meanwhile, the Elon Musk v.",
+    "OpenAI trial continues, revealing details about OpenAI's internal dealings and CEO Sam Altman's November 2023 ouster."
+  ],
+  "entities": [
+    {
+      "entity": "Cerebras",
+      "raw_text": "Cerebras",
+      "label": "ORG",
+      "start_char": 29,
+      "end_char": 37,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.49630773067474365,
+      "positive_score": 0.49630773067474365,
+      "negative_score": 0.08504954725503922,
+      "neutral_score": 0.41864269971847534
+    },
+    {
+      "entity": "Ai",
+      "raw_text": "AI",
+      "label": "ORG",
+      "start_char": 64,
+      "end_char": 66,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.49630773067474365,
+      "positive_score": 0.49630773067474365,
+      "negative_score": 0.08504954725503922,
+      "neutral_score": 0.41864269971847534
+    },
+    {
+      "entity": "Trump",
+      "raw_text": "Trump",
+      "label": "ORG",
+      "start_char": 80,
+      "end_char": 85,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.49630773067474365,
+      "positive_score": 0.49630773067474365,
+      "negative_score": 0.08504954725503922,
+      "neutral_score": 0.41864269971847534
+    },
+    {
+      "entity": "Xi",
+      "raw_text": "Xi",
+      "label": "ORG",
+      "start_char": 86,
+      "end_char": 88,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.49630773067474365,
+      "positive_score": 0.49630773067474365,
+      "negative_score": 0.08504954725503922,
+      "neutral_score": 0.41864269971847534
+    },
+    {
+      "entity": "Tech",
+      "raw_text": "Tech",
+      "label": "ORG",
+      "start_char": 97,
+      "end_char": 101,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.49630773067474365,
+      "positive_score": 0.49630773067474365,
+      "negative_score": 0.08504954725503922,
+      "neutral_score": 0.41864269971847534
+    },
+    {
+      "entity": "Amazon",
+      "raw_text": "Amazon",
+      "label": "ORG",
+      "start_char": 238,
+      "end_char": 244,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.49630773067474365,
+      "positive_score": 0.49630773067474365,
+      "negative_score": 0.08504954725503922,
+      "neutral_score": 0.41864269971847534
+    },
+    {
+      "entity": "Openai",
+      "raw_text": "OpenAI",
+      "label": "ORG",
+      "start_char": 249,
+      "end_char": 255,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.49630773067474365,
+      "positive_score": 0.49630773067474365,
+      "negative_score": 0.08504954725503922,
+      "neutral_score": 0.41864269971847534
+    },
+    {
+      "entity": "Ai",
+      "raw_text": "AI",
+      "label": "ORG",
+      "start_char": 380,
+      "end_char": 382,
+      "sentence_idx": 1,
+      "context_window": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v. OpenAI trial continues, revealing details about OpenAI's internal dealings and CEO Sam Altman's November 2023 ouster.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.6777980923652649,
+      "positive_score": 0.13158157467842102,
+      "negative_score": 0.1906203031539917,
+      "neutral_score": 0.6777980923652649
+    },
+    {
+      "entity": "Elon Musk",
+      "raw_text": "Elon Musk",
+      "label": "ORG",
+      "start_char": 446,
+      "end_char": 455,
+      "sentence_idx": 2,
+      "context_window": "Tech stocks today: Chipmaker Cerebras to stage blockbuster IPO, AI in focus for Trump-Xi meeting Tech stocks saw a mixed trading day, highlighted by chipmaker Cerebras planning a significant IPO expected to raise up to $4.8 billion, with Amazon and OpenAI among its customers. Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v. OpenAI trial continues, revealing details about OpenAI's internal dealings and CEO Sam Altman's November 2023 ouster.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.6777980923652649,
+      "positive_score": 0.13158157467842102,
+      "negative_score": 0.1906203031539917,
+      "neutral_score": 0.6777980923652649
+    },
+    {
+      "entity": "Openai",
+      "raw_text": "OpenAI",
+      "label": "ORG",
+      "start_char": 459,
+      "end_char": 465,
+      "sentence_idx": 3,
+      "context_window": "Attention is also on a looming meeting between President Trump and Chinese President Xi Jinping, where AI models and trade will be key discussion points. Meanwhile, the Elon Musk v. OpenAI trial continues, revealing details about OpenAI's internal dealings and CEO Sam Altman's November 2023 ouster.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.8555328845977783,
+      "positive_score": 0.03671097755432129,
+      "negative_score": 0.10775613784790039,
+      "neutral_score": 0.8555328845977783
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.5141,
+  "company_sentiments": {
+    "Cerebras": {
+      "label": "positive",
+      "score": 0.49630773067474365,
+      "positive_score": 0.4963,
+      "negative_score": 0.085,
+      "neutral_score": 0.4186,
+      "mentions": 1
+    },
+    "Ai": {
+      "label": "neutral",
+      "score": 0.5482203960418701,
+      "positive_score": 0.3139,
+      "negative_score": 0.1378,
+      "neutral_score": 0.5482,
+      "mentions": 2
+    },
+    "Trump": {
+      "label": "positive",
+      "score": 0.49630773067474365,
+      "positive_score": 0.4963,
+      "negative_score": 0.085,
+      "neutral_score": 0.4186,
+      "mentions": 1
+    },
+    "Xi": {
+      "label": "positive",
+      "score": 0.49630773067474365,
+      "positive_score": 0.4963,
+      "negative_score": 0.085,
+      "neutral_score": 0.4186,
+      "mentions": 1
+    },
+    "Tech": {
+      "label": "positive",
+      "score": 0.49630773067474365,
+      "positive_score": 0.4963,
+      "negative_score": 0.085,
+      "neutral_score": 0.4186,
+      "mentions": 1
+    },
+    "Amazon": {
+      "label": "positive",
+      "score": 0.49630773067474365,
+      "positive_score": 0.4963,
+      "negative_score": 0.085,
+      "neutral_score": 0.4186,
+      "mentions": 1
+    },
+    "Openai": {
+      "label": "neutral",
+      "score": 0.6370877921581268,
+      "positive_score": 0.2665,
+      "negative_score": 0.0964,
+      "neutral_score": 0.6371,
+      "mentions": 2
+    },
+    "Elon Musk": {
+      "label": "neutral",
+      "score": 0.6777980923652649,
+      "positive_score": 0.1316,
+      "negative_score": 0.1906,
+      "neutral_score": 0.6778,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "2ac3f176-3300-4072-a5dc-92b52ab54db9"
+}

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NLP News Intelligence</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #060d1a;
+      color: #e2e8f0;
+      overflow: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #1e3a5f; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2d5a8c; }
+
+    .spinner {
+      border: 2px solid #1a2d4a;
+      border-top-color: #06b6d4;
+      border-radius: 50%;
+      width: 15px; height: 15px;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .live-dot {
+      width: 8px; height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #10b981;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity:1; transform:scale(1); box-shadow:0 0 6px #10b981; }
+      50%      { opacity:.7; transform:scale(1.3); box-shadow:0 0 14px #10b981; }
+    }
+
+    /* ── Ticker ─────────────────────────────────────────── */
+    .ticker-wrap { overflow: hidden; background: rgba(6,182,212,0.04); border-top: 1px solid rgba(6,182,212,0.08); }
+    .ticker-tape { display: flex; white-space: nowrap; animation: ticker 80s linear infinite; }
+    .ticker-tape:hover { animation-play-state: paused; }
+    @keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+    /* ── Headline ───────────────────────────────────────── */
+    .headline-card {
+      background: #0d1526;
+      border: 1px solid #1a2d4a;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .headline-card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, #06b6d4, #a855f7, #f43f5e);
+    }
+
+    /* ── News cards ─────────────────────────────────────── */
+    .news-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #0d1526;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, transform 0.1s;
+    }
+    .news-card:hover {
+      border-color: #1a2d4a;
+      transform: translateX(2px);
+    }
+    .conf-bar-wrap { width: 36px; height: 3px; background: #1e2d3d; border-radius: 2px; overflow: hidden; }
+    .conf-bar { height: 100%; border-radius: 2px; }
+
+    /* ── Filter tabs ────────────────────────────────────── */
+    .ftab {
+      padding: 3px 10px; border-radius: 5px;
+      font-size: 10px; font-weight: 700;
+      cursor: pointer; transition: all 0.15s;
+      color: #475569; border: 1px solid transparent;
+      letter-spacing: .05em; background: none;
+    }
+    .ftab:hover { color: #94a3b8; }
+    .ftab-active-all { background:rgba(6,182,212,.1); border-color:rgba(6,182,212,.3); color:#06b6d4; }
+    .ftab-active-pos { background:rgba(16,185,129,.1); border-color:rgba(16,185,129,.3); color:#10b981; }
+    .ftab-active-neg { background:rgba(244,63,94,.1); border-color:rgba(244,63,94,.3); color:#f43f5e; }
+    .ftab-active-neu { background:rgba(100,116,139,.1); border-color:rgba(100,116,139,.3); color:#94a3b8; }
+
+    /* ── Company rows ───────────────────────────────────── */
+    .co-row {
+      padding: 10px 14px;
+      border-bottom: 1px solid #0d1a2a;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .co-row:hover, .co-row.expanded { background: #0d1a2d; }
+    .co-top-1 { border-left: 2px solid #ffd700; background: linear-gradient(90deg, rgba(255,215,0,.04) 0%, transparent 50%); }
+    .co-top-2 { border-left: 2px solid #c0c0c0; background: linear-gradient(90deg, rgba(192,192,192,.04) 0%, transparent 50%); }
+    .co-top-3 { border-left: 2px solid #cd7f32; background: linear-gradient(90deg, rgba(205,127,50,.04) 0%, transparent 50%); }
+
+    .co-detail { display: none; overflow: hidden; }
+    .co-detail.open {
+      display: block;
+      animation: slide-in .18s ease-out both;
+    }
+    @keyframes slide-in {
+      from { opacity:0; transform:translateY(-4px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── Velocity badge ─────────────────────────────────── */
+    .vel-badge {
+      background: rgba(168,85,247,.12);
+      border: 1px solid rgba(168,85,247,.25);
+      color: #c084fc;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-family: monospace;
+      font-weight: 700;
+    }
+
+    /* ── Sentiment bar pieces ───────────────────────────── */
+    .sb-pos { background: #10b981; }
+    .sb-neg { background: #f43f5e; }
+    .sb-neu { background: #334155; flex: 1; }
+  </style>
+</head>
+<body style="display:flex; flex-direction:column; height:100vh; overflow:hidden;">
+
+<!-- ══════════════════════════ HEADER ══════════════════════════ -->
+<header style="background:#0a1628; border-bottom:1px solid #1a2d4a; flex-shrink:0;">
+  <div style="padding:10px 20px; display:flex; align-items:center; justify-content:space-between;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div style="background:linear-gradient(135deg,#0284c7,#7c3aed); padding:7px; border-radius:8px; display:flex;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2">
+          <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+        </svg>
+      </div>
+      <div>
+        <div style="font-size:13px; font-weight:700; color:#fff; letter-spacing:-.01em;">NLP News Intelligence</div>
+        <div style="font-size:10px; color:#3d5a80; letter-spacing:.03em;">BERT-NER · ProsusAI/FinBERT · HDBSCAN</div>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <span id="last-refresh" style="font-size:10px; color:#3d5a80;"></span>
+      <div style="display:flex; align-items:center; gap:7px; background:#0d1526; border:1px solid #1a2d4a; padding:5px 10px; border-radius:20px;">
+        <div class="live-dot" id="status-dot"></div>
+        <span style="font-size:11px; font-weight:600; color:#94a3b8;" id="status-text">Connecting…</span>
+      </div>
+      <button onclick="loadAll()"
+        style="background:linear-gradient(135deg,#0284c7,#6d28d9); color:#fff; border:none; font-size:11px; font-weight:700; padding:6px 14px; border-radius:7px; cursor:pointer;"
+        onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+        ↻ Refresh
+      </button>
+    </div>
+  </div>
+  <div class="ticker-wrap" id="ticker-wrap" style="display:none; padding:4px 0;">
+    <div class="ticker-tape" id="ticker-tape" style="font-size:10px; color:#3d5a80;"></div>
+  </div>
+</header>
+
+<!-- ══════════════════════════ HEADLINE ══════════════════════════ -->
+<div id="headline-banner" style="flex-shrink:0; padding:10px 20px; background:#0a1628; border-bottom:1px solid #1a2d4a;">
+  <div style="display:flex; align-items:center; gap:8px; color:#3d5a80; font-size:13px;">
+    <div class="spinner"></div> Loading headline…
+  </div>
+</div>
+
+<!-- ══════════════════════════ STATS ROW ══════════════════════════ -->
+<div style="flex-shrink:0; display:grid; grid-template-columns:repeat(4,1fr); background:#0a1628; border-bottom:1px solid #1a2d4a;">
+  <div style="padding:10px 18px; display:flex; align-items:center; gap:12px; border-right:1px solid #0d1a2a;">
+    <div style="width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(16,185,129,.1); border:1px solid rgba(16,185,129,.2); flex-shrink:0;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+    </div>
+    <div style="flex:1; min-width:0;">
+      <div style="font-size:9px; color:#3d5a80; letter-spacing:.1em; text-transform:uppercase; margin-bottom:2px;">Positive</div>
+      <div style="font-size:22px; font-weight:800; color:#10b981; line-height:1;" id="stat-pos">—</div>
+      <div style="margin-top:4px; height:2px; background:#0d2d1f; border-radius:2px; overflow:hidden;">
+        <div id="bar-pos" class="sb-pos" style="height:100%; width:0%; border-radius:2px; transition:width .7s;"></div>
+      </div>
+      <div style="font-size:9px; color:#3d5a80; margin-top:2px;" id="stat-pos-count"></div>
+    </div>
+  </div>
+  <div style="padding:10px 18px; display:flex; align-items:center; gap:12px; border-right:1px solid #0d1a2a;">
+    <div style="width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(244,63,94,.1); border:1px solid rgba(244,63,94,.2); flex-shrink:0;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+    </div>
+    <div style="flex:1; min-width:0;">
+      <div style="font-size:9px; color:#3d5a80; letter-spacing:.1em; text-transform:uppercase; margin-bottom:2px;">Negative</div>
+      <div style="font-size:22px; font-weight:800; color:#f43f5e; line-height:1;" id="stat-neg">—</div>
+      <div style="margin-top:4px; height:2px; background:#2d0f1a; border-radius:2px; overflow:hidden;">
+        <div id="bar-neg" class="sb-neg" style="height:100%; width:0%; border-radius:2px; transition:width .7s;"></div>
+      </div>
+      <div style="font-size:9px; color:#3d5a80; margin-top:2px;" id="stat-neg-count"></div>
+    </div>
+  </div>
+  <div style="padding:10px 18px; display:flex; align-items:center; gap:12px; border-right:1px solid #0d1a2a;">
+    <div style="width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(100,116,139,.1); border:1px solid rgba(100,116,139,.2); flex-shrink:0;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    </div>
+    <div style="flex:1; min-width:0;">
+      <div style="font-size:9px; color:#3d5a80; letter-spacing:.1em; text-transform:uppercase; margin-bottom:2px;">Neutral</div>
+      <div style="font-size:22px; font-weight:800; color:#94a3b8; line-height:1;" id="stat-neu">—</div>
+      <div style="margin-top:4px; height:2px; background:#1a2332; border-radius:2px; overflow:hidden;">
+        <div id="bar-neu" style="height:100%; width:0%; border-radius:2px; transition:width .7s; background:#475569;"></div>
+      </div>
+      <div style="font-size:9px; color:#3d5a80; margin-top:2px;" id="stat-neu-count"></div>
+    </div>
+  </div>
+  <div style="padding:10px 18px; display:flex; align-items:center; gap:12px;">
+    <div style="width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:rgba(6,182,212,.1); border:1px solid rgba(6,182,212,.2); flex-shrink:0;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+    </div>
+    <div style="flex:1; min-width:0;">
+      <div style="font-size:9px; color:#3d5a80; letter-spacing:.1em; text-transform:uppercase; margin-bottom:2px;">Total Indexed</div>
+      <div style="font-size:22px; font-weight:800; color:#06b6d4; line-height:1;" id="stat-total">—</div>
+      <div style="font-size:9px; color:#3d5a80; margin-top:6px;">articles in pipeline</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ MAIN GRID ══════════════════════════ -->
+<div style="display:flex; flex:1; min-height:0;">
+
+  <!-- ── LEFT: News Feed ────────────────────────────────── -->
+  <main style="flex:1; display:flex; flex-direction:column; min-height:0; border-right:1px solid #1a2d4a;">
+    <div style="flex-shrink:0; padding:8px 14px; background:#0a1628; border-bottom:1px solid #1a2d4a; display:flex; align-items:center; gap:8px;">
+      <div style="display:flex; gap:4px;">
+        <button class="ftab ftab-active-all" id="tab-all" onclick="setTab('all')">ALL</button>
+        <button class="ftab" id="tab-pos" onclick="setTab('positive')">POSITIVE</button>
+        <button class="ftab" id="tab-neg" onclick="setTab('negative')">NEGATIVE</button>
+        <button class="ftab" id="tab-neu" onclick="setTab('neutral')">NEUTRAL</button>
+      </div>
+      <div style="position:relative; flex:1;">
+        <svg style="position:absolute; left:9px; top:50%; transform:translateY(-50%); pointer-events:none;" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3d5a80" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="news-search" type="text"
+          placeholder="Search ticker, company, keyword…"
+          style="width:100%; background:#0d1526; border:1px solid #1a2d4a; border-radius:7px; padding:5px 28px 5px 28px; font-size:12px; color:#e2e8f0; outline:none; transition:border-color .15s;"
+          oninput="filterNews(this.value)"
+          onfocus="this.style.borderColor='rgba(6,182,212,.4)'"
+          onblur="this.style.borderColor='#1a2d4a'">
+        <button id="news-search-clear" onclick="clearSearch()"
+          style="position:absolute; right:9px; top:50%; transform:translateY(-50%); background:none; border:none; color:#3d5a80; cursor:pointer; font-size:12px; display:none; line-height:1;">✕</button>
+      </div>
+      <span id="news-count" style="font-size:10px; color:#3d5a80; flex-shrink:0; white-space:nowrap;"></span>
+    </div>
+    <div id="news-feed" style="flex:1; overflow-y:auto; padding:10px; display:flex; flex-direction:column; gap:4px;">
+      <div style="display:flex; align-items:center; gap:8px; color:#3d5a80; font-size:13px; padding:16px;">
+        <div class="spinner"></div> Loading news…
+      </div>
+    </div>
+  </main>
+
+  <!-- ── RIGHT: Leaderboard ─────────────────────────────── -->
+  <aside style="width:380px; flex-shrink:0; display:flex; flex-direction:column; min-height:0; background:#0a1628;">
+    <div style="flex-shrink:0; padding:10px 14px; border-bottom:1px solid #1a2d4a; background:#0a1628;">
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        <div>
+          <div style="font-size:11px; font-weight:800; color:#fff; letter-spacing:.08em; text-transform:uppercase;">Company Rankings</div>
+          <div style="font-size:10px; color:#3d5a80; margin-top:1px;">NER mentions · FinBERT · click row to expand</div>
+        </div>
+        <div class="vel-badge">⚡ Velocity</div>
+      </div>
+    </div>
+    <div id="company-table" style="flex:1; overflow-y:auto;">
+      <div style="display:flex; align-items:center; gap:8px; padding:16px; color:#3d5a80; font-size:13px;">
+        <div class="spinner"></div> Loading…
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- ══════════════════════════ SCRIPT ══════════════════════════ -->
+<script>
+const API = '';
+let _allArticles = [];
+let _activeTab   = 'all';
+
+function pct(n, total) { return total ? Math.round(100 * n / total) : 0; }
+
+function timeAgo(iso) {
+  if (!iso) return '';
+  const s = (Date.now() - new Date(iso)) / 1000;
+  if (s < 60)    return 'just now';
+  if (s < 3600)  return `${Math.round(s/60)}m ago`;
+  if (s < 86400) return `${Math.round(s/3600)}h ago`;
+  return `${Math.round(s/86400)}d ago`;
+}
+
+function sentColor(label) {
+  const l = (label || '').toLowerCase();
+  return l === 'positive' ? '#10b981' : l === 'negative' ? '#f43f5e' : '#475569';
+}
+
+function sentStyle(label) {
+  const l = (label || '').toLowerCase();
+  if (l === 'positive') return 'background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#10b981;';
+  if (l === 'negative') return 'background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.25);color:#f43f5e;';
+  return 'background:rgba(71,85,105,.25);border:1px solid #334155;color:#94a3b8;';
+}
+
+function trunc(s, n) { return s && s.length > n ? s.slice(0, n) + '…' : (s || ''); }
+function srcName(s) {
+  return ({alphavantage:'AlphaVantage', finnhub:'FinnHub', yfinance:'yFinance'}[(s||'').toLowerCase()] || s || '');
+}
+
+async function checkHealth() {
+  try {
+    const ok = (await fetch(`${API}/health`)).ok;
+    document.getElementById('status-dot').style.background = ok ? '#10b981' : '#ef4444';
+    document.getElementById('status-dot').style.boxShadow  = ok ? '0 0 6px #10b981' : '0 0 6px #ef4444';
+    document.getElementById('status-text').textContent      = ok ? 'Live' : 'Down';
+  } catch {
+    document.getElementById('status-dot').style.background = '#ef4444';
+    document.getElementById('status-text').textContent = 'Offline';
+  }
+}
+
+async function loadHeadline() {
+  const el = document.getElementById('headline-banner');
+  try {
+    let evts = await fetch(`${API}/events?limit=3&since_days=7`).then(r => r.json());
+    if (!evts.length) evts = await fetch(`${API}/events?limit=3`).then(r => r.json());
+    if (!evts.length) {
+      el.innerHTML = `<p style="font-size:12px;color:#3d5a80;">No headline yet — run the pipeline first.</p>`;
+      return;
+    }
+
+    const e = evts[0];
+    let netLabel = 'neutral';
+    try {
+      const d = await fetch(`${API}/events/${e.event_id}`).then(r => r.json());
+      const cs = d.company_sentiments || [];
+      if (cs.length) {
+        const ap = cs.reduce((s, c) => s + c.positive_ratio, 0) / cs.length;
+        const an = cs.reduce((s, c) => s + c.negative_ratio, 0) / cs.length;
+        netLabel = ap > an ? 'positive' : an > ap ? 'negative' : 'neutral';
+      }
+    } catch {}
+
+    const cos     = (() => { try { return JSON.parse(e.top_companies || '[]'); } catch { return []; } })();
+    const hotPct  = Math.round(e.hot_score * 100);
+    const strPct  = Math.round((e.sentiment_strength || 0) * 100);
+    const bColor  = sentColor(netLabel);
+
+    const relHtml = evts.slice(1).map(r => `
+      <a href="${r.representative_url || '#'}" target="_blank"
+         style="display:block;padding:6px 8px 6px 10px;border-radius:6px;text-decoration:none;border-left:2px solid #1e3a5f;transition:background .15s;"
+         onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background='transparent'">
+        <div style="font-size:11px;font-weight:600;color:#e2e8f0;line-height:1.35;">${trunc(r.representative_title, 85)}</div>
+        <div style="font-size:10px;color:#3d5a80;margin-top:2px;">📰 ${r.article_count} · ⚡ ${r.velocity.toFixed(2)}/hr</div>
+      </a>`).join('');
+
+    el.innerHTML = `
+      <div style="display:flex;gap:14px;align-items:flex-start;">
+        <div class="headline-card" style="flex:1;padding:12px 14px;">
+          <div style="display:flex;align-items:flex-start;gap:10px;">
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;">
+                <span style="font-size:9px;font-weight:800;color:#f59e0b;letter-spacing:.1em;">⚡ TOP STORY</span>
+                <span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;${sentStyle(netLabel)}">${netLabel}</span>
+                <span style="font-size:9px;font-family:monospace;padding:2px 7px;border-radius:4px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);color:#06b6d4;">hot ${e.hot_score.toFixed(3)}</span>
+              </div>
+              <div style="font-size:14px;font-weight:700;color:#fff;line-height:1.4;margin-bottom:6px;">${e.representative_title || 'Untitled'}</div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:10px;color:#4a6a8a;">
+                <span>📰 ${e.article_count} articles</span>
+                <span style="color:#c084fc;">⚡ ${e.velocity.toFixed(2)}/hr</span>
+                <span>💡 strength ${strPct}%</span>
+                ${cos.slice(0,4).map(c => `<span style="background:#0d1526;border:1px solid #1a2d4a;color:#94a3b8;padding:1px 6px;border-radius:4px;font-size:9px;">${c}</span>`).join('')}
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:8px;">
+                <span style="font-size:9px;color:#3d5a80;">HOT SCORE</span>
+                <div style="flex:1;height:3px;background:#0d1526;border-radius:2px;overflow:hidden;">
+                  <div style="height:100%;width:${hotPct}%;background:linear-gradient(90deg,#06b6d4,#a855f7);border-radius:2px;"></div>
+                </div>
+                <span style="font-size:9px;font-family:monospace;color:#94a3b8;">${hotPct}%</span>
+              </div>
+            </div>
+            ${e.representative_url ? `
+              <a href="${e.representative_url}" target="_blank"
+                 style="flex-shrink:0;font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);color:#06b6d4;text-decoration:none;white-space:nowrap;transition:background .15s;"
+                 onmouseover="this.style.background='rgba(6,182,212,.2)'" onmouseout="this.style.background='rgba(6,182,212,.1)'">
+                Read ↗
+              </a>` : ''}
+          </div>
+        </div>
+        ${relHtml ? `
+          <div style="width:210px;flex-shrink:0;">
+            <div style="font-size:9px;color:#3d5a80;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;font-weight:700;">Also Trending</div>
+            <div style="display:flex;flex-direction:column;gap:4px;">${relHtml}</div>
+          </div>` : ''}
+      </div>`;
+  } catch (err) {
+    el.innerHTML = `<p style="font-size:12px;color:#f43f5e;">Failed: ${err.message}</p>`;
+  }
+}
+
+async function loadStats() {
+  try {
+    const s = await fetch(`${API}/stats/sentiment`).then(r => r.json());
+    const total = Number(s.total) || 0, pos = Number(s.positive) || 0;
+    const neg = Number(s.negative) || 0, neu = Number(s.neutral) || 0;
+    document.getElementById('stat-pos').textContent = `${pct(pos,total)}%`;
+    document.getElementById('stat-neg').textContent = `${pct(neg,total)}%`;
+    document.getElementById('stat-neu').textContent = `${pct(neu,total)}%`;
+    document.getElementById('stat-total').textContent = total.toLocaleString();
+    document.getElementById('stat-pos-count').textContent = `${pos} articles`;
+    document.getElementById('stat-neg-count').textContent = `${neg} articles`;
+    document.getElementById('stat-neu-count').textContent = `${neu} articles`;
+    document.getElementById('bar-pos').style.width = `${pct(pos,total)}%`;
+    document.getElementById('bar-neg').style.width = `${pct(neg,total)}%`;
+    document.getElementById('bar-neu').style.width = `${pct(neu,total)}%`;
+  } catch {}
+}
+
+function setTab(tab) {
+  _activeTab = tab;
+  const map = { all:['tab-all','ftab-active-all'], positive:['tab-pos','ftab-active-pos'], negative:['tab-neg','ftab-active-neg'], neutral:['tab-neu','ftab-active-neu'] };
+  Object.entries(map).forEach(([t, [id, cls]]) => {
+    document.getElementById(id).className = 'ftab' + (t === tab ? ' ' + cls : '');
+  });
+  filterNews(document.getElementById('news-search').value);
+}
+
+function filterNews(val) {
+  document.getElementById('news-search-clear').style.display = val ? 'block' : 'none';
+  const q = val.trim().toLowerCase();
+  let arts = _allArticles;
+  if (_activeTab !== 'all') arts = arts.filter(a => (a.article_sentiment_label||'').toLowerCase() === _activeTab);
+  if (q) arts = arts.filter(a =>
+    (a.title||'').toLowerCase().includes(q) ||
+    (a.ticker||'').toLowerCase().includes(q) ||
+    (a.source||'').toLowerCase().includes(q)
+  );
+  renderFeed(arts, q || (_activeTab !== 'all' ? _activeTab : null));
+}
+
+function clearSearch() {
+  document.getElementById('news-search').value = '';
+  filterNews('');
+}
+
+function renderFeed(arts, query) {
+  const feed = document.getElementById('news-feed');
+  const cnt  = document.getElementById('news-count');
+  if (!arts.length) {
+    feed.innerHTML = `<div style="text-align:center;padding:32px;font-size:12px;color:#3d5a80;">${
+      query ? `No results for <strong style="color:#64748b;">"${query}"</strong>` : 'No articles yet.'}</div>`;
+    cnt.textContent = '0';
+    return;
+  }
+  cnt.textContent = query ? `${arts.length} / ${_allArticles.length}` : `${arts.length} articles`;
+  feed.innerHTML = arts.map(renderCard).join('');
+}
+
+function renderCard(a) {
+  const score = a.article_sentiment_score != null ? a.article_sentiment_score : 0;
+  const p0    = Math.round(score * 100);
+  const col   = sentColor(a.article_sentiment_label);
+  const lbl   = (a.article_sentiment_label || 'unknown').toUpperCase();
+  return `
+  <a href="${a.url || '#'}" target="_blank" class="news-card">
+    <div style="width:3px;flex-shrink:0;align-self:stretch;border-radius:2px;background:${col};min-height:40px;"></div>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:12px;font-weight:600;color:#e2e8f0;line-height:1.45;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${a.title || 'Untitled'}</div>
+      <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:10px;">
+        <span style="padding:1px 6px;border-radius:10px;font-weight:800;font-size:9px;letter-spacing:.04em;${sentStyle(a.article_sentiment_label)}">${lbl}</span>
+        ${a.ticker ? `<span style="font-family:monospace;padding:1px 5px;border-radius:4px;background:#0a1628;border:1px solid #1a2d4a;color:#06b6d4;font-size:9px;">${a.ticker}</span>` : ''}
+        <span style="color:#3d5a80;">${srcName(a.source)}</span>
+        <span style="color:#1e2d3d;">·</span>
+        <span style="color:#3d5a80;">${timeAgo(a.published_at || a.processed_at)}</span>
+      </div>
+    </div>
+    <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+      <span style="font-size:11px;font-family:monospace;font-weight:700;color:${col};">${p0}%</span>
+      <div class="conf-bar-wrap"><div class="conf-bar" style="width:${p0}%;background:${col};"></div></div>
+    </div>
+  </a>`;
+}
+
+async function loadNews() {
+  try {
+    const arts = await fetch(`${API}/news?limit=200`).then(r => r.json());
+    _allArticles = arts;
+    if (arts.length) {
+      const items = arts.slice(0, 20).map(a =>
+        `<span style="color:${sentColor(a.article_sentiment_label)};padding:0 6px;">●</span><span style="padding:0 20px 0 0;">${trunc(a.title, 80)}</span>`
+      ).join('');
+      document.getElementById('ticker-tape').innerHTML = items + items;
+      document.getElementById('ticker-wrap').style.display = 'block';
+    }
+    filterNews(document.getElementById('news-search').value);
+  } catch (err) {
+    document.getElementById('news-feed').innerHTML =
+      `<div style="padding:16px;font-size:12px;color:#f43f5e;">Failed to load news: ${err.message}</div>`;
+  }
+}
+
+function toggleDetail(idx) {
+  const det = document.getElementById(`codet-${idx}`);
+  const row = document.getElementById(`corow-${idx}`);
+  if (!det) return;
+  const open = det.classList.toggle('open');
+  if (row) row.classList.toggle('expanded', open);
+}
+
+function renderCompanyRow(co, rank) {
+  const pos = Math.round((co.avg_positive || 0) * 100);
+  const neg = Math.round((co.avg_negative || 0) * 100);
+  const neu = Math.round((co.avg_neutral  || 0) * 100);
+  const vel = co.velocity_24h || 0;
+
+  const rankHtml =
+    rank === 1 ? `<span style="font-size:16px;line-height:1;filter:drop-shadow(0 0 5px gold);">🥇</span>` :
+    rank === 2 ? `<span style="font-size:16px;line-height:1;filter:drop-shadow(0 0 5px silver);">🥈</span>` :
+    rank === 3 ? `<span style="font-size:16px;line-height:1;filter:drop-shadow(0 0 4px #cd7f32);">🥉</span>` :
+    `<span style="font-size:10px;font-family:monospace;color:#253545;min-width:18px;text-align:right;display:inline-block;">${rank}</span>`;
+
+  const topCls = rank <= 3 ? `co-top-${rank}` : '';
+  const domPct = co.dominant_label === 'positive' ? pos : co.dominant_label === 'negative' ? neg : neu;
+  const topPos = co.top_positive;
+  const topNeg = co.top_negative;
+
+  const posArt = topPos
+    ? `<a href="${topPos.url||'#'}" target="_blank" style="display:flex;gap:6px;align-items:flex-start;text-decoration:none;padding:5px;border-radius:5px;transition:background .15s;" onmouseover="this.style.background='rgba(16,185,129,.06)'" onmouseout="this.style.background='transparent'">
+         <span style="color:#10b981;font-size:10px;flex-shrink:0;margin-top:1px;">▲</span>
+         <span style="font-size:11px;color:#c8d8e8;line-height:1.4;">${trunc(topPos.title, 80)}</span>
+       </a>`
+    : `<span style="font-size:11px;color:#253545;padding:4px 5px;display:block;">No positive articles found</span>`;
+
+  const negArt = topNeg
+    ? `<a href="${topNeg.url||'#'}" target="_blank" style="display:flex;gap:6px;align-items:flex-start;text-decoration:none;padding:5px;border-radius:5px;transition:background .15s;" onmouseover="this.style.background='rgba(244,63,94,.06)'" onmouseout="this.style.background='transparent'">
+         <span style="color:#f43f5e;font-size:10px;flex-shrink:0;margin-top:1px;">▼</span>
+         <span style="font-size:11px;color:#c8d8e8;line-height:1.4;">${trunc(topNeg.title, 80)}</span>
+       </a>`
+    : `<span style="font-size:11px;color:#253545;padding:4px 5px;display:block;">No negative articles found</span>`;
+
+  return `
+  <div class="co-row ${topCls}" id="corow-${rank}" onclick="toggleDetail(${rank})">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:22px;">${rankHtml}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;flex-wrap:wrap;">
+          <span style="font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:155px;">${co.company}</span>
+          ${vel > 0 ? `<span class="vel-badge">⚡${vel.toFixed(2)}/hr</span>` : ''}
+        </div>
+        <div style="display:flex;height:4px;border-radius:4px;overflow:hidden;margin-bottom:4px;">
+          <div class="sb-pos" style="width:${pos}%;transition:width .7s;" title="Positive ${pos}%"></div>
+          <div class="sb-neg" style="width:${neg}%;transition:width .7s;" title="Negative ${neg}%"></div>
+          <div class="sb-neu" title="Neutral ${neu}%"></div>
+        </div>
+        <div style="display:flex;gap:8px;font-size:9px;font-weight:700;">
+          <span style="color:#10b981;">+${pos}%</span>
+          <span style="color:#f43f5e;">−${neg}%</span>
+          <span style="color:#334155;">${neu}% neu</span>
+        </div>
+      </div>
+      <div style="flex-shrink:0;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
+        <div style="display:flex;align-items:center;gap:4px;">
+          <span style="font-size:12px;font-weight:800;color:#fff;">${domPct}%</span>
+          <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;${sentStyle(co.dominant_label)}">${co.dominant_label}</span>
+        </div>
+        <div style="font-size:11px;font-weight:700;color:#94a3b8;">${co.total_mentions}</div>
+        <div style="font-size:9px;color:#253545;">mentions</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="co-detail" id="codet-${rank}">
+    <div style="background:#070f1d;padding:10px 14px 12px;border-bottom:1px solid #0d1a2a;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;">
+        <div style="background:#0a1628;border:1px solid #1a2d4a;border-radius:6px;padding:6px;text-align:center;">
+          <div style="font-size:15px;font-weight:800;color:#10b981;">${pos}%</div>
+          <div style="font-size:8px;color:#3d5a80;text-transform:uppercase;letter-spacing:.08em;">Positive</div>
+        </div>
+        <div style="background:#0a1628;border:1px solid #1a2d4a;border-radius:6px;padding:6px;text-align:center;">
+          <div style="font-size:15px;font-weight:800;color:#f43f5e;">${neg}%</div>
+          <div style="font-size:8px;color:#3d5a80;text-transform:uppercase;letter-spacing:.08em;">Negative</div>
+        </div>
+        <div style="background:#0a1628;border:1px solid #1a2d4a;border-radius:6px;padding:6px;text-align:center;">
+          <div style="font-size:15px;font-weight:800;color:#fff;">${co.article_count}</div>
+          <div style="font-size:8px;color:#3d5a80;text-transform:uppercase;letter-spacing:.08em;">Articles</div>
+        </div>
+      </div>
+      <div style="margin-bottom:10px;padding:6px 8px;background:#0a1628;border:1px solid #1a2d4a;border-radius:6px;">
+        <div style="font-size:9px;color:#3d5a80;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;font-weight:700;">FinBERT Avg Scores</div>
+        <div style="display:flex;gap:12px;font-size:11px;font-family:monospace;">
+          <span style="color:#10b981;">POS ${(co.avg_positive*100).toFixed(1)}%</span>
+          <span style="color:#f43f5e;">NEG ${(co.avg_negative*100).toFixed(1)}%</span>
+          <span style="color:#475569;">NEU ${(co.avg_neutral*100).toFixed(1)}%</span>
+        </div>
+      </div>
+      <div style="margin-bottom:6px;">
+        <div style="font-size:8px;font-weight:800;color:#10b981;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Most Positive Coverage</div>
+        ${posArt}
+      </div>
+      <div>
+        <div style="font-size:8px;font-weight:800;color:#f43f5e;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Most Negative Coverage</div>
+        ${negArt}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderPersonRow(person) {
+  const pos = Math.round((person.avg_positive || 0) * 100);
+  const neg = Math.round((person.avg_negative || 0) * 100);
+  return `
+  <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #0d1a2a;background:#0a1628;transition:background .15s;cursor:default;" onmouseover="this.style.background='#0d1a2d'" onmouseout="this.style.background='#0a1628'">
+    <span style="font-size:12px;flex-shrink:0;">👤</span>
+    <div style="flex:1;min-width:0;">
+      <div style="font-size:12px;font-weight:600;color:#cbd5e1;">${person.company}</div>
+      <div style="display:flex;height:2px;border-radius:2px;overflow:hidden;margin-top:4px;">
+        <div class="sb-pos" style="width:${pos}%"></div>
+        <div class="sb-neg" style="width:${neg}%"></div>
+        <div class="sb-neu"></div>
+      </div>
+    </div>
+    <div style="flex-shrink:0;display:flex;align-items:center;gap:5px;">
+      <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:8px;${sentStyle(person.dominant_label)}">${person.dominant_label.toUpperCase()}</span>
+      <span style="font-size:11px;font-weight:700;color:#94a3b8;">${person.total_mentions}×</span>
+    </div>
+  </div>`;
+}
+
+async function loadLeaderboard() {
+  const tbl = document.getElementById('company-table');
+  try {
+    const data = await fetch(`${API}/companies/leaderboard?limit=25`).then(r => r.json());
+    const cos  = data.companies || [];
+    const ppl  = data.people    || [];
+
+    if (!cos.length && !ppl.length) {
+      tbl.innerHTML = `<div style="padding:16px;font-size:12px;color:#3d5a80;">No entity data yet.</div>`;
+      return;
+    }
+
+    let html = cos.map((c, i) => renderCompanyRow(c, i + 1)).join('');
+    if (ppl.length) {
+      html += `
+        <div style="padding:8px 14px 6px;border-top:1px solid #1a2d4a;margin-top:4px;">
+          <div style="font-size:9px;font-weight:800;color:#3d5a80;text-transform:uppercase;letter-spacing:.1em;">People in the News</div>
+        </div>
+        ${ppl.map(renderPersonRow).join('')}`;
+    }
+    tbl.innerHTML = html;
+  } catch (err) {
+    tbl.innerHTML = `<div style="padding:16px;font-size:12px;color:#f43f5e;">Failed: ${err.message}</div>`;
+  }
+}
+
+async function loadAll() {
+  await checkHealth();
+  await Promise.all([loadHeadline(), loadStats(), loadNews(), loadLeaderboard()]);
+  document.getElementById('last-refresh').textContent = 'Updated ' + new Date().toLocaleTimeString();
+}
+
+loadAll();
+setInterval(loadAll, 300_000);
+</script>
+</body>
+</html>

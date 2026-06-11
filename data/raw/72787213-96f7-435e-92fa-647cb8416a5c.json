@@ -1,0 +1,72 @@
+{
+  "article_id": "72787213-96f7-435e-92fa-647cb8416a5c",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Peter Thiel dumps entire Nvidia stake, slashes Tesla holdings amid bubble fears",
+  "url": "https://au.investing.com/news/stock-market-news/peter-thiel-dumps-entire-nvidia-stake-slashes-tesla-holdings-amid-bubble-fears-4128704",
+  "published_at": "2025-11-17T12:16:00Z",
+  "fetched_at": "2026-06-03T04:57:51.401383",
+  "full_text": "Billionaire Peter Thiel has sold his entire stake in Nvidia and significantly reduced his holdings in Tesla, citing concerns about an \"AI-fueled bubble\" in tech valuations. This move follows similar actions from SoftBank Group and investor Michael Burry, highlighting growing apprehension regarding inflated tech stock prices. Thiel, a co-founder of Paypal and Palantir, had previously voiced worries about stretched valuations in the tech sector.",
+  "summary": "Billionaire Peter Thiel has sold his entire stake in Nvidia and significantly reduced his holdings in Tesla, citing concerns about an \"AI-fueled bubble\" in tech valuations. This move follows similar actions from SoftBank Group and investor Michael Burry, highlighting growing apprehension regarding inflated tech stock prices. Thiel, a co-founder of Paypal and Palantir, had previously voiced worries about stretched valuations in the tech sector.",
+  "raw_payload": {
+    "title": "Peter Thiel dumps entire Nvidia stake, slashes Tesla holdings amid bubble fears",
+    "url": "https://au.investing.com/news/stock-market-news/peter-thiel-dumps-entire-nvidia-stake-slashes-tesla-holdings-amid-bubble-fears-4128704",
+    "time_published": "20251117T121600",
+    "authors": [
+      "Ambar Warrick"
+    ],
+    "summary": "Billionaire Peter Thiel has sold his entire stake in Nvidia and significantly reduced his holdings in Tesla, citing concerns about an \"AI-fueled bubble\" in tech valuations. This move follows similar actions from SoftBank Group and investor Michael Burry, highlighting growing apprehension regarding inflated tech stock prices. Thiel, a co-founder of Paypal and Palantir, had previously voiced worries about stretched valuations in the tech sector.",
+    "banner_image": null,
+    "source": "Investing.com Australia",
+    "category_within_source": "General",
+    "source_domain": "Investing.com Australia",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.923364"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.812351"
+      },
+      {
+        "topic": "economy_macro",
+        "relevance_score": "0.612150"
+      }
+    ],
+    "overall_sentiment_score": -0.150514,
+    "overall_sentiment_label": "Somewhat-Bearish",
+    "ticker_sentiment": [
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.954904",
+        "ticker_sentiment_score": "-0.399945",
+        "ticker_sentiment_label": "Bearish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.954711",
+        "ticker_sentiment_score": "-0.458280",
+        "ticker_sentiment_label": "Bearish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.634240",
+        "ticker_sentiment_score": "0.204691",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.617490",
+        "ticker_sentiment_score": "0.200942",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "PLTR",
+        "relevance_score": "0.625968",
+        "ticker_sentiment_score": "-0.331709",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      }
+    ]
+  }
+}

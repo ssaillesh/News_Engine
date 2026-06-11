@@ -1,0 +1,248 @@
+{
+  "article_id": "feae9515-ffdd-4988-bb8a-1c5dfca01670",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Apple Inc. $AAPL Holdings Decreased by TLW Wealth Management LLC",
+  "url": "https://www.marketbeat.com/instant-alerts/filing-apple-inc-aapl-holdings-decreased-by-tlw-wealth-management-llc-2026-02-10/",
+  "published_at": "2026-02-10T08:57:49Z",
+  "processed_at": "2026-06-03T04:58:30.387105",
+  "sentences": [
+    "Apple Inc. $AAPL Holdings Decreased by TLW Wealth Management LLC TLW Wealth Management LLC reduced its stake in Apple Inc.",
+    "($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million.",
+    "Despite this, Apple remains the firm's sixth-largest holding.",
+    "Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple."
+  ],
+  "entities": [
+    {
+      "entity": "Apple",
+      "raw_text": "Apple Inc",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 9,
+      "sentence_idx": 0,
+      "context_window": "Apple Inc. $AAPL Holdings Decreased by TLW Wealth Management LLC TLW Wealth Management LLC reduced its stake in Apple Inc. ($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9689977765083313,
+      "positive_score": 0.012112090364098549,
+      "negative_score": 0.9689977765083313,
+      "neutral_score": 0.018890198320150375
+    },
+    {
+      "entity": "Aapl",
+      "raw_text": "AAPL",
+      "label": "ORG",
+      "start_char": 12,
+      "end_char": 16,
+      "sentence_idx": 0,
+      "context_window": "Apple Inc. $AAPL Holdings Decreased by TLW Wealth Management LLC TLW Wealth Management LLC reduced its stake in Apple Inc. ($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9689977765083313,
+      "positive_score": 0.012112090364098549,
+      "negative_score": 0.9689977765083313,
+      "neutral_score": 0.018890198320150375
+    },
+    {
+      "entity": "T",
+      "raw_text": "T",
+      "label": "ORG",
+      "start_char": 39,
+      "end_char": 40,
+      "sentence_idx": 0,
+      "context_window": "Apple Inc. $AAPL Holdings Decreased by TLW Wealth Management LLC TLW Wealth Management LLC reduced its stake in Apple Inc. ($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9689977765083313,
+      "positive_score": 0.012112090364098549,
+      "negative_score": 0.9689977765083313,
+      "neutral_score": 0.018890198320150375
+    },
+    {
+      "entity": "##Lw Wealth Management",
+      "raw_text": "##LW Wealth Management LLC",
+      "label": "ORG",
+      "start_char": 40,
+      "end_char": 64,
+      "sentence_idx": 0,
+      "context_window": "Apple Inc. $AAPL Holdings Decreased by TLW Wealth Management LLC TLW Wealth Management LLC reduced its stake in Apple Inc. ($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9689977765083313,
+      "positive_score": 0.012112090364098549,
+      "negative_score": 0.9689977765083313,
+      "neutral_score": 0.018890198320150375
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 244,
+      "end_char": 249,
+      "sentence_idx": 2,
+      "context_window": "Apple Inc. $AAPL Holdings Decreased by TLW Wealth Management LLC TLW Wealth Management LLC reduced its stake in Apple Inc. ($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9609300494194031,
+      "positive_score": 0.017948614433407784,
+      "negative_score": 0.9609300494194031,
+      "neutral_score": 0.021121330559253693
+    },
+    {
+      "entity": "Vanguard",
+      "raw_text": "Vanguard Group Inc",
+      "label": "ORG",
+      "start_char": 338,
+      "end_char": 356,
+      "sentence_idx": 3,
+      "context_window": "($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.8552534580230713,
+      "positive_score": 0.11721155792474747,
+      "negative_score": 0.8552534580230713,
+      "neutral_score": 0.02753492444753647
+    },
+    {
+      "entity": "State Street",
+      "raw_text": "State Street Corp",
+      "label": "ORG",
+      "start_char": 359,
+      "end_char": 376,
+      "sentence_idx": 3,
+      "context_window": "($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.8552534580230713,
+      "positive_score": 0.11721155792474747,
+      "negative_score": 0.8552534580230713,
+      "neutral_score": 0.02753492444753647
+    },
+    {
+      "entity": "Geode Capital Management",
+      "raw_text": "Geode Capital Management LLC",
+      "label": "ORG",
+      "start_char": 378,
+      "end_char": 406,
+      "sentence_idx": 3,
+      "context_window": "($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.8552534580230713,
+      "positive_score": 0.11721155792474747,
+      "negative_score": 0.8552534580230713,
+      "neutral_score": 0.02753492444753647
+    },
+    {
+      "entity": "Norges Bank",
+      "raw_text": "Norges Bank",
+      "label": "ORG",
+      "start_char": 408,
+      "end_char": 419,
+      "sentence_idx": 3,
+      "context_window": "($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.8552534580230713,
+      "positive_score": 0.11721155792474747,
+      "negative_score": 0.8552534580230713,
+      "neutral_score": 0.02753492444753647
+    },
+    {
+      "entity": "Northern Trust",
+      "raw_text": "Northern Trust Corp",
+      "label": "ORG",
+      "start_char": 425,
+      "end_char": 444,
+      "sentence_idx": 3,
+      "context_window": "($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.8552534580230713,
+      "positive_score": 0.11721155792474747,
+      "negative_score": 0.8552534580230713,
+      "neutral_score": 0.02753492444753647
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 488,
+      "end_char": 493,
+      "sentence_idx": 3,
+      "context_window": "($AAPL) by 6.5% during the third quarter, reducing its holdings to 50,473 shares valued at $12.85 million. Despite this, Apple remains the firm's sixth-largest holding. Meanwhile, other institutional investors like Vanguard Group Inc., State Street Corp, Geode Capital Management LLC, Norges Bank, and Northern Trust Corp significantly increased their positions in Apple.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.8552534580230713,
+      "positive_score": 0.11721155792474747,
+      "negative_score": 0.8552534580230713,
+      "neutral_score": 0.02753492444753647
+    }
+  ],
+  "article_sentiment_label": "negative",
+  "article_sentiment_score": 0.9062,
+  "company_sentiments": {
+    "Apple": {
+      "label": "negative",
+      "score": 0.9283937613169352,
+      "positive_score": 0.0491,
+      "negative_score": 0.9284,
+      "neutral_score": 0.0225,
+      "mentions": 3
+    },
+    "Aapl": {
+      "label": "negative",
+      "score": 0.9689977765083313,
+      "positive_score": 0.0121,
+      "negative_score": 0.969,
+      "neutral_score": 0.0189,
+      "mentions": 1
+    },
+    "T": {
+      "label": "negative",
+      "score": 0.9689977765083313,
+      "positive_score": 0.0121,
+      "negative_score": 0.969,
+      "neutral_score": 0.0189,
+      "mentions": 1
+    },
+    "##Lw Wealth Management": {
+      "label": "negative",
+      "score": 0.9689977765083313,
+      "positive_score": 0.0121,
+      "negative_score": 0.969,
+      "neutral_score": 0.0189,
+      "mentions": 1
+    },
+    "Vanguard": {
+      "label": "negative",
+      "score": 0.8552534580230713,
+      "positive_score": 0.1172,
+      "negative_score": 0.8553,
+      "neutral_score": 0.0275,
+      "mentions": 1
+    },
+    "State Street": {
+      "label": "negative",
+      "score": 0.8552534580230713,
+      "positive_score": 0.1172,
+      "negative_score": 0.8553,
+      "neutral_score": 0.0275,
+      "mentions": 1
+    },
+    "Geode Capital Management": {
+      "label": "negative",
+      "score": 0.8552534580230713,
+      "positive_score": 0.1172,
+      "negative_score": 0.8553,
+      "neutral_score": 0.0275,
+      "mentions": 1
+    },
+    "Norges Bank": {
+      "label": "negative",
+      "score": 0.8552534580230713,
+      "positive_score": 0.1172,
+      "negative_score": 0.8553,
+      "neutral_score": 0.0275,
+      "mentions": 1
+    },
+    "Northern Trust": {
+      "label": "negative",
+      "score": 0.8552534580230713,
+      "positive_score": 0.1172,
+      "negative_score": 0.8553,
+      "neutral_score": 0.0275,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "b8daef53-e092-4cfa-99d2-413acfb45732"
+}

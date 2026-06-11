@@ -1,0 +1,70 @@
+{
+  "article_id": "82cf2ba5-2b7a-45e9-b71d-a810bbf4dcf6",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Meta Platforms Inc Class A",
+  "url": "https://www.tradingview.com/symbols/BVL-METAUS/ideas/page-39/",
+  "published_at": "2026-05-27T10:08:11Z",
+  "fetched_at": "2026-06-03T04:57:51.400242",
+  "full_text": "This article compiles various trading ideas and analyses for Meta Platforms Inc Class A (METAUS) stock. It highlights technical analysis indicating potential reversals and corrections despite a long-term upward trend, with some analysts predicting a significant downward correction in the coming months. Other analyses suggest short-term buying opportunities at support levels or identify potential resistance points.",
+  "summary": "This article compiles various trading ideas and analyses for Meta Platforms Inc Class A (METAUS) stock. It highlights technical analysis indicating potential reversals and corrections despite a long-term upward trend, with some analysts predicting a significant downward correction in the coming months. Other analyses suggest short-term buying opportunities at support levels or identify potential resistance points.",
+  "raw_payload": {
+    "title": "Meta Platforms Inc Class A",
+    "url": "https://www.tradingview.com/symbols/BVL-METAUS/ideas/page-39/",
+    "time_published": "20260527T100811",
+    "authors": [],
+    "summary": "This article compiles various trading ideas and analyses for Meta Platforms Inc Class A (METAUS) stock. It highlights technical analysis indicating potential reversals and corrections despite a long-term upward trend, with some analysts predicting a significant downward correction in the coming months. Other analyses suggest short-term buying opportunities at support levels or identify potential resistance points.",
+    "banner_image": "https://s3.tradingview.com/d/d7pnx2QC_mid.png",
+    "source": "TradingView",
+    "category_within_source": "General",
+    "source_domain": "TradingView",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.935404"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.809395"
+      },
+      {
+        "topic": "earnings",
+        "relevance_score": "0.722469"
+      }
+    ],
+    "overall_sentiment_score": 0.190599,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "META",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "-0.169576",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.600054",
+        "ticker_sentiment_score": "0.334593",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.625511",
+        "ticker_sentiment_score": "0.330554",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.632511",
+        "ticker_sentiment_score": "0.282012",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.566102",
+        "ticker_sentiment_score": "0.237050",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      }
+    ]
+  }
+}

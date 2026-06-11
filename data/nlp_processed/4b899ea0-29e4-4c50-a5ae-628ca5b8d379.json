@@ -1,0 +1,43 @@
+{
+  "article_id": "4b899ea0-29e4-4c50-a5ae-628ca5b8d379",
+  "source": "yfinance",
+  "ticker": "AMZN",
+  "title": "The GLP-1 stock nobody is pricing in isn’t a drugmaker",
+  "url": "https://247wallst.com/investing/2026/06/11/the-glp-1-stock-nobody-is-pricing-in-isnt-a-drugmaker/",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:56.764246",
+  "sentences": [
+    "The GLP-1 stock nobody is pricing in isn’t a drugmaker Scott Galloway and Ed Elson laid out the math on Prof G Markets and it should make every fast food shareholder uneasy: roughly 30 million Americans, about 1 in 8 US adults, are now on GLP-1s, and the drugs are reducing fast food’s addressable market by an estimated 27-30%.",
+    "This is structural, not cyclical: appetite, ...",
+    "The GLP-1 stock nobody is pricing in isn’t a drugmaker"
+  ],
+  "entities": [
+    {
+      "entity": "Prof G Markets",
+      "raw_text": "Prof G Markets",
+      "label": "ORG",
+      "start_char": 104,
+      "end_char": 118,
+      "sentence_idx": 0,
+      "context_window": "The GLP-1 stock nobody is pricing in isn’t a drugmaker Scott Galloway and Ed Elson laid out the math on Prof G Markets and it should make every fast food shareholder uneasy: roughly 30 million Americans, about 1 in 8 US adults, are now on GLP-1s, and the drugs are reducing fast food’s addressable market by an estimated 27-30%. This is structural, not cyclical: appetite, ... The GLP-1 stock nobody is pricing in isn’t a drugmaker",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Prof G Markets": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "1780d15b-0254-4bf7-8311-af69969478a3"
+}

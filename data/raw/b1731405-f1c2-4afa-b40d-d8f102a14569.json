@@ -1,0 +1,62 @@
+{
+  "article_id": "b1731405-f1c2-4afa-b40d-d8f102a14569",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Why Apple’s (AAPL) AI Rollout Timeline Is Raising Fresh Questions",
+  "url": "https://uk.finance.yahoo.com/news/why-apple-aapl-ai-rollout-142153489.html",
+  "published_at": "2026-02-14T12:21:00Z",
+  "fetched_at": "2026-06-03T04:57:51.400944",
+  "full_text": "Apple's AI rollout timeline is under renewed scrutiny from Evercore ISI due to potential delays in the Apple Intelligence 2.0 launch, initially expected in March. Headwinds during testing phases and a focus on privacy are reportedly causing these postponements. Despite these challenges, Evercore ISI maintains an Outperform rating on AAPL with a $330 price target, expecting a multi-phase AI release throughout the year.",
+  "summary": "Apple's AI rollout timeline is under renewed scrutiny from Evercore ISI due to potential delays in the Apple Intelligence 2.0 launch, initially expected in March. Headwinds during testing phases and a focus on privacy are reportedly causing these postponements. Despite these challenges, Evercore ISI maintains an Outperform rating on AAPL with a $330 price target, expecting a multi-phase AI release throughout the year.",
+  "raw_payload": {
+    "title": "Why Apple’s (AAPL) AI Rollout Timeline Is Raising Fresh Questions",
+    "url": "https://uk.finance.yahoo.com/news/why-apple-aapl-ai-rollout-142153489.html",
+    "time_published": "20260214T122100",
+    "authors": [
+      "Ghazal Ahmed"
+    ],
+    "summary": "Apple's AI rollout timeline is under renewed scrutiny from Evercore ISI due to potential delays in the Apple Intelligence 2.0 launch, initially expected in March. Headwinds during testing phases and a focus on privacy are reportedly causing these postponements. Despite these challenges, Evercore ISI maintains an Outperform rating on AAPL with a $330 price target, expecting a multi-phase AI release throughout the year.",
+    "banner_image": "https://s.yimg.com/ny/api/res/1.2/rwkuP_Nd9f7VuL_Dr4hWXQ--/YXBwaWQ9aGlnaGhsYW5kZXJ;d10PTk2MDtoPTY0MA--/https://media.zenfs.com/en/insidermonkey.com/028e3a6767f8a3fa1de90f373ab6c0c2",
+    "source": "Yahoo Finance UK",
+    "category_within_source": "General",
+    "source_domain": "Yahoo Finance UK",
+    "topics": [
+      {
+        "topic": "technology",
+        "relevance_score": "0.913706"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.810866"
+      }
+    ],
+    "overall_sentiment_score": 0.155726,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.973125",
+        "ticker_sentiment_score": "0.128269",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.613023",
+        "ticker_sentiment_score": "0.348156",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.558061",
+        "ticker_sentiment_score": "0.054873",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.568458",
+        "ticker_sentiment_score": "0.086594",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

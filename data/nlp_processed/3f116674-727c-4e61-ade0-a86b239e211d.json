@@ -1,0 +1,85 @@
+{
+  "article_id": "3f116674-727c-4e61-ade0-a86b239e211d",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Why the SpaceX, OpenAI, and Anthropic IPOs won't derail the bull market",
+  "url": "https://finance.yahoo.com/markets/article/why-the-spacex-openai-and-anthropic-ipos-wont-derail-the-bull-market-112903023.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:37:23.074050",
+  "sentences": [
+    "Why the SpaceX, OpenAI, and Anthropic IPOs won't derail the bull market Don't fret about a lot of stock coming to market, Goldman Sachs contends."
+  ],
+  "entities": [
+    {
+      "entity": "Spacex",
+      "raw_text": "SpaceX",
+      "label": "ORG",
+      "start_char": 8,
+      "end_char": 14,
+      "sentence_idx": 0,
+      "context_window": "Why the SpaceX, OpenAI, and Anthropic IPOs won't derail the bull market Don't fret about a lot of stock coming to market, Goldman Sachs contends.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Openai",
+      "raw_text": "OpenAI",
+      "label": "ORG",
+      "start_char": 16,
+      "end_char": 22,
+      "sentence_idx": 0,
+      "context_window": "Why the SpaceX, OpenAI, and Anthropic IPOs won't derail the bull market Don't fret about a lot of stock coming to market, Goldman Sachs contends.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Goldman Sachs",
+      "raw_text": "Goldman Sachs",
+      "label": "ORG",
+      "start_char": 122,
+      "end_char": 135,
+      "sentence_idx": 0,
+      "context_window": "Why the SpaceX, OpenAI, and Anthropic IPOs won't derail the bull market Don't fret about a lot of stock coming to market, Goldman Sachs contends.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Spacex": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Openai": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Goldman Sachs": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "3951aba4-cc1e-4298-9cab-19e75d94cebc"
+}

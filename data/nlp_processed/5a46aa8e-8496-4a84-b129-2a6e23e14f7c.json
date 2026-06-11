@@ -1,0 +1,100 @@
+{
+  "article_id": "5a46aa8e-8496-4a84-b129-2a6e23e14f7c",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Trump Criticized Canada's China EV Deal—Elon Musk's Tesla Could Be Among Its Biggest Winners",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/trump-criticized-canadas-china-ev-013112867.html",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:47.927932",
+  "sentences": [
+    "Trump Criticized Canada's China EV Deal—Elon Musk's Tesla Could Be Among Its Biggest Winners Tesla Inc. could be reaping the benefits of the China-Canada EV agreement despite earlier criticism from President Donald Trump following the deal.",
+    "Tesla Accounts For More Than 10% Of Chinese Imports According to a report by Drive Tesla Canada on..."
+  ],
+  "entities": [
+    {
+      "entity": "Elon Musk",
+      "raw_text": "Elon Musk",
+      "label": "ORG",
+      "start_char": 40,
+      "end_char": 49,
+      "sentence_idx": 0,
+      "context_window": "Trump Criticized Canada's China EV Deal—Elon Musk's Tesla Could Be Among Its Biggest Winners Tesla Inc. could be reaping the benefits of the China-Canada EV agreement despite earlier criticism from President Donald Trump following the deal. Tesla Accounts For More Than 10% Of Chinese Imports According to a report by Drive Tesla Canada on...",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.6891136765480042,
+      "positive_score": 0.6891136765480042,
+      "negative_score": 0.024569671601057053,
+      "neutral_score": 0.2863166034221649
+    },
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 52,
+      "end_char": 57,
+      "sentence_idx": 0,
+      "context_window": "Trump Criticized Canada's China EV Deal—Elon Musk's Tesla Could Be Among Its Biggest Winners Tesla Inc. could be reaping the benefits of the China-Canada EV agreement despite earlier criticism from President Donald Trump following the deal. Tesla Accounts For More Than 10% Of Chinese Imports According to a report by Drive Tesla Canada on...",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.6891136765480042,
+      "positive_score": 0.6891136765480042,
+      "negative_score": 0.024569671601057053,
+      "neutral_score": 0.2863166034221649
+    },
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 241,
+      "end_char": 246,
+      "sentence_idx": 1,
+      "context_window": "Trump Criticized Canada's China EV Deal—Elon Musk's Tesla Could Be Among Its Biggest Winners Tesla Inc. could be reaping the benefits of the China-Canada EV agreement despite earlier criticism from President Donald Trump following the deal. Tesla Accounts For More Than 10% Of Chinese Imports According to a report by Drive Tesla Canada on...",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.6891136765480042,
+      "positive_score": 0.6891136765480042,
+      "negative_score": 0.024569671601057053,
+      "neutral_score": 0.2863166034221649
+    },
+    {
+      "entity": "Drive Tesla Canada",
+      "raw_text": "Drive Tesla Canada",
+      "label": "ORG",
+      "start_char": 318,
+      "end_char": 336,
+      "sentence_idx": 1,
+      "context_window": "Trump Criticized Canada's China EV Deal—Elon Musk's Tesla Could Be Among Its Biggest Winners Tesla Inc. could be reaping the benefits of the China-Canada EV agreement despite earlier criticism from President Donald Trump following the deal. Tesla Accounts For More Than 10% Of Chinese Imports According to a report by Drive Tesla Canada on...",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.6891136765480042,
+      "positive_score": 0.6891136765480042,
+      "negative_score": 0.024569671601057053,
+      "neutral_score": 0.2863166034221649
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.6891,
+  "company_sentiments": {
+    "Elon Musk": {
+      "label": "positive",
+      "score": 0.6891136765480042,
+      "positive_score": 0.6891,
+      "negative_score": 0.0246,
+      "neutral_score": 0.2863,
+      "mentions": 1
+    },
+    "Tesla": {
+      "label": "positive",
+      "score": 0.6891136765480042,
+      "positive_score": 0.6891,
+      "negative_score": 0.0246,
+      "neutral_score": 0.2863,
+      "mentions": 2
+    },
+    "Drive Tesla Canada": {
+      "label": "positive",
+      "score": 0.6891136765480042,
+      "positive_score": 0.6891,
+      "negative_score": 0.0246,
+      "neutral_score": 0.2863,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "7ba19c21-313b-41e9-b3fc-c771b91c7963"
+}

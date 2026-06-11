@@ -1,0 +1,80 @@
+{
+  "article_id": "47368785-471b-4a70-8c99-7e5aee3fb295",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Stock Market Today: Dow Jones, S&P 500 Rally After Trump Hints At De-Escalation With China—Mag 7, Fastenal, Lucid In Focus",
+  "url": "https://www.inkl.com/news/stock-market-today-dow-jones-s-p-500-rally-after-trump-hints-at-de-escalation-with-china-mag-7-fastenal-lucid-in-focus",
+  "published_at": "2025-10-13T10:13:30Z",
+  "fetched_at": "2026-06-03T04:57:51.401758",
+  "full_text": "U.S. stock futures rallied on Monday, with the Dow Jones, S&P 500, and Nasdaq 100 all showing significant gains following a sell-off on Friday. This rebound was partly attributed to a hint of de-escalation with China by President Donald Trump and strong premarket surges in Magnificent 7 stocks. The article also highlights key stocks, analyst insights on market valuations, upcoming economic data, and the performance of commodities and global equity markets.",
+  "summary": "U.S. stock futures rallied on Monday, with the Dow Jones, S&P 500, and Nasdaq 100 all showing significant gains following a sell-off on Friday. This rebound was partly attributed to a hint of de-escalation with China by President Donald Trump and strong premarket surges in Magnificent 7 stocks. The article also highlights key stocks, analyst insights on market valuations, upcoming economic data, and the performance of commodities and global equity markets.",
+  "raw_payload": {
+    "title": "Stock Market Today: Dow Jones, S&P 500 Rally After Trump Hints At De-Escalation With China—Mag 7, Fastenal, Lucid In Focus",
+    "url": "https://www.inkl.com/news/stock-market-today-dow-jones-s-p-500-rally-after-trump-hints-at-de-escalation-with-china-mag-7-fastenal-lucid-in-focus",
+    "time_published": "20251013T101330",
+    "authors": [
+      "Rishabh Mishra"
+    ],
+    "summary": "U.S. stock futures rallied on Monday, with the Dow Jones, S&P 500, and Nasdaq 100 all showing significant gains following a sell-off on Friday. This rebound was partly attributed to a hint of de-escalation with China by President Donald Trump and strong premarket surges in Magnificent 7 stocks. The article also highlights key stocks, analyst insights on market valuations, upcoming economic data, and the performance of commodities and global equity markets.",
+    "banner_image": "https://cdn.benzinga.com/files/images/story/2025/10/13/Wall-Street_0.jpeg?auto=jpg&dpr=1&fit=crop&height=480&optimize=medium&width=720",
+    "source": "inkl",
+    "category_within_source": "General",
+    "source_domain": "inkl",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.925164"
+      },
+      {
+        "topic": "economy_macro",
+        "relevance_score": "0.805082"
+      },
+      {
+        "topic": "economy_monetary",
+        "relevance_score": "0.629012"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.512826"
+      },
+      {
+        "topic": "retail_wholesale",
+        "relevance_score": "0.305279"
+      }
+    ],
+    "overall_sentiment_score": 0.319593,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.734936",
+        "ticker_sentiment_score": "0.313184",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.801034",
+        "ticker_sentiment_score": "0.320134",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.722565",
+        "ticker_sentiment_score": "0.314392",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.729440",
+        "ticker_sentiment_score": "0.320935",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "AMZN",
+        "relevance_score": "0.729825",
+        "ticker_sentiment_score": "0.309831",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      }
+    ]
+  }
+}

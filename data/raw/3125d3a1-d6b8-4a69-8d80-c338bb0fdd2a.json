@@ -1,0 +1,80 @@
+{
+  "article_id": "3125d3a1-d6b8-4a69-8d80-c338bb0fdd2a",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Montis Financial LLC Has $19.84 Million Stake in Apple Inc. $AAPL",
+  "url": "https://www.marketbeat.com/instant-alerts/filing-montis-financial-llc-has-1984-million-stake-in-apple-inc-aapl-2026-02-10/",
+  "published_at": "2026-02-10T08:40:53Z",
+  "fetched_at": "2026-06-03T04:57:51.401015",
+  "full_text": "Montis Financial LLC increased its stake in Apple Inc. by 15.8% to 77,919 shares, valued at $19.84 million, making Apple its seventh-largest holding. This comes as Apple surpassed quarterly expectations with robust EPS and revenue figures, revenue growth, and a declared dividend. Analyst sentiment toward Apple remains largely positive, with a consensus \"Moderate Buy\" rating and upward adjustments to price targets from several brokerages.",
+  "summary": "Montis Financial LLC increased its stake in Apple Inc. by 15.8% to 77,919 shares, valued at $19.84 million, making Apple its seventh-largest holding. This comes as Apple surpassed quarterly expectations with robust EPS and revenue figures, revenue growth, and a declared dividend. Analyst sentiment toward Apple remains largely positive, with a consensus \"Moderate Buy\" rating and upward adjustments to price targets from several brokerages.",
+  "raw_payload": {
+    "title": "Montis Financial LLC Has $19.84 Million Stake in Apple Inc. $AAPL",
+    "url": "https://www.marketbeat.com/instant-alerts/filing-montis-financial-llc-has-1984-million-stake-in-apple-inc-aapl-2026-02-10/",
+    "time_published": "20260210T084053",
+    "authors": [
+      "MarketBeat"
+    ],
+    "summary": "Montis Financial LLC increased its stake in Apple Inc. by 15.8% to 77,919 shares, valued at $19.84 million, making Apple its seventh-largest holding. This comes as Apple surpassed quarterly expectations with robust EPS and revenue figures, revenue growth, and a declared dividend. Analyst sentiment toward Apple remains largely positive, with a consensus \"Moderate Buy\" rating and upward adjustments to price targets from several brokerages.",
+    "banner_image": "https://www.marketbeat.com/logos/apple-inc-logo-1200x675.png",
+    "source": "MarketBeat",
+    "category_within_source": "General",
+    "source_domain": "MarketBeat",
+    "topics": [
+      {
+        "topic": "earnings",
+        "relevance_score": "0.908354"
+      },
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.907386"
+      },
+      {
+        "topic": "technology",
+        "relevance_score": "0.801518"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.718648"
+      },
+      {
+        "topic": "economy_macro",
+        "relevance_score": "0.633659"
+      }
+    ],
+    "overall_sentiment_score": 0.191026,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "AAPL",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "0.466326",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.639069",
+        "ticker_sentiment_score": "0.104335",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "META",
+        "relevance_score": "0.642315",
+        "ticker_sentiment_score": "0.135113",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.632806",
+        "ticker_sentiment_score": "0.106592",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.620081",
+        "ticker_sentiment_score": "0.074663",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

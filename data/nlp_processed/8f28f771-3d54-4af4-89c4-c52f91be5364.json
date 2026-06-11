@@ -1,0 +1,41 @@
+{
+  "article_id": "8f28f771-3d54-4af4-89c4-c52f91be5364",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Why Figma Stock Jumped 44% in May",
+  "url": "https://www.fool.com/investing/2026/06/02/why-figma-stock-jumped-44-in-may/",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:51.201953",
+  "sentences": [
+    "Why Figma Stock Jumped 44% in May Figma continued to deliver strong results despite broader fears about disruption."
+  ],
+  "entities": [
+    {
+      "entity": "Fi",
+      "raw_text": "Fi",
+      "label": "ORG",
+      "start_char": 4,
+      "end_char": 6,
+      "sentence_idx": 0,
+      "context_window": "Why Figma Stock Jumped 44% in May Figma continued to deliver strong results despite broader fears about disruption.",
+      "sentiment_label": "positive",
+      "sentiment_score": 0.9533922672271729,
+      "positive_score": 0.9533922672271729,
+      "negative_score": 0.02516874484717846,
+      "neutral_score": 0.021438973024487495
+    }
+  ],
+  "article_sentiment_label": "positive",
+  "article_sentiment_score": 0.9534,
+  "company_sentiments": {
+    "Fi": {
+      "label": "positive",
+      "score": 0.9533922672271729,
+      "positive_score": 0.9534,
+      "negative_score": 0.0252,
+      "neutral_score": 0.0214,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "89677c0c-8f82-4591-9a1b-44d58d86680f"
+}

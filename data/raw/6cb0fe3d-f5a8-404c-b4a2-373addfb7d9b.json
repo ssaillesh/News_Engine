@@ -1,0 +1,54 @@
+{
+  "article_id": "6cb0fe3d-f5a8-404c-b4a2-373addfb7d9b",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Intel Stock Jumps After BofA Surprise Double Upgrade",
+  "url": "https://finance.yahoo.com/markets/stocks/articles/intel-stock-jumps-bofa-surprise-140335965.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:17.893199",
+  "full_text": "Bank of America Sends Strong Message to Intel Stock Investors",
+  "summary": "Bank of America Sends Strong Message to Intel Stock Investors",
+  "raw_payload": {
+    "id": "b14b9108-9c5b-3abc-ab9d-e01003b0edc4",
+    "content": {
+      "id": "b14b9108-9c5b-3abc-ab9d-e01003b0edc4",
+      "contentType": "STORY",
+      "title": "Intel Stock Jumps After BofA Surprise Double Upgrade",
+      "description": "",
+      "summary": "Bank of America Sends Strong Message to Intel Stock Investors",
+      "pubDate": "2026-06-11T14:03:35Z",
+      "displayTime": "2026-06-11T14:03:35Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": null,
+      "provider": {
+        "displayName": "GuruFocus.com",
+        "url": "http://www.gurufocus.com/",
+        "sourceId": "us.finance.gurufocus"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/intel-stock-jumps-bofa-surprise-140335965.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/intel-stock-jumps-bofa-surprise-140335965.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

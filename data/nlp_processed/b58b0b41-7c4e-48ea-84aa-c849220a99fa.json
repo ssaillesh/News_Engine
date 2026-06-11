@@ -1,0 +1,173 @@
+{
+  "article_id": "b58b0b41-7c4e-48ea-84aa-c849220a99fa",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B",
+  "url": "https://stocktwits.com/news-articles/markets/equity/amd-arm-intc-nvda-agentic-ai-server-cpu-market-170-billion-bofa/cZKTp9LR72O",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:36:42.439255",
+  "sentences": [
+    "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America."
+  ],
+  "entities": [
+    {
+      "entity": "Amd",
+      "raw_text": "AMD",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 3,
+      "sentence_idx": 0,
+      "context_window": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Arm",
+      "raw_text": "ARM",
+      "label": "ORG",
+      "start_char": 5,
+      "end_char": 8,
+      "sentence_idx": 0,
+      "context_window": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Intc",
+      "raw_text": "INTC",
+      "label": "ORG",
+      "start_char": 10,
+      "end_char": 14,
+      "sentence_idx": 0,
+      "context_window": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Nvda",
+      "raw_text": "NVDA",
+      "label": "ORG",
+      "start_char": 16,
+      "end_char": 20,
+      "sentence_idx": 0,
+      "context_window": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Bofa",
+      "raw_text": "BofA",
+      "label": "ORG",
+      "start_char": 47,
+      "end_char": 51,
+      "sentence_idx": 0,
+      "context_window": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Agent",
+      "raw_text": "Agent",
+      "label": "ORG",
+      "start_char": 105,
+      "end_char": 110,
+      "sentence_idx": 0,
+      "context_window": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Bank Of America",
+      "raw_text": "Bank of America",
+      "label": "ORG",
+      "start_char": 209,
+      "end_char": 224,
+      "sentence_idx": 0,
+      "context_window": "AMD, ARM, INTC, NVDA Get A Fresh AI Tailwind - BofA Sees Agentic AI Expanding Server CPU Market To $170B Agentic AI could unlock a much larger opportunity for chipmakers than previously expected, according to Bank of America.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Amd": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Arm": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Intc": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Nvda": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Bofa": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Agent": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Bank Of America": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "3c33c1d9-887b-4f8a-9259-0a05a83117b7"
+}

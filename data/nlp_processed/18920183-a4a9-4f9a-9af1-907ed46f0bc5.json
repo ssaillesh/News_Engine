@@ -1,0 +1,144 @@
+{
+  "article_id": "18920183-a4a9-4f9a-9af1-907ed46f0bc5",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc.",
+  "url": "https://www.marketbeat.com/instant-alerts/filing-apple-inc-aapl-stock-holdings-reduced-by-adams-diversified-equity-fund-inc-2026-01-27/",
+  "published_at": "2026-01-27T08:23:12Z",
+  "processed_at": "2026-06-03T04:58:32.367033",
+  "sentences": [
+    "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc.",
+    "Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares.",
+    "Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio.",
+    "The article also details other institutional investor activities, analyst ratings, financial data, and recent news impacting Apple's stock."
+  ],
+  "entities": [
+    {
+      "entity": "Apple",
+      "raw_text": "Apple Inc",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 9,
+      "sentence_idx": 0,
+      "context_window": "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc. Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9656418561935425,
+      "positive_score": 0.013543881475925446,
+      "negative_score": 0.9656418561935425,
+      "neutral_score": 0.020814284682273865
+    },
+    {
+      "entity": "Aapl Stock",
+      "raw_text": "AAPL Stock",
+      "label": "ORG",
+      "start_char": 12,
+      "end_char": 22,
+      "sentence_idx": 0,
+      "context_window": "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc. Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9656418561935425,
+      "positive_score": 0.013543881475925446,
+      "negative_score": 0.9656418561935425,
+      "neutral_score": 0.020814284682273865
+    },
+    {
+      "entity": "Adams Diversified Equity Fund",
+      "raw_text": "Adams Diversified Equity Fund Inc",
+      "label": "ORG",
+      "start_char": 43,
+      "end_char": 76,
+      "sentence_idx": 0,
+      "context_window": "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc. Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9656418561935425,
+      "positive_score": 0.013543881475925446,
+      "negative_score": 0.9656418561935425,
+      "neutral_score": 0.020814284682273865
+    },
+    {
+      "entity": "Adams Diversified Equity Fund",
+      "raw_text": "Adams Diversified Equity Fund Inc",
+      "label": "ORG",
+      "start_char": 78,
+      "end_char": 111,
+      "sentence_idx": 1,
+      "context_window": "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc. Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio. The article also details other institutional investor activities, analyst ratings, financial data, and recent news impacting Apple's stock.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.948046863079071,
+      "positive_score": 0.010192109271883965,
+      "negative_score": 0.948046863079071,
+      "neutral_score": 0.04176102206110954
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple Inc",
+      "label": "ORG",
+      "start_char": 134,
+      "end_char": 143,
+      "sentence_idx": 1,
+      "context_window": "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc. Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio. The article also details other institutional investor activities, analyst ratings, financial data, and recent news impacting Apple's stock.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.948046863079071,
+      "positive_score": 0.010192109271883965,
+      "negative_score": 0.948046863079071,
+      "neutral_score": 0.04176102206110954
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 221,
+      "end_char": 226,
+      "sentence_idx": 2,
+      "context_window": "Apple Inc. $AAPL Stock Holdings Reduced by Adams Diversified Equity Fund Inc. Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio. The article also details other institutional investor activities, analyst ratings, financial data, and recent news impacting Apple's stock.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.948046863079071,
+      "positive_score": 0.010192109271883965,
+      "negative_score": 0.948046863079071,
+      "neutral_score": 0.04176102206110954
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 428,
+      "end_char": 433,
+      "sentence_idx": 3,
+      "context_window": "Adams Diversified Equity Fund Inc. reduced its stake in Apple Inc. by 1.0% in the third quarter, selling 8,100 shares. Despite this reduction, Apple remains the fund's third-largest holding, comprising 7.1% of its portfolio. The article also details other institutional investor activities, analyst ratings, financial data, and recent news impacting Apple's stock.",
+      "sentiment_label": "negative",
+      "sentiment_score": 0.9522343873977661,
+      "positive_score": 0.008145960047841072,
+      "negative_score": 0.9522343873977661,
+      "neutral_score": 0.039619602262973785
+    }
+  ],
+  "article_sentiment_label": "negative",
+  "article_sentiment_score": 0.9562,
+  "company_sentiments": {
+    "Apple": {
+      "label": "negative",
+      "score": 0.9534924924373627,
+      "positive_score": 0.0105,
+      "negative_score": 0.9535,
+      "neutral_score": 0.036,
+      "mentions": 4
+    },
+    "Aapl Stock": {
+      "label": "negative",
+      "score": 0.9656418561935425,
+      "positive_score": 0.0135,
+      "negative_score": 0.9656,
+      "neutral_score": 0.0208,
+      "mentions": 1
+    },
+    "Adams Diversified Equity Fund": {
+      "label": "negative",
+      "score": 0.9568443596363068,
+      "positive_score": 0.0119,
+      "negative_score": 0.9568,
+      "neutral_score": 0.0313,
+      "mentions": 2
+    }
+  },
+  "embedding_id": "ffd1deb5-b270-4e4f-ad7d-b31291e0bb32"
+}

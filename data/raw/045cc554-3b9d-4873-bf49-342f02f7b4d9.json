@@ -1,0 +1,73 @@
+{
+  "article_id": "045cc554-3b9d-4873-bf49-342f02f7b4d9",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Why Super Micro stock is plunging & Cracker Barrel stock is surging",
+  "url": "https://finance.yahoo.com/video/why-super-micro-stock-is-plunging--cracker-barrel-stock-is-surging-150815558.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.695621",
+  "full_text": "Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+  "summary": "Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+  "raw_payload": {
+    "id": "e6a967c9-7ab2-469b-ad89-a1d312378c8b",
+    "content": {
+      "id": "e6a967c9-7ab2-469b-ad89-a1d312378c8b",
+      "contentType": "VIDEO",
+      "title": "Why Super Micro stock is plunging & Cracker Barrel stock is surging",
+      "description": "<p>Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's <a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/markets/stocks/trending/\" data-i13n=\"cpos:1;pos:1\">trending tickers</a> and stories, including Super Micro Computer (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/SMCI/\" data-i13n=\"cpos:2;pos:1\">SMCI</a>) stock plunging, Chewy (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/CHWY/\" data-i13n=\"cpos:3;pos:1\">CHWY</a>) cutting its full-year outlook, and Cracker Barrel (<a target=\"_blank\" rel=\"\" class=\"link\" href=\"https://finance.yahoo.com/quote/CBRL/\" data-i13n=\"cpos:4;pos:1\">CBRL</a>) stock surging.</p>",
+      "summary": "Yahoo Finance's Julie Hyman takes a closer look at some of Wednesday's trending tickers and stories, including Super Micro Computer (SMCI) stock plunging, Chewy (CHWY) cutting its full-year outlook, and Cracker Barrel (CBRL) stock surging.",
+      "pubDate": "2026-06-10T15:08:15Z",
+      "displayTime": "",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://s.yimg.com/uu/api/res/1.2/p8v3j56nB_hsBSFXSFrsrg--~B/aD0yMDc3O3c9MzY5NDthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/2141a034-07c5-4d5f-9e82-357e58f43ee3_dd1c476f87bde2dc399536e0b74e99f4ef921a0a93705d158e98af5fb593505d.jpg",
+        "originalWidth": 3694,
+        "originalHeight": 2077,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/p8v3j56nB_hsBSFXSFrsrg--~B/aD0yMDc3O3c9MzY5NDthcHBpZD15dGFjaHlvbg--/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/2141a034-07c5-4d5f-9e82-357e58f43ee3_dd1c476f87bde2dc399536e0b74e99f4ef921a0a93705d158e98af5fb593505d.jpg",
+            "width": 3694,
+            "height": 2077,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/cY2mqS64PA4sV1yTR0X6Fg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/2141a034-07c5-4d5f-9e82-357e58f43ee3_dd1c476f87bde2dc399536e0b74e99f4ef921a0a93705d158e98af5fb593505d.jpg",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Yahoo Finance Video",
+        "url": "https://finance.yahoo.com/",
+        "sourceId": "video.yahoofinance.com"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/video/why-super-micro-stock-is-plunging--cracker-barrel-stock-is-surging-150815558.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/video/why-super-micro-stock-is-plunging--cracker-barrel-stock-is-surging-150815558.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": true
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

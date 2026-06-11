@@ -1,0 +1,73 @@
+{
+  "article_id": "6f141cbd-8113-4671-bcdb-08bcd937f504",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Bank of America resets Nvidia stock forecast after key event",
+  "url": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-buy-rating-nvidia-stock-forecast",
+  "published_at": null,
+  "fetched_at": "2026-06-03T04:57:52.452717",
+  "full_text": "Nvidia (NVDA) stock closed the June 1 trading session up 6.26% at $224.36. The stock is now up about 20.3% year to date, at the time of writing, Tuesday morning, June 2. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.24% in the same period. While Nvidia was expected to outpace the ...",
+  "summary": "Nvidia (NVDA) stock closed the June 1 trading session up 6.26% at $224.36. The stock is now up about 20.3% year to date, at the time of writing, Tuesday morning, June 2. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.24% in the same period. While Nvidia was expected to outpace the ...",
+  "raw_payload": {
+    "id": "eded62ab-0c88-3a06-bcfe-0a22a405bc41",
+    "content": {
+      "id": "eded62ab-0c88-3a06-bcfe-0a22a405bc41",
+      "contentType": "STORY",
+      "title": "Bank of America resets Nvidia stock forecast after key event",
+      "description": "",
+      "summary": "Nvidia (NVDA) stock closed the June 1 trading session up 6.26% at $224.36. The stock is now up about 20.3% year to date, at the time of writing, Tuesday morning, June 2. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.24% in the same period. While Nvidia was expected to outpace the ...",
+      "pubDate": "2026-06-02T22:17:00Z",
+      "displayTime": "2026-06-02T22:17:00Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/thestreet_881/8fa56d8f713729ac1bb65da07115ee8f",
+        "originalWidth": 1200,
+        "originalHeight": 675,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/.KzcpSxDvD1Hq7i8GoT5gg--~B/aD02NzU7dz0xMjAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/thestreet_881/8fa56d8f713729ac1bb65da07115ee8f",
+            "width": 1200,
+            "height": 675,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/Feni4mqx96pKa1o3i0hqOw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/thestreet_881/8fa56d8f713729ac1bb65da07115ee8f",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "TheStreet",
+        "url": "https://www.thestreet.com/",
+        "sourceId": "thestreet_881"
+      },
+      "canonicalUrl": {
+        "url": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-buy-rating-nvidia-stock-forecast",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/bank-america-resets-nvidia-stock-221700811.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

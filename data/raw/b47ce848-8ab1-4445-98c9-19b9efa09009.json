@@ -1,0 +1,54 @@
+{
+  "article_id": "b47ce848-8ab1-4445-98c9-19b9efa09009",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "Amazon Says Its Data Centers Use 2.5 Billion Gallons of Water",
+  "url": "https://finance.yahoo.com/sectors/technology/articles/amazon-says-data-centers-2-130000972.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.138643",
+  "full_text": "(Bloomberg) -- Amazon.com Inc. said its data centers used 2.5 billion gallons of water worldwide last year, or about 5% of the amount metro Seattle consumes annually.Most Read from BloombergXbox Plans Significant Layoffs as New CEO Plans OverhaulHouse Republican Says Hegseth’s D-Day Remarks ‘Inappropriate’US Strikes Iran in Trump Escalation Over Stalled Peace TalksOracle Falls Most in Six Months on Mounting Data Center CostsTech Stocks Sink as Oil Jumps on US-Iran Jitters: Markets WrapThe world’",
+  "summary": "(Bloomberg) -- Amazon.com Inc. said its data centers used 2.5 billion gallons of water worldwide last year, or about 5% of the amount metro Seattle consumes annually.Most Read from BloombergXbox Plans Significant Layoffs as New CEO Plans OverhaulHouse Republican Says Hegseth’s D-Day Remarks ‘Inappropriate’US Strikes Iran in Trump Escalation Over Stalled Peace TalksOracle Falls Most in Six Months on Mounting Data Center CostsTech Stocks Sink as Oil Jumps on US-Iran Jitters: Markets WrapThe world’",
+  "raw_payload": {
+    "id": "928ec5a9-098a-36ed-9c45-3c65402bec93",
+    "content": {
+      "id": "928ec5a9-098a-36ed-9c45-3c65402bec93",
+      "contentType": "STORY",
+      "title": "Amazon Says Its Data Centers Use 2.5 Billion Gallons of Water",
+      "description": "",
+      "summary": "(Bloomberg) -- Amazon.com Inc. said its data centers used 2.5 billion gallons of water worldwide last year, or about 5% of the amount metro Seattle consumes annually.Most Read from BloombergXbox Plans Significant Layoffs as New CEO Plans OverhaulHouse Republican Says Hegseth’s D-Day Remarks ‘Inappropriate’US Strikes Iran in Trump Escalation Over Stalled Peace TalksOracle Falls Most in Six Months on Mounting Data Center CostsTech Stocks Sink as Oil Jumps on US-Iran Jitters: Markets WrapThe world’",
+      "pubDate": "2026-06-11T13:00:00Z",
+      "displayTime": "2026-06-11T13:00:00Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": null,
+      "provider": {
+        "displayName": "Bloomberg",
+        "url": "https://www.bloomberg.com/company",
+        "sourceId": "bloomberg_holding_pen_162"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/amazon-says-data-centers-2-130000972.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/amazon-says-data-centers-2-130000972.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

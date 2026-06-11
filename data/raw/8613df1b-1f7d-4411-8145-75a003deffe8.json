@@ -1,0 +1,73 @@
+{
+  "article_id": "8613df1b-1f7d-4411-8145-75a003deffe8",
+  "source": "yfinance",
+  "ticker": "GOOGL",
+  "title": "Prometheus, the industrial AI startup from Jeff Bezos, is now worth $41 billion",
+  "url": "https://www.axios.com/2026/06/11/prometheus-bezos-industrial-ai#utm_source=yahoo_finance&utm_medium=partner&utm_campaign=subs-partner-yahoo-finance-AI",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:19.071662",
+  "full_text": "Prometheus, the industrial AI startup led by Jeff Bezos and former Google exec Vik Bajaj, today will announce that it's raised $12 billion in Series B funding at a $41 billion valuation.",
+  "summary": "Prometheus, the industrial AI startup led by Jeff Bezos and former Google exec Vik Bajaj, today will announce that it's raised $12 billion in Series B funding at a $41 billion valuation.",
+  "raw_payload": {
+    "id": "3e23991c-2cff-3057-9e80-9149fe9c56b9",
+    "content": {
+      "id": "3e23991c-2cff-3057-9e80-9149fe9c56b9",
+      "contentType": "STORY",
+      "title": "Prometheus, the industrial AI startup from Jeff Bezos, is now worth $41 billion",
+      "description": "",
+      "summary": "Prometheus, the industrial AI startup led by Jeff Bezos and former Google exec Vik Bajaj, today will announce that it's raised $12 billion in Series B funding at a $41 billion valuation.",
+      "pubDate": "2026-06-11T14:00:06Z",
+      "displayTime": "2026-06-11T14:00:06Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/axios_527/9599fe64b11fa2de492be327bdeead8a",
+        "originalWidth": 1366,
+        "originalHeight": 768,
+        "caption": "Photo illustration: Brendan Lynch/Axios. Photos: Getty Images",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/ZItHrtMAhZsk6Xxw4E6foA--~B/aD03Njg7dz0xMzY2O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/axios_527/9599fe64b11fa2de492be327bdeead8a",
+            "width": 1366,
+            "height": 768,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/XIFoiGVhXLv5XE.Q7WazNg--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/axios_527/9599fe64b11fa2de492be327bdeead8a",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Axios",
+        "url": "https://www.axios.com/",
+        "sourceId": "axios_527"
+      },
+      "canonicalUrl": {
+        "url": "https://www.axios.com/2026/06/11/prometheus-bezos-industrial-ai#utm_source=yahoo_finance&utm_medium=partner&utm_campaign=subs-partner-yahoo-finance-AI",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/prometheus-industrial-ai-startup-jeff-140006055.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

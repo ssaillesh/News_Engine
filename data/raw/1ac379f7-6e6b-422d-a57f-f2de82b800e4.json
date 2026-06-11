@@ -1,0 +1,54 @@
+{
+  "article_id": "1ac379f7-6e6b-422d-a57f-f2de82b800e4",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "Google spurned U.S. quantum fund over conditions that would slow R&D",
+  "url": "https://finance.yahoo.com/sectors/technology/articles/google-spurned-u-quantum-fund-140235176.html",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.138429",
+  "full_text": "Google Quantum AI COO Charina Chou confirmed the decision at the Semafor Tech Summit in San Francisco on June 10, saying the company walked away because of \"various conditions that came with the funding\" that would have prevented it from moving at its desired pace toward building a functional quantum computer. The disclosure sheds new light on why Google — alongside Microsoft and IonQ — was conspicuously absent from the Trump administration's list of nine quantum recipients announced last month.",
+  "summary": "Google Quantum AI COO Charina Chou confirmed the decision at the Semafor Tech Summit in San Francisco on June 10, saying the company walked away because of \"various conditions that came with the funding\" that would have prevented it from moving at its desired pace toward building a functional quantum computer. The disclosure sheds new light on why Google — alongside Microsoft and IonQ — was conspicuously absent from the Trump administration's list of nine quantum recipients announced last month.",
+  "raw_payload": {
+    "id": "cc5a8ba3-3e24-3a50-ac30-6098a72b500f",
+    "content": {
+      "id": "cc5a8ba3-3e24-3a50-ac30-6098a72b500f",
+      "contentType": "STORY",
+      "title": "Google spurned U.S. quantum fund over conditions that would slow R&D",
+      "description": "",
+      "summary": "Google Quantum AI COO Charina Chou confirmed the decision at the Semafor Tech Summit in San Francisco on June 10, saying the company walked away because of \"various conditions that came with the funding\" that would have prevented it from moving at its desired pace toward building a functional quantum computer. The disclosure sheds new light on why Google — alongside Microsoft and IonQ — was conspicuously absent from the Trump administration's list of nine quantum recipients announced last month.",
+      "pubDate": "2026-06-11T14:02:35Z",
+      "displayTime": "2026-06-11T14:02:35Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": null,
+      "provider": {
+        "displayName": "Investing.com",
+        "url": "https://www.investing.com/",
+        "sourceId": "investing_com_631"
+      },
+      "canonicalUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/google-spurned-u-quantum-fund-140235176.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/sectors/technology/articles/google-spurned-u-quantum-fund-140235176.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

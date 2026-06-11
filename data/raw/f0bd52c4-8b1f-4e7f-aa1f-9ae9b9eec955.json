@@ -1,0 +1,70 @@
+{
+  "article_id": "f0bd52c4-8b1f-4e7f-aa1f-9ae9b9eec955",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "26th January – Threat Intelligence Report",
+  "url": "https://research.checkpoint.com/2026/26th-january-threat-intelligence-report/",
+  "published_at": "2026-01-26T13:40:49Z",
+  "fetched_at": "2026-06-03T04:57:51.401202",
+  "full_text": "This Threat Intelligence Report for January 26, 2026, highlights recent cyber incidents including ransomware attacks by RansomHub on Luxshare and an alleged database leak from Under Armour. It also discusses AI-related threats such as prompt injection flaws in Google Calendar assistant, web attack techniques using LLM APIs to generate malicious JavaScript, and advanced language models creating zero-day exploits. The report further covers vulnerabilities, patches for Zoom and Fortinet, and details from Check Point Research on AI-authored malware, KONNI phishing campaigns, and a new ransomware family called Osiris.",
+  "summary": "This Threat Intelligence Report for January 26, 2026, highlights recent cyber incidents including ransomware attacks by RansomHub on Luxshare and an alleged database leak from Under Armour. It also discusses AI-related threats such as prompt injection flaws in Google Calendar assistant, web attack techniques using LLM APIs to generate malicious JavaScript, and advanced language models creating zero-day exploits. The report further covers vulnerabilities, patches for Zoom and Fortinet, and details from Check Point Research on AI-authored malware, KONNI phishing campaigns, and a new ransomware family called Osiris.",
+  "raw_payload": {
+    "title": "26th January – Threat Intelligence Report",
+    "url": "https://research.checkpoint.com/2026/26th-january-threat-intelligence-report/",
+    "time_published": "20260126T134049",
+    "authors": [],
+    "summary": "This Threat Intelligence Report for January 26, 2026, highlights recent cyber incidents including ransomware attacks by RansomHub on Luxshare and an alleged database leak from Under Armour. It also discusses AI-related threats such as prompt injection flaws in Google Calendar assistant, web attack techniques using LLM APIs to generate malicious JavaScript, and advanced language models creating zero-day exploits. The report further covers vulnerabilities, patches for Zoom and Fortinet, and details from Check Point Research on AI-authored malware, KONNI phishing campaigns, and a new ransomware family called Osiris.",
+    "banner_image": "https://research.checkpoint.com/wp-content/uploads/2022/02/cpr_socialTWITTER_WeeklyIntelligenceReportHero.jpg",
+    "source": "Check Point Software",
+    "category_within_source": "General",
+    "source_domain": "Check Point Software",
+    "topics": [
+      {
+        "topic": "technology",
+        "relevance_score": "1.000000"
+      },
+      {
+        "topic": "manufacturing",
+        "relevance_score": "0.731041"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.634812"
+      }
+    ],
+    "overall_sentiment_score": 0.305271,
+    "overall_sentiment_label": "Somewhat-Bullish",
+    "ticker_sentiment": [
+      {
+        "ticker": "CHKP",
+        "relevance_score": "0.882290",
+        "ticker_sentiment_score": "0.716305",
+        "ticker_sentiment_label": "Bullish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.700855",
+        "ticker_sentiment_score": "0.273351",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.726734",
+        "ticker_sentiment_score": "0.287751",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.695162",
+        "ticker_sentiment_score": "0.176390",
+        "ticker_sentiment_label": "Somewhat-Bullish"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.635401",
+        "ticker_sentiment_score": "0.128617",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

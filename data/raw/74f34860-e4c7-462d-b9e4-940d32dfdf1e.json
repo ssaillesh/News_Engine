@@ -1,0 +1,66 @@
+{
+  "article_id": "74f34860-e4c7-462d-b9e4-940d32dfdf1e",
+  "source": "alphavantage",
+  "ticker": "AAPL,MSFT,TSLA,NVDA",
+  "title": "Prudential Financial, Inc. (1PRU.MI) stock price, news, quote and history",
+  "url": "https://uk.finance.yahoo.com/quote/1PRU.MI/sec-filing/",
+  "published_at": "2026-04-02T22:08:19Z",
+  "fetched_at": "2026-06-03T04:57:51.400704",
+  "full_text": "This page provides an overview of Prudential Financial, Inc. (1PRU.MI) stock, including its current price, news, and historical data. As of April 2, 2026, the stock was trading at 84.00 EUR, down 1.48%. The article also presents performance metrics, comparing 1PRU.MI's returns against the S&P 500 benchmark.",
+  "summary": "This page provides an overview of Prudential Financial, Inc. (1PRU.MI) stock, including its current price, news, and historical data. As of April 2, 2026, the stock was trading at 84.00 EUR, down 1.48%. The article also presents performance metrics, comparing 1PRU.MI's returns against the S&P 500 benchmark.",
+  "raw_payload": {
+    "title": "Prudential Financial, Inc. (1PRU.MI) stock price, news, quote and history",
+    "url": "https://uk.finance.yahoo.com/quote/1PRU.MI/sec-filing/",
+    "time_published": "20260402T220819",
+    "authors": [],
+    "summary": "This page provides an overview of Prudential Financial, Inc. (1PRU.MI) stock, including its current price, news, and historical data. As of April 2, 2026, the stock was trading at 84.00 EUR, down 1.48%. The article also presents performance metrics, comparing 1PRU.MI's returns against the S&P 500 benchmark.",
+    "banner_image": null,
+    "source": "Yahoo Finance UK",
+    "category_within_source": "General",
+    "source_domain": "Yahoo Finance UK",
+    "topics": [
+      {
+        "topic": "financial_markets",
+        "relevance_score": "0.934848"
+      },
+      {
+        "topic": "finance",
+        "relevance_score": "0.726970"
+      }
+    ],
+    "overall_sentiment_score": -0.050209,
+    "overall_sentiment_label": "Neutral",
+    "ticker_sentiment": [
+      {
+        "ticker": "PRU",
+        "relevance_score": "1.000000",
+        "ticker_sentiment_score": "-0.177266",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "NVDA",
+        "relevance_score": "0.639342",
+        "ticker_sentiment_score": "0.107026",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "TSLA",
+        "relevance_score": "0.601056",
+        "ticker_sentiment_score": "-0.321097",
+        "ticker_sentiment_label": "Somewhat-Bearish"
+      },
+      {
+        "ticker": "AAPL",
+        "relevance_score": "0.612064",
+        "ticker_sentiment_score": "0.127740",
+        "ticker_sentiment_label": "Neutral"
+      },
+      {
+        "ticker": "MSFT",
+        "relevance_score": "0.612247",
+        "ticker_sentiment_score": "0.103071",
+        "ticker_sentiment_label": "Neutral"
+      }
+    ]
+  }
+}

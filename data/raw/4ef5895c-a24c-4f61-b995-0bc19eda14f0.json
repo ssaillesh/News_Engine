@@ -1,0 +1,73 @@
+{
+  "article_id": "4ef5895c-a24c-4f61-b995-0bc19eda14f0",
+  "source": "yfinance",
+  "ticker": "META",
+  "title": "SpaceX Is Minting Millionaires and Maybe Even a Trillionaire. It Also Might The Offer a Glimpse of the Future of America’s Blue-Collar Economy.",
+  "url": "https://247wallst.com/investing/2026/06/11/spacex-is-minting-millionaires-and-maybe-even-a-trillionaire-it-also-might-the-offer-a-glimpse-of-the-future-of-americas-blue-collar-economy/",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:19.249597",
+  "full_text": "The countdown to the SpaceX (SPCX) IPO has finally come down to T-minus one day, and it’s going to be a shocker how many people are going to be made incredibly rich as investors witness just how high the oversubscribed IPO goes. Who knows? It might even mint the world’s first trillionaire in Elon Musk, given ... SpaceX Is Minting Millionaires and Maybe Even a Trillionaire. It Also Might The Offer a Glimpse of the Future of America’s Blue-Collar Economy.",
+  "summary": "The countdown to the SpaceX (SPCX) IPO has finally come down to T-minus one day, and it’s going to be a shocker how many people are going to be made incredibly rich as investors witness just how high the oversubscribed IPO goes. Who knows? It might even mint the world’s first trillionaire in Elon Musk, given ... SpaceX Is Minting Millionaires and Maybe Even a Trillionaire. It Also Might The Offer a Glimpse of the Future of America’s Blue-Collar Economy.",
+  "raw_payload": {
+    "id": "31bd39d7-08c6-3b83-a15e-39c53baec655",
+    "content": {
+      "id": "31bd39d7-08c6-3b83-a15e-39c53baec655",
+      "contentType": "STORY",
+      "title": "SpaceX Is Minting Millionaires and Maybe Even a Trillionaire. It Also Might The Offer a Glimpse of the Future of America’s Blue-Collar Economy.",
+      "description": "",
+      "summary": "The countdown to the SpaceX (SPCX) IPO has finally come down to T-minus one day, and it’s going to be a shocker how many people are going to be made incredibly rich as investors witness just how high the oversubscribed IPO goes. Who knows? It might even mint the world’s first trillionaire in Elon Musk, given ... SpaceX Is Minting Millionaires and Maybe Even a Trillionaire. It Also Might The Offer a Glimpse of the Future of America’s Blue-Collar Economy.",
+      "pubDate": "2026-06-11T13:13:26Z",
+      "displayTime": "2026-06-11T13:13:26Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/24_7_wall_st__718/d68b1d05ed3b99268b31920b3bd88a65",
+        "originalWidth": 1024,
+        "originalHeight": 542,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/EafMp8kqCJ7Nv3r8FkrSgw--~B/aD01NDI7dz0xMDI0O2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/24_7_wall_st__718/d68b1d05ed3b99268b31920b3bd88a65",
+            "width": 1024,
+            "height": 542,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/Zx00HhixsibcKrRPD6wG3Q--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/24_7_wall_st__718/d68b1d05ed3b99268b31920b3bd88a65",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "24/7 Wall St.",
+        "url": "https://247wallst.com/",
+        "sourceId": "24_7_wall_st__718"
+      },
+      "canonicalUrl": {
+        "url": "https://247wallst.com/investing/2026/06/11/spacex-is-minting-millionaires-and-maybe-even-a-trillionaire-it-also-might-the-offer-a-glimpse-of-the-future-of-americas-blue-collar-economy/",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/spacex-minting-millionaires-maybe-even-131326073.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

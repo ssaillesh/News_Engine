@@ -1,0 +1,195 @@
+{
+  "article_id": "def325eb-f4da-465a-aa88-bfff2b928d00",
+  "source": "yfinance",
+  "ticker": "GOOGL",
+  "title": "Google in talks with Samsung to make part of next-gen chip, The Information reports",
+  "url": "https://finance.yahoo.com/sectors/technology/articles/google-talks-samsung-next-generation-131006391.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:38:18.304304",
+  "sentences": [
+    "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter.",
+    "Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said.",
+    "The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom."
+  ],
+  "entities": [
+    {
+      "entity": "Google",
+      "raw_text": "Google",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 6,
+      "sentence_idx": 0,
+      "context_window": "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter. Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said. The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Samsung",
+      "raw_text": "Samsung",
+      "label": "ORG",
+      "start_char": 21,
+      "end_char": 28,
+      "sentence_idx": 0,
+      "context_window": "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter. Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said. The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "The Information",
+      "raw_text": "The Information",
+      "label": "ORG",
+      "start_char": 60,
+      "end_char": 75,
+      "sentence_idx": 0,
+      "context_window": "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter. Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said. The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Alphabet",
+      "raw_text": "Alphabet",
+      "label": "ORG",
+      "start_char": 84,
+      "end_char": 92,
+      "sentence_idx": 0,
+      "context_window": "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter. Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said. The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Samsung Electronics",
+      "raw_text": "Samsung Electronics",
+      "label": "ORG",
+      "start_char": 119,
+      "end_char": 138,
+      "sentence_idx": 0,
+      "context_window": "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter. Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said. The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Google",
+      "raw_text": "Google",
+      "label": "ORG",
+      "start_char": 273,
+      "end_char": 279,
+      "sentence_idx": 1,
+      "context_window": "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter. Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said. The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Tsmc",
+      "raw_text": "TSMC",
+      "label": "ORG",
+      "start_char": 299,
+      "end_char": 303,
+      "sentence_idx": 1,
+      "context_window": "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter. Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said. The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Samsung",
+      "raw_text": "Samsung",
+      "label": "ORG",
+      "start_char": 367,
+      "end_char": 374,
+      "sentence_idx": 1,
+      "context_window": "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter. Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said. The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Tsmc",
+      "raw_text": "TSMC",
+      "label": "ORG",
+      "start_char": 569,
+      "end_char": 573,
+      "sentence_idx": 2,
+      "context_window": "Google in talks with Samsung to make part of next-gen chip, The Information reports Alphabet's Google is in talks with Samsung Electronics to manufacture part of its ‌next-generation chip, The Information reported on Thursday, citing ‌two people familiar with the matter. Google plans for Taiwan's TSMC to ​make the main part of the chip, codenamed 'Icefish,' while Samsung may produce a separate component that helps connect it to memory using its 2-nanometer production technology, the report ‌said. The chip industry has ⁠been grappling with a capacity crunch, as TSMC, the world's largest contract chipmaker, works ⁠to keep up with surging demand and avoid becoming a bottleneck in the global supply chain amid the AI ​boom.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Google": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 2
+    },
+    "Samsung": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 2
+    },
+    "The Information": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Alphabet": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Samsung Electronics": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Tsmc": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 2
+    }
+  },
+  "embedding_id": "e40831b6-5d43-46d9-a209-3abe691b781d"
+}

@@ -1,0 +1,41 @@
+{
+  "article_id": "850fc42b-4c8a-4875-8145-4e9468688078",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "Microsoft is turning to AI to combat cyber threats",
+  "url": "https://finance.yahoo.com/markets/article/microsoft-is-turning-to-ai-to-combat-cyber-threats-181500134.html",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:44.984294",
+  "sentences": [
+    "Microsoft is turning to AI to combat cyber threats Microsoft is leaning on AI to help it fight back against hackers."
+  ],
+  "entities": [
+    {
+      "entity": "Microsoft",
+      "raw_text": "Microsoft",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 9,
+      "sentence_idx": 0,
+      "context_window": "Microsoft is turning to AI to combat cyber threats Microsoft is leaning on AI to help it fight back against hackers.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.5310173034667969,
+      "positive_score": 0.4578436315059662,
+      "negative_score": 0.011139086447656155,
+      "neutral_score": 0.5310173034667969
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.531,
+  "company_sentiments": {
+    "Microsoft": {
+      "label": "neutral",
+      "score": 0.5310173034667969,
+      "positive_score": 0.4578,
+      "negative_score": 0.0111,
+      "neutral_score": 0.531,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "bd02a68e-260d-4190-80af-9de83418a875"
+}

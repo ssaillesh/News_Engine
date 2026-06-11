@@ -1,0 +1,151 @@
+{
+  "article_id": "078ca34f-8f33-495c-921b-d63f1d3303b5",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Tech stocks today: Chip stocks pull back, Trump says he's meeting with AI executives",
+  "url": "https://finance.yahoo.com/sectors/technology/live/tech-stocks-today-chip-stocks-pull-back-trump-says-hes-meeting-with-ai-executives-120420030.html",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:36:25.704891",
+  "sentences": [
+    "Tech stocks today: Chip stocks pull back, Trump says he's meeting with AI executives Tech stocks are recovering from a brusing sell-off ahead of Oracle earnings, Apple's Worldwide Developers Conference, and the highly anticipated SpaceX IPO."
+  ],
+  "entities": [
+    {
+      "entity": "Ai",
+      "raw_text": "AI",
+      "label": "ORG",
+      "start_char": 71,
+      "end_char": 73,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chip stocks pull back, Trump says he's meeting with AI executives Tech stocks are recovering from a brusing sell-off ahead of Oracle earnings, Apple's Worldwide Developers Conference, and the highly anticipated SpaceX IPO.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Tech",
+      "raw_text": "Tech",
+      "label": "ORG",
+      "start_char": 85,
+      "end_char": 89,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chip stocks pull back, Trump says he's meeting with AI executives Tech stocks are recovering from a brusing sell-off ahead of Oracle earnings, Apple's Worldwide Developers Conference, and the highly anticipated SpaceX IPO.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Oracle",
+      "raw_text": "Oracle",
+      "label": "ORG",
+      "start_char": 145,
+      "end_char": 151,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chip stocks pull back, Trump says he's meeting with AI executives Tech stocks are recovering from a brusing sell-off ahead of Oracle earnings, Apple's Worldwide Developers Conference, and the highly anticipated SpaceX IPO.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Apple",
+      "raw_text": "Apple",
+      "label": "ORG",
+      "start_char": 162,
+      "end_char": 167,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chip stocks pull back, Trump says he's meeting with AI executives Tech stocks are recovering from a brusing sell-off ahead of Oracle earnings, Apple's Worldwide Developers Conference, and the highly anticipated SpaceX IPO.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Dev",
+      "raw_text": "Dev",
+      "label": "ORG",
+      "start_char": 180,
+      "end_char": 183,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chip stocks pull back, Trump says he's meeting with AI executives Tech stocks are recovering from a brusing sell-off ahead of Oracle earnings, Apple's Worldwide Developers Conference, and the highly anticipated SpaceX IPO.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "##Pers",
+      "raw_text": "##pers",
+      "label": "ORG",
+      "start_char": 186,
+      "end_char": 190,
+      "sentence_idx": 0,
+      "context_window": "Tech stocks today: Chip stocks pull back, Trump says he's meeting with AI executives Tech stocks are recovering from a brusing sell-off ahead of Oracle earnings, Apple's Worldwide Developers Conference, and the highly anticipated SpaceX IPO.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Ai": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Tech": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Oracle": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Apple": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Dev": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "##Pers": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "ab4ae9cd-4d6e-4124-854b-22fb0f52c01d"
+}

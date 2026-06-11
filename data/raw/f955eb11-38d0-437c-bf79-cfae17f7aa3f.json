@@ -1,0 +1,73 @@
+{
+  "article_id": "f955eb11-38d0-437c-bf79-cfae17f7aa3f",
+  "source": "yfinance",
+  "ticker": "NVDA",
+  "title": "Micron Technology Stock Is Falling. Should You Buy the Dip?",
+  "url": "https://www.fool.com/investing/2026/06/11/micron-technology-stock-is-falling-should-you-buy/",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.696003",
+  "full_text": "The looming SpaceX IPO and growing concern in the market about high valuations may be impacting Micron and other tech stocks of late.",
+  "summary": "The looming SpaceX IPO and growing concern in the market about high valuations may be impacting Micron and other tech stocks of late.",
+  "raw_payload": {
+    "id": "32be311a-3a3b-3633-8253-73c2181e206b",
+    "content": {
+      "id": "32be311a-3a3b-3633-8253-73c2181e206b",
+      "contentType": "STORY",
+      "title": "Micron Technology Stock Is Falling. Should You Buy the Dip?",
+      "description": "",
+      "summary": "The looming SpaceX IPO and growing concern in the market about high valuations may be impacting Micron and other tech stocks of late.",
+      "pubDate": "2026-06-11T14:20:00Z",
+      "displayTime": "2026-06-11T14:20:00Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/motleyfool.com/1fb755c6e6154d76e89ce153e775a4f2",
+        "originalWidth": 1400,
+        "originalHeight": 933,
+        "caption": "Investor analyzing a chart.",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/6LWHholVklRRiCQT_KAH1w--~B/aD05MzM7dz0xNDAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/motleyfool.com/1fb755c6e6154d76e89ce153e775a4f2",
+            "width": 1400,
+            "height": 933,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/50Qnn1CqVkPg5gnYsc6HQA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/motleyfool.com/1fb755c6e6154d76e89ce153e775a4f2",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Motley Fool",
+        "url": "http://www.fool.com/",
+        "sourceId": "motleyfool.com"
+      },
+      "canonicalUrl": {
+        "url": "https://www.fool.com/investing/2026/06/11/micron-technology-stock-is-falling-should-you-buy/",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/micron-technology-stock-falling-buy-142000673.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

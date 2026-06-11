@@ -1,0 +1,73 @@
+{
+  "article_id": "d3138a0e-a7d0-4b84-a520-f958bbd872ef",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Wall Street Is Ignoring This Part of the Market. That's Why I'm Interested.",
+  "url": "https://www.fool.com/investing/2026/06/11/wall-street-ignoring-this-part-of-market-small-cap/",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:17.893554",
+  "full_text": "Small caps trade at a 20% discount to large caps, but their earnings are about to grow faster. It's time to consider buying.",
+  "summary": "Small caps trade at a 20% discount to large caps, but their earnings are about to grow faster. It's time to consider buying.",
+  "raw_payload": {
+    "id": "de3a2da0-5a93-3a43-a7dd-a996307d04ef",
+    "content": {
+      "id": "de3a2da0-5a93-3a43-a7dd-a996307d04ef",
+      "contentType": "STORY",
+      "title": "Wall Street Is Ignoring This Part of the Market. That's Why I'm Interested.",
+      "description": "",
+      "summary": "Small caps trade at a 20% discount to large caps, but their earnings are about to grow faster. It's time to consider buying.",
+      "pubDate": "2026-06-11T12:40:00Z",
+      "displayTime": "2026-06-11T12:40:00Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/motleyfool.com/194cf38d09350ceab9e6a9248a19120e",
+        "originalWidth": 1400,
+        "originalHeight": 933,
+        "caption": "Financial statements with a note on top saying small cap.",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/i0T04zS.HO91JDRZ5MXQog--~B/aD05MzM7dz0xNDAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/motleyfool.com/194cf38d09350ceab9e6a9248a19120e",
+            "width": 1400,
+            "height": 933,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/9mtIMpj6Vruo9jEFPsBbPw--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/motleyfool.com/194cf38d09350ceab9e6a9248a19120e",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "Motley Fool",
+        "url": "http://www.fool.com/",
+        "sourceId": "motleyfool.com"
+      },
+      "canonicalUrl": {
+        "url": "https://www.fool.com/investing/2026/06/11/wall-street-ignoring-this-part-of-market-small-cap/",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-ignoring-part-market-124000534.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

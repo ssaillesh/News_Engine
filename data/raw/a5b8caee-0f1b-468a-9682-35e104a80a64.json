@@ -1,0 +1,73 @@
+{
+  "article_id": "a5b8caee-0f1b-468a-9682-35e104a80a64",
+  "source": "yfinance",
+  "ticker": "MSFT",
+  "title": "The Stock Market Isn’t Crashing. Investors Are Just Fleeing Technology Stocks.",
+  "url": "https://247wallst.com/investing/2026/06/11/the-stock-market-isnt-crashing-investors-are-just-fleeing-technology-stocks/",
+  "published_at": null,
+  "fetched_at": "2026-06-11T14:36:18.138503",
+  "full_text": "Whenever the Nasdaq 100 slides more than 4% in a single day, as it did on Friday, it can feel like the stock market is crashing. Undoubtedly, it’s never fun when stocks experience their worst days in some number of months or even years. After all, historic stock market crashes tend to happen shortly after ... The Stock Market Isn’t Crashing. Investors Are Just Fleeing Technology Stocks.",
+  "summary": "Whenever the Nasdaq 100 slides more than 4% in a single day, as it did on Friday, it can feel like the stock market is crashing. Undoubtedly, it’s never fun when stocks experience their worst days in some number of months or even years. After all, historic stock market crashes tend to happen shortly after ... The Stock Market Isn’t Crashing. Investors Are Just Fleeing Technology Stocks.",
+  "raw_payload": {
+    "id": "970373ec-b85a-3083-8f20-8f7cc8b909af",
+    "content": {
+      "id": "970373ec-b85a-3083-8f20-8f7cc8b909af",
+      "contentType": "STORY",
+      "title": "The Stock Market Isn’t Crashing. Investors Are Just Fleeing Technology Stocks.",
+      "description": "",
+      "summary": "Whenever the Nasdaq 100 slides more than 4% in a single day, as it did on Friday, it can feel like the stock market is crashing. Undoubtedly, it’s never fun when stocks experience their worst days in some number of months or even years. After all, historic stock market crashes tend to happen shortly after ... The Stock Market Isn’t Crashing. Investors Are Just Fleeing Technology Stocks.",
+      "pubDate": "2026-06-11T13:42:38Z",
+      "displayTime": "2026-06-11T13:42:38Z",
+      "isHosted": true,
+      "bypassModal": false,
+      "previewUrl": null,
+      "thumbnail": {
+        "originalUrl": "https://media.zenfs.com/en/24_7_wall_st__718/eef7aa9a397b7df1cea0f9b7d9d1963d",
+        "originalWidth": 1500,
+        "originalHeight": 946,
+        "caption": "",
+        "resolutions": [
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/blw4zuB_S2vXUto6Dtj1ew--~B/aD05NDY7dz0xNTAwO2FwcGlkPXl0YWNoeW9u/https://media.zenfs.com/en/24_7_wall_st__718/eef7aa9a397b7df1cea0f9b7d9d1963d",
+            "width": 1500,
+            "height": 946,
+            "tag": "original"
+          },
+          {
+            "url": "https://s.yimg.com/uu/api/res/1.2/65DsymO_WBa9CIm8E77piA--~B/Zmk9c3RyaW07aD0xMjg7dz0xNzA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/24_7_wall_st__718/eef7aa9a397b7df1cea0f9b7d9d1963d",
+            "width": 170,
+            "height": 128,
+            "tag": "170x128"
+          }
+        ]
+      },
+      "provider": {
+        "displayName": "24/7 Wall St.",
+        "url": "https://247wallst.com/",
+        "sourceId": "24_7_wall_st__718"
+      },
+      "canonicalUrl": {
+        "url": "https://247wallst.com/investing/2026/06/11/the-stock-market-isnt-crashing-investors-are-just-fleeing-technology-stocks/",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "clickThroughUrl": {
+        "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-isn-t-crashing-134238405.html",
+        "site": "finance",
+        "region": "US",
+        "lang": "en-US"
+      },
+      "metadata": {
+        "editorsPick": false
+      },
+      "finance": {
+        "premiumFinance": {
+          "isPremiumNews": false,
+          "isPremiumFreeNews": false
+        }
+      },
+      "storyline": null
+    }
+  }
+}

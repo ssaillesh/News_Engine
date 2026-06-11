@@ -1,0 +1,131 @@
+{
+  "article_id": "a8ed0d5f-5e3b-4eb3-a1f8-5546115e31c7",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "Citigroup Is Rolling Out Tokenized Shares of Private Companies",
+  "url": "https://www.wsj.com/finance/banking/citigroup-is-rolling-out-tokenized-shares-of-private-companies-64cd19ba?siteid=yhoof2&yptr=yahoo",
+  "published_at": null,
+  "processed_at": "2026-06-11T14:36:45.541281",
+  "sentences": [
+    "Citigroup Is Rolling Out Tokenized Shares of Private Companies Citigroup  is establishing a way for its wealthy and institutional clients to trade shares of private companies through a blockchain, a venture it hopes will be adopted by other banks across Wall Street.",
+    "The bank said it is in discussions with some of the largest private companies to get involved.",
+    "The venture is intended to broaden access to private firms at the same time companies are taking longer to go public, and Wall Street has been in a frenzy over the coming blockbuster stock-market debuts of SpaceX, Anthropic and others."
+  ],
+  "entities": [
+    {
+      "entity": "Citigroup Is",
+      "raw_text": "Citigroup Is",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 12,
+      "sentence_idx": 0,
+      "context_window": "Citigroup Is Rolling Out Tokenized Shares of Private Companies Citigroup  is establishing a way for its wealthy and institutional clients to trade shares of private companies through a blockchain, a venture it hopes will be adopted by other banks across Wall Street. The bank said it is in discussions with some of the largest private companies to get involved. The venture is intended to broaden access to private firms at the same time companies are taking longer to go public, and Wall Street has been in a frenzy over the coming blockbuster stock-market debuts of SpaceX, Anthropic and others.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Citigroup",
+      "raw_text": "Citigroup",
+      "label": "ORG",
+      "start_char": 63,
+      "end_char": 72,
+      "sentence_idx": 0,
+      "context_window": "Citigroup Is Rolling Out Tokenized Shares of Private Companies Citigroup  is establishing a way for its wealthy and institutional clients to trade shares of private companies through a blockchain, a venture it hopes will be adopted by other banks across Wall Street. The bank said it is in discussions with some of the largest private companies to get involved. The venture is intended to broaden access to private firms at the same time companies are taking longer to go public, and Wall Street has been in a frenzy over the coming blockbuster stock-market debuts of SpaceX, Anthropic and others.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "Spacex",
+      "raw_text": "SpaceX",
+      "label": "ORG",
+      "start_char": 570,
+      "end_char": 576,
+      "sentence_idx": 2,
+      "context_window": "Citigroup Is Rolling Out Tokenized Shares of Private Companies Citigroup  is establishing a way for its wealthy and institutional clients to trade shares of private companies through a blockchain, a venture it hopes will be adopted by other banks across Wall Street. The bank said it is in discussions with some of the largest private companies to get involved. The venture is intended to broaden access to private firms at the same time companies are taking longer to go public, and Wall Street has been in a frenzy over the coming blockbuster stock-market debuts of SpaceX, Anthropic and others.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "An",
+      "raw_text": "An",
+      "label": "ORG",
+      "start_char": 578,
+      "end_char": 580,
+      "sentence_idx": 2,
+      "context_window": "Citigroup Is Rolling Out Tokenized Shares of Private Companies Citigroup  is establishing a way for its wealthy and institutional clients to trade shares of private companies through a blockchain, a venture it hopes will be adopted by other banks across Wall Street. The bank said it is in discussions with some of the largest private companies to get involved. The venture is intended to broaden access to private firms at the same time companies are taking longer to go public, and Wall Street has been in a frenzy over the coming blockbuster stock-market debuts of SpaceX, Anthropic and others.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    },
+    {
+      "entity": "##Ic",
+      "raw_text": "##ic",
+      "label": "ORG",
+      "start_char": 585,
+      "end_char": 587,
+      "sentence_idx": 2,
+      "context_window": "Citigroup Is Rolling Out Tokenized Shares of Private Companies Citigroup  is establishing a way for its wealthy and institutional clients to trade shares of private companies through a blockchain, a venture it hopes will be adopted by other banks across Wall Street. The bank said it is in discussions with some of the largest private companies to get involved. The venture is intended to broaden access to private firms at the same time companies are taking longer to go public, and Wall Street has been in a frenzy over the coming blockbuster stock-market debuts of SpaceX, Anthropic and others.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 1.0,
+  "company_sentiments": {
+    "Citigroup Is": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Citigroup": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "Spacex": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "An": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    },
+    "##Ic": {
+      "label": "neutral",
+      "score": 1.0,
+      "positive_score": 0.0,
+      "negative_score": 0.0,
+      "neutral_score": 1.0,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "a66c081c-f7d7-4b85-bfa4-8b50cb67c65b"
+}

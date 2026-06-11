@@ -1,0 +1,41 @@
+{
+  "article_id": "92491d6e-7fac-48cd-92fa-f71d4232e8fb",
+  "source": "yfinance",
+  "ticker": "AAPL",
+  "title": "AI is carrying the S&P 500 rally: Chart of the Day",
+  "url": "https://finance.yahoo.com/markets/article/ai-is-carrying-the-sp-500-rally-chart-of-the-day-100000546.html",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:41.733512",
+  "sentences": [
+    "AI is carrying the S&P 500 rally: Chart of the Day The S&P 500's rebound looks a lot thinner once AI enablers are stripped out."
+  ],
+  "entities": [
+    {
+      "entity": "Ai",
+      "raw_text": "AI",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 2,
+      "sentence_idx": 0,
+      "context_window": "AI is carrying the S&P 500 rally: Chart of the Day The S&P 500's rebound looks a lot thinner once AI enablers are stripped out.",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.35389670729637146,
+      "positive_score": 0.32859230041503906,
+      "negative_score": 0.31751102209091187,
+      "neutral_score": 0.35389670729637146
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.3539,
+  "company_sentiments": {
+    "Ai": {
+      "label": "neutral",
+      "score": 0.35389670729637146,
+      "positive_score": 0.3286,
+      "negative_score": 0.3175,
+      "neutral_score": 0.3539,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "b4db58f3-9979-4ef5-9b54-f66b49b2f720"
+}

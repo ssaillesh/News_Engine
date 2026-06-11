@@ -1,0 +1,109 @@
+{
+  "article_id": "a30190c2-1150-4af1-9536-8bec735d032d",
+  "source": "yfinance",
+  "ticker": "TSLA",
+  "title": "Tesla bull drops blunt take on gold rival",
+  "url": "https://www.thestreet.com/crypto/markets/tesla-bull-drops-blunt-take-on-gold-rival",
+  "published_at": null,
+  "processed_at": "2026-06-03T04:58:48.773793",
+  "sentences": [
+    "Tesla bull drops blunt take on gold rival Tesla bull Ross Gerber just took a sharp swing at Bitcoin (BTC).",
+    "This comes at a time when \"king crypto\" has slipped below its $70,000 mark for the first time since April, while its rival, gold, continues to hold the fort in green.",
+    "Gerber is the co-founder and CEO of Gerber Kawasaki Wealth ..."
+  ],
+  "entities": [
+    {
+      "entity": "Tesla",
+      "raw_text": "Tesla",
+      "label": "ORG",
+      "start_char": 0,
+      "end_char": 5,
+      "sentence_idx": 0,
+      "context_window": "Tesla bull drops blunt take on gold rival Tesla bull Ross Gerber just took a sharp swing at Bitcoin (BTC). This comes at a time when \"king crypto\" has slipped below its $70,000 mark for the first time since April, while its rival, gold, continues to hold the fort in green. Gerber is the co-founder and CEO of Gerber Kawasaki Wealth ...",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.564489483833313,
+      "positive_score": 0.0874839574098587,
+      "negative_score": 0.3480266034603119,
+      "neutral_score": 0.564489483833313
+    },
+    {
+      "entity": "Bitcoin",
+      "raw_text": "Bitcoin",
+      "label": "ORG",
+      "start_char": 92,
+      "end_char": 99,
+      "sentence_idx": 0,
+      "context_window": "Tesla bull drops blunt take on gold rival Tesla bull Ross Gerber just took a sharp swing at Bitcoin (BTC). This comes at a time when \"king crypto\" has slipped below its $70,000 mark for the first time since April, while its rival, gold, continues to hold the fort in green. Gerber is the co-founder and CEO of Gerber Kawasaki Wealth ...",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.564489483833313,
+      "positive_score": 0.0874839574098587,
+      "negative_score": 0.3480266034603119,
+      "neutral_score": 0.564489483833313
+    },
+    {
+      "entity": "Btc",
+      "raw_text": "BTC",
+      "label": "ORG",
+      "start_char": 101,
+      "end_char": 104,
+      "sentence_idx": 0,
+      "context_window": "Tesla bull drops blunt take on gold rival Tesla bull Ross Gerber just took a sharp swing at Bitcoin (BTC). This comes at a time when \"king crypto\" has slipped below its $70,000 mark for the first time since April, while its rival, gold, continues to hold the fort in green. Gerber is the co-founder and CEO of Gerber Kawasaki Wealth ...",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.564489483833313,
+      "positive_score": 0.0874839574098587,
+      "negative_score": 0.3480266034603119,
+      "neutral_score": 0.564489483833313
+    },
+    {
+      "entity": "Gerber Kawasaki Wealth",
+      "raw_text": "Gerber Kawasaki Wealth",
+      "label": "ORG",
+      "start_char": 310,
+      "end_char": 332,
+      "sentence_idx": 2,
+      "context_window": "Tesla bull drops blunt take on gold rival Tesla bull Ross Gerber just took a sharp swing at Bitcoin (BTC). This comes at a time when \"king crypto\" has slipped below its $70,000 mark for the first time since April, while its rival, gold, continues to hold the fort in green. Gerber is the co-founder and CEO of Gerber Kawasaki Wealth ...",
+      "sentiment_label": "neutral",
+      "sentiment_score": 0.564489483833313,
+      "positive_score": 0.0874839574098587,
+      "negative_score": 0.3480266034603119,
+      "neutral_score": 0.564489483833313
+    }
+  ],
+  "article_sentiment_label": "neutral",
+  "article_sentiment_score": 0.5645,
+  "company_sentiments": {
+    "Tesla": {
+      "label": "neutral",
+      "score": 0.564489483833313,
+      "positive_score": 0.0875,
+      "negative_score": 0.348,
+      "neutral_score": 0.5645,
+      "mentions": 1
+    },
+    "Bitcoin": {
+      "label": "neutral",
+      "score": 0.564489483833313,
+      "positive_score": 0.0875,
+      "negative_score": 0.348,
+      "neutral_score": 0.5645,
+      "mentions": 1
+    },
+    "Btc": {
+      "label": "neutral",
+      "score": 0.564489483833313,
+      "positive_score": 0.0875,
+      "negative_score": 0.348,
+      "neutral_score": 0.5645,
+      "mentions": 1
+    },
+    "Gerber Kawasaki Wealth": {
+      "label": "neutral",
+      "score": 0.564489483833313,
+      "positive_score": 0.0875,
+      "negative_score": 0.348,
+      "neutral_score": 0.5645,
+      "mentions": 1
+    }
+  },
+  "embedding_id": "61bc2dd5-24eb-4e59-b41e-459ac3b18305"
+}
