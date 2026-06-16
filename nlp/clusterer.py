@@ -10,19 +10,13 @@ Steps:
 """
 from __future__ import annotations
 
+import importlib
 from collections import defaultdict
 from datetime import datetime, timezone, timedelta
 from typing import Dict, List
 
 import numpy as np
 from loguru import logger
-
-try:
-    import hdbscan
-    _HDBSCAN_AVAILABLE = True
-except ImportError:
-    _HDBSCAN_AVAILABLE = False
-    logger.warning("hdbscan not installed — falling back to DBSCAN")
 
 from config.models import CompanyEventSentiment, NewsEvent, ProcessedArticle
 from config.settings import MIN_CLUSTER_SIZE
@@ -33,10 +27,60 @@ from nlp.embedder import get_all_article_vectors, add_event_embedding
 # Clustering
 # ─────────────────────────────────────────────────────────────────────────────
 
+def _run_fallback_clustering(matrix: np.ndarray) -> np.ndarray:
+    """Cluster normalized vectors with a cosine-similarity connected-components fallback."""
+    if matrix.size == 0:
+        return np.empty((0,), dtype=int)
+
+    norms = np.linalg.norm(matrix, axis=1, keepdims=True)
+    norms[norms == 0] = 1.0
+    normalized = matrix / norms
+
+    # all-MiniLM-L6-v2 embeddings are already cosine-friendly; 0.70 matches the
+    # previous DBSCAN cosine distance threshold of 0.3 reasonably well.
+    similarity = normalized @ normalized.T
+    adjacency = similarity >= 0.70
+    np.fill_diagonal(adjacency, False)
+
+    labels = np.full(matrix.shape[0], -1, dtype=int)
+    visited = np.zeros(matrix.shape[0], dtype=bool)
+    cluster_id = 0
+
+    for seed in range(matrix.shape[0]):
+        if visited[seed]:
+            continue
+
+        stack = [seed]
+        component = []
+        visited[seed] = True
+
+        while stack:
+            node = stack.pop()
+            component.append(node)
+
+            neighbors = np.where(adjacency[node] & ~visited)[0]
+            for neighbor in neighbors:
+                visited[neighbor] = True
+                stack.append(int(neighbor))
+
+        if len(component) >= MIN_CLUSTER_SIZE:
+            labels[np.array(component)] = cluster_id
+            cluster_id += 1
+
+    return labels
+
 def _run_clustering(matrix: np.ndarray) -> np.ndarray:
     """Returns integer cluster labels (N,). Label -1 = noise."""
-    if _HDBSCAN_AVAILABLE:
-        clusterer = hdbscan.HDBSCAN(
+    if matrix.size == 0:
+        return np.empty((0,), dtype=int)
+
+    try:
+        hdbscan_module = importlib.import_module("hdbscan")
+    except ImportError:
+        hdbscan_module = None
+
+    if hdbscan_module is not None:
+        clusterer = hdbscan_module.HDBSCAN(
             min_cluster_size=MIN_CLUSTER_SIZE,
             min_samples=1,
             metric="euclidean",
@@ -44,10 +88,15 @@ def _run_clustering(matrix: np.ndarray) -> np.ndarray:
         )
         labels = clusterer.fit_predict(matrix)
     else:
-        from sklearn.cluster import DBSCAN
-        labels = DBSCAN(
-            eps=0.3, min_samples=MIN_CLUSTER_SIZE, metric="cosine"
-        ).fit_predict(matrix)
+        try:
+            sklearn_cluster = importlib.import_module("sklearn.cluster")
+        except ImportError:
+            logger.warning("hdbscan and scikit-learn are unavailable; using local clustering fallback")
+            labels = _run_fallback_clustering(matrix)
+        else:
+            labels = sklearn_cluster.DBSCAN(
+                eps=0.3, min_samples=MIN_CLUSTER_SIZE, metric="cosine"
+            ).fit_predict(matrix)
 
     n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     n_noise    = int((labels == -1).sum())

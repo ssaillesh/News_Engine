@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NLP News Intelligence</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; }
@@ -98,6 +99,30 @@
     .ftab-active-neg { background:rgba(244,63,94,.1); border-color:rgba(244,63,94,.3); color:#f43f5e; }
     .ftab-active-neu { background:rgba(100,116,139,.1); border-color:rgba(100,116,139,.3); color:#94a3b8; }
 
+    /* ── Top-level view tabs ────────────────────────────── */
+    .vtab {
+      padding: 6px 14px; border-radius: 7px;
+      font-size: 11px; font-weight: 700; letter-spacing: .03em;
+      cursor: pointer; transition: all 0.15s;
+      color: #64748b; background: #0d1526; border: 1px solid #1a2d4a;
+    }
+    .vtab:hover { color: #94a3b8; border-color: #2d5a8c; }
+    .vtab-active {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(2,132,199,.25), rgba(124,58,237,.25));
+      border-color: rgba(6,182,212,.45);
+    }
+
+    /* ── Market card ────────────────────────────────────── */
+    .mkt-card {
+      background: #0a1628; border: 1px solid #1a2d4a; border-radius: 10px;
+      padding: 12px 14px; display: flex; flex-direction: column; min-width: 0;
+    }
+    .corr-pill {
+      font-size: 9px; font-weight: 800; font-family: monospace;
+      padding: 1px 6px; border-radius: 4px; letter-spacing: .03em;
+    }
+
     /* ── Company rows ───────────────────────────────────── */
     .co-row {
       padding: 10px 14px;
@@ -154,6 +179,10 @@
         <div style="font-size:10px; color:#3d5a80; letter-spacing:.03em;">BERT-NER · ProsusAI/FinBERT · HDBSCAN</div>
       </div>
     </div>
+    <nav style="display:flex; gap:6px;">
+      <button id="nav-sentiment" class="vtab vtab-active" onclick="switchView('sentiment')">📊 Live Sentiment</button>
+      <button id="nav-market" class="vtab" onclick="switchView('market')">📈 Market Correlation</button>
+    </nav>
     <div style="display:flex; align-items:center; gap:12px;">
       <span id="last-refresh" style="font-size:10px; color:#3d5a80;"></span>
       <div style="display:flex; align-items:center; gap:7px; background:#0d1526; border:1px solid #1a2d4a; padding:5px 10px; border-radius:20px;">
@@ -171,6 +200,9 @@
     <div class="ticker-tape" id="ticker-tape" style="font-size:10px; color:#3d5a80;"></div>
   </div>
 </header>
+
+<!-- ══════════════════════════ SENTIMENT VIEW (existing) ══════════════════════════ -->
+<div id="view-sentiment" style="display:flex; flex-direction:column; flex:1; min-height:0;">
 
 <!-- ══════════════════════════ HEADLINE ══════════════════════════ -->
 <div id="headline-banner" style="flex-shrink:0; padding:10px 20px; background:#0a1628; border-bottom:1px solid #1a2d4a;">
@@ -281,6 +313,45 @@
       </div>
     </div>
   </aside>
+</div>
+</div><!-- /view-sentiment -->
+
+<!-- ══════════════════════════ MARKET CORRELATION VIEW ══════════════════════════ -->
+<div id="view-market" style="display:none; flex:1; min-height:0; overflow-y:auto; padding:16px 18px; background:#060d1a;">
+
+  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:14px; flex-wrap:wrap;">
+    <div>
+      <div style="font-size:15px; font-weight:800; color:#fff; letter-spacing:-.01em;">Sentiment&nbsp;×&nbsp;Price Correlation</div>
+      <div id="mkt-meta" style="font-size:11px; color:#3d5a80; margin-top:3px;">Loading market data…</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span id="mkt-updated" style="font-size:10px; color:#3d5a80;"></span>
+      <button id="mkt-recompute" onclick="loadMarket(true)"
+        style="background:linear-gradient(135deg,#0284c7,#6d28d9); color:#fff; border:none; font-size:11px; font-weight:700; padding:6px 14px; border-radius:7px; cursor:pointer;"
+        onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">↻ Recompute</button>
+    </div>
+  </div>
+
+  <!-- Lag summary: does sentiment precede price moves? -->
+  <div class="mkt-card" style="margin-bottom:14px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+      <div style="font-size:12px; font-weight:800; color:#e2e8f0;">Does sentiment <em>precede</em> price moves?</div>
+      <div style="font-size:10px; color:#3d5a80;">Pearson r · sentiment vs return <strong>N trading days later</strong></div>
+    </div>
+    <div style="height:230px; position:relative;"><canvas id="mkt-lagchart"></canvas></div>
+  </div>
+
+  <!-- Per-ticker price vs sentiment -->
+  <div id="mkt-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(440px,1fr)); gap:14px;">
+    <div style="display:flex; align-items:center; gap:8px; color:#3d5a80; font-size:13px; padding:16px;">
+      <div class="spinner"></div> Loading market data…
+    </div>
+  </div>
+
+  <div style="margin-top:16px; font-size:10px; color:#3d5a80; line-height:1.6;">
+    Sentiment is the signed daily news polarity (−1…+1) from FinBERT, aligned to the next trading day.
+    With a sparse corpus most correlations are <strong>not yet statistically significant</strong> (p&gt;0.05) — read as directional.
+  </div>
 </div>
 
 <!-- ══════════════════════════ SCRIPT ══════════════════════════ -->
@@ -662,10 +733,195 @@ async function loadLeaderboard() {
   }
 }
 
+// ══════════════════════════ MARKET CORRELATION VIEW ══════════════════════════
+const TICKER_COLORS = ['#06b6d4','#a855f7','#10b981','#f59e0b','#f43f5e','#3b82f6','#ec4899'];
+let _marketLoaded = false;
+let _mktCharts = [];
+let _lagChart = null;
+
+function switchView(name) {
+  const isMkt = name === 'market';
+  document.getElementById('view-sentiment').style.display = isMkt ? 'none' : 'flex';
+  document.getElementById('view-market').style.display    = isMkt ? 'block' : 'none';
+  document.getElementById('nav-sentiment').className = 'vtab' + (isMkt ? '' : ' vtab-active');
+  document.getElementById('nav-market').className    = 'vtab' + (isMkt ? ' vtab-active' : '');
+  if (isMkt && !_marketLoaded) { _marketLoaded = true; loadMarket(false); }
+}
+
+function destroyMktCharts() {
+  _mktCharts.forEach(c => { try { c.destroy(); } catch (e) {} });
+  _mktCharts = [];
+  if (_lagChart) { try { _lagChart.destroy(); } catch (e) {} _lagChart = null; }
+}
+
+function corrPillStyle(r) {
+  if (r == null) return 'background:rgba(71,85,105,.2);color:#64748b;';
+  return r > 0 ? 'background:rgba(16,185,129,.15);color:#10b981;'
+               : 'background:rgba(244,63,94,.15);color:#f43f5e;';
+}
+
+async function loadMarket(force) {
+  const meta = document.getElementById('mkt-meta');
+  const grid = document.getElementById('mkt-grid');
+  const btn  = document.getElementById('mkt-recompute');
+  if (btn) { btn.disabled = true; btn.style.opacity = '.6'; }
+  if (force) meta.textContent = 'Recomputing from latest news + live prices…';
+  try {
+    const url = `${API}/analysis/correlation?tickers=AAPL,MSFT,TSLA,NVDA&max_lag=3${force ? '&refresh=1' : ''}`;
+    const data = await fetch(url).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+    renderMarket(data);
+  } catch (err) {
+    grid.innerHTML = `<div style="padding:16px;font-size:12px;color:#f43f5e;">Failed to load market data: ${err.message}</div>`;
+    meta.textContent = 'Error';
+  } finally {
+    if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+  }
+}
+
+function renderMarket(data) {
+  destroyMktCharts();
+  const meta = document.getElementById('mkt-meta');
+  const grid = document.getElementById('mkt-grid');
+  const tickers = data.tickers || {};
+  const syms = Object.keys(tickers);
+
+  document.getElementById('mkt-updated').textContent =
+    data.generated_at ? 'Computed ' + new Date(data.generated_at).toLocaleString() : '';
+
+  if (!syms.length) {
+    meta.textContent = 'No overlapping sentiment + price data yet — run the pipeline to ingest news.';
+    grid.innerHTML = `<div style="padding:16px;font-size:12px;color:#3d5a80;">Nothing to correlate yet.</div>`;
+    return;
+  }
+  const span = data.span ? `${data.span.start} → ${data.span.end}` : '';
+  meta.textContent = `${syms.length} tickers · sentiment span ${span} · close-to-close returns`;
+
+  // ── Lag summary chart: grouped bars (ticker × lag) ──
+  const maxLag = data.max_lag != null ? data.max_lag : 3;
+  const lagLabels = [];
+  for (let l = 0; l <= maxLag; l++) lagLabels.push('+' + l + 'd');
+  const lagDatasets = syms.map((s, i) => ({
+    label: s,
+    data: lagLabels.map((_, lag) => {
+      const c = (tickers[s].correlations || []).find(x => x.lag === lag);
+      return c ? c.r : null;
+    }),
+    backgroundColor: TICKER_COLORS[i % TICKER_COLORS.length],
+    borderRadius: 3,
+  }));
+  _lagChart = new Chart(document.getElementById('mkt-lagchart'), {
+    type: 'bar',
+    data: { labels: lagLabels, datasets: lagDatasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: {
+        x: { grid: { color: '#0d1a2a' }, ticks: { color: '#94a3b8', font: { size: 11 } },
+             title: { display: true, text: 'News lead time — trading days from sentiment to price move (+0d = same day)',
+                      color: '#94a3b8', font: { size: 10, weight: '700' } } },
+        y: { suggestedMin: -0.5, suggestedMax: 0.5, grid: { color: '#0d1a2a' },
+             ticks: { color: '#64748b', callback: v => (v > 0 ? '+' : '') + v },
+             title: { display: true, text: 'Correlation: sentiment → return (Pearson r, −1 … +1)',
+                      color: '#94a3b8', font: { size: 10, weight: '700' } } },
+      },
+      plugins: {
+        legend: { title: { display: true, text: 'Ticker', color: '#64748b', font: { size: 10 } },
+                  labels: { color: '#94a3b8', boxWidth: 12 } },
+        tooltip: { callbacks: {
+          title: items => items.length ? `Sentiment vs return ${items[0].label} later` : '',
+          label: c => {
+            if (c.raw == null) return `${c.dataset.label}: no data`;
+            const dir = c.raw > 0.05 ? ' (price follows sentiment)' : c.raw < -0.05 ? ' (price moves opposite)' : '';
+            return `${c.dataset.label}: r = ${c.raw >= 0 ? '+' : ''}${c.raw.toFixed(2)}${dir}`;
+          } } },
+      },
+    },
+  });
+
+  // ── Per-ticker price-vs-sentiment cards ──
+  grid.innerHTML = syms.map(s => {
+    const t = tickers[s];
+    const bestTxt = t.best ? `r=${t.best.r.toFixed(2)} @ +${t.best.lag}d (p=${t.best.p.toFixed(2)})` : 'n/a';
+    const corrRows = (t.correlations || []).map(c =>
+      `<span class="corr-pill" style="${corrPillStyle(c.r)}">+${c.lag}d ${c.r == null ? 'n/a' : c.r.toFixed(2)}</span>`
+    ).join(' ');
+    return `
+    <div class="mkt-card">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:14px; font-weight:800; color:#fff; font-family:monospace;">${s}</span>
+          <span style="font-size:10px; color:#3d5a80;">${t.n_sentiment_days} sentiment days</span>
+        </div>
+        <span style="font-size:10px; color:#94a3b8;">best ${bestTxt}</span>
+      </div>
+      <div style="height:200px; position:relative;"><canvas id="mkt-chart-${s}"></canvas></div>
+      <div style="display:flex; gap:5px; flex-wrap:wrap; margin-top:8px;">${corrRows}</div>
+    </div>`;
+  }).join('');
+
+  // charts must be created after the canvases exist in the DOM
+  syms.forEach((s, i) => {
+    const t = tickers[s];
+    const ctx = document.getElementById('mkt-chart-' + s);
+    if (!ctx) return;
+    const sentColors = t.sentiment.map(v =>
+      v == null ? 'rgba(0,0,0,0)' : (v >= 0 ? 'rgba(16,185,129,.8)' : 'rgba(244,63,94,.8)'));
+    const lineColor = TICKER_COLORS[i % TICKER_COLORS.length];
+    const chart = new Chart(ctx, {
+      data: {
+        labels: t.dates,
+        datasets: [
+          { type: 'line', label: `${s} close price`, data: t.close, yAxisID: 'price',
+            borderColor: lineColor, borderWidth: 1.8,
+            pointRadius: 0, tension: 0.15, order: 0 },
+          { type: 'bar', label: 'Daily news sentiment', data: t.sentiment, yAxisID: 'sent',
+            backgroundColor: sentColors, maxBarThickness: 6, order: 1 },
+        ],
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        scales: {
+          x: { grid: { display: false },
+               ticks: { color: '#3d5a80', maxTicksLimit: 7, font: { size: 9 }, autoSkip: true },
+               title: { display: true, text: 'Trading day', color: '#64748b', font: { size: 10 } } },
+          price: { position: 'left', grid: { color: '#0d1a2a' },
+                   ticks: { color: '#64748b', font: { size: 9 }, callback: v => '$' + v },
+                   title: { display: true, text: 'Stock close price (USD)', color: '#94a3b8', font: { size: 10, weight: '700' } } },
+          sent: { position: 'right', min: -1, max: 1, grid: { display: false },
+                  ticks: { color: '#64748b', font: { size: 9 }, stepSize: 0.5 },
+                  title: { display: true, text: 'News sentiment score (−1 … +1)', color: '#94a3b8', font: { size: 10, weight: '700' } } },
+        },
+        plugins: {
+          legend: {
+            display: true, position: 'top', align: 'end',
+            onClick: () => {},
+            labels: {
+              color: '#94a3b8', boxWidth: 14, boxHeight: 10, font: { size: 10 }, padding: 10, usePointStyle: true,
+              generateLabels: () => [
+                { text: 'Close price', fillStyle: lineColor, strokeStyle: lineColor, lineWidth: 2, pointStyle: 'line' },
+                { text: 'Positive sentiment', fillStyle: 'rgba(16,185,129,.8)', strokeStyle: 'rgba(16,185,129,.8)', pointStyle: 'rect' },
+                { text: 'Negative sentiment', fillStyle: 'rgba(244,63,94,.8)', strokeStyle: 'rgba(244,63,94,.8)', pointStyle: 'rect' },
+              ],
+            },
+          },
+          tooltip: { callbacks: {
+            title: items => items.length ? `Trading day: ${items[0].label}` : '',
+            label: c => c.dataset.yAxisID === 'sent'
+              ? (c.raw == null ? null : `News sentiment: ${c.raw >= 0 ? '+' : ''}${c.raw.toFixed(2)} (${c.raw >= 0 ? 'positive' : 'negative'})`)
+              : `Close price: $${c.raw == null ? '' : c.raw.toFixed(2)}` } },
+        },
+      },
+    });
+    _mktCharts.push(chart);
+  });
+}
+
 async function loadAll() {
   await checkHealth();
   await Promise.all([loadHeadline(), loadStats(), loadNews(), loadLeaderboard()]);
   document.getElementById('last-refresh').textContent = 'Updated ' + new Date().toLocaleTimeString();
+  // keep the market tab fresh when it's the one being viewed (server caches ~10 min)
+  if (document.getElementById('view-market').style.display !== 'none') loadMarket(false);
 }
 
 loadAll();

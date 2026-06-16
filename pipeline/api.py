@@ -155,3 +155,41 @@ def get_article(article_id: str):
     if not article:
         raise HTTPException(status_code=404, detail="Article not found")
     return article
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Market correlation (sentiment ↔ stock price) — powers the dashboard's
+# "Market Correlation" tab. Computed live from the current nlp_processed store +
+# yfinance, cached briefly so a browser auto-refresh doesn't hammer Yahoo.
+# ─────────────────────────────────────────────────────────────────────────────
+import time as _time
+
+_CORR_TTL_SECONDS = 600  # 10 min
+_corr_cache: dict = {"key": None, "at": 0.0, "data": None}
+
+
+@app.get("/analysis/correlation")
+def analysis_correlation(
+    tickers: str = Query("AAPL,MSFT,TSLA,NVDA", description="Comma-separated symbols"),
+    max_lag: int = Query(3, ge=0, le=10),
+    refresh: bool = Query(False, description="Bypass the cache and recompute now"),
+):
+    symbols = [t.strip().upper() for t in tickers.split(",") if t.strip()]
+    if not symbols:
+        raise HTTPException(status_code=400, detail="No tickers given")
+
+    key = (tuple(symbols), max_lag)
+    now = _time.time()
+    cached = _corr_cache
+    if not refresh and cached["key"] == key and (now - cached["at"]) < _CORR_TTL_SECONDS:
+        return cached["data"]
+
+    try:
+        from analysis.sentiment_stock_correlation import build_payload
+        data = build_payload(tickers=symbols, max_lag=max_lag)
+    except Exception as exc:  # missing deps, network, etc.
+        logger.error(f"correlation build failed: {exc}")
+        raise HTTPException(status_code=503, detail=f"Correlation unavailable: {exc}")
+
+    _corr_cache.update(key=key, at=now, data=data)
+    return data

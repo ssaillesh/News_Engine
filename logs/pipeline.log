@@ -17147,3 +17147,7 @@ See the vulnerability report here https://nvd.nist.gov/vuln/detail/CVE-2025-3243
 2026-06-11 11:45:56.800 | INFO     | pipeline.api:startup:55 - API started — PostgreSQL schema ensured
 2026-06-11 11:47:49.529 | INFO     | storage.store:init_db:166 - PostgreSQL schema initialised.
 2026-06-11 11:47:49.531 | INFO     | pipeline.api:startup:55 - API started — PostgreSQL schema ensured
+2026-06-16 05:29:52.982 | INFO     | storage.store:init_db:166 - PostgreSQL schema initialised.
+2026-06-16 05:29:52.982 | INFO     | pipeline.api:startup:55 - API started — PostgreSQL schema ensured
+2026-06-16 13:21:10.409 | INFO     | storage.store:init_db:166 - PostgreSQL schema initialised.
+2026-06-16 13:21:10.413 | INFO     | pipeline.api:startup:55 - API started — PostgreSQL schema ensured
