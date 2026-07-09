@@ -44,6 +44,15 @@ SENTIMENT_MODEL: str = os.getenv("SENTIMENT_MODEL", "ProsusAI/finbert")
 EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
 TORCH_DEVICE:    str = os.getenv("TORCH_DEVICE",    "cpu")
 
+# ── Auto-refresh (background news ingestion inside the API server) ──────────
+AUTO_REFRESH_ENABLED:  bool = os.getenv("AUTO_REFRESH_ENABLED", "1") not in ("0", "false", "False")
+AUTO_REFRESH_INTERVAL: int  = int(os.getenv("AUTO_REFRESH_INTERVAL", "600"))  # seconds
+AUTO_REFRESH_TICKERS:  list = [
+    t.strip().upper()
+    for t in os.getenv("AUTO_REFRESH_TICKERS", "AAPL,MSFT,TSLA,NVDA").split(",")
+    if t.strip()
+]
+
 # ── Pipeline Tuning ───────────────────────────────────────────────────────────
 DEDUP_SIMILARITY_THRESHOLD: float = float(os.getenv("DEDUP_SIMILARITY_THRESHOLD", "0.92"))
 SENTIMENT_WINDOW_SIZE:      int   = int(os.getenv("SENTIMENT_WINDOW_SIZE",        "2"))

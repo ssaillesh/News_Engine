@@ -6,12 +6,13 @@ services:
   postgres:
     image: postgres:15-alpine
     container_name: nlp_postgres
+    restart: unless-stopped
     environment:
       POSTGRES_USER:     nlp_user
       POSTGRES_PASSWORD: nlp_password
       POSTGRES_DB:       nlp_pipeline
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"   # localhost only — never expose Postgres publicly
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -24,8 +25,9 @@ services:
   redis:
     image: redis:7-alpine
     container_name: nlp_redis
+    restart: unless-stopped
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"   # localhost only
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes
@@ -39,6 +41,7 @@ services:
   api:
     build: .
     container_name: nlp_api
+    restart: unless-stopped
     ports:
       - "8000:8000"
     env_file:
@@ -49,6 +52,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs
+      - hf_cache:/root/.cache/huggingface   # models download once, survive restarts
     depends_on:
       postgres:
         condition: service_healthy
@@ -68,6 +72,7 @@ services:
     volumes:
       - ./data:/app/data
       - ./logs:/app/logs
+      - hf_cache:/root/.cache/huggingface
     depends_on:
       postgres:
         condition: service_healthy
@@ -80,3 +85,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  hf_cache:

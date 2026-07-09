@@ -204,6 +204,15 @@
 <!-- ══════════════════════════ SENTIMENT VIEW (existing) ══════════════════════════ -->
 <div id="view-sentiment" style="display:flex; flex-direction:column; flex:1; min-height:0;">
 
+<!-- ══════════════════════════ LATEST STORY ══════════════════════════ -->
+<div id="latest-story" style="display:none; flex-shrink:0; padding:6px 20px; background:#0d1526; border-bottom:1px solid #1a2d4a; align-items:center; gap:10px;">
+  <span style="flex-shrink:0; display:inline-flex; align-items:center; gap:6px; background:rgba(244,63,94,.12); border:1px solid rgba(244,63,94,.3); color:#f43f5e; font-size:9px; font-weight:800; letter-spacing:.1em; padding:3px 8px; border-radius:12px;">
+    <span class="live-dot"></span> LATEST
+  </span>
+  <a id="latest-story-link" href="#" target="_blank" style="flex:1; min-width:0; font-size:12px; font-weight:600; color:#e2e8f0; text-decoration:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"></a>
+  <span id="latest-story-meta" style="flex-shrink:0; font-size:10px; color:#3d5a80;"></span>
+</div>
+
 <!-- ══════════════════════════ HEADLINE ══════════════════════════ -->
 <div id="headline-banner" style="flex-shrink:0; padding:10px 20px; background:#0a1628; border-bottom:1px solid #1a2d4a;">
   <div style="display:flex; align-items:center; gap:8px; color:#3d5a80; font-size:13px;">
@@ -296,23 +305,6 @@
     </div>
   </main>
 
-  <!-- ── RIGHT: Leaderboard ─────────────────────────────── -->
-  <aside style="width:380px; flex-shrink:0; display:flex; flex-direction:column; min-height:0; background:#0a1628;">
-    <div style="flex-shrink:0; padding:10px 14px; border-bottom:1px solid #1a2d4a; background:#0a1628;">
-      <div style="display:flex; align-items:center; justify-content:space-between;">
-        <div>
-          <div style="font-size:11px; font-weight:800; color:#fff; letter-spacing:.08em; text-transform:uppercase;">Company Rankings</div>
-          <div style="font-size:10px; color:#3d5a80; margin-top:1px;">NER mentions · FinBERT · click row to expand</div>
-        </div>
-        <div class="vel-badge">⚡ Velocity</div>
-      </div>
-    </div>
-    <div id="company-table" style="flex:1; overflow-y:auto;">
-      <div style="display:flex; align-items:center; gap:8px; padding:16px; color:#3d5a80; font-size:13px;">
-        <div class="spinner"></div> Loading…
-      </div>
-    </div>
-  </aside>
 </div>
 </div><!-- /view-sentiment -->
 
@@ -580,159 +572,6 @@ async function loadNews() {
   }
 }
 
-function toggleDetail(idx) {
-  const det = document.getElementById(`codet-${idx}`);
-  const row = document.getElementById(`corow-${idx}`);
-  if (!det) return;
-  const open = det.classList.toggle('open');
-  if (row) row.classList.toggle('expanded', open);
-}
-
-function renderCompanyRow(co, rank) {
-  const pos = Math.round((co.avg_positive || 0) * 100);
-  const neg = Math.round((co.avg_negative || 0) * 100);
-  const neu = Math.round((co.avg_neutral  || 0) * 100);
-  const vel = co.velocity_24h || 0;
-
-  const rankHtml =
-    rank === 1 ? `<span style="font-size:16px;line-height:1;filter:drop-shadow(0 0 5px gold);">🥇</span>` :
-    rank === 2 ? `<span style="font-size:16px;line-height:1;filter:drop-shadow(0 0 5px silver);">🥈</span>` :
-    rank === 3 ? `<span style="font-size:16px;line-height:1;filter:drop-shadow(0 0 4px #cd7f32);">🥉</span>` :
-    `<span style="font-size:10px;font-family:monospace;color:#253545;min-width:18px;text-align:right;display:inline-block;">${rank}</span>`;
-
-  const topCls = rank <= 3 ? `co-top-${rank}` : '';
-  const domPct = co.dominant_label === 'positive' ? pos : co.dominant_label === 'negative' ? neg : neu;
-  const topPos = co.top_positive;
-  const topNeg = co.top_negative;
-
-  const posArt = topPos
-    ? `<a href="${topPos.url||'#'}" target="_blank" style="display:flex;gap:6px;align-items:flex-start;text-decoration:none;padding:5px;border-radius:5px;transition:background .15s;" onmouseover="this.style.background='rgba(16,185,129,.06)'" onmouseout="this.style.background='transparent'">
-         <span style="color:#10b981;font-size:10px;flex-shrink:0;margin-top:1px;">▲</span>
-         <span style="font-size:11px;color:#c8d8e8;line-height:1.4;">${trunc(topPos.title, 80)}</span>
-       </a>`
-    : `<span style="font-size:11px;color:#253545;padding:4px 5px;display:block;">No positive articles found</span>`;
-
-  const negArt = topNeg
-    ? `<a href="${topNeg.url||'#'}" target="_blank" style="display:flex;gap:6px;align-items:flex-start;text-decoration:none;padding:5px;border-radius:5px;transition:background .15s;" onmouseover="this.style.background='rgba(244,63,94,.06)'" onmouseout="this.style.background='transparent'">
-         <span style="color:#f43f5e;font-size:10px;flex-shrink:0;margin-top:1px;">▼</span>
-         <span style="font-size:11px;color:#c8d8e8;line-height:1.4;">${trunc(topNeg.title, 80)}</span>
-       </a>`
-    : `<span style="font-size:11px;color:#253545;padding:4px 5px;display:block;">No negative articles found</span>`;
-
-  return `
-  <div class="co-row ${topCls}" id="corow-${rank}" onclick="toggleDetail(${rank})">
-    <div style="display:flex;align-items:center;gap:8px;">
-      <div style="flex-shrink:0;display:flex;align-items:center;justify-content:center;width:22px;">${rankHtml}</div>
-      <div style="flex:1;min-width:0;">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;flex-wrap:wrap;">
-          <span style="font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:155px;">${co.company}</span>
-          ${vel > 0 ? `<span class="vel-badge">⚡${vel.toFixed(2)}/hr</span>` : ''}
-        </div>
-        <div style="display:flex;height:4px;border-radius:4px;overflow:hidden;margin-bottom:4px;">
-          <div class="sb-pos" style="width:${pos}%;transition:width .7s;" title="Positive ${pos}%"></div>
-          <div class="sb-neg" style="width:${neg}%;transition:width .7s;" title="Negative ${neg}%"></div>
-          <div class="sb-neu" title="Neutral ${neu}%"></div>
-        </div>
-        <div style="display:flex;gap:8px;font-size:9px;font-weight:700;">
-          <span style="color:#10b981;">+${pos}%</span>
-          <span style="color:#f43f5e;">−${neg}%</span>
-          <span style="color:#334155;">${neu}% neu</span>
-        </div>
-      </div>
-      <div style="flex-shrink:0;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:2px;">
-        <div style="display:flex;align-items:center;gap:4px;">
-          <span style="font-size:12px;font-weight:800;color:#fff;">${domPct}%</span>
-          <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:8px;text-transform:uppercase;letter-spacing:.04em;${sentStyle(co.dominant_label)}">${co.dominant_label}</span>
-        </div>
-        <div style="font-size:11px;font-weight:700;color:#94a3b8;">${co.total_mentions}</div>
-        <div style="font-size:9px;color:#253545;">mentions</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="co-detail" id="codet-${rank}">
-    <div style="background:#070f1d;padding:10px 14px 12px;border-bottom:1px solid #0d1a2a;">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;">
-        <div style="background:#0a1628;border:1px solid #1a2d4a;border-radius:6px;padding:6px;text-align:center;">
-          <div style="font-size:15px;font-weight:800;color:#10b981;">${pos}%</div>
-          <div style="font-size:8px;color:#3d5a80;text-transform:uppercase;letter-spacing:.08em;">Positive</div>
-        </div>
-        <div style="background:#0a1628;border:1px solid #1a2d4a;border-radius:6px;padding:6px;text-align:center;">
-          <div style="font-size:15px;font-weight:800;color:#f43f5e;">${neg}%</div>
-          <div style="font-size:8px;color:#3d5a80;text-transform:uppercase;letter-spacing:.08em;">Negative</div>
-        </div>
-        <div style="background:#0a1628;border:1px solid #1a2d4a;border-radius:6px;padding:6px;text-align:center;">
-          <div style="font-size:15px;font-weight:800;color:#fff;">${co.article_count}</div>
-          <div style="font-size:8px;color:#3d5a80;text-transform:uppercase;letter-spacing:.08em;">Articles</div>
-        </div>
-      </div>
-      <div style="margin-bottom:10px;padding:6px 8px;background:#0a1628;border:1px solid #1a2d4a;border-radius:6px;">
-        <div style="font-size:9px;color:#3d5a80;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;font-weight:700;">FinBERT Avg Scores</div>
-        <div style="display:flex;gap:12px;font-size:11px;font-family:monospace;">
-          <span style="color:#10b981;">POS ${(co.avg_positive*100).toFixed(1)}%</span>
-          <span style="color:#f43f5e;">NEG ${(co.avg_negative*100).toFixed(1)}%</span>
-          <span style="color:#475569;">NEU ${(co.avg_neutral*100).toFixed(1)}%</span>
-        </div>
-      </div>
-      <div style="margin-bottom:6px;">
-        <div style="font-size:8px;font-weight:800;color:#10b981;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Most Positive Coverage</div>
-        ${posArt}
-      </div>
-      <div>
-        <div style="font-size:8px;font-weight:800;color:#f43f5e;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px;">Most Negative Coverage</div>
-        ${negArt}
-      </div>
-    </div>
-  </div>`;
-}
-
-function renderPersonRow(person) {
-  const pos = Math.round((person.avg_positive || 0) * 100);
-  const neg = Math.round((person.avg_negative || 0) * 100);
-  return `
-  <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #0d1a2a;background:#0a1628;transition:background .15s;cursor:default;" onmouseover="this.style.background='#0d1a2d'" onmouseout="this.style.background='#0a1628'">
-    <span style="font-size:12px;flex-shrink:0;">👤</span>
-    <div style="flex:1;min-width:0;">
-      <div style="font-size:12px;font-weight:600;color:#cbd5e1;">${person.company}</div>
-      <div style="display:flex;height:2px;border-radius:2px;overflow:hidden;margin-top:4px;">
-        <div class="sb-pos" style="width:${pos}%"></div>
-        <div class="sb-neg" style="width:${neg}%"></div>
-        <div class="sb-neu"></div>
-      </div>
-    </div>
-    <div style="flex-shrink:0;display:flex;align-items:center;gap:5px;">
-      <span style="font-size:8px;font-weight:800;padding:1px 5px;border-radius:8px;${sentStyle(person.dominant_label)}">${person.dominant_label.toUpperCase()}</span>
-      <span style="font-size:11px;font-weight:700;color:#94a3b8;">${person.total_mentions}×</span>
-    </div>
-  </div>`;
-}
-
-async function loadLeaderboard() {
-  const tbl = document.getElementById('company-table');
-  try {
-    const data = await fetch(`${API}/companies/leaderboard?limit=25`).then(r => r.json());
-    const cos  = data.companies || [];
-    const ppl  = data.people    || [];
-
-    if (!cos.length && !ppl.length) {
-      tbl.innerHTML = `<div style="padding:16px;font-size:12px;color:#3d5a80;">No entity data yet.</div>`;
-      return;
-    }
-
-    let html = cos.map((c, i) => renderCompanyRow(c, i + 1)).join('');
-    if (ppl.length) {
-      html += `
-        <div style="padding:8px 14px 6px;border-top:1px solid #1a2d4a;margin-top:4px;">
-          <div style="font-size:9px;font-weight:800;color:#3d5a80;text-transform:uppercase;letter-spacing:.1em;">People in the News</div>
-        </div>
-        ${ppl.map(renderPersonRow).join('')}`;
-    }
-    tbl.innerHTML = html;
-  } catch (err) {
-    tbl.innerHTML = `<div style="padding:16px;font-size:12px;color:#f43f5e;">Failed: ${err.message}</div>`;
-  }
-}
-
 // ══════════════════════════ MARKET CORRELATION VIEW ══════════════════════════
 const TICKER_COLORS = ['#06b6d4','#a855f7','#10b981','#f59e0b','#f43f5e','#3b82f6','#ec4899'];
 let _marketLoaded = false;
@@ -916,16 +755,31 @@ function renderMarket(data) {
   });
 }
 
+async function loadLatest() {
+  try {
+    const { story } = await fetch(`${API}/news/latest`).then(r => { if (!r.ok) throw 0; return r.json(); });
+    const bar  = document.getElementById('latest-story');
+    const link = document.getElementById('latest-story-link');
+    link.textContent = story.title;
+    link.href = story.url || '#';
+    const when  = story.published_at ? new Date(story.published_at).toLocaleString() : '';
+    const label = story.article_sentiment_label || 'neutral';
+    document.getElementById('latest-story-meta').textContent =
+      `${story.source || ''}${story.ticker ? ' · ' + story.ticker : ''} · ${label}${when ? ' · ' + when : ''}`;
+    bar.style.display = 'flex';
+  } catch { /* no articles yet — keep the bar hidden */ }
+}
+
 async function loadAll() {
   await checkHealth();
-  await Promise.all([loadHeadline(), loadStats(), loadNews(), loadLeaderboard()]);
+  await Promise.all([loadLatest(), loadHeadline(), loadStats(), loadNews()]);
   document.getElementById('last-refresh').textContent = 'Updated ' + new Date().toLocaleTimeString();
   // keep the market tab fresh when it's the one being viewed (server caches ~10 min)
   if (document.getElementById('view-market').style.display !== 'none') loadMarket(false);
 }
 
 loadAll();
-setInterval(loadAll, 300_000);
+setInterval(loadAll, 600_000);  // reload every 10 min, matching backend auto-refresh
 </script>
 </body>
 </html>

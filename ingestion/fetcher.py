@@ -41,6 +41,12 @@ def _parse_dt(value: Optional[str | int]) -> Optional[datetime]:
         return None
     if isinstance(value, (int, float)):
         return datetime.fromtimestamp(value, tz=timezone.utc)
+    # ISO 8601 incl. 'Z' suffix (yfinance pubDate: 2026-07-09T15:30:00Z)
+    try:
+        dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+    except ValueError:
+        pass
     for fmt in (
         "%Y%m%dT%H%M%S",        # AlphaVantage: 20240501T130000
         "%Y-%m-%dT%H:%M:%S%z",  # ISO 8601

@@ -1,3 +1,10 @@
 /.claude
 /.env
 .venv/
+venv/
+__pycache__/
+*.pyc
+
+# runtime artifacts — created by the pipeline, never committed
+/data/
+/logs/

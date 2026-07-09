@@ -22,12 +22,19 @@ from fastapi.staticfiles import StaticFiles
 from loguru import logger
 from pydantic import BaseModel
 
+import asyncio
+from datetime import datetime, timezone
+
 from config.models import ProcessedArticle
-from config.settings import EVENTS_STORE_DIR
+from config.settings import (
+    AUTO_REFRESH_ENABLED,
+    AUTO_REFRESH_INTERVAL,
+    AUTO_REFRESH_TICKERS,
+    EVENTS_STORE_DIR,
+)
 from storage.store import (
     init_db,
     load_processed_article,
-    query_company_leaderboard,
     query_company_sentiment_trend,
     query_latest_articles,
     query_sentiment_stats,
@@ -49,10 +56,48 @@ app = FastAPI(
 app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
 
 
+# Status of the background news refresher — exposed via /refresh/status
+_refresh_state: dict = {
+    "enabled":      AUTO_REFRESH_ENABLED,
+    "interval_sec": AUTO_REFRESH_INTERVAL,
+    "tickers":      AUTO_REFRESH_TICKERS,
+    "running":      False,
+    "last_run_at":  None,
+    "last_summary": None,
+    "last_error":   None,
+}
+
+
+async def _auto_refresh_loop():
+    from pipeline.runner import run_batch   # lazy: heavy NLP imports
+
+    while True:
+        _refresh_state["running"] = True
+        try:
+            summary = await asyncio.to_thread(run_batch, AUTO_REFRESH_TICKERS)
+            summary.pop("top_events", None)
+            _refresh_state["last_summary"] = summary
+            _refresh_state["last_error"] = None
+            logger.info(f"Auto-refresh complete: {summary}")
+        except Exception as exc:
+            _refresh_state["last_error"] = str(exc)
+            logger.error(f"Auto-refresh failed: {exc}")
+        finally:
+            _refresh_state["running"] = False
+            _refresh_state["last_run_at"] = datetime.now(timezone.utc).isoformat()
+        await asyncio.sleep(AUTO_REFRESH_INTERVAL)
+
+
 @app.on_event("startup")
 async def startup():
     init_db()
     logger.info("API started — PostgreSQL schema ensured")
+    if AUTO_REFRESH_ENABLED:
+        asyncio.create_task(_auto_refresh_loop())
+        logger.info(
+            f"Auto-refresh enabled: every {AUTO_REFRESH_INTERVAL}s "
+            f"for {AUTO_REFRESH_TICKERS}"
+        )
 
 
 @app.get("/", include_in_schema=False)
@@ -130,15 +175,23 @@ def get_news(limit: int = Query(100, ge=1, le=200)):
     return query_latest_articles(limit=limit)
 
 
+@app.get("/news/latest")
+def get_latest_story():
+    """The single most recent news story, plus refresh metadata."""
+    rows = query_latest_articles(limit=1)
+    if not rows:
+        raise HTTPException(status_code=404, detail="No articles yet — first refresh pending")
+    return {"story": rows[0], "refresh": _refresh_state}
+
+
+@app.get("/refresh/status")
+def refresh_status():
+    return _refresh_state
+
+
 @app.get("/stats/sentiment")
 def get_sentiment_stats():
     return query_sentiment_stats()
-
-
-@app.get("/companies/leaderboard")
-def get_company_leaderboard(limit: int = Query(25, ge=1, le=50)):
-    # Returns {"companies": [...], "people": [...]}
-    return query_company_leaderboard(limit=limit)
 
 
 @app.get("/search")
