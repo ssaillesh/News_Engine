@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": null,
+  "outputDirectory": "static",
+  "framework": null,
+  "rewrites": [
+    { "source": "/health", "destination": "https://YOUR-BACKEND-HOST/health" },
+    { "source": "/events", "destination": "https://YOUR-BACKEND-HOST/events" },
+    { "source": "/events/:id", "destination": "https://YOUR-BACKEND-HOST/events/:id" },
+    { "source": "/company/:name/sentiment", "destination": "https://YOUR-BACKEND-HOST/company/:name/sentiment" },
+    { "source": "/news", "destination": "https://YOUR-BACKEND-HOST/news" },
+    { "source": "/news/latest", "destination": "https://YOUR-BACKEND-HOST/news/latest" },
+    { "source": "/refresh/status", "destination": "https://YOUR-BACKEND-HOST/refresh/status" },
+    { "source": "/stats/sentiment", "destination": "https://YOUR-BACKEND-HOST/stats/sentiment" },
+    { "source": "/search", "destination": "https://YOUR-BACKEND-HOST/search" },
+    { "source": "/articles/:id", "destination": "https://YOUR-BACKEND-HOST/articles/:id" },
+    { "source": "/analysis/correlation", "destination": "https://YOUR-BACKEND-HOST/analysis/correlation" },
+    { "source": "/run/batch", "destination": "https://YOUR-BACKEND-HOST/run/batch" }
+  ]
+}

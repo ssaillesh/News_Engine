@@ -1,0 +1,6 @@
+# Only the static dashboard is deployed to Vercel — the Python backend
+# runs elsewhere (see DEPLOY_ORACLE.md). Exclude everything else.
+*
+!static
+!static/**
+!vercel.json
