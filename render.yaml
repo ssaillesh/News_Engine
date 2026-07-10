@@ -1,0 +1,66 @@
+# Render Blueprint — deploys the FastAPI backend (Docker) + managed Postgres.
+# Import at https://dashboard.render.com/blueprints (New → Blueprint).
+# The Vercel frontend proxies to this service's URL (see DEPLOY_VERCEL.md).
+#
+# Redis is NOT provisioned: it is only needed for the produce/consume
+# streaming mode. The API server + 10-min auto-refresh loop run without it.
+# If you want streaming later, add a Render Key Value instance and a worker.
+
+services:
+  - type: web
+    name: news-intel-api
+    runtime: docker
+    plan: standard          # 2 GB RAM — minimum realistic for torch + FinBERT + NER.
+                            # If you see OOM kills during batch runs, bump to "pro" (4 GB).
+    region: oregon          # pick the region closest to you
+    healthCheckPath: /health
+    disk:                   # persists ./data (FAISS, event JSONs) and the HF model
+      name: news-intel-data # cache across deploys — models download only once
+      mountPath: /var/data
+      sizeGB: 5
+    envVars:
+      - key: PORT
+        value: "8000"       # matches the Dockerfile CMD / EXPOSE
+      - key: DATABASE_URL
+        fromDatabase:
+          name: news-intel-db
+          property: connectionString
+      # secrets — set these in the Render dashboard when prompted
+      - key: ALPHA_VANTAGE_API_KEY
+        sync: false
+      - key: FINNHUB_API_KEY
+        sync: false
+      # storage on the persistent disk (each dir is read individually)
+      - key: STORAGE_BASE_DIR
+        value: /var/data/data
+      - key: RAW_STORE_DIR
+        value: /var/data/data/raw
+      - key: NLP_STORE_DIR
+        value: /var/data/data/nlp_processed
+      - key: EVENTS_STORE_DIR
+        value: /var/data/data/events
+      - key: VECTOR_STORE_DIR
+        value: /var/data/data/vectors
+      - key: HF_HOME
+        value: /var/data/hf
+      # background news refresh
+      - key: AUTO_REFRESH_ENABLED
+        value: "1"
+      - key: AUTO_REFRESH_INTERVAL
+        value: "600"
+      - key: AUTO_REFRESH_TICKERS
+        value: AAPL,MSFT,TSLA,NVDA
+      # models / pipeline
+      - key: TORCH_DEVICE
+        value: cpu
+      - key: NER_MODEL
+        value: dslim/bert-base-NER
+      - key: SENTIMENT_MODEL
+        value: ProsusAI/finbert
+      - key: EMBEDDING_MODEL
+        value: sentence-transformers/all-MiniLM-L6-v2
+
+databases:
+  - name: news-intel-db
+    plan: basic-256mb       # $6/mo; "free" also works but expires after 30 days
+    region: oregon          # keep in the same region as the web service
