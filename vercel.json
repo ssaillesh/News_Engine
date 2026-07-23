@@ -1,9 +1,6 @@
 {
-  "buildCommand": "pip install -r requirements.txt && alembic upgrade head",
+  "buildCommand": "pip install -r requirements.txt",
   "framework": "python",
-  "python": {
-    "version": "3.12"
-  },
   "env": {
     "ARCHIVER_ENV": {
       "description": "Configuration profile (dev/test/prod)",
@@ -18,6 +15,5 @@
       "default": "https://mastodon.social"
     }
   },
-  "buildCommand": "pip install -r requirements.txt",
   "public": true
 }
