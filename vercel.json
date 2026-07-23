@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pip install -r requirements.txt",
+  "buildCommand": "pip install -r requirements.txt && pip install -e .",
   "framework": "python",
   "env": {
     "ARCHIVER_ENV": "prod",

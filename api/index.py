@@ -1,11 +1,5 @@
 """Vercel serverless ASGI handler for FastAPI app."""
 
-import sys
-from pathlib import Path
-
-# Add src to path so imports work
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-
 from archiver.config.settings import Settings
 from archiver.storage.db import Database
 from archiver.web.app import create_app
