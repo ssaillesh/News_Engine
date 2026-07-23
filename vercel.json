@@ -1,0 +1,23 @@
+{
+  "buildCommand": "pip install -r requirements.txt && alembic upgrade head",
+  "framework": "python",
+  "python": {
+    "version": "3.12"
+  },
+  "env": {
+    "ARCHIVER_ENV": {
+      "description": "Configuration profile (dev/test/prod)",
+      "default": "prod"
+    },
+    "DATABASE_URL": {
+      "description": "PostgreSQL connection string (required for production)",
+      "required": true
+    },
+    "API_BASE_URL": {
+      "description": "Mastodon-compatible API base URL",
+      "default": "https://mastodon.social"
+    }
+  },
+  "buildCommand": "pip install -r requirements.txt",
+  "public": true
+}

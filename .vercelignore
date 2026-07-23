@@ -1,0 +1,15 @@
+# Ignore development and test files
+tests/
+.pytest_cache
+.mypy_cache
+.ruff_cache
+*.egg-info
+build/
+dist/
+.venv
+.env
+.env.local
+.env.*.local
+
+# Keep git info
+.gitignore
