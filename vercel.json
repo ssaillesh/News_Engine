@@ -2,17 +2,7 @@
   "buildCommand": "pip install -r requirements.txt",
   "framework": "python",
   "env": {
-    "ARCHIVER_ENV": {
-      "description": "Configuration profile (dev/test/prod)",
-      "default": "prod"
-    },
-    "DATABASE_URL": {
-      "description": "PostgreSQL connection string (required for production)",
-      "required": true
-    },
-    "API_BASE_URL": {
-      "description": "Mastodon-compatible API base URL",
-      "default": "https://mastodon.social"
-    }
+    "ARCHIVER_ENV": "prod",
+    "API_BASE_URL": "https://mastodon.social"
   }
 }
