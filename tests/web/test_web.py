@@ -75,7 +75,7 @@ async def test_statuses_search_filter(client: httpx.AsyncClient):
 async def test_statuses_source_filter(client: httpx.AsyncClient):
     hit = (await client.get("/api/statuses", params={"source": "federal_register"})).json()
     assert hit["count"] == 1
-    miss = (await client.get("/api/statuses", params={"source": "mastodon"})).json()
+    miss = (await client.get("/api/statuses", params={"source": "no-such-source"})).json()
     assert miss["count"] == 0
 
 

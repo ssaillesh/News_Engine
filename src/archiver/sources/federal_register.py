@@ -4,7 +4,7 @@ The Federal Register publishes presidential documents (executive orders,
 proclamations, memoranda, notices) via a free, open, machine-readable API. US
 government works are public domain and the API imposes no anti-bot barrier, so
 this is a fully compliant *live* first-party source for "what Trump puts out" in
-his official capacity — the counterpart to the blocked Truth Social social feed.
+his official capacity — a public-domain, machine-readable government source.
 
 Docs: https://www.federalregister.gov/developers/documentation/api/v1
 """

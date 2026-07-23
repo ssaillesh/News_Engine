@@ -21,9 +21,7 @@ def test_conservative_defaults(monkeypatch):
     s = _load(monkeypatch, ARCHIVER_ENV="test")
     assert s.env == "test"
     assert s.respect_robots is True
-    assert s.enable_auth is False
-    assert s.enable_html_fallback is False
-    assert s.download_media is False
+    assert s.sentiment_model == "ProsusAI/finbert"
 
 
 def test_env_overrides_profile_yaml(monkeypatch):
@@ -48,38 +46,22 @@ def test_interval_ordering_is_validated(monkeypatch):
         )
 
 
-def test_auth_requires_token(monkeypatch):
-    monkeypatch.delenv("AUTH_TOKEN", raising=False)
-    with pytest.raises(ValidationError):
-        _load(monkeypatch, ARCHIVER_ENV="test", ENABLE_AUTH="true")
-
-
-def test_auth_with_token_ok(monkeypatch):
-    s = _load(monkeypatch, ARCHIVER_ENV="test", ENABLE_AUTH="true", AUTH_TOKEN="secret")
-    assert s.enable_auth is True
-
-
-def test_html_fallback_cannot_disable_robots(monkeypatch):
-    with pytest.raises(ValidationError):
-        _load(
-            monkeypatch,
-            ARCHIVER_ENV="test",
-            ENABLE_HTML_FALLBACK="true",
-            RESPECT_ROBOTS="false",
-        )
-
-
 def test_masked_dict_hides_secrets(monkeypatch):
     s = _load(
         monkeypatch,
         ARCHIVER_ENV="test",
         DATABASE_URL="postgresql://user:supersecret@host:5432/db",
-        ENABLE_AUTH="true",
-        AUTH_TOKEN="tok_abc123",
+        GOVINFO_API_KEY="real_key_abc123",
     )
     masked = s.masked_dict()
     assert "supersecret" not in masked["database_url"]
-    assert masked["auth_token"] == "***set***"
+    assert masked["govinfo_api_key"] == "***set***"
+
+
+def test_masked_dict_shows_the_public_demo_key(monkeypatch):
+    # DEMO_KEY is the shared public default — masking it would hide useful signal.
+    s = _load(monkeypatch, ARCHIVER_ENV="test")
+    assert s.masked_dict()["govinfo_api_key"] == "DEMO_KEY"
 
 
 def test_bad_log_level_rejected(monkeypatch):

@@ -22,6 +22,7 @@ import yaml
 from pydantic import AliasChoices, Field, model_validator
 from pydantic_settings import (
     BaseSettings,
+    DotEnvSettingsSource,
     PydanticBaseSettingsSource,
     SettingsConfigDict,
 )
@@ -73,22 +74,23 @@ class Settings(BaseSettings):
     env: Literal["dev", "test", "prod"] = Field(
         "dev", validation_alias=AliasChoices("env", "ARCHIVER_ENV")
     )
-    target_handle: str = Field("realDonaldTrump")
 
     # ── storage ───────────────────────────────────────────────────────────────
     database_url: str = Field("sqlite+aiosqlite:///./archive.db")
     redis_url: str | None = Field(None)
 
-    # ── API client (provider-agnostic Mastodon-compatible) ────────────────────
-    # Point at any Mastodon-compatible instance you are authorized to access.
-    # NOT defaulted to truthsocial.com — Phase 0 confirmed it blocks anonymous
-    # automated access at Cloudflare (see docs/adr/0004).
-    api_base_url: str = Field("https://mastodon.social")
-    user_agent: str = Field("ts-archiver/0.1 (+personal-research; contact-configured)")
+    # ── HTTP client (shared by every source adapter) ──────────────────────────
+    user_agent: str = Field("trump-news-archiver/0.1 (+personal-research; contact-configured)")
     http_timeout_s: float = Field(30.0, gt=0)
     http_max_retries: int = Field(5, ge=0)
     backoff_base_s: float = Field(1.0, gt=0)
     backoff_cap_s: float = Field(60.0, gt=0)
+
+    # ── sentiment enrichment (archiver score-sentiment) ───────────────────────
+    sentiment_model: str = Field("ProsusAI/finbert")
+    sentiment_batch_size: int = Field(16, ge=1)
+    # None → CPU. Set to "mps" (Apple silicon) or "cuda" to use an accelerator.
+    sentiment_device: str | None = Field(None)
 
     # ── web UI ────────────────────────────────────────────────────────────────
     # Default off 8000 to avoid the common collision with other local dev servers
@@ -103,13 +105,8 @@ class Settings(BaseSettings):
 
     # ── compliance switches (conservative by default; DESIGN.md §1.8) ─────────
     respect_robots: bool = Field(True)
-    enable_html_fallback: bool = Field(False)
-    enable_auth: bool = Field(False)
-    download_media: bool = Field(False)
-    archive_foreign_replies: bool = Field(False)
 
     # ── secrets (never logged; scrubbed everywhere) ───────────────────────────
-    auth_token: str | None = Field(None, repr=False)
     # Free key from https://api.data.gov/signup/ (DEMO_KEY works but is rate-limited).
     govinfo_api_key: str = Field("DEMO_KEY", repr=False)
 
@@ -125,14 +122,6 @@ class Settings(BaseSettings):
             raise ValueError(f"log_level must be one of {sorted(_LOG_LEVELS)}")
         if self.min_poll_interval_s > self.max_poll_interval_s:
             raise ValueError("min_poll_interval_s must be <= max_poll_interval_s")
-        if self.enable_auth and not self.auth_token:
-            raise ValueError("enable_auth=True requires AUTH_TOKEN to be set")
-        if self.enable_html_fallback and not self.respect_robots:
-            # An explicit, refusable combination — force the operator to be deliberate.
-            raise ValueError(
-                "Refusing enable_html_fallback=True with respect_robots=False. "
-                "Disabling robots enforcement is not permitted via config alone."
-            )
         return self
 
     @property
@@ -144,7 +133,11 @@ class Settings(BaseSettings):
         from archiver.config.logging import mask_url
 
         data = self.model_dump()
-        data["auth_token"] = "***set***" if self.auth_token else None
+        # DEMO_KEY is the public shared default, so showing it is informative;
+        # anything else is the operator's own key and must not be printed.
+        data["govinfo_api_key"] = (
+            "DEMO_KEY" if self.govinfo_api_key == "DEMO_KEY" else "***set***"
+        )
         if self.database_url:
             data["database_url"] = mask_url(self.database_url)
         if self.redis_url:
@@ -162,8 +155,19 @@ class Settings(BaseSettings):
     ) -> tuple[PydanticBaseSettingsSource, ...]:
         profile = os.environ.get("ARCHIVER_ENV", "dev")
         yaml_source = _YamlProfileSource(settings_cls, _load_profile_yaml(profile))
+        # Re-resolve the .env path here rather than trusting model_config: that
+        # dict is built once at class-definition time, so it pins whatever
+        # ARCHIVER_ENV_FILE held at *import*. Setting the variable later (as the
+        # tests do, to stay hermetic) would otherwise be silently ignored and a
+        # developer's real .env would outrank the profile YAML.
+        dotenv = DotEnvSettingsSource(
+            settings_cls,
+            env_file=os.environ.get("ARCHIVER_ENV_FILE", ".env"),
+            env_file_encoding="utf-8",
+            case_sensitive=False,
+        )
         # Order = priority, highest first.
-        return (init_settings, env_settings, dotenv_settings, yaml_source, file_secret_settings)
+        return (init_settings, env_settings, dotenv, yaml_source, file_secret_settings)
 
 
 @lru_cache

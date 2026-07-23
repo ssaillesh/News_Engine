@@ -1,8 +1,8 @@
 """HTML → plaintext derivation for full-text search and analysis.
 
-Mastodon delivers status content as HTML. We derive a clean plaintext form
-(``content_text``) using only the standard library, treating ``<br>`` and ``</p>``
-as line breaks. Character references are decoded automatically.
+RSS feeds and news APIs deliver item bodies as HTML. We derive a clean plaintext
+form (``content_text``) using only the standard library, treating ``<br>`` and
+``</p>`` as line breaks. Character references are decoded automatically.
 """
 
 from __future__ import annotations

@@ -15,9 +15,10 @@ from typing import Any
 from fastapi import FastAPI, Query
 from fastapi.responses import HTMLResponse
 from sqlalchemy import func, select
+from sqlalchemy.orm import selectinload
 
 from archiver.storage.db import Database
-from archiver.storage.models import Status
+from archiver.storage.models import Status, StatusSentiment
 from archiver.web.page import INDEX_HTML
 
 
@@ -57,6 +58,29 @@ def find_free_port(host: str, preferred: int, span: int = 20) -> int:
     return preferred  # give up; let uvicorn surface the bind error
 
 
+def _to_sentiment(reading: StatusSentiment | None) -> dict[str, Any] | None:
+    """Shape a stored sentiment reading for the API (None when never scored)."""
+    if reading is None:
+        return None
+    return {
+        "label": reading.label,
+        "score": round(reading.score, 4),
+        "compound": round(reading.compound, 4),
+        "positive": round(reading.positive, 4),
+        "negative": round(reading.negative, 4),
+        "neutral": round(reading.neutral, 4),
+        "model": reading.model,
+        "scored_at": reading.scored_at.isoformat() if reading.scored_at else None,
+    }
+
+
+def _body(text: str, title: str) -> str:
+    """The article body: everything after the headline line, if there is any."""
+    if "\n" in text:
+        return text.split("\n", 1)[1].strip()
+    return "" if text.strip() == title.strip() else text.strip()
+
+
 def _to_item(status: Status) -> dict[str, Any]:
     raw = status.raw or {}
     text = status.content_text or ""
@@ -77,6 +101,24 @@ def _to_item(status: Status) -> dict[str, Any]:
         "title": title,
         "url": status.url,
         "text": text,
+        # The publisher's own words, as captured.
+        "summary": _body(text, str(title)),
+        # A machine paraphrase — kept in a separate field so the UI can never
+        # present generated text as if the publisher wrote it.
+        "generated_summary": (
+            {
+                "text": status.summary.summary,
+                "model": status.summary.model,
+                "generated_at": (
+                    status.summary.generated_at.isoformat()
+                    if status.summary.generated_at
+                    else None
+                ),
+            }
+            if status.summary
+            else None
+        ),
+        "sentiment": _to_sentiment(status.sentiment),
     }
 
 
@@ -116,10 +158,21 @@ def create_app(db: Database) -> FastAPI:
                     .limit(14)
                 )
             ).all()
+            snt = (
+                await session.execute(
+                    select(StatusSentiment.label, func.count(), func.avg(StatusSentiment.compound))
+                    .group_by(StatusSentiment.label)
+                    .order_by(func.count().desc())
+                )
+            ).all()
         return {
             "total": sum(row[1] for row in src),
             "sources": [{"key": row[0], "count": row[1]} for row in src],
             "kinds": [{"key": row[0], "count": row[1]} for row in knd],
+            "sentiments": [
+                {"key": row[0], "count": row[1], "avg_compound": round(row[2] or 0.0, 4)}
+                for row in snt
+            ],
         }
 
     @app.get("/api/statuses")
@@ -127,16 +180,24 @@ def create_app(db: Database) -> FastAPI:
         q: str | None = None,
         source: str | None = None,
         kind: str | None = None,
+        sentiment: str | None = None,
         since: str | None = None,
         until: str | None = None,
         limit: int = Query(25, ge=1, le=200),
         offset: int = Query(0, ge=0),
     ) -> dict[str, Any]:
-        stmt = select(Status).order_by(Status.created_at.desc())
+        # selectinload keeps this one extra query instead of N+1 per card.
+        stmt = (
+            select(Status)
+            .options(selectinload(Status.sentiment), selectinload(Status.summary))
+            .order_by(Status.created_at.desc())
+        )
         if source:
             stmt = stmt.where(Status.source == source)
         if kind:
             stmt = stmt.where(Status.kind == kind)
+        if sentiment:
+            stmt = stmt.join(StatusSentiment).where(StatusSentiment.label == sentiment)
         if q:
             stmt = stmt.where(Status.content_text.ilike(f"%{q}%"))
         since_dt = _parse_bound(since, end=False)

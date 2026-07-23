@@ -12,10 +12,7 @@ import pytest
 
 from archiver.storage.db import Database
 
-_FIXTURE_DIRS = (
-    Path(__file__).parent / "parsers" / "fixtures",
-    Path(__file__).parent / "sources" / "fixtures",
-)
+_FIXTURE_DIRS = (Path(__file__).parent / "sources" / "fixtures",)
 
 
 @pytest.fixture(autouse=True)

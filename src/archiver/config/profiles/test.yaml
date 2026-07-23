@@ -5,6 +5,3 @@ database_url: "sqlite+aiosqlite:///:memory:"
 min_poll_interval_s: 1
 max_poll_interval_s: 5
 respect_robots: true
-enable_html_fallback: false
-enable_auth: false
-download_media: false

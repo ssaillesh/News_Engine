@@ -1,7 +1,7 @@
 [project]
-name = "truthsocial-archiver"
+name = "trump-news-archiver"
 version = "0.1.0"
-description = "Single-account Truth Social archival system — Phase 1 scaffold (config + CLI, no collection code)."
+description = "Archives Trump's official documents and news coverage about him, with FinBERT sentiment scoring."
 readme = "README.md"
 requires-python = ">=3.12"
 license = { text = "MIT" }
@@ -25,6 +25,12 @@ postgres = [
 web = [
   "fastapi>=0.110",
   "uvicorn[standard]>=0.29",
+]
+# FinBERT sentiment scoring. Kept optional: it pulls in torch (~500 MB), which
+# the ingest and web paths do not need.
+sentiment = [
+  "torch>=2.4",
+  "transformers>=4.40",
 ]
 dev = [
   "pytest>=8.0",
@@ -71,6 +77,11 @@ python_version = "3.12"
 strict = true
 files = ["src"]
 plugins = ["pydantic.mypy"]
+
+# The ML stack is an optional extra and ships no stubs mypy can use.
+[[tool.mypy.overrides]]
+module = ["torch.*", "transformers.*"]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

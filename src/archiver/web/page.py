@@ -92,6 +92,26 @@ INDEX_HTML = """<!doctype html>
     justify-content:center;font-size:9px;color:var(--n400);font-weight:700}
   .card .who{font-size:11px;color:var(--n500)}
   .badge{margin-left:auto;font-size:11px;padding:2px 9px;border-radius:20px;background:var(--a800);color:var(--a100);white-space:nowrap}
+
+  /* SENTIMENT (FinBERT) */
+  .sent{font-size:10px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;white-space:nowrap;
+    padding:2px 8px;border-radius:20px;border:1px solid transparent}
+  .sent.positive{color:#a8dd8c;background:color-mix(in srgb,#8fce6b 15%,transparent);border-color:color-mix(in srgb,#8fce6b 40%,transparent)}
+  .sent.negative{color:#f0a49e;background:color-mix(in srgb,#e0736d 15%,transparent);border-color:color-mix(in srgb,#e0736d 40%,transparent)}
+  .sent.neutral{color:var(--n400);background:color-mix(in srgb,var(--text) 7%,transparent);border-color:var(--divider)}
+  .sbar{display:flex;height:6px;border-radius:4px;overflow:hidden;background:var(--n900);margin:12px 0 10px}
+  .sbar i{display:block;height:100%}
+  .sbar .pos{background:#8fce6b}.sbar .neu{background:var(--n600)}.sbar .neg{background:#e0736d}
+  .srow{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;color:var(--n500);padding:2px 0}
+  .srow b{color:var(--n300);font-weight:500;font-variant-numeric:tabular-nums}
+  .smodel{margin-top:8px;padding-top:8px;border-top:1px solid var(--divider);font-size:10px;color:var(--n600)}
+
+  /* PROVENANCE — publisher's words vs. machine paraphrase must never blur */
+  .prov{font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;
+    padding:2px 7px;border-radius:20px;border:1px solid transparent}
+  .prov.pub{color:var(--n400);background:color-mix(in srgb,var(--text) 7%,transparent);border-color:var(--divider)}
+  .prov.ai{color:#e8c98a;background:color-mix(in srgb,#e0b86d 14%,transparent);border-color:color-mix(in srgb,#e0b86d 40%,transparent)}
+  .card .summary{margin-top:2px}
   .card .title{font-size:15px;font-weight:500;line-height:1.3;margin-bottom:4px}
   .card .summary{font-size:13px;color:var(--n400);line-height:1.45;
     display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden}
@@ -134,8 +154,11 @@ INDEX_HTML = """<!doctype html>
       <div class="kicker">Trending Types</div>
       <div class="chips" id="kinds"></div>
       <div class="divider"></div>
+      <div class="kicker">Sentiment</div>
+      <div class="chips" id="sentiments"></div>
+      <div class="divider"></div>
       <div class="kicker">About</div>
-      <div class="muted small">A local archive of first-party statements, official documents, and news coverage — one row per item, updated by scheduled ingests.</div>
+      <div class="muted small">A local archive of first-party statements, official documents, and news coverage — one row per item, updated by scheduled ingests. Coverage is scored with FinBERT.</div>
     </div>
 
     <div class="center">
@@ -157,8 +180,8 @@ INDEX_HTML = """<!doctype html>
 
 <script>
 const SOURCE_LABEL = {presidential_documents:'His Words',federal_register:'Official Actions',
-  whitehouse:'White House',news:'In the News',mastodon:'Social',truthsocial:'Truth Social'};
-const state = {source:'', kind:'', q:'', since:'', until:'', offset:0, limit:25, selectedId:null, items:[]};
+  whitehouse:'White House',news:'In the News'};
+const state = {source:'', kind:'', sentiment:'', q:'', since:'', until:'', offset:0, limit:25, selectedId:null, items:[]};
 
 const $ = id => document.getElementById(id);
 function esc(s){const d=document.createElement('div');d.textContent=(s==null?'':String(s));return d.innerHTML;}
@@ -192,31 +215,48 @@ async function loadFacets(){
     `<button class="chip${state.kind===k.key?' active':''}" data-kind="${esc(k.key)}">${esc(k.key)} · ${k.count}</button>`).join('');
   $('kinds').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
     state.kind = state.kind===c.dataset.kind ? '' : c.dataset.kind; loadFeed(true); syncActive();});
+  // sentiment
+  const sents = d.sentiments || [];
+  $('sentiments').innerHTML = sents.length
+    ? sents.map(s=>`<button class="chip${state.sentiment===s.key?' active':''}" data-sent="${esc(s.key)}"
+        title="average polarity ${s.avg_compound>0?'+':''}${s.avg_compound}">${esc(s.key)} · ${s.count}</button>`).join('')
+    : `<div class="muted small">Not scored yet — run <code>archiver score-sentiment</code>.</div>`;
+  $('sentiments').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+    state.sentiment = state.sentiment===c.dataset.sent ? '' : c.dataset.sent; loadFeed(true); syncActive();});
 }
 
 function syncActive(){
   $('tabs').querySelectorAll('.tab').forEach(b=>b.classList.toggle('active', b.dataset.src===state.source));
   $('sources').querySelectorAll('.srcrow').forEach(r=>r.classList.toggle('active', r.dataset.src===state.source));
   $('kinds').querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.kind===state.kind));
+  $('sentiments').querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.sent===state.sentiment));
   const bits=[];
   if(state.source) bits.push('source: '+label(state.source));
   if(state.kind) bits.push('type: '+state.kind);
+  if(state.sentiment) bits.push('sentiment: '+state.sentiment);
   if(state.q) bits.push('“'+state.q+'”');
   $('filterlabel').innerHTML = bits.length
     ? 'Filtering by '+bits.map(b=>`<span style="color:var(--accent)">${esc(b)}</span>`).join(', ')
       +' <span class="clear" id="clear">clear</span>'
     : 'Showing all items';
-  const c=$('clear'); if(c) c.onclick=()=>{state.source='';state.kind='';state.q='';$('q').value='';loadFeed(true);syncActive();};
+  const c=$('clear'); if(c) c.onclick=()=>{state.source='';state.kind='';state.sentiment='';state.q='';$('q').value='';loadFeed(true);syncActive();};
+}
+
+function sentPill(s){
+  if(!s) return '';
+  const pct = Math.round(s.score*100);
+  return `<span class="sent ${esc(s.label)}" title="FinBERT · ${pct}% confidence · polarity ${s.compound>0?'+':''}${s.compound}">${esc(s.label)}</span>`;
 }
 
 function card(it){
   const who = (it.source==='news' && it.publisher) ? it.publisher : label(it.source);
-  const summary = it.text && it.text!==it.title ? `<div class="summary">${esc(it.text)}</div>` : '';
+  const summary = it.summary ? `<div class="summary">${esc(it.summary)}</div>` : '';
   return `<div class="card${state.selectedId===it.id?' sel':''}" data-id="${esc(it.id)}">
     <div class="meta">
       <div class="avatar">${esc(initials(it.source))}</div>
       <span class="who">${esc(who)} · ${esc(fmtTime(it.created_at))}</span>
       <span class="badge">${esc(it.kind)}</span>
+      ${sentPill(it.sentiment)}
     </div>
     <div class="title">${esc(it.title)}</div>
     ${summary}
@@ -229,6 +269,7 @@ async function loadFeed(reset){
   const p=new URLSearchParams({limit:state.limit,offset:state.offset});
   if(state.source)p.set('source',state.source);
   if(state.kind)p.set('kind',state.kind);
+  if(state.sentiment)p.set('sentiment',state.sentiment);
   if(state.q)p.set('q',state.q);
   if(state.since)p.set('since',state.since);
   if(state.until)p.set('until',state.until);
@@ -249,6 +290,38 @@ async function loadFeed(reset){
   if(!state.selectedId && state.items.length) select(state.items[0].id);
 }
 
+function genSummaryPanel(g){
+  if(!g) return '';
+  return `<div class="panel">
+      <div class="h">Condensed <span class="prov ai">AI-generated</span></div>
+      <div class="dd-body">${esc(g.text)}</div>
+      <div class="smodel">${esc(g.model)} · generated ${esc(fmtTime(g.generated_at))} · a paraphrase, not the publisher's words</div>
+    </div>`;
+}
+
+function sentimentPanel(s){
+  if(!s) return `<div class="panel">
+      <div class="h">Sentiment <span class="soon">not scored</span></div>
+      <div class="muted small">This item hasn't been scored. Run <code>archiver score-sentiment</code> to add a FinBERT reading.</div>
+    </div>`;
+  const pct = v => (v*100).toFixed(1)+'%';
+  const sign = v => (v>0?'+':'')+v.toFixed(3);
+  return `<div class="panel">
+      <div class="h">Sentiment ${sentPill(s)}</div>
+      <div class="sbar">
+        <i class="pos" style="width:${s.positive*100}%"></i>
+        <i class="neu" style="width:${s.neutral*100}%"></i>
+        <i class="neg" style="width:${s.negative*100}%"></i>
+      </div>
+      <div class="srow"><span>Positive</span><b>${pct(s.positive)}</b></div>
+      <div class="srow"><span>Neutral</span><b>${pct(s.neutral)}</b></div>
+      <div class="srow"><span>Negative</span><b>${pct(s.negative)}</b></div>
+      <div class="srow" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--divider)">
+        <span>Polarity</span><b>${sign(s.compound)}</b></div>
+      <div class="smodel">${esc(s.model)} · scored ${esc(fmtTime(s.scored_at))}</div>
+    </div>`;
+}
+
 function select(id){
   state.selectedId=id;
   $('feed').querySelectorAll('.card').forEach(c=>c.classList.toggle('sel',c.dataset.id===id));
@@ -261,11 +334,9 @@ function select(id){
       <div class="muted small">${esc(who)} · ${esc(fmtTime(it.created_at))} · ${esc(it.kind)}</div>
       ${it.url?`<div style="margin-top:10px"><a class="link" style="color:var(--accent);font-size:13px" href="${esc(it.url)}" target="_blank" rel="noopener">Read the original ↗</a></div>`:''}
     </div>
-    ${it.text && it.text!==it.title ? `<div class="panel"><div class="h">Summary</div><div class="dd-body">${esc(it.text)}</div></div>`:''}
-    <div class="panel">
-      <div class="h">Sentiment <span class="soon">not connected</span></div>
-      <div class="muted small">Automated sentiment scoring isn't wired up yet — planned as an offline enrichment pass (see DESIGN.md §15 &amp; Roadmap Phase 12).</div>
-    </div>
+    ${it.summary ? `<div class="panel"><div class="h">Summary <span class="prov pub">publisher</span></div><div class="dd-body">${esc(it.summary)}</div></div>`:''}
+    ${genSummaryPanel(it.generated_summary)}
+    ${sentimentPanel(it.sentiment)}
     <div class="panel">
       <div class="h">More from ${esc(who==='In the News'?'the news':who)}</div>
       <div class="also">${also.length?also.map(a=>`<a data-id="${esc(a.id)}">${esc(a.title)}</a>`).join(''):'<div class="muted small">Nothing else loaded yet.</div>'}</div>

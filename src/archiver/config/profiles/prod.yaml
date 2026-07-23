@@ -1,5 +1,5 @@
 # Production profile — structured logs, conservative cadence. (DESIGN.md §11.4)
-# DATABASE_URL / REDIS_URL / AUTH_TOKEN are supplied via environment/secrets,
+# DATABASE_URL / REDIS_URL / GOVINFO_API_KEY are supplied via environment/secrets,
 # never committed here.
 log_level: INFO
 log_json: true
@@ -7,7 +7,3 @@ min_poll_interval_s: 60
 max_poll_interval_s: 1800
 rate_limit_rps: 0.5
 respect_robots: true
-enable_html_fallback: false
-enable_auth: false
-download_media: false
-archive_foreign_replies: false

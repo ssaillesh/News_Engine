@@ -30,9 +30,13 @@ from archiver.storage.models import (
     Media,
     MediaBlob,
     RawPayload,
+    CompanyMarket,
     Status,
     StatusMetric,
+    StatusSentiment,
+    StatusSummary,
     StatusVersion,
+    StockMention,
     utcnow,
 )
 
@@ -178,6 +182,122 @@ class StatusVersionRepository(_Repo):
 class StatusMetricRepository(_Repo):
     async def add(self, values: Mapping[str, Any]) -> None:
         self.session.add(StatusMetric(**dict(values)))
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+class StatusSentimentRepository(_Repo):
+    """Derived sentiment readings — overwritten in place on re-score.
+
+    Unlike versions/metrics this is *not* append-only history: a status has one
+    current reading, and re-running the model with a better checkpoint should
+    replace it rather than accumulate. The raw text is still in ``statuses``, so
+    nothing captured is lost by overwriting.
+    """
+
+    _UPDATABLE = (
+        "model",
+        "label",
+        "score",
+        "positive",
+        "negative",
+        "neutral",
+        "compound",
+        "scored_content_hash",
+        "scored_at",
+    )
+
+    async def upsert(self, values: Mapping[str, Any]) -> None:
+        payload = {**values}
+        payload.setdefault("scored_at", utcnow())
+        await _upsert(
+            self.session,
+            self.dialect,
+            StatusSentiment.__table__,
+            payload,
+            index_elements=["status_id"],
+            update_columns=self._UPDATABLE,
+        )
+
+    async def get(self, status_id: str) -> StatusSentiment | None:
+        return await self.session.get(StatusSentiment, status_id)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+class StatusSummaryRepository(_Repo):
+    """Derived summaries — overwritten in place, like sentiment readings."""
+
+    _UPDATABLE = ("model", "summary", "source_content_hash", "generated_at")
+
+    async def upsert(self, values: Mapping[str, Any]) -> None:
+        payload = {**values}
+        payload.setdefault("generated_at", utcnow())
+        await _upsert(
+            self.session,
+            self.dialect,
+            StatusSummary.__table__,
+            payload,
+            index_elements=["status_id"],
+            update_columns=self._UPDATABLE,
+        )
+
+    async def get(self, status_id: str) -> StatusSummary | None:
+        return await self.session.get(StatusSummary, status_id)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+class StockMentionRepository(_Repo):
+    """Company mentions — idempotent on (status_id, ticker)."""
+
+    async def upsert(self, values: Mapping[str, Any]) -> None:
+        payload = {**values}
+        payload.setdefault("first_seen_at", utcnow())
+        await _upsert(
+            self.session,
+            self.dialect,
+            StockMention.__table__,
+            payload,
+            index_elements=["status_id", "ticker"],
+            update_columns=None,  # a mention, once recorded, doesn't change
+        )
+
+    async def clear_for_status(self, status_id: str) -> None:
+        """Drop a status's mentions before re-detecting, so removed ones vanish."""
+        from sqlalchemy import delete
+
+        await self.session.execute(
+            delete(StockMention).where(StockMention.status_id == status_id)
+        )
+
+
+class CompanyMarketRepository(_Repo):
+    """Cached quote + next-earnings data, overwritten in place per refresh."""
+
+    _UPDATABLE = (
+        "name",
+        "last_price",
+        "net_change",
+        "pct_change",
+        "delta_indicator",
+        "market_cap",
+        "price_as_of",
+        "next_earnings_date",
+        "next_earnings_eps_forecast",
+        "next_earnings_time",
+        "quote_error",
+        "refreshed_at",
+    )
+
+    async def upsert(self, values: Mapping[str, Any]) -> None:
+        payload = {**values}
+        payload.setdefault("refreshed_at", utcnow())
+        await _upsert(
+            self.session,
+            self.dialect,
+            CompanyMarket.__table__,
+            payload,
+            index_elements=["ticker"],
+            update_columns=self._UPDATABLE,
+        )
 
 
 # ─────────────────────────────────────────────────────────────────────────────

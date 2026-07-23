@@ -76,7 +76,6 @@ class BaseHttpClient:
         max_retries: int = 5,
         backoff_base_s: float = 1.0,
         backoff_cap_s: float = 60.0,
-        auth_token: str | None = None,
         rate_limiter: RateLimiter | None = None,
         sleep: Callable[[float], Awaitable[None]] = asyncio.sleep,
         rng: random.Random | None = None,
@@ -88,9 +87,8 @@ class BaseHttpClient:
         self._sleep = sleep
         self._rng = rng or random.Random()
 
+        # Every source is public: we send no credentials at all.
         headers = {"User-Agent": user_agent, "Accept": "application/json"}
-        if auth_token:
-            headers["Authorization"] = f"Bearer {auth_token}"
         self._client = httpx.AsyncClient(
             base_url=base_url,
             headers=headers,

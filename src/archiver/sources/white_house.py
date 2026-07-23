@@ -14,7 +14,6 @@ feed). Idempotent — re-running never duplicates.
 from __future__ import annotations
 
 import re
-import xml.etree.ElementTree as ET
 from collections.abc import Sequence
 from datetime import UTC, datetime
 from email.utils import parsedate_to_datetime
@@ -23,6 +22,7 @@ from typing import TYPE_CHECKING, Any
 from archiver.clients.base import BaseHttpClient
 from archiver.clients.rate_limit import RateLimiter, TokenBucket
 from archiver.domain.hashing import content_hash, payload_hash
+from archiver.parsing.rss import parse_rss
 from archiver.parsing.text import html_to_text
 from archiver.storage.repositories import (
     AccountRepository,
@@ -37,8 +37,6 @@ if TYPE_CHECKING:
 SOURCE = "whitehouse"
 DEFAULT_FEEDS = ("/news/feed/",)
 
-_CONTENT_NS = "http://purl.org/rss/1.0/modules/content/"
-_DC_NS = "http://purl.org/dc/elements/1.1/"
 _WP_ID_RE = re.compile(r"[?&]p=(\d+)")
 
 WHITE_HOUSE_ACCOUNT: dict[str, Any] = {
@@ -72,26 +70,8 @@ class WhiteHouseClient(BaseHttpClient):
 
 
 def parse_feed(xml_text: str) -> list[dict[str, Any]]:
-    """Parse an RSS feed into a list of item dicts (stdlib only)."""
-    root = ET.fromstring(xml_text)
-    channel = root.find("channel")
-    if channel is None:
-        return []
-    items: list[dict[str, Any]] = []
-    for item in channel.findall("item"):
-        items.append(
-            {
-                "guid": item.findtext("guid"),
-                "title": (item.findtext("title") or "").strip(),
-                "link": item.findtext("link"),
-                "pub_date": item.findtext("pubDate"),
-                "categories": [c.text for c in item.findall("category") if c.text],
-                "creator": item.findtext(f"{{{_DC_NS}}}creator"),
-                "description": item.findtext("description"),
-                "content": item.findtext(f"{{{_CONTENT_NS}}}encoded"),
-            }
-        )
-    return items
+    """Parse a White House RSS feed into item dicts (see ``parsing.rss``)."""
+    return parse_rss(xml_text)
 
 
 def _post_id(item: dict[str, Any]) -> str:

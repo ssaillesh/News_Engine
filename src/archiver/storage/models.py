@@ -139,9 +139,11 @@ class Status(Base):
     content_html: Mapped[str | None] = mapped_column(Text)
     content_text: Mapped[str | None] = mapped_column(Text)
     content_hash: Mapped[str] = mapped_column(String, nullable=False)
-    # Which platform this status came from (multi-source archive): e.g.
-    # "mastodon", "truthsocial", "federal_register". Set on insert, never updated.
-    source: Mapped[str] = mapped_column(String, nullable=False, default="mastodon")
+    # Which feed this status came from (multi-source archive): "federal_register",
+    # "presidential_documents", "whitehouse", or "news". Every adapter sets this
+    # explicitly on insert and it is never updated; the default only catches a
+    # writer that forgot to.
+    source: Mapped[str] = mapped_column(String, nullable=False, default="unknown")
     # Human-facing type/label used as the badge and for faceting/filtering, e.g.
     # "Proclamation", "Remarks", "Releases", or a news publisher ("CNN").
     kind: Mapped[str | None] = mapped_column(String)
@@ -160,6 +162,15 @@ class Status(Base):
         back_populates="status", cascade="all, delete-orphan"
     )
     media: Mapped[list[Media]] = relationship(
+        back_populates="status", cascade="all, delete-orphan"
+    )
+    sentiment: Mapped[StatusSentiment | None] = relationship(
+        back_populates="status", cascade="all, delete-orphan", uselist=False
+    )
+    summary: Mapped[StatusSummary | None] = relationship(
+        back_populates="status", cascade="all, delete-orphan", uselist=False
+    )
+    stock_mentions: Mapped[list[StockMention]] = relationship(
         back_populates="status", cascade="all, delete-orphan"
     )
 
@@ -214,6 +225,123 @@ class StatusMetric(Base):
     status: Mapped[Status] = relationship(back_populates="metrics")
 
     __table_args__ = (Index("ix_metrics_status_time", "status_id", "captured_at"),)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6.5b status_sentiment  (derived enrichment, 1:1 with a status)
+# ─────────────────────────────────────────────────────────────────────────────
+class StatusSentiment(Base):
+    """A FinBERT sentiment reading for one status.
+
+    Derived data, kept out of ``statuses`` so the captured record stays exactly as
+    ingested and a re-score never rewrites it. ``scored_content_hash`` records
+    *which* text produced this reading, so an edited status can be detected as
+    stale and re-scored without blindly redoing the whole archive.
+    """
+
+    __tablename__ = "status_sentiment"
+
+    status_id: Mapped[str] = mapped_column(ForeignKey("statuses.id"), primary_key=True)
+    model: Mapped[str] = mapped_column(String, nullable=False)
+    # "positive" | "negative" | "neutral" — the argmax of the three probabilities.
+    label: Mapped[str] = mapped_column(String, nullable=False)
+    # Confidence of the winning label (max of the three), in [0, 1].
+    score: Mapped[float] = mapped_column(Double, nullable=False)
+    positive: Mapped[float] = mapped_column(Double, nullable=False)
+    negative: Mapped[float] = mapped_column(Double, nullable=False)
+    neutral: Mapped[float] = mapped_column(Double, nullable=False)
+    # positive − negative, in [-1, 1]: one signed number to sort/aggregate on.
+    compound: Mapped[float] = mapped_column(Double, nullable=False)
+    scored_content_hash: Mapped[str | None] = mapped_column(String)
+    scored_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    status: Mapped[Status] = relationship(back_populates="sentiment")
+
+    __table_args__ = (
+        Index("ix_sentiment_label", "label"),
+        Index("ix_sentiment_compound", "compound"),
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6.5c status_summary  (derived enrichment, 1:1 with a status)
+# ─────────────────────────────────────────────────────────────────────────────
+class StatusSummary(Base):
+    """A machine-generated condensation of a status's text.
+
+    Kept strictly separate from the publisher's own summary, which lives in
+    ``statuses.content_text`` as captured. A model paraphrase of political
+    reporting is an interpretation, not a record, so the two must never be
+    conflated — the UI labels this one as generated.
+    """
+
+    __tablename__ = "status_summary"
+
+    status_id: Mapped[str] = mapped_column(ForeignKey("statuses.id"), primary_key=True)
+    model: Mapped[str] = mapped_column(String, nullable=False)
+    summary: Mapped[str] = mapped_column(Text, nullable=False)
+    # Hash of the text that was condensed, so an edited article is re-summarized.
+    source_content_hash: Mapped[str | None] = mapped_column(String)
+    generated_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    status: Mapped[Status] = relationship(back_populates="summary")
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6.5d stock_mentions  (derived: a company named in a status)
+# ─────────────────────────────────────────────────────────────────────────────
+class StockMention(Base):
+    """A publicly-traded company named in a status.
+
+    Derived by the detection pass from a curated ticker dictionary, so — like
+    sentiment and summaries — it never touches the captured text and is fully
+    re-derivable. The set of distinct tickers here IS the Trump watchlist that
+    drives the market refresh and the Upcoming Reports tab.
+    """
+
+    __tablename__ = "stock_mentions"
+
+    status_id: Mapped[str] = mapped_column(ForeignKey("statuses.id"), primary_key=True)
+    ticker: Mapped[str] = mapped_column(String, primary_key=True)
+    # The exact alias that matched ("Truth Social"), kept for display and audit.
+    alias: Mapped[str | None] = mapped_column(String)
+    first_seen_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    status: Mapped[Status] = relationship(back_populates="stock_mentions")
+
+    __table_args__ = (Index("ix_stock_mentions_ticker", "ticker"),)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6.5e company_market  (cache of live quote + next earnings, keyed by ticker)
+# ─────────────────────────────────────────────────────────────────────────────
+class CompanyMarket(Base):
+    """Cached market data for a watchlist company (refreshed from Nasdaq).
+
+    Not derived from the archive — this is external, time-sensitive data fetched
+    on demand and cached so the dashboard never blocks on the network. One row per
+    ticker; ``refreshed_at`` says how stale the quote is.
+    """
+
+    __tablename__ = "company_market"
+
+    ticker: Mapped[str] = mapped_column(String, primary_key=True)
+    name: Mapped[str | None] = mapped_column(String)
+    # Live quote (strings kept as fetched, e.g. "$320.95", "-0.22%").
+    last_price: Mapped[str | None] = mapped_column(String)
+    net_change: Mapped[str | None] = mapped_column(String)
+    pct_change: Mapped[str | None] = mapped_column(String)
+    delta_indicator: Mapped[str | None] = mapped_column(String)  # "up" | "down"
+    market_cap: Mapped[str | None] = mapped_column(String)
+    price_as_of: Mapped[str | None] = mapped_column(String)
+    # Next scheduled quarterly report.
+    next_earnings_date: Mapped[str | None] = mapped_column(String)  # ISO date
+    next_earnings_eps_forecast: Mapped[str | None] = mapped_column(String)
+    next_earnings_time: Mapped[str | None] = mapped_column(String)  # pre/after market
+    quote_error: Mapped[str | None] = mapped_column(String)  # last fetch problem, if any
+    refreshed_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    __table_args__ = (Index("ix_company_market_earnings", "next_earnings_date"),)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
