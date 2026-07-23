@@ -1,0 +1,10 @@
+# Development profile — verbose, local, safe. (DESIGN.md §11.4)
+log_level: DEBUG
+log_json: false
+database_url: "sqlite+aiosqlite:///./archive.dev.db"
+min_poll_interval_s: 30
+max_poll_interval_s: 300
+respect_robots: true
+enable_html_fallback: false
+enable_auth: false
+download_media: false

@@ -1,0 +1,57 @@
+{
+  "id": "222222222222222222",
+  "created_at": "2024-02-20T08:30:00.000Z",
+  "edited_at": null,
+  "url": "https://mastodon.example/@archivist/222222222222222222",
+  "uri": "https://mastodon.example/users/archivist/statuses/222222222222222222",
+  "content": "<p>Look at this <a href=\"https://example.com\">link</a> and cc <span class=\"h-card\"><a href=\"https://mastodon.example/@friend\">@<span>friend</span></a></span> #News #Archive</p>",
+  "language": "en",
+  "visibility": "public",
+  "sensitive": true,
+  "spoiler_text": "content warning",
+  "in_reply_to_id": "111111111111111111",
+  "in_reply_to_account_id": "42",
+  "replies_count": 0,
+  "reblogs_count": 1,
+  "favourites_count": 3,
+  "account": {
+    "id": "42",
+    "username": "archivist",
+    "acct": "archivist",
+    "display_name": "The Archivist",
+    "url": "https://mastodon.example/@archivist"
+  },
+  "media_attachments": [
+    {
+      "id": "9001",
+      "type": "image",
+      "url": "https://mastodon.example/media/9001.jpg",
+      "preview_url": "https://mastodon.example/media/9001_small.jpg",
+      "remote_url": null,
+      "description": "a photo of a document",
+      "blurhash": "LKO2?U%2Tw=w",
+      "meta": {"original": {"width": 1200, "height": 800}}
+    }
+  ],
+  "mentions": [
+    {
+      "id": "77",
+      "username": "friend",
+      "acct": "friend",
+      "url": "https://mastodon.example/@friend"
+    }
+  ],
+  "tags": [
+    {"name": "News", "url": "https://mastodon.example/tags/news"},
+    {"name": "Archive", "url": "https://mastodon.example/tags/archive"}
+  ],
+  "emojis": [],
+  "card": {
+    "url": "https://example.com",
+    "title": "Example Domain",
+    "description": "An illustrative example.",
+    "provider_name": "example.com",
+    "image": "https://example.com/preview.png"
+  },
+  "poll": null
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>"Donald Trump" - Google News</title>
+    <link>https://news.google.com/search</link>
+    <item>
+      <title>Trump Approves Landmark Nuclear Deal With Saudi Arabia - WSJ</title>
+      <link>https://news.google.com/rss/articles/AAA111</link>
+      <guid isPermaLink="false">CBMiAAA111</guid>
+      <pubDate>Wed, 22 Jul 2026 21:36:00 GMT</pubDate>
+      <description><![CDATA[<a href="https://www.wsj.com/x">Trump Approves Landmark Nuclear Deal</a>]]></description>
+      <source url="https://www.wsj.com">WSJ</source>
+    </item>
+    <item>
+      <title>Why a Saudi deal is a metaphor for Trump’s presidency - CNN</title>
+      <link>https://news.google.com/rss/articles/BBB222</link>
+      <guid isPermaLink="false">CBMiBBB222</guid>
+      <pubDate>Thu, 23 Jul 2026 04:01:25 GMT</pubDate>
+      <description><![CDATA[<a href="https://www.cnn.com/y">Trump presidency analysis</a>]]></description>
+      <source url="https://www.cnn.com">CNN</source>
+    </item>
+    <item>
+      <title>Local Weather Update for the Weekend - Weather.com</title>
+      <link>https://news.google.com/rss/articles/CCC333</link>
+      <guid isPermaLink="false">CBMiCCC333</guid>
+      <pubDate>Thu, 23 Jul 2026 03:00:00 GMT</pubDate>
+      <description><![CDATA[<a href="https://weather.com/z">Sunny skies expected</a>]]></description>
+      <source url="https://weather.com">Weather.com</source>
+    </item>
+  </channel>
+</rss>

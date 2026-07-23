@@ -1,0 +1,30 @@
+{
+  "id": "111111111111111111",
+  "created_at": "2024-01-15T12:00:00.000Z",
+  "edited_at": "2024-01-15T13:30:00.000Z",
+  "url": "https://mastodon.example/@archivist/111111111111111111",
+  "uri": "https://mastodon.example/users/archivist/statuses/111111111111111111",
+  "content": "<p>Hello <strong>world</strong>! This is a test. (edited)</p>",
+  "language": "en",
+  "visibility": "public",
+  "sensitive": false,
+  "spoiler_text": "",
+  "in_reply_to_id": null,
+  "in_reply_to_account_id": null,
+  "replies_count": 4,
+  "reblogs_count": 9,
+  "favourites_count": 25,
+  "account": {
+    "id": "42",
+    "username": "archivist",
+    "acct": "archivist",
+    "display_name": "The Archivist",
+    "url": "https://mastodon.example/@archivist"
+  },
+  "media_attachments": [],
+  "mentions": [],
+  "tags": [],
+  "emojis": [],
+  "card": null,
+  "poll": null
+}

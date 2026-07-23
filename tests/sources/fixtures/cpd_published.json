@@ -1,0 +1,26 @@
+{
+  "count": 3,
+  "message": null,
+  "nextPage": "https://api.govinfo.gov/published/2026-06-01?offsetMark=NEXT&pageSize=2&collection=CPD",
+  "previousPage": null,
+  "packages": [
+    {
+      "packageId": "DCPD-202600445",
+      "title": "Remarks on Coal and an Exchange With Reporters",
+      "dateIssued": "2026-06-04",
+      "docClass": "DCPD",
+      "congress": null,
+      "lastModified": "2026-06-05T10:00:00Z",
+      "packageLink": "https://api.govinfo.gov/packages/DCPD-202600445/summary"
+    },
+    {
+      "packageId": "DCPD-202600450",
+      "title": "Message on the Anniversary of the D-Day Landings in Normandy, France",
+      "dateIssued": "2026-06-06",
+      "docClass": "DCPD",
+      "congress": null,
+      "lastModified": "2026-06-07T10:00:00Z",
+      "packageLink": "https://api.govinfo.gov/packages/DCPD-202600450/summary"
+    }
+  ]
+}

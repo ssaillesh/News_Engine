@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>News &#8211; The White House</title>
+    <link>https://www.whitehouse.gov</link>
+    <item>
+      <title>Presidential Message on the Anniversary of the Liberation of Guam</title>
+      <link>https://www.whitehouse.gov/briefings-statements/2026/07/presidential-message-guam/</link>
+      <pubDate>Tue, 21 Jul 2026 21:30:51 +0000</pubDate>
+      <dc:creator><![CDATA[The White House]]></dc:creator>
+      <guid isPermaLink="false">https://www.whitehouse.gov/?p=45462</guid>
+      <category><![CDATA[Briefings & Statements]]></category>
+      <description><![CDATA[<p>Today, our Nation marks the 82nd anniversary of the liberation of Guam.</p>]]></description>
+      <content:encoded><![CDATA[<p>Today, our Nation marks the 82nd anniversary of the American liberation of Guam.</p><p>We honor the brave.</p>]]></content:encoded>
+    </item>
+    <item>
+      <title>Trump Administration Announces More Than $5 Billion for the Genesis Mission</title>
+      <link>https://www.whitehouse.gov/releases/2026/07/45502/</link>
+      <pubDate>Wed, 22 Jul 2026 12:00:59 +0000</pubDate>
+      <dc:creator><![CDATA[The White House]]></dc:creator>
+      <guid isPermaLink="false">https://www.whitehouse.gov/?p=45502</guid>
+      <category><![CDATA[Releases]]></category>
+      <description><![CDATA[<p>WASHINGTON, DC &#8212; Today, the White House announced funding.</p>]]></description>
+      <content:encoded><![CDATA[<p>WASHINGTON, DC &#8212; Today, the White House announced more than $5 billion.</p>]]></content:encoded>
+    </item>
+  </channel>
+</rss>

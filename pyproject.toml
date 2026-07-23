@@ -1,0 +1,78 @@
+[project]
+name = "truthsocial-archiver"
+version = "0.1.0"
+description = "Single-account Truth Social archival system — Phase 1 scaffold (config + CLI, no collection code)."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+dependencies = [
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "typer>=0.12",
+  "rich>=13.7",
+  "loguru>=0.7",
+  "pyyaml>=6.0",
+  "sqlalchemy[asyncio]>=2.0.30",
+  "alembic>=1.13",
+  "aiosqlite>=0.20",
+  "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+postgres = [
+  "psycopg[binary]>=3.1",
+]
+web = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.29",
+]
+dev = [
+  "pytest>=8.0",
+  "pytest-asyncio>=0.23",
+  "respx>=0.21",
+  "hypothesis>=6.100",
+  "ruff>=0.4",
+  "mypy>=1.9",
+  "types-PyYAML>=6.0",
+]
+
+[project.scripts]
+archiver = "archiver.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/archiver"]
+
+# Ensure non-.py profile files ship in the wheel.
+[tool.hatch.build.targets.wheel.force-include]
+"src/archiver/config/profiles" = "archiver/config/profiles"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "C4", "PTH"]
+
+[tool.ruff.lint.per-file-ignores]
+# Self-contained HTML/CSS/JS template — long lines are intentional, not code.
+"src/archiver/web/page.py" = ["E501"]
+
+[tool.ruff.lint.flake8-bugbear]
+# Typer's option/argument declarations are the idiomatic way to set CLI defaults.
+extend-immutable-calls = ["typer.Option", "typer.Argument"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src"]
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+asyncio_mode = "auto"
