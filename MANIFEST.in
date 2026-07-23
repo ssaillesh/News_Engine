@@ -1,0 +1,2 @@
+recursive-include src/archiver/config *.yaml
+recursive-include src/archiver/reference *.py
