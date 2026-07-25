@@ -1,8 +1,5 @@
 {
-  "buildCommand": "pip install -r requirements.txt && pip install -e .",
-  "framework": "python",
-  "env": {
-    "ARCHIVER_ENV": "prod",
-    "API_BASE_URL": "https://mastodon.social"
-  }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index" }
+  ]
 }

@@ -1,3 +1,6 @@
+# Local SQLite databases — Vercel uses Postgres, so these just bloat the bundle
+*.db
+
 # Ignore development and test files
 tests/
 .pytest_cache

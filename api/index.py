@@ -1,5 +1,16 @@
 """Vercel serverless ASGI handler for FastAPI app."""
 
+import sys
+from pathlib import Path
+
+# The `archiver` package lives under ./src and is not guaranteed to be
+# pip-installed inside Vercel's serverless function bundle, so make it
+# importable directly. Without this, `import archiver` fails and every
+# request falls into the error branch below.
+_SRC = Path(__file__).resolve().parent.parent / "src"
+if _SRC.is_dir() and str(_SRC) not in sys.path:
+    sys.path.insert(0, str(_SRC))
+
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
