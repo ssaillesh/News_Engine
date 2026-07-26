@@ -1,0 +1,18 @@
+# Dependencies for the Vercel serverless function.
+# Vercel installs a function's packages from a requirements.txt located next to
+# the entrypoint (api/index.py), so this must exist here — not only at the repo
+# root — or imports like `fastapi` fail and the function crashes at cold start.
+#
+# This is the runtime subset the web dashboard/API needs. (No uvicorn: Vercel
+# provides the ASGI server. No torch/transformers: sentiment scoring is offline.)
+pydantic>=2.6
+pydantic-settings>=2.2
+pyyaml>=6.0
+loguru>=0.7
+httpx>=0.27
+sqlalchemy[asyncio]>=2.0.30
+aiosqlite>=0.20
+fastapi>=0.110
+
+# PostgreSQL driver for Neon/Supabase (async engine uses postgresql+psycopg://)
+psycopg[binary]>=3.1
