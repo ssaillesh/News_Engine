@@ -177,3 +177,75 @@ Vercel cold-starts (~5-10s) are normal. Requests warm up after.
 ---
 
 **Happy deploying! 🚀**
+
+---
+
+# Scheduled ingest with GitHub Actions
+
+Vercel serves the dashboard but **cannot run the ingest**: a full run takes ~64
+seconds against the serverless timeout, and the FinBERT stack is ~500 MB against
+a 250 MB bundle cap. The ingest therefore runs in GitHub Actions, which has
+neither limit and is free (unlimited minutes on public repos, 2,000/month on
+private).
+
+Three pieces, each doing only what it is suited to:
+
+| Piece | Job | Free tier |
+|---|---|---|
+| **Vercel** | serves dashboard + JSON API (read-only, ~5 ms queries) | Hobby |
+| **Neon** | Postgres — holds the archive (~14 MB today) | ~0.5 GB |
+| **GitHub Actions** | scheduled ingest + FinBERT enrichment | 2,000 min/mo |
+
+## Workflows
+
+| File | Schedule | Does |
+|---|---|---|
+| `.github/workflows/ingest.yml` | every 3 h | migrations, then all five ingesters |
+| `.github/workflows/enrich.yml` | daily 04:30 UTC | `score-sentiment`, `summarize` |
+
+Both accept `workflow_dispatch`, so you can trigger a run by hand from the
+Actions tab — do that first to confirm the secrets are right.
+
+## Repository secrets
+
+Settings → Secrets and variables → Actions → *New repository secret*:
+
+| Secret | Value |
+|---|---|
+| `DATABASE_URL` | the Neon connection string |
+| `GOVINFO_API_KEY` | your key, or omit to fall back to the rate-limited `DEMO_KEY` |
+
+## Creating the schema on Neon
+
+You do **not** need to run migrations by hand. `ingest.yml` runs
+`alembic upgrade head` before every ingest, so the first workflow run creates all
+20 tables on an empty Neon database. Trigger it manually once and watch it go
+green before wiring up Vercel.
+
+To do it locally instead:
+
+```bash
+DATABASE_URL='postgresql://...neon.tech/archive?sslmode=require' \
+ARCHIVER_ENV_FILE=/dev/null alembic upgrade head
+```
+
+## Environment variables
+
+Vercel needs only the first two; Actions gets them from the secrets above.
+
+| Variable | Vercel | Actions | Notes |
+|---|---|---|---|
+| `DATABASE_URL` | ✅ | ✅ | Neon's plain `postgresql://` URL works as-is — the driver is normalized in code |
+| `ARCHIVER_ENV` | `prod` | `prod` | selects `config/profiles/prod.yaml` (JSON logs) |
+| `GOVINFO_API_KEY` | — | ✅ | ingest only; the web app never calls govinfo |
+| `ARCHIVER_ENV_FILE` | — | `/dev/null` | keeps a stray committed `.env` out of the config chain |
+
+## Gotchas
+
+- **Scheduled workflows stop after 60 days of repo inactivity.** GitHub disables
+  them; re-enable from the Actions tab or push any commit.
+- **Neon autosuspends when idle** (~1 s cold start). The 3-hourly ingest keeps it
+  warm as a side effect.
+- **`ingest-federal-register` needs `--incremental`.** Without it every run
+  refetches ~1,700 documents back to 2017 instead of the handful that are new.
+  The workflow already passes it.

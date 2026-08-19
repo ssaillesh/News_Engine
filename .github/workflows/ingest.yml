@@ -1,0 +1,64 @@
+name: Scheduled ingest
+
+# The archive only advances when this runs. Every 3 hours keeps the RSS sources
+# (which carry only recent items) from rolling over between runs.
+#
+# NOTE: GitHub disables scheduled workflows after 60 days with no repo activity.
+# Re-enable from the Actions tab, or push any commit, to restart the schedule.
+on:
+  schedule:
+    - cron: "0 */3 * * *"
+  workflow_dispatch:        # lets you trigger a run by hand from the Actions tab
+
+concurrency:
+  # A slow run must never overlap the next slot — the same guarantee the local
+  # script gets from its lock directory.
+  group: ingest
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      GOVINFO_API_KEY: ${{ secrets.GOVINFO_API_KEY }}
+      ARCHIVER_ENV: prod
+      # Nothing is committed, so keep the repo's .env out of the resolution
+      # chain entirely and read config from the environment only.
+      ARCHIVER_ENV_FILE: /dev/null
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[postgres]"
+
+      - name: Fail fast if DATABASE_URL is unset
+        run: |
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::DATABASE_URL secret is not set — add it under Settings → Secrets → Actions."
+            exit 1
+          fi
+
+      - name: Apply migrations
+        run: alembic upgrade head
+
+      # RSS sources self-bound (feeds carry only recent items). Federal Register
+      # needs --incremental or it refetches all ~1700 documents back to 2017.
+      - name: Ingest news
+        run: archiver ingest-news
+      - name: Ingest publishers
+        run: archiver ingest-publishers
+      - name: Ingest presidential documents
+        run: archiver ingest-presidential-documents
+      - name: Ingest federal register
+        run: archiver ingest-federal-register --incremental
+      - name: Ingest White House
+        run: archiver ingest-white-house

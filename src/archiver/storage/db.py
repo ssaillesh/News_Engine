@@ -22,6 +22,7 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from archiver.storage.models import Base
+from archiver.storage.url import to_async_url
 
 
 def _install_sqlite_fk_pragma(engine: AsyncEngine) -> None:
@@ -45,8 +46,12 @@ class Database:
         echo: bool = False,
         engine_kwargs: dict[str, Any] | None = None,
     ) -> None:
-        self.url = url
-        self.engine: AsyncEngine = create_async_engine(url, echo=echo, **(engine_kwargs or {}))
+        # Providers hand out driver-less postgresql:// URLs; normalize here so
+        # the CLI, the web app, and the serverless handler all accept one secret.
+        self.url = to_async_url(url)
+        self.engine: AsyncEngine = create_async_engine(
+            self.url, echo=echo, **(engine_kwargs or {})
+        )
         _install_sqlite_fk_pragma(self.engine)
         self.dialect: str = self.engine.sync_engine.dialect.name
         self.session_factory: async_sessionmaker[AsyncSession] = async_sessionmaker(

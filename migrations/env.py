@@ -15,6 +15,7 @@ from sqlalchemy import engine_from_config, pool
 
 from archiver.config.settings import get_settings
 from archiver.storage.models import Base
+from archiver.storage.url import to_sync_url
 
 config = context.config
 
@@ -25,8 +26,7 @@ target_metadata = Base.metadata
 
 
 def _sync_url() -> str:
-    url = get_settings().database_url
-    return url.replace("+aiosqlite", "").replace("+asyncpg", "+psycopg")
+    return to_sync_url(get_settings().database_url)
 
 
 def run_migrations_offline() -> None:

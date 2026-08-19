@@ -31,3 +31,7 @@ htmlcov/
 .DS_Store
 .idea/
 .vscode/
+
+# Scheduled-ingest logs and lock
+logs/
+.ingest.lock/
