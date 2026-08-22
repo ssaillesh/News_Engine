@@ -1,0 +1,63 @@
+# Local stack for the stock research app. The news archiver is not
+# containerized — it runs on the host and against the same database.
+#
+# DATABASE_URL in .env decides which database everything talks to:
+#   - the `db` service below  -> local development, full TimescaleDB
+#     (host port 5433, since 5432 is occupied by a local Postgres install)
+#   - the Neon URL            -> the shared production archive
+services:
+  db:
+    image: timescale/timescaledb:latest-pg17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: archive
+    ports:
+      # 5433 on the host: port 5432 is already taken by a local Postgres.
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d archive"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: ./backend
+    env_file: .env
+    environment:
+      # Override the host-facing values from .env with in-network addresses.
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/archive
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://postgres:postgres@db:5432/archive
+      REDIS_URL: redis://redis:6379/0
+    command: celery -A workers.celery_app.celery_app worker --loglevel=info
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  pgdata:
