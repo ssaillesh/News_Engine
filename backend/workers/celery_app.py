@@ -1,7 +1,7 @@
 """Celery application.
 
-No tasks yet — the worker boots so the compose stack is complete and future
-tasks have a home. Register task modules in ``include`` as they are added.
+Register every task module in ``include`` — the worker imports only what is
+listed there.
 """
 
 from __future__ import annotations
@@ -22,7 +22,7 @@ celery_app = Celery(
     "research",
     broker=settings.redis_url,
     backend=settings.redis_url,
-    include=[],
+    include=["workers.tasks.prices"],
 )
 
 celery_app.conf.update(
