@@ -36,6 +36,9 @@ _ADDED_LATER = frozenset(
         "status_summary",  # 0003_summary
         "stock_mentions",  # 0004_stocks
         "company_market",  # 0004_stocks
+        "status_topics",  # 0005_classification
+        "status_entities",  # 0005_classification
+        "status_impact",  # 0005_classification
     }
 )
 

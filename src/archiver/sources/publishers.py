@@ -61,7 +61,7 @@ PUBLISHER_FEEDS: dict[str, str] = {
     "NBC News": "https://feeds.nbcnews.com/nbcnews/public/politics",
     "CNBC": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000113",
     "Deutsche Welle": "https://rss.dw.com/rdf/rss-en-world",
-    "France 24": "https://www.france24.com/en/america/rss",
+    "France 24": "https://www.france24.com/en/americas/rss",
 }
 
 PUBLISHERS_ACCOUNT: dict[str, Any] = {

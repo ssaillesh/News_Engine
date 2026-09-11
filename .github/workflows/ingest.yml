@@ -62,3 +62,11 @@ jobs:
         run: archiver ingest-federal-register --incremental
       - name: Ingest White House
         run: archiver ingest-white-house
+
+      # Offline enrichment: curated lexicons + regex, no model downloads, ~7s
+      # over the whole archive. Cheap enough to belong here rather than in the
+      # heavy `enrich` workflow, and both passes are incremental after the first.
+      - name: Detect company mentions
+        run: archiver detect-stocks
+      - name: Classify topics, entities, and impact
+        run: archiver classify

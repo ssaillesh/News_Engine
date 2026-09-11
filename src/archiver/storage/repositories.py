@@ -27,14 +27,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from archiver.storage.models import (
     Account,
     CheckpointState,
+    CompanyMarket,
     Media,
     MediaBlob,
     RawPayload,
-    CompanyMarket,
     Status,
+    StatusEntity,
+    StatusImpact,
     StatusMetric,
     StatusSentiment,
     StatusSummary,
+    StatusTopic,
     StatusVersion,
     StockMention,
     utcnow,
@@ -267,6 +270,81 @@ class StockMentionRepository(_Repo):
         await self.session.execute(
             delete(StockMention).where(StockMention.status_id == status_id)
         )
+
+
+class StatusTopicRepository(_Repo):
+    """Derived topic hits — idempotent on (status_id, topic)."""
+
+    async def upsert(self, values: Mapping[str, Any]) -> None:
+        payload = {**values}
+        payload.setdefault("detected_at", utcnow())
+        await _upsert(
+            self.session,
+            self.dialect,
+            StatusTopic.__table__,
+            payload,
+            index_elements=["status_id", "topic"],
+            update_columns=["matched_term"],
+        )
+
+    async def clear_for_status(self, status_id: str) -> None:
+        """Drop a status's topics before re-detecting, so removed ones vanish."""
+        from sqlalchemy import delete
+
+        await self.session.execute(
+            delete(StatusTopic).where(StatusTopic.status_id == status_id)
+        )
+
+
+class StatusEntityRepository(_Repo):
+    """Derived country/bloc/agency hits — idempotent on (status_id, entity_key)."""
+
+    async def upsert(self, values: Mapping[str, Any]) -> None:
+        payload = {**values}
+        payload.setdefault("detected_at", utcnow())
+        await _upsert(
+            self.session,
+            self.dialect,
+            StatusEntity.__table__,
+            payload,
+            index_elements=["status_id", "entity_key"],
+            update_columns=["entity_type", "alias"],
+        )
+
+    async def clear_for_status(self, status_id: str) -> None:
+        from sqlalchemy import delete
+
+        await self.session.execute(
+            delete(StatusEntity).where(StatusEntity.status_id == status_id)
+        )
+
+
+class StatusImpactRepository(_Repo):
+    """Derived impact scores — overwritten in place, like sentiment readings.
+
+    Writes exactly the columns it is given, rather than a fixed list. The
+    components are owned by different passes — the deterministic classifier sets
+    authority/topic/actionability, clustering sets corroboration — and a
+    repository that decided for itself which columns to skip would make the
+    owning pass unable to write its own column. Protecting a component another
+    pass owns is the caller's job: read it back and pass it through, which is
+    what ``classify_statuses`` does.
+    """
+
+    async def upsert(self, values: Mapping[str, Any]) -> None:
+        payload = {**values}
+        payload.setdefault("scored_at", utcnow())
+        await _upsert(
+            self.session,
+            self.dialect,
+            StatusImpact.__table__,
+            payload,
+            index_elements=["status_id"],
+            update_columns=[c for c in payload if c != "status_id"],
+        )
+
+    async def get(self, status_id: str) -> StatusImpact | None:
+        return await self.session.get(StatusImpact, status_id)
 
 
 class CompanyMarketRepository(_Repo):

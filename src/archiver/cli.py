@@ -29,6 +29,7 @@ from archiver.analysis import (
     score_statuses,
     summarize_statuses,
 )
+from archiver.analysis.classify import ClassifyReport, classify_statuses
 from archiver.analysis.stocks import (
     DEFAULT_MENTION_SOURCES,
     MentionReport,
@@ -443,6 +444,62 @@ def detect_stocks_cmd(
             report.ticker_counts.items(), key=lambda kv: kv[1], reverse=True
         ):
             table.add_row(ticker, str(count))
+        console.print(table)
+
+
+@app.command(name="classify")
+def classify_cmd(
+    source: list[str] = typer.Option(
+        None, "--source", help="Sources to classify (repeatable; default: all)."
+    ),
+    reclassify: bool = typer.Option(
+        False, "--reclassify", help="Redo every item, not just new or edited ones."
+    ),
+    limit: int = typer.Option(None, help="Cap how many items to visit (for a quick run)."),
+) -> None:
+    """Detect topics and entities, then score each item for real-world impact.
+
+    Offline and deterministic — curated lexicons plus regex, no model downloads,
+    so this belongs in the ingest schedule rather than the enrichment one. Impact
+    combines how authoritative the source is, what the item is about, and how
+    committed its language is. Safe to re-run; use --reclassify after editing a
+    lexicon or the weights.
+    """
+    settings = get_settings()
+    configure_logging(settings)
+    sources = source or []
+
+    async def _run() -> ClassifyReport:
+        database = Database(settings.database_url)
+        try:
+            await database.create_all()  # dev convenience; production uses `alembic upgrade head`
+            return await classify_statuses(
+                database, sources=sources, limit=limit, reclassify=reclassify
+            )
+        finally:
+            await database.dispose()
+
+    report = asyncio.run(_run())
+    console.print(
+        f"[green]✓[/] classified {report.scanned} item(s); "
+        f"{len(report.topic_counts)} topic(s), {len(report.entity_counts)} entity(ies)"
+    )
+    if report.tier_counts:
+        table = Table(title="Impact tiers")
+        table.add_column("tier", style="cyan")
+        table.add_column("items", justify="right")
+        for tier in ("critical", "high", "notable", "routine"):
+            if tier in report.tier_counts:
+                table.add_row(tier, str(report.tier_counts[tier]))
+        console.print(table)
+    if report.topic_counts:
+        table = Table(title="Topics found")
+        table.add_column("topic", style="cyan")
+        table.add_column("items", justify="right")
+        for topic, count in sorted(
+            report.topic_counts.items(), key=lambda kv: kv[1], reverse=True
+        ):
+            table.add_row(topic, str(count))
         console.print(table)
 
 

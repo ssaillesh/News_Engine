@@ -5,6 +5,7 @@ stored statuses and writes derived rows alongside them. That keeps every pass
 re-runnable: drop the derived table, run the pass again, get the same answer.
 """
 
+from archiver.analysis.classify import ClassifyReport, classify_statuses
 from archiver.analysis.pipeline import (
     DEFAULT_SOURCES,
     ScoreReport,
@@ -22,10 +23,12 @@ from archiver.analysis.sentiment import (
 from archiver.analysis.summarize import SUMMARY_MODEL, Summarizer
 
 __all__ = [
+    "ClassifyReport",
     "DEFAULT_SOURCES",
     "FINBERT_MODEL",
     "LABELS",
     "SUMMARY_MODEL",
+    "classify_statuses",
     "FinBertScorer",
     "ModelUnavailableError",
     "ScoreReport",

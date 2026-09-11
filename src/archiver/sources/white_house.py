@@ -98,11 +98,61 @@ def _published_at(item: dict[str, Any]) -> datetime:
     return datetime.now(UTC)
 
 
+# whitehouse.gov serves its entire page chrome inside the RSS <content> element,
+# so the extracted text arrives as: headline, then the site navigation menu, then
+# the actual article. Left in, that menu is what the dashboard shows as the
+# summary, what the classifier reads, and — because the menu names categories,
+# not companies — what a company matcher scans instead of the release itself.
+#
+# These are the menu's own labels. Real article prose is sentences; a line that
+# is exactly one of these, on its own, is chrome.
+_NAV_LABELS = frozenset(
+    {
+        "search",
+        "select category",
+        "all",
+        "all news",
+        "news",
+        "articles",
+        "briefings & statements",
+        "presidential actions",
+        "all presidential actions",
+        "executive orders",
+        "nominations & appointments",
+        "presidential memoranda",
+        "proclamations",
+        "fact sheets",
+        "releases",
+        "remarks",
+        "research",
+        "home",
+        "menu",
+        "skip to content",
+    }
+)
+
+
+def strip_site_chrome(text: str) -> str:
+    """Drop whitehouse.gov's navigation menu from extracted article text.
+
+    Matches only whole lines, case-insensitively, so a sentence that merely
+    mentions "proclamations" is untouched.
+    """
+    if not text:
+        return text
+    kept = [
+        line.strip()
+        for line in text.split("\n")
+        if line.strip() and line.strip().lower() not in _NAV_LABELS
+    ]
+    return "\n\n".join(kept)
+
+
 def normalize_item(item: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     """Map an RSS item into (account_row, status_row) dicts."""
     post_id = _post_id(item)
     content_html = item.get("content") or item.get("description")
-    content_text = html_to_text(content_html)
+    content_text = strip_site_chrome(html_to_text(content_html))
     title = item.get("title") or (content_text.split("\n", 1)[0] if content_text else post_id)
     categories = item.get("categories") or []
 

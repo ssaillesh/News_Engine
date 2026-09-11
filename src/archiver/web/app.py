@@ -3,11 +3,18 @@
 Endpoints:
     GET /               → the dashboard HTML
     GET /api/stats      → totals and per-source counts
+    GET /api/facets     → sources, kinds, sentiments, topics, impact tiers
     GET /api/statuses   → paginated, searchable, filterable archive items
+
+Impact ranking is exposed through ``/api/statuses`` (``sort=impact`` plus the
+``tier`` and ``topic`` filters) rather than a separate ``/api/impact`` endpoint:
+a second route would have to duplicate the search, date-bound and pagination
+logic, and the two would drift. One list endpoint, one set of filters.
 """
 
 from __future__ import annotations
 
+import re
 import socket
 from datetime import UTC, datetime, timedelta
 from typing import Any
@@ -17,8 +24,19 @@ from fastapi.responses import HTMLResponse
 from sqlalchemy import func, select
 from sqlalchemy.orm import selectinload
 
+from archiver.analysis.signals import is_generic_label
+from archiver.reference.tickers import TICKERS
+from archiver.reference.topics import TOPICS
 from archiver.storage.db import Database
-from archiver.storage.models import Status, StatusSentiment
+from archiver.storage.models import (
+    CompanyMarket,
+    Status,
+    StatusEntity,
+    StatusImpact,
+    StatusSentiment,
+    StatusTopic,
+    StockMention,
+)
 from archiver.web.page import INDEX_HTML
 
 
@@ -74,11 +92,122 @@ def _to_sentiment(reading: StatusSentiment | None) -> dict[str, Any] | None:
     }
 
 
+# Separators an RSS description tends to leave behind once the restated
+# headline in front of them is removed.
+_LEADING_PUNCT = re.compile(r"^[\s\u2014\u2013:·|,;.-]+")
+# Official sources prefix the stored text with the document type —
+# "[Executive Order] Ending Certain Tariff Actions" — while the title field
+# holds the bare title. Ignore that prefix when deciding whether the body is
+# saying anything the headline has not.
+_TYPE_PREFIX = re.compile(r"^\[[^\]]{1,40}\]\s*")
+
+
 def _body(text: str, title: str) -> str:
-    """The article body: everything after the headline line, if there is any."""
-    if "\n" in text:
-        return text.split("\n", 1)[1].strip()
-    return "" if text.strip() == title.strip() else text.strip()
+    """The article body: whatever the headline does not already say.
+
+    RSS descriptions very often *restate* the headline and then trail off, so an
+    exact-match check is not enough — on this corpus about half of all items
+    would otherwise render the same sentence twice in a row. When the body opens
+    with the headline, that opening is stripped; when what remains is only a
+    fragment, there is no body worth showing.
+    """
+    body = text.split("\n", 1)[1].strip() if "\n" in text else text.strip()
+    head = title.strip()
+    if not body or not head or body == head:
+        return ""
+    body = _TYPE_PREFIX.sub("", body).strip()
+    if not body or body == head:
+        return ""
+    low_body, low_head = body.lower(), head.lower()
+    # The overlap runs in both directions on this corpus. Google News titles are
+    # the description plus a " - Publisher" suffix, so the *title* starts with
+    # the body and the body adds nothing at all. Full article rows are the other
+    # way round: the body opens by restating the headline and then continues.
+    if low_head.startswith(low_body):
+        return ""
+    if low_body.startswith(low_head):
+        body = _LEADING_PUNCT.sub("", body[len(head) :]).strip()
+    # A handful of leftover words is noise, not a summary.
+    return body if len(body) >= 40 else ""
+
+
+def _to_impact(row: StatusImpact | None) -> dict[str, Any] | None:
+    """Shape a stored impact score for the API (None when never classified).
+
+    Components ship alongside the total so the UI can explain a ranking instead
+    of asserting a number; ``reasons`` is that explanation pre-assembled, since
+    every client would otherwise rebuild the same sentence.
+    """
+    if row is None:
+        return None
+    reasons: list[str] = []
+    # "news coverage" under every news headline is noise; a real document type
+    # ("Executive Order") is the single most useful thing on the card.
+    if row.authority_label and not is_generic_label(row.authority_label):
+        reasons.append(row.authority_label)
+    if row.actionability >= 0.65:
+        reasons.append("committed language")
+    elif row.actionability <= 0.35:
+        reasons.append("speculative language")
+    if row.corroboration is not None:
+        reasons.append(f"{int(round(row.corroboration * 10))} outlets")
+    return {
+        "score": round(row.impact_score, 4),
+        "tier": row.tier,
+        "authority": round(row.authority, 4),
+        "authority_label": row.authority_label,
+        "topic": round(row.topic, 4),
+        "actionability": round(row.actionability, 4),
+        "corroboration": (
+            round(row.corroboration, 4) if row.corroboration is not None else None
+        ),
+        "market_sensitivity": (
+            round(row.market_sensitivity, 4)
+            if row.market_sensitivity is not None
+            else None
+        ),
+        "reasons": reasons,
+    }
+
+
+def _to_topics(rows: list[StatusTopic]) -> list[dict[str, Any]]:
+    """Topic hits with their display labels, heaviest first."""
+    out = [
+        {
+            "key": r.topic,
+            "label": TOPICS[r.topic].label if r.topic in TOPICS else r.topic,
+            "weight": TOPICS[r.topic].weight if r.topic in TOPICS else 0.0,
+            "matched_term": r.matched_term,
+        }
+        for r in rows
+    ]
+    return sorted(out, key=lambda t: t["weight"], reverse=True)
+
+
+def _to_entities(rows: list[StatusEntity]) -> list[dict[str, Any]]:
+    """Named countries, blocs and agencies, countries first (they carry most)."""
+    order = {"country": 0, "bloc": 1, "agency": 2}
+    out = [
+        {"key": r.entity_key, "type": r.entity_type, "alias": r.alias} for r in rows
+    ]
+    return sorted(out, key=lambda e: (order.get(e["type"], 9), e["key"]))
+
+
+def _to_stocks(rows: list[StockMention]) -> list[dict[str, Any]]:
+    """Companies named in a status, with the alias that actually matched.
+
+    The alias is kept visible so a false positive is obvious at a glance —
+    "mentioned as 'Truth Social'" is auditable in a way a bare ticker is not.
+    """
+    out = [
+        {
+            "ticker": r.ticker,
+            "name": TICKERS[r.ticker].name if r.ticker in TICKERS else r.ticker,
+            "alias": r.alias,
+        }
+        for r in rows
+    ]
+    return sorted(out, key=lambda c: c["ticker"])
 
 
 def _to_item(status: Status) -> dict[str, Any]:
@@ -119,6 +248,10 @@ def _to_item(status: Status) -> dict[str, Any]:
             else None
         ),
         "sentiment": _to_sentiment(status.sentiment),
+        "impact": _to_impact(status.impact),
+        "topics": _to_topics(list(status.topics)),
+        "entities": _to_entities(list(status.entities)),
+        "stocks": _to_stocks(list(status.stock_mentions)),
     }
 
 
@@ -165,9 +298,66 @@ def create_app(db: Database) -> FastAPI:
                     .order_by(func.count().desc())
                 )
             ).all()
+            tpc = (
+                await session.execute(
+                    select(StatusTopic.topic, func.count())
+                    .group_by(StatusTopic.topic)
+                    .order_by(func.count().desc())
+                )
+            ).all()
+            tir = (
+                await session.execute(
+                    select(StatusImpact.tier, func.count()).group_by(StatusImpact.tier)
+                )
+            ).all()
+            cmp = (
+                await session.execute(
+                    select(StockMention.ticker, func.count())
+                    .group_by(StockMention.ticker)
+                    .order_by(func.count().desc())
+                )
+            ).all()
+            mkt = (
+                await session.execute(
+                    select(
+                        CompanyMarket.ticker,
+                        CompanyMarket.last_price,
+                        CompanyMarket.pct_change,
+                        CompanyMarket.delta_indicator,
+                    )
+                )
+            ).all()
+        quotes = {
+            r[0]: {"last_price": r[1], "pct_change": r[2], "delta": r[3]} for r in mkt
+        }
+        # Tiers are a severity ladder, so present them in severity order rather
+        # than by count — "critical" belongs at the top even when it is rarest.
+        tier_rank = {"critical": 0, "high": 1, "notable": 2, "routine": 3}
+        tiers = sorted(
+            ({"key": row[0], "count": row[1]} for row in tir),
+            key=lambda t: tier_rank.get(t["key"], 9),
+        )
         return {
             "total": sum(row[1] for row in src),
             "sources": [{"key": row[0], "count": row[1]} for row in src],
+            "companies": [
+                {
+                    "key": row[0],
+                    "label": TICKERS[row[0]].name if row[0] in TICKERS else row[0],
+                    "count": row[1],
+                    "quote": quotes.get(row[0]),
+                }
+                for row in cmp
+            ],
+            "topics": [
+                {
+                    "key": row[0],
+                    "label": TOPICS[row[0]].label if row[0] in TOPICS else row[0],
+                    "count": row[1],
+                }
+                for row in tpc
+            ],
+            "tiers": tiers,
             "kinds": [{"key": row[0], "count": row[1]} for row in knd],
             "sentiments": [
                 {"key": row[0], "count": row[1], "avg_compound": round(row[2] or 0.0, 4)}
@@ -181,23 +371,60 @@ def create_app(db: Database) -> FastAPI:
         source: str | None = None,
         kind: str | None = None,
         sentiment: str | None = None,
+        topic: str | None = None,
+        tier: str | None = None,
+        ticker: str | None = None,
+        sort: str = Query("recent", pattern="^(recent|impact)$"),
         since: str | None = None,
         until: str | None = None,
         limit: int = Query(25, ge=1, le=200),
         offset: int = Query(0, ge=0),
     ) -> dict[str, Any]:
-        # selectinload keeps this one extra query instead of N+1 per card.
-        stmt = (
-            select(Status)
-            .options(selectinload(Status.sentiment), selectinload(Status.summary))
-            .order_by(Status.created_at.desc())
+        # selectinload keeps this one extra query per relationship instead of
+        # N+1 per card.
+        stmt = select(Status).options(
+            selectinload(Status.sentiment),
+            selectinload(Status.summary),
+            selectinload(Status.impact),
+            selectinload(Status.topics),
+            selectinload(Status.entities),
+            selectinload(Status.stock_mentions),
         )
+        if sort == "impact":
+            # Ties are common — three components over short headlines land on a
+            # handful of values — so recency breaks them and the order stays
+            # stable across requests instead of shuffling under pagination.
+            stmt = stmt.join(StatusImpact).order_by(
+                StatusImpact.impact_score.desc(), Status.created_at.desc()
+            )
+        else:
+            stmt = stmt.order_by(Status.created_at.desc())
         if source:
             stmt = stmt.where(Status.source == source)
         if kind:
             stmt = stmt.where(Status.kind == kind)
         if sentiment:
             stmt = stmt.join(StatusSentiment).where(StatusSentiment.label == sentiment)
+        if topic:
+            stmt = stmt.where(
+                Status.id.in_(
+                    select(StatusTopic.status_id).where(StatusTopic.topic == topic)
+                )
+            )
+        if ticker:
+            stmt = stmt.where(
+                Status.id.in_(
+                    select(StockMention.status_id).where(StockMention.ticker == ticker)
+                )
+            )
+        if tier:
+            # An explicit tier filter can coexist with sort=impact, which already
+            # joins the table — use a subquery so the join is never duplicated.
+            stmt = stmt.where(
+                Status.id.in_(
+                    select(StatusImpact.status_id).where(StatusImpact.tier == tier)
+                )
+            )
         if q:
             stmt = stmt.where(Status.content_text.ilike(f"%{q}%"))
         since_dt = _parse_bound(since, end=False)

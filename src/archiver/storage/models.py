@@ -173,6 +173,15 @@ class Status(Base):
     stock_mentions: Mapped[list[StockMention]] = relationship(
         back_populates="status", cascade="all, delete-orphan"
     )
+    topics: Mapped[list[StatusTopic]] = relationship(
+        back_populates="status", cascade="all, delete-orphan"
+    )
+    entities: Mapped[list[StatusEntity]] = relationship(
+        back_populates="status", cascade="all, delete-orphan"
+    )
+    impact: Mapped[StatusImpact | None] = relationship(
+        back_populates="status", cascade="all, delete-orphan", uselist=False
+    )
 
     __table_args__ = (
         Index("ix_status_account_created", "account_id", "created_at"),
@@ -541,3 +550,101 @@ class CrawlerMetric(Base):
     labels: Mapped[dict[str, Any] | None] = mapped_column(JSONType)
 
     __table_args__ = (Index("ix_cmetrics", "metric", "captured_at"),)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6.16 status_topics  (derived: curated topic hits)
+# ─────────────────────────────────────────────────────────────────────────────
+class StatusTopic(Base):
+    """A curated topic matched in a status.
+
+    Derived, like sentiment and stock mentions: never touches the captured text,
+    fully re-derivable, safe to drop and rebuild. One row per (status, topic)
+    however many of the topic's terms appeared.
+    """
+
+    __tablename__ = "status_topics"
+
+    status_id: Mapped[str] = mapped_column(ForeignKey("statuses.id"), primary_key=True)
+    topic: Mapped[str] = mapped_column(String, primary_key=True)
+    # The exact term that matched ("section 232"), kept for display and for
+    # auditing whichever term turns out to be the noisy one.
+    matched_term: Mapped[str | None] = mapped_column(String)
+    detected_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    status: Mapped[Status] = relationship(back_populates="topics")
+
+    __table_args__ = (Index("ix_status_topics_topic", "topic"),)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6.17 status_entities  (derived: countries, blocs, agencies)
+# ─────────────────────────────────────────────────────────────────────────────
+class StatusEntity(Base):
+    """A country, bloc, or agency named in a status.
+
+    Companies deliberately live in ``stock_mentions`` instead — they already had
+    a curated matcher and a market cache hanging off them.
+    """
+
+    __tablename__ = "status_entities"
+
+    status_id: Mapped[str] = mapped_column(ForeignKey("statuses.id"), primary_key=True)
+    entity_key: Mapped[str] = mapped_column(String, primary_key=True)
+    entity_type: Mapped[str] = mapped_column(String, nullable=False)  # country|bloc|agency
+    alias: Mapped[str | None] = mapped_column(String)
+    detected_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    status: Mapped[Status] = relationship(back_populates="entities")
+
+    __table_args__ = (
+        Index("ix_status_entities_key", "entity_key"),
+        Index("ix_status_entities_type", "entity_type"),
+    )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6.18 status_impact  (derived: the ranking score and its components)
+# ─────────────────────────────────────────────────────────────────────────────
+class StatusImpact(Base):
+    """Impact ranking for a status, with every component kept alongside the total.
+
+    The components are the point. A bare score cannot be explained to a reader or
+    corrected by an operator; with authority/topic/actionability/corroboration/
+    market sensitivity on the row, the dashboard can say *why* an item ranks
+    where it does, and re-weighting is an UPDATE rather than a re-run of every
+    model pass.
+
+    ``corroboration`` and ``market_sensitivity`` are nullable on purpose: NULL
+    means "not measured yet" (the clustering and market passes are separate) and
+    is excluded from the weighted average, where 0.0 would mean "measured, and
+    there is no support" and would drag every row down to routine.
+    """
+
+    __tablename__ = "status_impact"
+
+    status_id: Mapped[str] = mapped_column(ForeignKey("statuses.id"), primary_key=True)
+
+    authority: Mapped[float] = mapped_column(Double, nullable=False)
+    # Human-readable reason for the authority score ("Executive Order").
+    authority_label: Mapped[str | None] = mapped_column(String)
+    topic: Mapped[float] = mapped_column(Double, nullable=False)
+    actionability: Mapped[float] = mapped_column(Double, nullable=False)
+    corroboration: Mapped[float | None] = mapped_column(Double)
+    market_sensitivity: Mapped[float | None] = mapped_column(Double)
+
+    impact_score: Mapped[float] = mapped_column(Double, nullable=False)
+    tier: Mapped[str] = mapped_column(String, nullable=False)
+
+    # Which weight set produced this score, so a re-weight is detectable.
+    weights_version: Mapped[str] = mapped_column(String, nullable=False)
+    # Lets a re-run skip rows whose text has not changed since scoring.
+    scored_content_hash: Mapped[str | None] = mapped_column(String)
+    scored_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    status: Mapped[Status] = relationship(back_populates="impact")
+
+    __table_args__ = (
+        Index("ix_status_impact_score", "impact_score"),
+        Index("ix_status_impact_tier", "tier"),
+    )
