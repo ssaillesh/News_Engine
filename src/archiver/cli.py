@@ -38,7 +38,11 @@ from archiver.analysis.stocks import (
 from archiver.clients import BlockedError, ClientError
 from archiver.config.logging import configure_logging, mask_url
 from archiver.config.settings import get_settings
-from archiver.sources.federal_register import ingest_federal_register
+from archiver.sources.federal_register import (
+    BackfillReport,
+    backfill_full_text,
+    ingest_federal_register,
+)
 from archiver.sources.nasdaq import refresh_market
 from archiver.sources.presidential_documents import ingest_presidential_documents
 from archiver.sources.publishers import ingest_publishers
@@ -445,6 +449,35 @@ def detect_stocks_cmd(
         ):
             table.add_row(ticker, str(count))
         console.print(table)
+
+
+@app.command(name="backfill-federal-register-text")
+def backfill_fr_text_cmd(
+    limit: int = typer.Option(None, help="Cap how many documents to fetch this run."),
+) -> None:
+    """Fill in Federal Register bodies, which the list endpoint does not return.
+
+    An archived executive order is ~90 characters of headline, so it names no
+    company and carries none of the policy vocabulary that says which sector it
+    touches. Every row already stores a link to its own full text — free, public
+    domain, no key — and this fetches it. Resumable; safe to re-run.
+    """
+    settings = get_settings()
+    configure_logging(settings)
+
+    async def _run() -> BackfillReport:
+        database = Database(settings.database_url)
+        try:
+            return await backfill_full_text(database, settings=settings, limit=limit)
+        finally:
+            await database.dispose()
+
+    report = asyncio.run(_run())
+    console.print(
+        f"[green]✓[/] filled {report.fetched} of {report.scanned} document(s); "
+        f"+{report.chars_added:,} characters"
+        + (f"; {report.failed} failed" if report.failed else "")
+    )
 
 
 @app.command(name="classify")

@@ -62,6 +62,7 @@ _COMPANIES: tuple[Company, ...] = (
     Company("UNH", "UnitedHealth", ("UnitedHealth",)),
     Company("LMT", "Lockheed Martin", ("Lockheed Martin", "Lockheed")),
     Company("CAT", "Caterpillar", ("Caterpillar",)),
+    Company("GE", "General Electric", ("General Electric",)),
     Company("DE", "Deere", ("John Deere", "Deere & Company")),
     Company("IBM", "IBM", ("IBM",)),
     Company("ORCL", "Oracle", ("Oracle",)),

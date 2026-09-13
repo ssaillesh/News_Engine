@@ -31,11 +31,13 @@ from archiver.analysis.signals import (
     tier_for,
 )
 from archiver.reference.entities import find_entities
+from archiver.reference.sectors import detect_stance, find_sectors
 from archiver.reference.topics import find_topics, topic_weight
 from archiver.storage.models import Status, StatusImpact, StockMention
 from archiver.storage.repositories import (
     StatusEntityRepository,
     StatusImpactRepository,
+    StatusSectorRepository,
     StatusTopicRepository,
 )
 
@@ -53,6 +55,14 @@ class ClassifyReport:
     entity_counts: dict[str, int] = field(default_factory=dict)
     tier_counts: dict[str, int] = field(default_factory=dict)
     market_flagged: int = 0
+    sector_counts: dict[str, int] = field(default_factory=dict)
+    stance_counts: dict[str, int] = field(default_factory=dict)
+
+    def record_sector(self, key: str) -> None:
+        self.sector_counts[key] = self.sector_counts.get(key, 0) + 1
+
+    def record_stance(self, key: str) -> None:
+        self.stance_counts[key] = self.stance_counts.get(key, 0) + 1
 
     def record_topic(self, topic: str) -> None:
         self.topic_counts[topic] = self.topic_counts.get(topic, 0) + 1
@@ -134,18 +144,13 @@ async def classify_statuses(
             )
             existing = {r[0]: (r[1], r[2]) for r in rows}
 
-    # Market sensitivity needs the stock pass's output. Whether that pass has
-    # ever run is the difference between "no company named" (0.0, a real
-    # measurement) and "nobody has looked" (None, excluded from the average), so
-    # check the table once rather than guessing per row.
+    # Market sensitivity reads the stock pass's output where it exists, but no
+    # longer depends on it: an inferred sector scores an item that names no
+    # company at all, which is almost all of them.
     mentions: dict[str, int] = {}
-    stocks_detected = False
     if pending:
         ids = [s.id for s in pending]
         async with db.session() as session:
-            stocks_detected = bool(
-                await session.scalar(select(StockMention.status_id).limit(1))
-            )
             rows = await session.execute(
                 select(StockMention.status_id, func.count())
                 .where(StockMention.status_id.in_(ids))
@@ -162,18 +167,17 @@ async def classify_statuses(
 
         topics = find_topics(text)
         entities = find_entities(text)
+        sectors = find_sectors(text)
+        stance, stance_conf = detect_stance(text)
         authority, authority_label = authority_score(status.source, status.raw)
         actionability = actionability_score(text)
         topic_score = topic_weight(list(topics))
 
         corroboration, _prior_market = existing.get(status.id, (None, None))
-        market_sensitivity = (
-            market_sensitivity_score(
-                mentions.get(status.id, 0),
-                status.sentiment.compound if status.sentiment else None,
-            )
-            if stocks_detected
-            else _prior_market
+        market_sensitivity = market_sensitivity_score(
+            mentions.get(status.id, 0),
+            status.sentiment.compound if status.sentiment else None,
+            sector_count=len(sectors),
         )
         if market_sensitivity is not None and market_sensitivity > 0:
             report.market_flagged += 1
@@ -200,6 +204,14 @@ async def classify_statuses(
                 )
                 report.record_topic(key)
 
+            sector_repo = StatusSectorRepository(session, db.dialect)
+            await sector_repo.clear_for_status(status.id)
+            for key, term in sectors.items():
+                await sector_repo.upsert(
+                    {"status_id": status.id, "sector": key, "matched_term": term}
+                )
+                report.record_sector(key)
+
             await entity_repo.clear_for_status(status.id)
             for key, (kind, alias) in entities.items():
                 await entity_repo.upsert(
@@ -223,10 +235,13 @@ async def classify_statuses(
                     "market_sensitivity": market_sensitivity,
                     "impact_score": score,
                     "tier": tier,
+                    "stance": stance,
+                    "stance_confidence": stance_conf,
                     "weights_version": WEIGHTS_VERSION,
                     "scored_content_hash": status.content_hash,
                 }
             )
         report.record_tier(tier)
+        report.record_stance(stance)
 
     return report

@@ -35,6 +35,7 @@ from archiver.storage.models import (
     StatusEntity,
     StatusImpact,
     StatusMetric,
+    StatusSector,
     StatusSentiment,
     StatusSummary,
     StatusTopic,
@@ -316,6 +317,29 @@ class StatusEntityRepository(_Repo):
 
         await self.session.execute(
             delete(StatusEntity).where(StatusEntity.status_id == status_id)
+        )
+
+
+class StatusSectorRepository(_Repo):
+    """Derived market sectors — idempotent on (status_id, sector)."""
+
+    async def upsert(self, values: Mapping[str, Any]) -> None:
+        payload = {**values}
+        payload.setdefault("detected_at", utcnow())
+        await _upsert(
+            self.session,
+            self.dialect,
+            StatusSector.__table__,
+            payload,
+            index_elements=["status_id", "sector"],
+            update_columns=["matched_term"],
+        )
+
+    async def clear_for_status(self, status_id: str) -> None:
+        from sqlalchemy import delete
+
+        await self.session.execute(
+            delete(StatusSector).where(StatusSector.status_id == status_id)
         )
 
 

@@ -165,6 +165,39 @@ INDEX_HTML = """<!doctype html>
   .tick .mv{font-size:9px}
   .tick .mv.up{color:#8fce6b}.tick .mv.down{color:#e0736d}
   .chip .mv{margin-left:5px;font-size:10px;font-variant-numeric:tabular-nums}
+
+  /* MARKET READ — the line that answers "what does this mean for the market".
+     Given its own band so it reads as an answer, not another tag row. */
+  .mkt{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:9px;padding:7px 9px;
+    border-radius:var(--radius-sm);background:color-mix(in srgb,var(--text) 4%,transparent);
+    border:1px solid var(--divider)}
+  .mkt.none{background:transparent;border-style:dashed;opacity:.6}
+  .mkt .lbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--n600);margin-right:2px}
+  .stance{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;
+    letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:20px;
+    border:1px solid transparent;white-space:nowrap}
+  .stance.restrictive{color:#f0908a;background:color-mix(in srgb,#e0736d 15%,transparent);border-color:color-mix(in srgb,#e0736d 42%,transparent)}
+  .stance.supportive{color:#a8dd8c;background:color-mix(in srgb,#8fce6b 15%,transparent);border-color:color-mix(in srgb,#8fce6b 42%,transparent)}
+  .stance.mentioned{color:var(--n400);background:color-mix(in srgb,var(--text) 7%,transparent);border-color:var(--divider)}
+  .sect{display:inline-flex;align-items:center;gap:5px;font-size:10px;padding:2px 8px;border-radius:20px;
+    background:color-mix(in srgb,#7aa7e0 12%,transparent);color:#a8c6ec;
+    border:1px solid color-mix(in srgb,#7aa7e0 32%,transparent);cursor:pointer;font-family:inherit}
+  .sect:hover{border-color:#7aa7e0;color:#cfe0f7}
+  .sect .etf{font-weight:700;font-size:9px;opacity:.85;letter-spacing:.03em}
+
+  /* LEGEND — the scores are meaningless to a first-time reader without this. */
+  .legend{margin-top:6px}
+  .legend details{border:1px solid var(--divider);border-radius:var(--radius-sm);background:var(--surface2)}
+  .legend summary{cursor:pointer;padding:7px 10px;font-size:11px;color:var(--n400);list-style:none}
+  .legend summary::-webkit-details-marker{display:none}
+  .legend summary::before{content:"?";display:inline-flex;align-items:center;justify-content:center;
+    width:14px;height:14px;border-radius:50%;border:1px solid var(--n600);font-size:9px;
+    margin-right:7px;color:var(--n500)}
+  .legend details[open] summary{border-bottom:1px solid var(--divider);color:var(--n300)}
+  .legend .body{padding:9px 10px;font-size:11px;color:var(--n500);line-height:1.6}
+  .legend .body b{color:var(--n300);font-weight:600}
+  .legend .row{display:flex;gap:7px;align-items:flex-start;margin-bottom:7px}
+  .legend .row:last-child{margin-bottom:0}
   .chip .mv.up{color:#8fce6b}.chip .mv.down{color:#e0736d}
 
   .ibar{display:flex;flex-direction:column;gap:7px;margin:10px 0 4px}
@@ -261,8 +294,38 @@ INDEX_HTML = """<!doctype html>
     <div class="rail left" id="leftrail">
       <div class="kicker">Impact</div>
       <div class="chips" id="tiers"></div>
+      <div class="legend">
+        <details>
+          <summary>What do these mean?</summary>
+          <div class="body">
+            <div class="row"><span class="tier critical"><i></i>critical</span>
+              <span>Top of the scale. Scored from how <b>authoritative</b> the source is
+              (a signed executive order outranks a news report), what it is <b>about</b>,
+              and how <b>committed</b> its language is — "signed, effective Oct 1" beats
+              "reportedly weighing".</span></div>
+            <div class="row"><span class="stance restrictive">restrictive</span>
+              <span>Direction for the sector named: tariffs, bans and probes are a
+              headwind. <b class="muted">supportive</b> means exemptions, approvals or
+              deregulation. Not tone of voice — a neutrally worded tariff is still
+              restrictive.</span></div>
+            <div class="row"><span class="sect"><span class="etf">XLB</span> Materials</span>
+              <span>The part of the market an item touches, with a tradable proxy.
+              Inferred from policy wording, so it works even when no company is named.</span></div>
+            <div class="row"><span class="sent neutral">sentiment</span>
+              <span>FinBERT's read of the <b>prose</b>, scored only on news articles.
+              "Not scored" means the model hasn't run on that item — it is not a
+              judgement.</span></div>
+          </div>
+        </details>
+      </div>
       <div class="divider"></div>
-      <div class="kicker">Topics</div>
+      <div class="kicker">Market sector</div>
+      <div class="chips" id="sectors"></div>
+      <div class="divider"></div>
+      <div class="kicker">Direction</div>
+      <div class="chips" id="stances"></div>
+      <div class="divider"></div>
+      <div class="kicker">Policy topic</div>
       <div class="chips" id="topics"></div>
       <div class="divider"></div>
       <div class="kicker">Companies Trump named</div>
@@ -321,7 +384,7 @@ INDEX_HTML = """<!doctype html>
 <script>
 const SOURCE_LABEL = {presidential_documents:'His Words',federal_register:'Official Actions',
   whitehouse:'White House',news:'In the News'};
-const state = {source:'', kind:'', sentiment:'', topic:'', tier:'', ticker:'', sort:'recent', q:'', since:'', until:'',
+const state = {source:'', kind:'', sentiment:'', topic:'', tier:'', ticker:'', sector:'', stance:'', sort:'recent', q:'', since:'', until:'',
                offset:0, limit:25, selectedId:null, items:[], loading:false};
 const TIER_RANK = {critical:0, high:1, notable:2, routine:3};
 
@@ -331,7 +394,7 @@ const $ = id => document.getElementById(id);
 // Filters live in the query string so a view can be bookmarked, shared, and
 // walked back through with the browser's own Back button. Without this, "top
 // impact, tariffs only" is a place you can reach but never link to.
-const FILTER_KEYS = ['source','kind','sentiment','topic','tier','ticker','q','since','until'];
+const FILTER_KEYS = ['source','kind','sentiment','topic','tier','ticker','sector','stance','q','since','until'];
 const URL_KEYS = FILTER_KEYS.concat(['sort']);
 
 function readUrl(){
@@ -406,6 +469,25 @@ async function loadFacets(){
     : `<div class="muted small">No topics detected yet.</div>`;
   $('topics').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
     state.topic = state.topic===c.dataset.topic ? '' : c.dataset.topic; loadFeed(true); syncActive();});
+  // market sectors
+  const secs = d.sectors || [];
+  SECTOR_LABELS = Object.fromEntries(secs.map(x=>[x.key,x.label]));
+  $('sectors').innerHTML = secs.length
+    ? secs.map(x=>`<button class="chip${state.sector===x.key?' active':''}" data-sector="${esc(x.key)}"
+        title="proxy: ${esc(x.etf||'—')}">${esc(x.label)} · ${x.count}</button>`).join('')
+    : `<div class="muted small">None detected yet — run <code>archiver classify</code>.</div>`;
+  $('sectors').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+    state.sector = state.sector===c.dataset.sector ? '' : c.dataset.sector; loadFeed(true); syncActive();});
+  // direction
+  const stn = d.stances || [];
+  const order = {restrictive:0, supportive:1, mentioned:2};
+  $('stances').innerHTML = stn.length
+    ? stn.slice().sort((a,b)=>(order[a.key]??9)-(order[b.key]??9))
+        .map(x=>`<button class="chip${state.stance===x.key?' active':''}" data-stance="${esc(x.key)}"
+          >${esc(x.key)} · ${x.count}</button>`).join('')
+    : '';
+  $('stances').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+    state.stance = state.stance===c.dataset.stance ? '' : c.dataset.stance; loadFeed(true); syncActive();});
   // companies
   const comps = d.companies || [];
   COMPANY_NAMES = Object.fromEntries(comps.map(c=>[c.key,c.label]));
@@ -416,6 +498,9 @@ async function loadFacets(){
   $('companies').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
     state.ticker = state.ticker===c.dataset.ticker ? '' : c.dataset.ticker; loadFeed(true); syncActive();});
 }
+
+let SECTOR_LABELS = {};
+function sectorLabel(k){return SECTOR_LABELS[k]||k;}
 
 let COMPANY_NAMES = {};
 function companyName(t){return COMPANY_NAMES[t]||t;}
@@ -436,6 +521,8 @@ function syncActive(){
   $('tiers').querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.tier===state.tier));
   $('topics').querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.topic===state.topic));
   $('companies').querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.ticker===state.ticker));
+  $('sectors').querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.sector===state.sector));
+  $('stances').querySelectorAll('.chip').forEach(c=>c.classList.toggle('active', c.dataset.stance===state.stance));
   $('sort-recent').classList.toggle('active', state.sort==='recent');
   $('sort-impact').classList.toggle('active', state.sort==='impact');
   const bits=[];
@@ -445,6 +532,8 @@ function syncActive(){
   if(state.tier) bits.push('impact: '+state.tier);
   if(state.topic) bits.push('topic: '+topicLabel(state.topic));
   if(state.ticker) bits.push('company: '+companyName(state.ticker));
+  if(state.sector) bits.push('sector: '+sectorLabel(state.sector));
+  if(state.stance) bits.push('direction: '+state.stance);
   if(state.q) bits.push('“'+state.q+'”');
   $('filterlabel').innerHTML = bits.length
     ? 'Filtering by '+bits.map(b=>`<span style="color:var(--accent)">${esc(b)}</span>`).join(', ')
@@ -485,6 +574,27 @@ function tickerChips(stocks){
       ><span class="sym">${esc(c.ticker)}</span></button>`).join('');
 }
 
+const STANCE_ARROW = {restrictive:'\\u25bc', supportive:'\\u25b2', mentioned:'\\u2022'};
+
+function marketRead(it){
+  const secs = it.sectors || [], stocks = it.stocks || [];
+  const stance = it.impact && it.impact.stance ? it.impact.stance : null;
+  // Say so explicitly when there is no market angle. A blank space reads as a
+  // missing feature; "no market angle" reads as an answer, and most Trump
+  // stories genuinely are not market stories.
+  if(!secs.length && !stocks.length){
+    return `<div class="mkt none"><span class="lbl">Market</span>
+      <span class="muted small">No market angle detected</span></div>`;
+  }
+  const st = stance
+    ? `<span class="stance ${esc(stance)}" title="direction for the sector named">${STANCE_ARROW[stance]||''} ${esc(stance)}</span>`
+    : '';
+  const sc = secs.map(x=>`<button class="sect" data-sector="${esc(x.key)}"
+      title="${esc(x.label)} — proxy ${esc(x.etf||'')}${x.matched_term?' · matched on “'+esc(x.matched_term)+'”':''}"
+      >${x.etf?`<span class="etf">${esc(x.etf)}</span>`:''}${esc(x.label)}</button>`).join('');
+  return `<div class="mkt"><span class="lbl">Market</span>${st}${sc}${tickerChips(stocks)}</div>`;
+}
+
 function card(it){
   // The publisher already names the outlet, so the kind badge would repeat it
   // verbatim on every news card; show the badge only when it says something new.
@@ -504,8 +614,8 @@ function card(it){
     </div>
     <div class="title">${esc(it.title)}</div>
     ${summary}
-    ${(it.topics&&it.topics.length)||(it.stocks&&it.stocks.length)
-      ? `<div class="topics">${topicChips(it.topics)}${tickerChips(it.stocks)}</div>` : ''}
+    ${(it.topics&&it.topics.length) ? `<div class="topics">${topicChips(it.topics)}</div>` : ''}
+    ${marketRead(it)}
     ${why}
     <div class="foot">${it.url?`<a class="link" href="${esc(it.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Read original ↗</a>`:''}</div>
   </div>`;
@@ -526,6 +636,11 @@ function wireCards(){
     c.querySelectorAll('.topic').forEach(t=>t.onclick=e=>{
       e.stopPropagation();
       state.topic = state.topic===t.dataset.topic ? '' : t.dataset.topic;
+      loadFeed(true); syncActive();
+    });
+    c.querySelectorAll('.sect').forEach(t=>t.onclick=e=>{
+      e.stopPropagation();
+      state.sector = state.sector===t.dataset.sector ? '' : t.dataset.sector;
       loadFeed(true); syncActive();
     });
     c.querySelectorAll('.tick').forEach(t=>t.onclick=e=>{

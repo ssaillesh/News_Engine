@@ -13,12 +13,17 @@ from __future__ import annotations
 
 import html as html_lib
 from collections.abc import AsyncIterator
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any
+
+from sqlalchemy import func, select
 
 from archiver.clients.base import BaseHttpClient
 from archiver.clients.rate_limit import RateLimiter, TokenBucket
 from archiver.domain.hashing import content_hash, payload_hash
+from archiver.parsing.text import html_to_text
+from archiver.storage.models import Status
 from archiver.storage.repositories import (
     AccountRepository,
     CheckpointRepository,
@@ -227,3 +232,97 @@ async def ingest_federal_register(
     if incremental and processed and latest_date:
         await _save_checkpoint(db, latest_date)
     return processed
+
+
+# ── full-text backfill ────────────────────────────────────────────────────────
+# The list endpoint returns titles, not bodies, so an archived executive order is
+# ~90 characters of headline. That is enough to say what a document is *called*
+# and nothing else: no company is named in a title, and the policy vocabulary a
+# sector matcher needs lives in the body. Every row already carries a
+# ``full_text_xml_url`` pointing at the same document's full text — free, public
+# domain, no key — so this pass fills the bodies in from what we already stored.
+#
+# Separate from ingest because it is expensive and re-runnable independently, and
+# it belongs in ``sources`` rather than ``analysis`` because it fetches.
+
+# Below this, a stored body is really just the headline and worth replacing.
+_TITLE_ONLY_CHARS = 400
+
+
+@dataclass
+class BackfillReport:
+    """What a full-text backfill run did."""
+
+    scanned: int = 0
+    fetched: int = 0
+    failed: int = 0
+    chars_added: int = 0
+
+
+async def backfill_full_text(
+    db: Database,
+    *,
+    settings: Settings,
+    limit: int | None = None,
+    rate_limiter: RateLimiter | None = None,
+) -> BackfillReport:
+    """Replace title-only Federal Register bodies with the document's full text.
+
+    Idempotent and resumable: a row whose body already exceeds the title-only
+    threshold is skipped, so an interrupted run simply continues. Updating
+    ``content_hash`` is deliberate — it marks the row stale for the enrichment
+    passes, which then re-read it with the body present.
+    """
+    report = BackfillReport()
+
+    stmt = (
+        select(Status)
+        .where(Status.source == SOURCE)
+        .where(func.length(func.coalesce(Status.content_text, "")) < _TITLE_ONLY_CHARS)
+        .order_by(Status.created_at.desc())
+    )
+    if limit is not None:
+        stmt = stmt.limit(limit)
+
+    async with db.session() as session:
+        pending = list((await session.scalars(stmt)).all())
+
+    if not pending:
+        return report
+
+    async with FederalRegisterClient.from_settings(
+        settings, rate_limiter=rate_limiter
+    ) as client:
+        for status in pending:
+            report.scanned += 1
+            raw = status.raw or {}
+            url = raw.get("full_text_xml_url") or raw.get("body_html_url")
+            if not url:
+                continue
+            try:
+                body = html_to_text(await client.get_text(url))
+            except Exception:  # noqa: BLE001 - one bad document must not end the run
+                report.failed += 1
+                continue
+            if not body or len(body) <= len(status.content_text or ""):
+                continue
+
+            title = str(raw.get("title") or "").strip()
+            # Keep the headline as the first line, the shape every other source
+            # uses and the one `_to_item` and the classifier both rely on.
+            text = f"{title}\n\n{body}" if title else body
+            report.chars_added += len(text) - len(status.content_text or "")
+            report.fetched += 1
+
+            async with db.session() as session, session.begin():
+                await StatusRepository(session, db.dialect).upsert(
+                    {
+                        "id": status.id,
+                        "account_id": status.account_id,
+                        "created_at": status.created_at,
+                        "content_text": text,
+                        "content_hash": content_hash(content=text),
+                        "source": SOURCE,
+                    }
+                )
+    return report

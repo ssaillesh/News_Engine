@@ -182,6 +182,9 @@ class Status(Base):
     impact: Mapped[StatusImpact | None] = relationship(
         back_populates="status", cascade="all, delete-orphan", uselist=False
     )
+    sectors: Mapped[list[StatusSector]] = relationship(
+        back_populates="status", cascade="all, delete-orphan"
+    )
 
     __table_args__ = (
         Index("ix_status_account_created", "account_id", "created_at"),
@@ -637,6 +640,11 @@ class StatusImpact(Base):
     tier: Mapped[str] = mapped_column(String, nullable=False)
 
     # Which weight set produced this score, so a re-weight is detectable.
+    # Market direction for the sector named — restrictive / supportive /
+    # mentioned — kept beside the score because it is what a reader acts on.
+    stance: Mapped[str | None] = mapped_column(String)
+    stance_confidence: Mapped[float | None] = mapped_column(Double)
+
     weights_version: Mapped[str] = mapped_column(String, nullable=False)
     # Lets a re-run skip rows whose text has not changed since scoring.
     scored_content_hash: Mapped[str | None] = mapped_column(String)
@@ -648,3 +656,26 @@ class StatusImpact(Base):
         Index("ix_status_impact_score", "impact_score"),
         Index("ix_status_impact_tier", "tier"),
     )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6.19 status_sectors  (derived: market sectors a status touches)
+# ─────────────────────────────────────────────────────────────────────────────
+class StatusSector(Base):
+    """A market sector implicated by a status.
+
+    Company detection needs a company named by name, which almost no policy item
+    does; sectors are matched from policy vocabulary instead, so an item about
+    steel tariffs resolves to Materials even though it names no producer.
+    """
+
+    __tablename__ = "status_sectors"
+
+    status_id: Mapped[str] = mapped_column(ForeignKey("statuses.id"), primary_key=True)
+    sector: Mapped[str] = mapped_column(String, primary_key=True)
+    matched_term: Mapped[str | None] = mapped_column(String)
+    detected_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    status: Mapped[Status] = relationship(back_populates="sectors")
+
+    __table_args__ = (Index("ix_status_sectors_sector", "sector"),)

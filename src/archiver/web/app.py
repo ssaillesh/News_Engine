@@ -25,6 +25,7 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import selectinload
 
 from archiver.analysis.signals import is_generic_label
+from archiver.reference.sectors import SECTORS
 from archiver.reference.tickers import TICKERS
 from archiver.reference.topics import TOPICS
 from archiver.storage.db import Database
@@ -33,6 +34,7 @@ from archiver.storage.models import (
     Status,
     StatusEntity,
     StatusImpact,
+    StatusSector,
     StatusSentiment,
     StatusTopic,
     StockMention,
@@ -154,6 +156,8 @@ def _to_impact(row: StatusImpact | None) -> dict[str, Any] | None:
     return {
         "score": round(row.impact_score, 4),
         "tier": row.tier,
+        "stance": row.stance,
+        "stance_confidence": row.stance_confidence,
         "authority": round(row.authority, 4),
         "authority_label": row.authority_label,
         "topic": round(row.topic, 4),
@@ -191,6 +195,28 @@ def _to_entities(rows: list[StatusEntity]) -> list[dict[str, Any]]:
         {"key": r.entity_key, "type": r.entity_type, "alias": r.alias} for r in rows
     ]
     return sorted(out, key=lambda e: (order.get(e["type"], 9), e["key"]))
+
+
+def _to_sectors(rows: list[StatusSector]) -> list[dict[str, Any]]:
+    """Market sectors an item touches, each with a tradable proxy.
+
+    The ETF is what makes a sector an *answer* rather than a label: an item about
+    steel tariffs names no company, but "Materials — XLB" is something a reader
+    can act on.
+    """
+    out = []
+    for r in rows:
+        sec = SECTORS.get(r.sector)
+        out.append(
+            {
+                "key": r.sector,
+                "label": sec.label if sec else r.sector,
+                "etf": sec.etf if sec else None,
+                "tickers": list(sec.tickers) if sec else [],
+                "matched_term": r.matched_term,
+            }
+        )
+    return sorted(out, key=lambda x: x["label"])
 
 
 def _to_stocks(rows: list[StockMention]) -> list[dict[str, Any]]:
@@ -252,6 +278,7 @@ def _to_item(status: Status) -> dict[str, Any]:
         "topics": _to_topics(list(status.topics)),
         "entities": _to_entities(list(status.entities)),
         "stocks": _to_stocks(list(status.stock_mentions)),
+        "sectors": _to_sectors(list(status.sectors)),
     }
 
 
@@ -310,6 +337,20 @@ def create_app(db: Database) -> FastAPI:
                     select(StatusImpact.tier, func.count()).group_by(StatusImpact.tier)
                 )
             ).all()
+            sec = (
+                await session.execute(
+                    select(StatusSector.sector, func.count())
+                    .group_by(StatusSector.sector)
+                    .order_by(func.count().desc())
+                )
+            ).all()
+            stn = (
+                await session.execute(
+                    select(StatusImpact.stance, func.count())
+                    .where(StatusImpact.stance.is_not(None))
+                    .group_by(StatusImpact.stance)
+                )
+            ).all()
             cmp = (
                 await session.execute(
                     select(StockMention.ticker, func.count())
@@ -340,6 +381,16 @@ def create_app(db: Database) -> FastAPI:
         return {
             "total": sum(row[1] for row in src),
             "sources": [{"key": row[0], "count": row[1]} for row in src],
+            "sectors": [
+                {
+                    "key": row[0],
+                    "label": SECTORS[row[0]].label if row[0] in SECTORS else row[0],
+                    "etf": SECTORS[row[0]].etf if row[0] in SECTORS else None,
+                    "count": row[1],
+                }
+                for row in sec
+            ],
+            "stances": [{"key": r[0], "count": r[1]} for r in stn],
             "companies": [
                 {
                     "key": row[0],
@@ -374,6 +425,8 @@ def create_app(db: Database) -> FastAPI:
         topic: str | None = None,
         tier: str | None = None,
         ticker: str | None = None,
+        sector: str | None = None,
+        stance: str | None = None,
         sort: str = Query("recent", pattern="^(recent|impact)$"),
         since: str | None = None,
         until: str | None = None,
@@ -389,6 +442,7 @@ def create_app(db: Database) -> FastAPI:
             selectinload(Status.topics),
             selectinload(Status.entities),
             selectinload(Status.stock_mentions),
+            selectinload(Status.sectors),
         )
         if sort == "impact":
             # Ties are common — three components over short headlines land on a
@@ -409,6 +463,18 @@ def create_app(db: Database) -> FastAPI:
             stmt = stmt.where(
                 Status.id.in_(
                     select(StatusTopic.status_id).where(StatusTopic.topic == topic)
+                )
+            )
+        if sector:
+            stmt = stmt.where(
+                Status.id.in_(
+                    select(StatusSector.status_id).where(StatusSector.sector == sector)
+                )
+            )
+        if stance:
+            stmt = stmt.where(
+                Status.id.in_(
+                    select(StatusImpact.status_id).where(StatusImpact.stance == stance)
                 )
             )
         if ticker:

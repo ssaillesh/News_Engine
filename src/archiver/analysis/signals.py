@@ -172,18 +172,24 @@ _MENTION_BASE = 0.60
 _SENTIMENT_SPAN = 0.40
 
 
+_SECTOR_BASE = 0.35
+
+
 def market_sensitivity_score(
-    ticker_count: int, sentiment_compound: float | None = None
+    ticker_count: int,
+    sentiment_compound: float | None = None,
+    *,
+    sector_count: int = 0,
 ) -> float:
     """Score 0–1 for how market-relevant an item is.
 
-    Zero when no watchlist company is named — that is a measurement, not a gap,
-    which is why the caller passes ``None`` instead when the detection pass has
-    never run at all.
+    A named company is the strongest signal, but requiring one scored 99% of the
+    archive at zero: policy items name sectors, not tickers. An implicated
+    sector therefore carries its own weight, below a direct mention.
     """
-    if ticker_count <= 0:
+    if ticker_count <= 0 and sector_count <= 0:
         return 0.0
-    score = _MENTION_BASE
+    score = _MENTION_BASE if ticker_count > 0 else _SECTOR_BASE
     if sentiment_compound is not None:
         score += _SENTIMENT_SPAN * min(abs(sentiment_compound), 1.0)
     return max(0.0, min(1.0, score))

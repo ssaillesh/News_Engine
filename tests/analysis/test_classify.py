@@ -24,6 +24,16 @@ from archiver.analysis.signals import (
     tier_for,
 )
 from archiver.reference.entities import find_entities
+from archiver.reference.sectors import (
+    MENTIONED,
+    RESTRICTIVE,
+    SECTORS,
+    SUPPORTIVE,
+    detect_stance,
+    find_sectors,
+    tickers_for_sectors,
+)
+from archiver.reference.tickers import TICKERS
 from archiver.reference.topics import find_topics, topic_weight
 from archiver.storage.models import StatusImpact, StatusTopic
 from archiver.storage.repositories import (
@@ -298,9 +308,78 @@ def test_charged_language_raises_it_in_either_direction():
     assert market_sensitivity_score(3, 1.0) <= 1.0
 
 
-async def test_market_component_stays_unmeasured_until_stocks_are_detected(db):
-    """With no stock_mentions rows at all, nobody has looked — so it is None,
-    and `combine` renormalizes around it instead of scoring every item as 0."""
+async def test_market_component_no_longer_waits_on_the_stock_pass(db):
+    """Requiring a named company scored 99% of the archive at zero.
+
+    A sector inferred from policy wording now carries the component on its own,
+    so an item about steel tariffs is market-relevant even though no stock pass
+    has run and no producer is named.
+    """
     await _add_status(db, "news:1", "Tariffs on steel")
     await classify_statuses(db)
-    assert (await _impact(db, "news:1")).market_sensitivity is None
+    assert (await _impact(db, "news:1")).market_sensitivity > 0
+
+
+async def test_item_with_neither_sector_nor_company_scores_zero(db):
+    await _add_status(db, "news:2", "Trump held a rally in Florida on Tuesday")
+    await classify_statuses(db)
+    assert (await _impact(db, "news:2")).market_sensitivity == 0.0
+
+
+# ── sectors: the answer for items that name no company ────────────────────────
+def test_policy_language_resolves_to_a_sector_without_a_company():
+    """The whole point: steel tariffs name no producer but clearly hit Materials."""
+    found = find_sectors("Imposing Tariffs on Imported Steel and Aluminum")
+    assert "materials" in found
+    assert tickers_for_sectors(list(found))
+
+
+def test_every_sector_has_a_tradable_proxy():
+    # A sector without an ETF is a label, not an answer a reader can act on.
+    assert all(s.etf for s in SECTORS.values())
+
+
+def test_sector_terms_do_not_fire_on_unrelated_prose():
+    assert find_sectors("Trump held a rally in Florida on Tuesday") == {}
+
+
+def test_sector_tickers_are_real_watchlist_members():
+    """A sector pointing at a ticker the matcher cannot produce is a dead link."""
+    for sector in SECTORS.values():
+        for ticker in sector.tickers:
+            assert ticker in TICKERS, f"{sector.key} references unknown ticker {ticker}"
+
+
+# ── stance: direction, not tone ───────────────────────────────────────────────
+def test_tariffs_read_as_restrictive():
+    stance, conf = detect_stance("Imposing tariffs and export controls on imports")
+    assert stance == RESTRICTIVE
+    assert conf > 0.3
+
+
+def test_exemptions_read_as_supportive():
+    stance, _ = detect_stance("Granting exemptions and streamlining drilling permits")
+    assert stance == SUPPORTIVE
+
+
+def test_balanced_language_refuses_to_pick_a_direction():
+    """"Imposes tariffs but grants exemptions" should not be sold as a direction."""
+    stance, conf = detect_stance("The order imposes tariffs but grants an exemption")
+    assert stance == MENTIONED
+    assert conf < 0.34
+
+
+def test_neutral_text_has_no_stance():
+    assert detect_stance("A ceremonial proclamation about national parks") == (MENTIONED, 0.0)
+
+
+async def test_sectors_are_persisted_and_scored(db):
+    await _add_status(
+        db, "fr:steel", "Imposing Tariffs on Imported Steel",
+        source="federal_register", raw={"subtype": "Executive Order"},
+    )
+    await classify_statuses(db)
+    row = await _impact(db, "fr:steel")
+    assert row.stance == RESTRICTIVE
+    # An inferred sector must carry market sensitivity even with no ticker.
+    assert row.market_sensitivity > 0
