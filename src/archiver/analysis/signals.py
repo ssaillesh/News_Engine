@@ -29,7 +29,9 @@ WEIGHTS: dict[str, float] = {
     "market_sensitivity": 0.10,
 }
 
-WEIGHTS_VERSION = "v1"
+# v2: sector-aware market sensitivity, and a full re-score after the
+# Federal Register metadata repair (restored rows keep their content hash).
+WEIGHTS_VERSION = "v2"
 
 # ── authority ─────────────────────────────────────────────────────────────────
 # Did Trump *do* this, or did someone report on it? Federal Register subtypes

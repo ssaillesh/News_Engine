@@ -16,3 +16,6 @@ fastapi>=0.110
 
 # PostgreSQL driver for Neon/Supabase (async engine uses postgresql+psycopg://)
 psycopg[binary]>=3.1
+
+# On-demand story analysis (Claude). Inert unless ANTHROPIC_API_KEY is set.
+anthropic>=1.5

@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any
 
-from sqlalchemy import func, select
+from sqlalchemy import func, select, update
 
 from archiver.clients.base import BaseHttpClient
 from archiver.clients.rate_limit import RateLimiter, TokenBucket
@@ -314,15 +314,13 @@ async def backfill_full_text(
             report.chars_added += len(text) - len(status.content_text or "")
             report.fetched += 1
 
+            # A targeted UPDATE of exactly the two columns this pass owns. An
+            # upsert here once passed a partial row, and every column it left
+            # out — raw, url, kind — was overwritten with NULL.
             async with db.session() as session, session.begin():
-                await StatusRepository(session, db.dialect).upsert(
-                    {
-                        "id": status.id,
-                        "account_id": status.account_id,
-                        "created_at": status.created_at,
-                        "content_text": text,
-                        "content_hash": content_hash(content=text),
-                        "source": SOURCE,
-                    }
+                await session.execute(
+                    update(Status)
+                    .where(Status.id == status.id)
+                    .values(content_text=text, content_hash=content_hash(content=text))
                 )
     return report

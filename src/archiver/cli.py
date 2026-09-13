@@ -480,6 +480,61 @@ def backfill_fr_text_cmd(
     )
 
 
+@app.command(name="write-analyses")
+def write_analyses_cmd(
+    limit: int = typer.Option(6, min=1, help="Most analyses to write this run."),
+    max_minutes: float = typer.Option(45.0, help="Stop starting new stories after this long."),
+    days: int = typer.Option(7, min=1, help="Only consider stories from the last N days."),
+    model: str = typer.Option(None, help="Ollama model tag (default from settings)."),
+) -> None:
+    """Write detailed analyses for the newest stories with an open model (free).
+
+    Needs an Ollama server running locally (the analyze workflow starts one).
+    Picks the highest-impact recent stories that have no analysis yet and real
+    text to read: stored full text, or a direct publisher link it may fetch.
+    Google News redirect links are skipped rather than analysed from a headline.
+    """
+    from archiver.briefings.local import LocalBriefingGenerator
+    from archiver.briefings.offline import WriteReport, write_analyses
+
+    settings = get_settings()
+    configure_logging(settings)
+    generator = LocalBriefingGenerator(
+        model=model or settings.local_analysis_model, base_url=settings.ollama_url
+    )
+
+    async def _run() -> WriteReport:
+        database = Database(settings.database_url)
+        try:
+            return await write_analyses(
+                database,
+                generator,
+                limit=limit,
+                max_minutes=max_minutes,
+                days=days,
+                user_agent=settings.user_agent,
+                respect_robots=settings.respect_robots,
+            )
+        finally:
+            await database.dispose()
+
+    report = asyncio.run(_run())
+    if report.unavailable:
+        console.print(f"[red]✗[/] {report.unavailable}. Is `ollama serve` running?")
+        raise typer.Exit(code=1)
+    mark = "[green]✓[/]" if report.written or not report.failed else "[red]✗[/]"
+    console.print(
+        f"{mark} wrote {report.written} analysis(es) in {report.seconds / 60:.1f} min"
+        f" with {generator.label}; failed {report.failed}; skipped {report.skipped_no_text} "
+        f"without readable text and {report.skipped_google_news} Google News links"
+        + (" (stopped at the time limit)" if report.stopped_for_time else "")
+    )
+    for title in report.titles:
+        console.print(f"  · {title}")
+    if report.failed and not report.written:
+        raise typer.Exit(code=1)
+
+
 @app.command(name="classify")
 def classify_cmd(
     source: list[str] = typer.Option(

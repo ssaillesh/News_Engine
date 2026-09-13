@@ -22,6 +22,10 @@ dependencies = [
 postgres = [
   "psycopg[binary]>=3.1",
 ]
+# On-demand story analysis written by Claude (archiver.briefings).
+briefing = [
+  "anthropic>=1.5",
+]
 web = [
   "fastapi>=0.110",
   "uvicorn[standard]>=0.29",
@@ -63,6 +67,9 @@ select = ["E", "F", "I", "UP", "B", "SIM", "C4", "PTH"]
 [tool.ruff.lint.per-file-ignores]
 # Self-contained HTML/CSS/JS template — long lines are intentional, not code.
 "src/archiver/web/page.py" = ["E501"]
+# Prompt text and schema field descriptions read as prose, not code.
+"src/archiver/briefings/generator.py" = ["E501"]
+"src/archiver/briefings/local.py" = ["E501"]
 
 [tool.ruff.lint.flake8-bugbear]
 # Typer's option/argument declarations are the idiomatic way to set CLI defaults.

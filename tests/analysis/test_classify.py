@@ -383,3 +383,23 @@ async def test_sectors_are_persisted_and_scored(db):
     assert row.stance == RESTRICTIVE
     # An inferred sector must carry market sensitivity even with no ticker.
     assert row.market_sensitivity > 0
+
+
+# ── regression: partial writes must never erase stored fields ─────────────────
+async def test_partial_status_upsert_preserves_unsupplied_columns(db):
+    """A partial upsert once nulled raw/url/kind on 1,585 production rows."""
+    await _add_status(
+        db, "fr:keep", "Title only", source="federal_register",
+        raw={"subtype": "Executive Order", "full_text_xml_url": "https://x/y.xml"},
+    )
+    async with db.session() as session, session.begin():
+        await StatusRepository(session, db.dialect).upsert(
+            {"id": "fr:keep", "account_id": ACCOUNT["id"], "created_at": datetime.now(UTC),
+             "content_text": "Title only\n\nnow with a much longer body", "content_hash": "new",
+             "source": "federal_register"}
+        )
+    async with db.session() as session:
+        from archiver.storage.models import Status
+        row = await session.get(Status, "fr:keep")
+    assert row.content_text.endswith("longer body")
+    assert row.raw and row.raw["subtype"] == "Executive Order"

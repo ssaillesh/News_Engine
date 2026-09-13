@@ -92,6 +92,20 @@ class Settings(BaseSettings):
     # None → CPU. Set to "mps" (Apple silicon) or "cuda" to use an accelerator.
     sentiment_device: str | None = Field(None)
 
+    # ── story analysis (Claude; needs ANTHROPIC_API_KEY in the environment) ───
+    analysis_model: str = Field("claude-opus-5")
+    analysis_effort: Literal["low", "medium", "high", "xhigh", "max"] = Field("medium")
+    # Hard cap on new generations per UTC day; stored analyses always load.
+    analysis_daily_limit: int = Field(200, ge=0)
+    # Stories newer than this generate automatically when opened; older ones
+    # wait for the reader to ask.
+    analysis_auto_days: int = Field(7, ge=0)
+
+    # Free path: an open model served by Ollama, run by the scheduled
+    # `archiver write-analyses` job (no API key).
+    local_analysis_model: str = Field("qwen3:4b")
+    ollama_url: str = Field("http://127.0.0.1:11434")
+
     # ── web UI ────────────────────────────────────────────────────────────────
     # Default off 8000 to avoid the common collision with other local dev servers
     # / SSH tunnels. `serve` auto-skips to the next free port if this one is busy.

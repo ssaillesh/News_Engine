@@ -679,3 +679,28 @@ class StatusSector(Base):
     status: Mapped[Status] = relationship(back_populates="sectors")
 
     __table_args__ = (Index("ix_status_sectors_sector", "sector"),)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 6.20 status_analysis  (derived: AI-written breakdown, generated on demand)
+# ─────────────────────────────────────────────────────────────────────────────
+class StatusAnalysis(Base):
+    """A structured breakdown of one story, written by a language model.
+
+    Generated the first time a reader asks for it and stored, so each story costs
+    at most one generation. Kept apart from the captured record and labelled as
+    machine-written wherever it is shown.
+    """
+
+    __tablename__ = "status_analysis"
+
+    status_id: Mapped[str] = mapped_column(ForeignKey("statuses.id"), primary_key=True)
+    model: Mapped[str] = mapped_column(String, nullable=False)
+    # full_text / partial / headline_only — whether the article was actually read.
+    source_quality: Mapped[str] = mapped_column(String, nullable=False)
+    analysis: Mapped[dict[str, Any]] = mapped_column(JSONType, nullable=False)
+    input_tokens: Mapped[int | None] = mapped_column(Integer)
+    output_tokens: Mapped[int | None] = mapped_column(Integer)
+    generated_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    __table_args__ = (Index("ix_status_analysis_generated", "generated_at"),)

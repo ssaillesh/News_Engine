@@ -19,12 +19,20 @@ import socket
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse
 from sqlalchemy import func, select
 from sqlalchemy.orm import selectinload
 
 from archiver.analysis.signals import is_generic_label
+from archiver.briefings import (
+    BriefingFailed,
+    BriefingGenerator,
+    BriefingUnavailable,
+    get_briefing,
+    get_or_create_briefing,
+)
+from archiver.config.settings import get_settings
 from archiver.reference.sectors import SECTORS
 from archiver.reference.tickers import TICKERS
 from archiver.reference.topics import TOPICS
@@ -282,8 +290,58 @@ def _to_item(status: Status) -> dict[str, Any]:
     }
 
 
-def create_app(db: Database) -> FastAPI:
+def _analysis_payload(row: Any) -> dict[str, Any]:
+    return {
+        "status": "ready",
+        "analysis": row.analysis,
+        "source_quality": row.source_quality,
+        "model": row.model,
+        "generated_at": row.generated_at.isoformat() if row.generated_at else None,
+    }
+
+
+def create_app(db: Database, *, briefer: BriefingGenerator | None = None) -> FastAPI:
     app = FastAPI(title="Trump News Archive", docs_url="/api/docs")
+    settings = get_settings()
+    briefer = briefer or BriefingGenerator(
+        model=settings.analysis_model, effort=settings.analysis_effort
+    )
+
+    # Story analysis is keyed by query parameter, not path: status ids contain
+    # colons and full URLs ("pub:bbc:https://…"), which do not survive as a
+    # path segment.
+    @app.get("/api/analysis")
+    async def analysis_get(id: str) -> dict[str, Any]:
+        row = await get_briefing(db, id)
+        if row is not None:
+            return _analysis_payload(row)
+        async with db.session() as session:
+            status = await session.get(Status, id)
+        if status is None:
+            raise HTTPException(status_code=404, detail="Unknown story.")
+        recent = bool(
+            status.created_at
+            and (datetime.now(UTC).replace(tzinfo=None) - status.created_at.replace(tzinfo=None))
+            <= timedelta(days=settings.analysis_auto_days)
+        )
+        return {"status": "missing", "available": briefer.available(), "auto": recent}
+
+    @app.post("/api/analysis")
+    async def analysis_create(id: str) -> dict[str, Any]:
+        try:
+            row = await get_or_create_briefing(
+                db, id, briefer, daily_limit=settings.analysis_daily_limit
+            )
+        except LookupError:
+            raise HTTPException(status_code=404, detail="Unknown story.") from None
+        except BriefingUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from None
+        except BriefingFailed as exc:
+            raise HTTPException(
+                status_code=429 if exc.limit_reached else 502 if exc.retryable else 422,
+                detail={"message": str(exc), "retryable": exc.retryable},
+            ) from None
+        return _analysis_payload(row)
 
     @app.get("/", response_class=HTMLResponse)
     async def index() -> str:

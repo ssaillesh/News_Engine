@@ -40,6 +40,7 @@ _ADDED_LATER = frozenset(
         "status_entities",  # 0005_classification
         "status_impact",  # 0005_classification
         "status_sectors",  # 0006_sectors
+        "status_analysis",  # 0007_analysis
     }
 )
 

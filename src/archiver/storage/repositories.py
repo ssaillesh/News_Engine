@@ -131,13 +131,17 @@ class StatusRepository(_Repo):
     )
 
     async def upsert(self, values: Mapping[str, Any]) -> None:
+        # Only refresh columns the caller actually supplied. Listing every
+        # updatable column made ON CONFLICT copy NULL into any the caller
+        # omitted, so a partial row silently erased the stored raw payload,
+        # URL and document type.
         await _upsert(
             self.session,
             self.dialect,
             Status.__table__,
             values,
             index_elements=["id"],
-            update_columns=self._UPDATABLE,
+            update_columns=[c for c in self._UPDATABLE if c in values],
         )
 
     async def get(self, status_id: str) -> Status | None:
