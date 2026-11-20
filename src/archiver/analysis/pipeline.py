@@ -37,7 +37,7 @@ if TYPE_CHECKING:
 # Which sources get scored by default. FinBERT reads news prose; proclamation and
 # executive-order legalese is out of its training distribution and mostly yields
 # low-confidence neutral, so the news feed is the default target.
-DEFAULT_SOURCES = ("news",)
+DEFAULT_SOURCES = ("news", "market_news")
 
 
 @dataclass

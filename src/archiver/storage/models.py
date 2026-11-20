@@ -10,13 +10,14 @@ Portability notes:
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from typing import Any
 
 from sqlalchemy import (
     JSON,
     BigInteger,
     Boolean,
+    Date,
     DateTime,
     Double,
     ForeignKey,
@@ -704,3 +705,86 @@ class StatusAnalysis(Base):
     generated_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
 
     __table_args__ = (Index("ix_status_analysis_generated", "generated_at"),)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 7. Investment hub: securities, daily prices, watchlist, holdings
+#
+# External market data lives apart from the archive: it is fetched, cached and
+# overwritten, never "captured". Company news is NOT stored here; it is archived
+# as ordinary statuses (source="market_news") so FinBERT, impact scoring and the
+# feed all apply to it unchanged.
+# ─────────────────────────────────────────────────────────────────────────────
+class Security(Base):
+    """One tracked company: profile, latest quote and key fundamentals."""
+
+    __tablename__ = "securities"
+
+    ticker: Mapped[str] = mapped_column(String(16), primary_key=True)
+    name: Mapped[str | None] = mapped_column(String)
+    exchange: Mapped[str | None] = mapped_column(String)
+    currency: Mapped[str | None] = mapped_column(String(8))
+    country: Mapped[str | None] = mapped_column(String(8))
+    industry: Mapped[str | None] = mapped_column(String)
+    logo_url: Mapped[str | None] = mapped_column(String)
+    web_url: Mapped[str | None] = mapped_column(String)
+    ipo_date: Mapped[str | None] = mapped_column(String(10))
+    market_cap: Mapped[float | None] = mapped_column(Double)  # in currency units
+    shares_outstanding: Mapped[float | None] = mapped_column(Double)
+    # Latest quote.
+    price: Mapped[float | None] = mapped_column(Double)
+    change: Mapped[float | None] = mapped_column(Double)
+    pct_change: Mapped[float | None] = mapped_column(Double)
+    day_open: Mapped[float | None] = mapped_column(Double)
+    day_high: Mapped[float | None] = mapped_column(Double)
+    day_low: Mapped[float | None] = mapped_column(Double)
+    prev_close: Mapped[float | None] = mapped_column(Double)
+    quote_at: Mapped[datetime | None] = mapped_column(_TS)
+    # Curated fundamentals (P/E, 52w range, margins…) and the latest analyst
+    # recommendation trend, kept as JSON so adding a metric needs no migration.
+    metrics: Mapped[dict[str, Any] | None] = mapped_column(JSONType)
+    recommendation: Mapped[dict[str, Any] | None] = mapped_column(JSONType)
+    last_error: Mapped[str | None] = mapped_column(String)
+    profile_refreshed_at: Mapped[datetime | None] = mapped_column(_TS)
+    refreshed_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+
+class PriceBar(Base):
+    """One daily OHLCV bar. Split-adjusted OHLC plus a fully adjusted close."""
+
+    __tablename__ = "price_bars"
+
+    ticker: Mapped[str] = mapped_column(String(16), primary_key=True)
+    date: Mapped[date] = mapped_column(Date, primary_key=True)
+    open: Mapped[float | None] = mapped_column(Double)
+    high: Mapped[float | None] = mapped_column(Double)
+    low: Mapped[float | None] = mapped_column(Double)
+    close: Mapped[float | None] = mapped_column(Double)
+    adj_close: Mapped[float | None] = mapped_column(Double)
+    volume: Mapped[int | None] = mapped_column(BigInteger)
+
+
+class WatchlistItem(Base):
+    """A ticker the user follows."""
+
+    __tablename__ = "watchlist"
+
+    ticker: Mapped[str] = mapped_column(String(16), primary_key=True)
+    note: Mapped[str | None] = mapped_column(Text)
+    added_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+
+class Holding(Base):
+    """One lot of a position. Several lots of a ticker roll up in the portfolio."""
+
+    __tablename__ = "holdings"
+
+    id: Mapped[int] = mapped_column(BigIntPK, primary_key=True, autoincrement=True)
+    ticker: Mapped[str] = mapped_column(String(16), nullable=False)
+    shares: Mapped[float] = mapped_column(Double, nullable=False)
+    avg_cost: Mapped[float] = mapped_column(Double, nullable=False)  # per share
+    opened_at: Mapped[date | None] = mapped_column(Date)
+    note: Mapped[str | None] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    __table_args__ = (Index("ix_holdings_ticker", "ticker"),)

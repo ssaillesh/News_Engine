@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
+      FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       GOVINFO_API_KEY: ${{ secrets.GOVINFO_API_KEY }}
       ARCHIVER_ENV: prod
@@ -80,3 +81,7 @@ jobs:
       - name: Refresh quotes for mentioned companies
         run: archiver refresh-market
         continue-on-error: true   # a third-party quote API must not fail the ingest
+      - name: Refresh investment hub
+        if: ${{ env.FINNHUB_API_KEY != '' }}
+        run: archiver hub-refresh
+        continue-on-error: true

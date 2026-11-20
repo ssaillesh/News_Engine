@@ -41,6 +41,10 @@ _ADDED_LATER = frozenset(
         "status_impact",  # 0005_classification
         "status_sectors",  # 0006_sectors
         "status_analysis",  # 0007_analysis
+        "securities",  # 0008_investment_hub
+        "price_bars",  # 0008_investment_hub
+        "watchlist",  # 0008_investment_hub
+        "holdings",  # 0008_investment_hub
     }
 )
 

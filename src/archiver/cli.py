@@ -633,6 +633,102 @@ def refresh_market_cmd(
         )
 
 
+@app.command(name="watch")
+def watch_cmd(
+    tickers: list[str] = typer.Argument(..., help="Tickers to add, e.g. AAPL MSFT."),
+    remove: bool = typer.Option(False, "--remove", help="Remove them instead."),
+) -> None:
+    """Add tickers to (or remove them from) the investment hub watchlist."""
+    from archiver.hub.service import normalize_ticker
+    from archiver.storage.models import WatchlistItem
+
+    settings = get_settings()
+    configure_logging(settings)
+    try:
+        symbols = [normalize_ticker(t) for t in tickers]
+    except ValueError as exc:
+        console.print(f"[bold red]✗[/] {exc}")
+        raise typer.Exit(code=1) from exc
+
+    async def _run() -> None:
+        database = Database(settings.database_url)
+        try:
+            await database.create_all()  # dev convenience; production uses `alembic upgrade head`
+            async with database.session() as session, session.begin():
+                for symbol in symbols:
+                    item = await session.get(WatchlistItem, symbol)
+                    if remove and item is not None:
+                        await session.delete(item)
+                    elif not remove and item is None:
+                        session.add(WatchlistItem(ticker=symbol))
+        finally:
+            await database.dispose()
+
+    asyncio.run(_run())
+    verb = "removed from" if remove else "added to"
+    console.print(f"[green]✓[/] {', '.join(symbols)} {verb} the watchlist")
+
+
+@app.command(name="hub-refresh")
+def hub_refresh_cmd(
+    ticker: list[str] = typer.Option(
+        None, "--ticker", help="Only these tickers (repeatable; default: watchlist + holdings)."
+    ),
+    news_days: int = typer.Option(None, help="Days of company news (default MARKET_NEWS_DAYS)."),
+    no_prices: bool = typer.Option(False, "--no-prices", help="Skip daily price history."),
+    no_news: bool = typer.Option(False, "--no-news", help="Skip company news."),
+) -> None:
+    """Refresh the investment hub: quotes, fundamentals, prices, company news.
+
+    Quotes, profiles, fundamentals and news come from Finnhub (FINNHUB_API_KEY);
+    daily price history from Yahoo. Prices backfill five years on first run and
+    are incremental after. News lands as source="market_news", so run
+    `score-sentiment` and `classify` afterwards to score it. Safe to re-run.
+    """
+    from archiver.clients.market import FinnhubClient, YahooChartClient
+    from archiver.hub.service import HubReport, normalize_ticker, refresh_all
+
+    settings = get_settings()
+    configure_logging(settings)
+    if not settings.finnhub_api_key:
+        console.print("[bold red]✗ FINNHUB_API_KEY is not set.[/] Get a free key at finnhub.io.")
+        raise typer.Exit(code=1)
+    symbols = [normalize_ticker(t) for t in ticker] if ticker else None
+
+    async def _run() -> HubReport:
+        database = Database(settings.database_url)
+        try:
+            await database.create_all()  # dev convenience; production uses `alembic upgrade head`
+            async with (
+                FinnhubClient.from_settings(settings) as finnhub,
+                YahooChartClient.from_settings(settings) as yahoo,
+            ):
+                return await refresh_all(
+                    database,
+                    finnhub,
+                    yahoo,
+                    tickers=symbols,
+                    news_days=news_days or settings.market_news_days,
+                    prices=not no_prices,
+                    news=not no_news,
+                )
+        finally:
+            await database.dispose()
+
+    report = asyncio.run(_run())
+    if not report.tickers:
+        console.print(
+            "[yellow]Nothing tracked yet.[/] Add tickers with [bold]archiver watch AAPL[/]."
+        )
+        return
+    console.print(
+        f"[green]✓[/] {report.tickers} ticker(s): {report.quotes} quote(s), "
+        f"{report.bars} price bar(s), {report.news} news item(s)"
+    )
+    for key, err in report.errors.items():
+        console.print(f"  [yellow]![/] {key}: {err}")
+
+
 @app.command()
 def serve(
     host: str = typer.Option(None, help="Bind host (default from config: web_host)."),

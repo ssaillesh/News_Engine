@@ -145,6 +145,41 @@ works but is rate-limited).
 filters, links to the originals) plus a JSON API (`/api/statuses`, `/api/stats`,
 `/api/facets`). Install the web extra first: `pip install -e ".[web]"`.
 
+## Investment hub
+
+Watchlist, holdings and per-ticker research on top of the archive. Quotes,
+company profiles, fundamentals, analyst recommendation trends and company news
+come from [Finnhub](https://finnhub.io) (free key); daily price history comes
+from Yahoo's chart endpoint, because Finnhub's free tier excludes candles.
+
+Company news is archived as ordinary statuses (`source="market_news"`) linked to
+tickers through `stock_mentions`, so FinBERT sentiment, impact scoring and the
+feed's filters all apply to it unchanged.
+
+```bash
+# .env: FINNHUB_API_KEY=...   (and HUB_WRITE_TOKEN=... on any public deployment)
+alembic upgrade head
+archiver watch AAPL MSFT NVDA      # or POST /api/hub/watchlist
+archiver hub-refresh               # quotes, fundamentals, 5y prices, 7d of news
+archiver score-sentiment && archiver classify
+archiver serve                     # API docs at /api/docs, routes under /api/hub
+```
+
+| Route | What it returns |
+| --- | --- |
+| `GET /api/hub/dashboard` | watchlist movers, portfolio totals, top-impact news across your tickers |
+| `GET /api/hub/securities/{t}` | profile, quote, fundamentals, recommendation (`?refresh=true` for live) |
+| `GET /api/hub/securities/{t}/prices?range=1m…max` | daily bars, period stats, per-day news markers for the chart |
+| `GET /api/hub/securities/{t}/news?sort=recent\|impact` | that ticker's stories with sentiment and impact |
+| `GET /api/hub/search?q=` | ticker lookup |
+| `GET/POST/DELETE /api/hub/watchlist` | the watchlist |
+| `GET/POST/PATCH/DELETE /api/hub/holdings` | position lots (shares, average cost) |
+| `GET /api/hub/portfolio` | positions rolled up by ticker: value, P&L, day change, weights |
+
+Writes need the `X-Hub-Token` header whenever `HUB_WRITE_TOKEN` is set. The
+scheduled ingest workflow runs `hub-refresh` when the `FINNHUB_API_KEY` secret
+exists.
+
 ## Sentiment (FinBERT)
 
 `archiver score-sentiment` runs [ProsusAI/finbert](https://huggingface.co/ProsusAI/finbert)

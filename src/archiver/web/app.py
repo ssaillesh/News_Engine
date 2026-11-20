@@ -20,6 +20,7 @@ from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from sqlalchemy import func, select
 from sqlalchemy.orm import selectinload
@@ -47,6 +48,7 @@ from archiver.storage.models import (
     StatusTopic,
     StockMention,
 )
+from archiver.web.hub import build_hub_router
 from archiver.web.page import INDEX_HTML
 
 
@@ -303,6 +305,13 @@ def _analysis_payload(row: Any) -> dict[str, Any]:
 def create_app(db: Database, *, briefer: BriefingGenerator | None = None) -> FastAPI:
     app = FastAPI(title="Trump News Archive", docs_url="/api/docs")
     settings = get_settings()
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.cors_origins,
+        allow_methods=["GET", "POST", "PATCH", "DELETE"],
+        allow_headers=["Content-Type", "X-Hub-Token"],
+    )
+    app.include_router(build_hub_router(db, _to_item))
     briefer = briefer or BriefingGenerator(
         model=settings.analysis_model, effort=settings.analysis_effort
     )
