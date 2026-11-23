@@ -22,6 +22,7 @@ jobs:
     timeout-minutes: 30
     env:
       FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+      POLYGON_API_KEY: ${{ secrets.POLYGON_API_KEY }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       GOVINFO_API_KEY: ${{ secrets.GOVINFO_API_KEY }}
       ARCHIVER_ENV: prod
@@ -84,4 +85,10 @@ jobs:
       - name: Refresh investment hub
         if: ${{ env.FINNHUB_API_KEY != '' }}
         run: archiver hub-refresh
+        continue-on-error: true
+      - name: Sync stock universe
+        run: archiver universe-sync
+        continue-on-error: true
+      - name: Core prices
+        run: archiver universe-prices --backfill 50
         continue-on-error: true
