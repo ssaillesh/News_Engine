@@ -1,23 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Nav } from "@/components/Nav";
+import { Archivo, IBM_Plex_Mono } from "next/font/google";
+import { Shell } from "@/components/Shell";
 import "./globals.css";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+const archivo = Archivo({ variable: "--font-archivo", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
+const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500", "600"] });
 
 export const metadata: Metadata = {
   title: { default: "Investment Hub", template: "%s · Investment Hub" },
-  description: "Watchlist, portfolio, prices and news impact in one place.",
+  description: "Policy to markets: Washington, news impact, prices and your portfolio in one terminal.",
 };
+
+// Applied before first paint so a light-theme choice never flashes dark.
+const THEME_SCRIPT = `try{var t=localStorage.getItem("hub:theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
-        {/* Server config, known at build time: show "Sign out" only when the gate is on. */}
-        <Nav signOut={Boolean(process.env.SITE_PASSWORD)} />
-        <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6">{children}</main>
+    <html lang="en" data-theme="dark" className={`${archivo.variable} ${plexMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
+      <body>
+        {/* Server config, known at build time: show "Logout" only when the gate is on. */}
+        <Shell signOut={Boolean(process.env.SITE_PASSWORD)}>{children}</Shell>
       </body>
     </html>
   );

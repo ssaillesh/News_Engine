@@ -172,13 +172,9 @@ def _to_impact(row: StatusImpact | None) -> dict[str, Any] | None:
         "authority_label": row.authority_label,
         "topic": round(row.topic, 4),
         "actionability": round(row.actionability, 4),
-        "corroboration": (
-            round(row.corroboration, 4) if row.corroboration is not None else None
-        ),
+        "corroboration": (round(row.corroboration, 4) if row.corroboration is not None else None),
         "market_sensitivity": (
-            round(row.market_sensitivity, 4)
-            if row.market_sensitivity is not None
-            else None
+            round(row.market_sensitivity, 4) if row.market_sensitivity is not None else None
         ),
         "reasons": reasons,
     }
@@ -201,9 +197,7 @@ def _to_topics(rows: list[StatusTopic]) -> list[dict[str, Any]]:
 def _to_entities(rows: list[StatusEntity]) -> list[dict[str, Any]]:
     """Named countries, blocs and agencies, countries first (they carry most)."""
     order = {"country": 0, "bloc": 1, "agency": 2}
-    out = [
-        {"key": r.entity_key, "type": r.entity_type, "alias": r.alias} for r in rows
-    ]
+    out = [{"key": r.entity_key, "type": r.entity_type, "alias": r.alias} for r in rows]
     return sorted(out, key=lambda e: (order.get(e["type"], 9), e["key"]))
 
 
@@ -251,11 +245,7 @@ def _to_item(status: Status) -> dict[str, Any]:
     text = status.content_text or ""
     title = raw.get("title") or (text.split("\n", 1)[0] if text else status.id)
     kind = (
-        status.kind
-        or raw.get("subtype")
-        or raw.get("type")
-        or raw.get("category")
-        or status.source
+        status.kind or raw.get("subtype") or raw.get("type") or raw.get("category") or status.source
     )
     return {
         "id": status.id,
@@ -275,9 +265,7 @@ def _to_item(status: Status) -> dict[str, Any]:
                 "text": status.summary.summary,
                 "model": status.summary.model,
                 "generated_at": (
-                    status.summary.generated_at.isoformat()
-                    if status.summary.generated_at
-                    else None
+                    status.summary.generated_at.isoformat() if status.summary.generated_at else None
                 ),
             }
             if status.summary
@@ -439,9 +427,7 @@ def create_app(db: Database, *, briefer: BriefingGenerator | None = None) -> Fas
                     )
                 )
             ).all()
-        quotes = {
-            r[0]: {"last_price": r[1], "pct_change": r[2], "delta": r[3]} for r in mkt
-        }
+        quotes = {r[0]: {"last_price": r[1], "pct_change": r[2], "delta": r[3]} for r in mkt}
         # Tiers are a severity ladder, so present them in severity order rather
         # than by count — "critical" belongs at the top even when it is rarest.
         tier_rank = {"critical": 0, "high": 1, "notable": 2, "routine": 3}
@@ -503,7 +489,14 @@ def create_app(db: Database, *, briefer: BriefingGenerator | None = None) -> Fas
         until: str | None = None,
         limit: int = Query(25, ge=1, le=200),
         offset: int = Query(0, ge=0),
+        with_total: bool = False,
+        id: str | None = Query(None, max_length=2000),  # noqa: A002 - the public param name
     ) -> dict[str, Any]:
+        # ``id``, ``source``, ``kind`` and ``ticker`` take comma-separated lists (any of).
+        def many(raw: str | None) -> list[str]:
+            return [p.strip() for p in (raw or "").split(",") if p.strip()]
+
+        sources, kinds, tickers = many(source), many(kind), [t.upper() for t in many(ticker)]
         # selectinload keeps this one extra query per relationship instead of
         # N+1 per card.
         stmt = select(Status).options(
@@ -524,43 +517,37 @@ def create_app(db: Database, *, briefer: BriefingGenerator | None = None) -> Fas
             )
         else:
             stmt = stmt.order_by(Status.created_at.desc())
-        if source:
-            stmt = stmt.where(Status.source == source)
-        if kind:
-            stmt = stmt.where(Status.kind == kind)
+        if ids := many(id):
+            stmt = stmt.where(Status.id.in_(ids))
+        if sources:
+            stmt = stmt.where(Status.source.in_(sources))
+        if kinds:
+            stmt = stmt.where(Status.kind.in_(kinds))
         if sentiment:
             stmt = stmt.join(StatusSentiment).where(StatusSentiment.label == sentiment)
         if topic:
             stmt = stmt.where(
-                Status.id.in_(
-                    select(StatusTopic.status_id).where(StatusTopic.topic == topic)
-                )
+                Status.id.in_(select(StatusTopic.status_id).where(StatusTopic.topic == topic))
             )
         if sector:
             stmt = stmt.where(
-                Status.id.in_(
-                    select(StatusSector.status_id).where(StatusSector.sector == sector)
-                )
+                Status.id.in_(select(StatusSector.status_id).where(StatusSector.sector == sector))
             )
         if stance:
             stmt = stmt.where(
-                Status.id.in_(
-                    select(StatusImpact.status_id).where(StatusImpact.stance == stance)
-                )
+                Status.id.in_(select(StatusImpact.status_id).where(StatusImpact.stance == stance))
             )
-        if ticker:
+        if tickers:
             stmt = stmt.where(
                 Status.id.in_(
-                    select(StockMention.status_id).where(StockMention.ticker == ticker)
+                    select(StockMention.status_id).where(StockMention.ticker.in_(tickers))
                 )
             )
         if tier:
             # An explicit tier filter can coexist with sort=impact, which already
             # joins the table — use a subquery so the join is never duplicated.
             stmt = stmt.where(
-                Status.id.in_(
-                    select(StatusImpact.status_id).where(StatusImpact.tier == tier)
-                )
+                Status.id.in_(select(StatusImpact.status_id).where(StatusImpact.tier == tier))
             )
         if q:
             stmt = stmt.where(Status.content_text.ilike(f"%{q}%"))
@@ -570,10 +557,22 @@ def create_app(db: Database, *, briefer: BriefingGenerator | None = None) -> Fas
             stmt = stmt.where(Status.created_at >= since_dt)
         if until_dt is not None:
             stmt = stmt.where(Status.created_at < until_dt)
-        stmt = stmt.limit(limit).offset(offset)
         async with db.session() as session:
-            rows = (await session.scalars(stmt)).all()
+            total = None
+            if with_total:
+                total = await session.scalar(
+                    select(func.count()).select_from(stmt.order_by(None).subquery())
+                )
+            rows = (await session.scalars(stmt.limit(limit).offset(offset))).all()
             items = [_to_item(row) for row in rows]
-        return {"items": items, "count": len(items), "offset": offset, "limit": limit}
+        out: dict[str, Any] = {
+            "items": items,
+            "count": len(items),
+            "offset": offset,
+            "limit": limit,
+        }
+        if total is not None:
+            out["total"] = total
+        return out
 
     return app

@@ -17,7 +17,7 @@ import {
   type Time,
 } from "lightweight-charts";
 import type { Bar, NewsMarker } from "@/lib/api";
-import { compact, money, num, pct, sentimentTone, shortDate, tone, toneText } from "@/lib/format";
+import { cls, compact, money, num, pct, sentimentTone, shortDate } from "@/lib/format";
 
 export type ChartMode = "candle" | "area";
 
@@ -104,17 +104,22 @@ function palette() {
   const s = getComputedStyle(document.documentElement);
   const v = (name: string) => s.getPropertyValue(name).trim();
   return {
-    text: v("--muted"),
-    border: v("--border"),
-    grid: v("--surface-2"),
+    text: v("--dim"),
+    border: v("--rule"),
+    grid: v("--rule"),
     up: v("--up"),
-    down: v("--down"),
-    accent: v("--accent"),
-    neutral: v("--neutral-mark"),
+    down: v("--dn"),
+    accent: v("--amb"),
+    neutral: v("--dim"),
+    ink: v("--ink"),
   };
 }
 
-const alpha = (hex: string, a: string) => (/^#[0-9a-f]{6}$/i.test(hex) ? hex + a : hex);
+/** Append an alpha byte to #rgb / #rrggbb colours; anything else passes through. */
+function alpha(hex: string, a: string) {
+  if (/^#[0-9a-f]{3}$/i.test(hex)) hex = "#" + [...hex.slice(1)].map((c) => c + c).join("");
+  return /^#[0-9a-f]{6}$/i.test(hex) ? hex + a : hex;
+}
 
 export function PriceChart({
   bars,
@@ -123,7 +128,7 @@ export function PriceChart({
   currency = "USD",
   selected,
   onSelectDay,
-  height = 380,
+  height,
 }: {
   bars: Bar[];
   markers: NewsMarker[];
@@ -179,11 +184,11 @@ export function PriceChart({
     });
     c.subscribeCrosshairMove((p) => setHover(timeKey(p.time)));
 
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const onTheme = () => setTheme((n) => n + 1);
-    mq.addEventListener("change", onTheme);
+    // The header toggle flips data-theme on <html>; recolour when it does.
+    const obs = new MutationObserver(() => setTheme((n) => n + 1));
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     return () => {
-      mq.removeEventListener("change", onTheme);
+      obs.disconnect();
       c.remove();
       chart.current = null;
       priceSeries.current = null;
@@ -199,12 +204,12 @@ export function PriceChart({
       layout: {
         background: { type: ColorType.Solid, color: "transparent" },
         textColor: p.text,
-        fontFamily: "var(--font-geist-mono), ui-monospace, monospace",
+        fontFamily: getComputedStyle(document.body).getPropertyValue("--font-plex-mono") || "ui-monospace, monospace",
         fontSize: 11,
         attributionLogo: false,
       },
       grid: { vertLines: { visible: false }, horzLines: { color: p.grid } },
-      crosshair: { vertLine: { color: p.border, labelBackgroundColor: p.accent }, horzLine: { color: p.border, labelBackgroundColor: p.accent } },
+      crosshair: { vertLine: { color: p.text, labelBackgroundColor: p.accent }, horzLine: { color: p.text, labelBackgroundColor: p.accent } },
     });
   }, [theme]);
 
@@ -230,13 +235,11 @@ export function PriceChart({
       });
       series.setData(data.map(({ time, open, high, low, close }) => ({ time, open, high, low, close })));
     } else {
-      const first = data[0]?.close;
-      const last = data[data.length - 1]?.close;
-      const line = first !== undefined && last !== undefined && last < first ? p.down : p.up;
+      const line = p.accent;
       series = c.addSeries(AreaSeries, {
         lineColor: line,
         lineWidth: 2,
-        topColor: alpha(line, "40"),
+        topColor: alpha(line, "33"),
         bottomColor: alpha(line, "00"),
         priceFormat,
       });
@@ -270,7 +273,8 @@ export function PriceChart({
         time: d.time,
         position: "aboveBar",
         shape: "circle",
-        color: isSel ? p.accent : t === "up" ? p.up : t === "down" ? p.down : p.neutral,
+        // Selected: ink. High impact (70+): amber. Otherwise by mean sentiment.
+        color: isSel ? p.ink : (d.impact ?? 0) >= 0.7 ? p.accent : t === "up" ? p.up : t === "down" ? p.down : p.neutral,
         size: (isSel ? 1.25 : 0.9) + Math.min(1, d.impact ?? 0) * 0.6,
         text: String(d.count),
         id: d.time,
@@ -284,27 +288,33 @@ export function PriceChart({
   const legendNews = legendKey ? newsDays.get(legendKey) : undefined;
   const dayChange = legend?.prev ? ((legend.bar.close - legend.prev.close) / legend.prev.close) * 100 : null;
 
+  const newsCls = legendNews ? { up: "up", down: "dn", flat: "dim" }[sentimentTone(legendNews.sentiment)] : "";
   return (
-    <div className="relative" style={{ height }}>
-      <div ref={container} className="absolute inset-0" />
+    <div style={{ position: "relative", height: height ?? "100%", minHeight: 260 }}>
+      <div ref={container} style={{ position: "absolute", inset: 0 }} />
       {legend ? (
-        <div className="pointer-events-none absolute left-3 top-2 z-10 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 rounded-md bg-surface/80 px-2 py-1 text-[11px] text-muted backdrop-blur-sm">
-          <span className="font-medium text-text">{shortDate(legend.bar.time)}</span>
-          <span className="num">O {num(legend.bar.open)}</span>
-          <span className="num">H {num(legend.bar.high)}</span>
-          <span className="num">L {num(legend.bar.low)}</span>
-          <span className="num text-text">C {money(legend.bar.close, currency)}</span>
-          <span className={`num ${toneText[tone(dayChange)]}`}>{pct(dayChange)}</span>
-          {legend.bar.volume !== null ? <span className="num">Vol {compact(legend.bar.volume)}</span> : null}
+        <div
+          className="m dim"
+          style={{ pointerEvents: "none", position: "absolute", left: 8, top: 4, zIndex: 10, display: "flex", flexWrap: "wrap", gap: "2px 12px", alignItems: "baseline", background: "color-mix(in srgb, var(--pane) 85%, transparent)", padding: "2px 6px", fontSize: 11 }}
+        >
+          <span style={{ color: "var(--ink)" }}>{shortDate(legend.bar.time).toUpperCase()}</span>
+          <span>O {num(legend.bar.open)}</span>
+          <span>H {num(legend.bar.high)}</span>
+          <span>L {num(legend.bar.low)}</span>
+          <span style={{ color: "var(--ink)" }}>C {money(legend.bar.close, currency)}</span>
+          <span className={cls(dayChange)}>{pct(dayChange)}</span>
+          {legend.bar.volume !== null ? <span>VOL {compact(legend.bar.volume)}</span> : null}
           {legendNews ? (
-            <span className={`font-medium ${toneText[sentimentTone(legendNews.sentiment)]}`}>
-              {legendNews.count} {legendNews.count === 1 ? "story" : "stories"} · click to filter
+            <span className={newsCls}>
+              {legendNews.count} {legendNews.count === 1 ? "STORY" : "STORIES"} · CLICK TO FILTER
             </span>
           ) : null}
         </div>
       ) : null}
       {!data.length ? (
-        <div className="absolute inset-0 grid place-items-center text-sm text-muted">No price history for this range.</div>
+        <div className="m dim" style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", fontSize: 12 }}>
+          NO PRICE HISTORY FOR THIS RANGE.
+        </div>
       ) : null}
     </div>
   );

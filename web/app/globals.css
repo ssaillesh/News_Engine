@@ -1,89 +1,436 @@
 @import "tailwindcss";
 
-:root {
-  --bg: #f5f6f8;
-  --surface: #ffffff;
-  --surface-2: #f0f2f5;
-  --border: #e2e5ea;
-  --border-strong: #cfd4dc;
-  --text: #0f1419;
-  --muted: #5b6470;
-  --faint: #8b939e;
-  --accent: #3355d1;
-  --accent-soft: #e8edfd;
-  --up: #12924c;
-  --up-soft: #e3f5ea;
-  --down: #d93a40;
-  --down-soft: #fdeaea;
-  --warn: #b7791f;
-  --warn-soft: #fdf3e1;
-  --neutral-mark: #8b939e;
-  color-scheme: light;
+/* ── Terminal theme (Investment Hub Redesign) ─────────────────────────────────
+   Dark is the default; the header toggle stores "light" or "dark" and sets
+   data-theme on <html> before first paint (see layout.tsx). */
+:root,
+:root[data-theme="dark"] {
+  --bg: #000;
+  --pane: #0b0b0b;
+  --title: #fb8b1e;
+  --ontitle: #000;
+  --rule: #262626;
+  --ink: #e9e9e9;
+  --dim: #9a9a9a;
+  --amb: #fb8b1e;
+  --up: #2bd67b;
+  --dn: #ff5b4f;
+  --sel: #1a1a1a;
+  --hot: #ffd23f;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a0c0f;
-    --surface: #111418;
-    --surface-2: #171b20;
-    --border: #232930;
-    --border-strong: #313841;
-    --text: #e6e9ee;
-    --muted: #98a1ad;
-    --faint: #69727e;
-    --accent: #7d93ff;
-    --accent-soft: #1b2340;
-    --up: #2fbf71;
-    --up-soft: #11281c;
-    --down: #ff5d63;
-    --down-soft: #2e1416;
-    --warn: #e0a84a;
-    --warn-soft: #2b2112;
-    --neutral-mark: #7c8590;
-    color-scheme: dark;
-  }
+:root[data-theme="light"] {
+  --bg: #e9e6df;
+  --pane: #f7f5f0;
+  --title: #1c1c1c;
+  --ontitle: #fb8b1e;
+  --rule: #cfcac0;
+  --ink: #141414;
+  --dim: #55524c;
+  --amb: #a65400;
+  --up: #0e7a3e;
+  --dn: #b3241b;
+  --sel: #ece8de;
+  --hot: #8a5a00;
+  color-scheme: light;
 }
 
 @theme inline {
   --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-border: var(--border);
-  --color-border-strong: var(--border-strong);
-  --color-text: var(--text);
-  --color-muted: var(--muted);
-  --color-faint: var(--faint);
-  --color-accent: var(--accent);
-  --color-accent-soft: var(--accent-soft);
+  --color-pane: var(--pane);
+  --color-rule: var(--rule);
+  --color-ink: var(--ink);
+  --color-dim: var(--dim);
+  --color-amb: var(--amb);
   --color-up: var(--up);
-  --color-up-soft: var(--up-soft);
-  --color-down: var(--down);
-  --color-down-soft: var(--down-soft);
-  --color-warn: var(--warn);
-  --color-warn-soft: var(--warn-soft);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-dn: var(--dn);
+  --color-sel: var(--sel);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-plex-mono);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  margin: 0;
+  font-family: var(--font-archivo), Archivo, system-ui, sans-serif;
 }
 
-.num {
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
-}
-
-input,
-select,
-textarea {
-  color: var(--text);
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: 1px solid var(--amb);
+  outline-offset: -1px;
+}
+
+/* ── shell ──────────────────────────────────────────────────────────────── */
+.root {
+  background: var(--bg);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.root > main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 1024px) {
+  .root {
+    height: 100vh;
+    min-height: 760px;
+    overflow: hidden;
+  }
+}
+
+.m {
+  font-family: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+.dim {
+  color: var(--dim);
+}
+.up {
+  color: var(--up);
+}
+.dn {
+  color: var(--dn);
+}
+.amb {
+  color: var(--amb);
+}
+
+.hdr {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--rule);
+  min-height: 34px;
+}
+.hdr > .cell {
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 12px;
+  border-left: 1px solid var(--rule);
+  white-space: nowrap;
+}
+@media (max-width: 640px) {
+  /* Phones: the command line needs the room; drop the clock and market status. */
+  .hdr > .cell.m {
+    display: none;
+  }
+}
+.logo {
+  background: var(--amb);
+  color: #000;
+  font-weight: 600;
+  padding: 6px 12px;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+}
+input.cmd {
+  flex: 1;
+  min-width: 120px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--hot);
+  font: 500 14px var(--font-plex-mono), "IBM Plex Mono", monospace;
+  caret-color: var(--amb);
+}
+input.cmd::placeholder {
+  color: var(--dim);
+}
+
+.fk {
+  padding: 6px 10px;
+  font: 500 12px var(--font-plex-mono), "IBM Plex Mono", monospace;
+  color: var(--ink);
+  border-right: 1px solid var(--rule);
+}
+.fk b {
+  color: var(--amb);
+  font-weight: 600;
+  margin-right: 6px;
+}
+.fk:hover {
+  background: var(--sel);
+}
+.fk.on {
+  background: var(--amb);
+  color: #000;
+}
+.fk.on b {
+  color: #000;
+}
+
+/* ── panes ──────────────────────────────────────────────────────────────── */
+.grid-term {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--rule);
+  padding: 2px;
+}
+.grid-term > .pane {
+  min-height: 360px;
+  max-height: 80vh;
+}
+@media (min-width: 1024px) {
+  .grid-term {
+    display: grid;
+  }
+  .grid-term > .pane {
+    min-height: 0;
+    max-height: none;
+  }
+}
+
+.pane {
+  background: var(--pane);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+.tb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: var(--title);
+  color: var(--ontitle);
+  padding: 3px 8px;
+  font: 600 12px var(--font-plex-mono), "IBM Plex Mono", monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.tb > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tb a:hover,
+.tb button:hover {
+  text-decoration: underline;
+}
+.tb button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+.body {
+  overflow: auto;
+  flex: 1;
+  min-height: 0;
+}
+.r {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--rule);
+}
+a.r:hover,
+a.st:hover,
+tr.lk:hover,
+.hov:hover {
+  background: var(--sel);
+}
+.trunc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn {
+  background: transparent;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font: 500 12px var(--font-plex-mono), "IBM Plex Mono", monospace;
+  padding: 4px 10px;
+  cursor: pointer;
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.btn:hover {
+  border-color: var(--amb);
+}
+.btn.on {
+  background: var(--amb);
+  border-color: var(--amb);
+  color: #000;
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.btn.danger {
+  border-color: var(--dn);
+  color: var(--dn);
+}
+
+.blk {
+  height: 6px;
+  background: var(--rule);
+}
+.blk span {
+  display: block;
+  height: 100%;
+  background: var(--amb);
+}
+
+select.sel,
+input.fld {
+  background: var(--pane);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  font: 500 12px var(--font-plex-mono), "IBM Plex Mono", monospace;
+  padding: 4px 6px;
+  min-height: 28px;
+}
+input.fld:focus,
+select.sel:focus {
+  border-color: var(--amb);
+  outline: 0;
+}
+
+/* news list rows */
+.item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 10px;
+  padding: 9px 8px;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-left: 3px solid transparent;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  width: 100%;
+}
+.item:hover {
+  background: var(--sel);
+}
+.item.on {
+  background: var(--sel);
+  border-left-color: var(--amb);
+}
+
+.kpi {
+  padding: 8px 12px;
+  border-right: 1px solid var(--rule);
+}
+.kv {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.kv > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+}
+
+table.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+table.tbl th {
+  font: 600 11px var(--font-plex-mono), "IBM Plex Mono", monospace;
+  color: var(--dim);
+  text-align: right;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  background: var(--pane);
+  white-space: nowrap;
+}
+table.tbl td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--rule);
+  text-align: right;
+  white-space: nowrap;
+}
+table.tbl th.l,
+table.tbl td.l {
+  text-align: left;
+}
+table.tbl th button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+table.tbl th button:hover,
+table.tbl th button.on {
+  color: var(--ink);
+}
+
+.sk {
+  background: var(--sel);
+  animation: sk 1.2s ease-in-out infinite;
+}
+@keyframes sk {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* page grids (desktop); phones stack panes in source order */
+@media (min-width: 1024px) {
+  .g-today {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .g-wash {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 3fr) minmax(0, 3fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .g-news {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+    grid-template-rows: minmax(0, 11fr) minmax(0, 9fr);
+  }
+  .g-mkts {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3fr);
+    grid-template-rows: minmax(0, 5fr) minmax(0, 6fr);
+  }
+  .g-stock {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+    grid-template-rows: minmax(0, 11fr) minmax(0, 9fr);
+  }
+  .g-port {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  }
 }

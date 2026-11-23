@@ -14,20 +14,24 @@ holdings and portfolio endpoints themselves, which return 401.
 
 from __future__ import annotations
 
+import asyncio
 import hmac
+import time
 from collections.abc import Callable
 from datetime import UTC, date, datetime, timedelta
-from typing import Any
+from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Query
 from pydantic import BaseModel, Field, field_validator
-from sqlalchemy import Float, cast, func, select
+from sqlalchemy import Float, cast, func, or_, select
 from sqlalchemy.orm import selectinload
 
 from archiver.clients.exceptions import ClientError
-from archiver.clients.market import FinnhubClient, YahooChartClient
+from archiver.clients.market import FinnhubClient, PolymarketClient, YahooChartClient
 from archiver.config.settings import get_settings
+from archiver.hub.odds import ODDS_TAGS, pick_odds
 from archiver.hub.portfolio import Lot, summarize
+from archiver.hub.returns import load_closes, period_returns, reaction
 from archiver.hub.service import normalize_ticker, refresh_prices, refresh_security
 from archiver.storage.db import Database
 from archiver.storage.models import (
@@ -42,6 +46,23 @@ from archiver.storage.models import (
 )
 
 RANGES = {"1m": 31, "3m": 92, "6m": 183, "ytd": None, "1y": 366, "5y": 1830, "max": None}
+MAX_TICKERS = 100
+ODDS_TTL_S = 300.0
+
+
+def _ticker_list(raw: str | None, limit: int = MAX_TICKERS) -> list[str]:
+    """``"aapl, msft"`` -> ``["AAPL", "MSFT"]``; unparseable symbols are skipped."""
+    out: list[str] = []
+    for part in (raw or "").split(","):
+        try:
+            symbol = normalize_ticker(part)
+        except ValueError:
+            continue
+        if symbol not in out:
+            out.append(symbol)
+    if len(out) > limit:
+        raise HTTPException(422, f"at most {limit} tickers per request")
+    return out
 
 
 # ── request bodies ───────────────────────────────────────────────────────────
@@ -84,6 +105,8 @@ def security_dict(sec: Security | None, ticker: str) -> dict[str, Any]:
         "currency": sec.currency,
         "country": sec.country,
         "industry": sec.industry,
+        "sector": sec.sector,
+        "security_type": sec.security_type,
         "logo_url": sec.logo_url,
         "web_url": sec.web_url,
         "ipo_date": sec.ipo_date,
@@ -219,15 +242,31 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         scope: str = Query("core", pattern="^(core|all)$"),
         q: str | None = Query(None, max_length=40),
         sector: str | None = Query(None, max_length=64),
+        tickers: str | None = Query(None, max_length=1200),
+        kind: str | None = Query(None, pattern="^(stock|etf)$"),
         sort: str = Query("market_cap", pattern="^(ticker|name|price|pct_change|market_cap)$"),
         order: str = Query("desc", pattern="^(asc|desc)$"),
         limit: int = Query(50, ge=1, le=200),
         offset: int = Query(0, ge=0),
     ) -> dict[str, Any]:
-        """Browse the universe: core symbols by default, every listed one with scope=all."""
+        """Browse the universe: core symbols by default, every listed one with scope=all.
+
+        ``tickers`` (comma-separated) looks up exactly those symbols in any scope.
+        Each row also carries its 5-day return, P/E and count of stories in the
+        last 7 days, which are not sortable.
+        """
         stmt = select(Security)
-        if scope == "core":
+        wanted = _ticker_list(tickers)
+        if wanted:
+            stmt = stmt.where(Security.ticker.in_(wanted))
+        elif scope == "core":
             stmt = stmt.where(Security.is_core.is_(True))
+        if kind == "etf":
+            stmt = stmt.where(Security.security_type == "ETP")
+        elif kind == "stock":
+            stmt = stmt.where(
+                or_(Security.security_type.is_(None), Security.security_type != "ETP")
+            )
         if q:
             needle = q.strip().upper()
             stmt = stmt.where(
@@ -244,6 +283,23 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
                     stmt.order_by(ordered.nulls_last(), Security.ticker).limit(limit).offset(offset)
                 )
             ).all()
+            symbols = [s.ticker for s in rows]
+            closes = await load_closes(session, symbols, date.today() - timedelta(days=20))
+            week_ago = datetime.now(UTC) - timedelta(days=7)
+            news = (
+                dict(
+                    (
+                        await session.execute(
+                            select(StockMention.ticker, func.count(func.distinct(Status.id)))
+                            .join(Status, Status.id == StockMention.status_id)
+                            .where(StockMention.ticker.in_(symbols), Status.created_at >= week_ago)
+                            .group_by(StockMention.ticker)
+                        )
+                    ).all()
+                )
+                if symbols
+                else {}
+            )
         return {
             "total": total or 0,
             "items": [
@@ -258,6 +314,9 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
                     "pct_change": s.pct_change,
                     "market_cap": s.market_cap,
                     "quote_at": s.quote_at.isoformat() if s.quote_at else None,
+                    "pe": (s.metrics or {}).get("peTTM"),
+                    "r5d": period_returns(closes.get(s.ticker, []))["r5d"],
+                    "news_7d": news.get(s.ticker, 0),
                 }
                 for s in rows
             ],
@@ -396,6 +455,75 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         async with db.session() as session:
             rows = (await session.scalars(stmt.limit(limit).offset(offset))).unique().all()
         return {"ticker": symbol, "items": [to_item(s) for s in rows]}
+
+    # ── returns, reactions, odds ─────────────────────────────────────────────
+    @router.get("/returns")
+    async def returns(tickers: str = Query(..., max_length=1200)) -> dict[str, Any]:
+        """Last close and 1D / 5D / 1M / YTD returns (percent) from stored daily bars."""
+        symbols = _ticker_list(tickers)
+        today = date.today()
+        start = min(today - timedelta(days=45), date(today.year - 1, 12, 20))
+        async with db.session() as session:
+            closes = await load_closes(session, symbols, start)
+        items = {}
+        for t in symbols:
+            r = period_returns(closes.get(t, []))
+            items[t] = {**r, "date": r["date"].isoformat() if r["date"] else None}
+        return {"items": items}
+
+    @router.get("/reactions")
+    async def reactions(
+        at: Annotated[list[datetime], Query(max_length=200)],
+        tickers: str = Query(..., max_length=1200),
+        benchmark: str = Query("SPY", max_length=16),
+    ) -> dict[str, Any]:
+        """How ``tickers`` (and ``benchmark``) moved after each timestamp in ``at``:
+        ``d1`` is the session the news landed in, ``d5`` five sessions in, both in
+        percent from the prior close."""
+        bench = _ticker(benchmark)
+        symbols = [*_ticker_list(tickers, limit=40)]
+        if bench not in symbols:
+            symbols.append(bench)
+        if not at:
+            return {"benchmark": bench, "events": []}
+        stamps = [a if a.tzinfo else a.replace(tzinfo=UTC) for a in at]
+        start = min(stamps).date() - timedelta(days=10)
+        async with db.session() as session:
+            closes = await load_closes(session, symbols, start)
+        events = []
+        for stamp in stamps:
+            moves = {}
+            for t in symbols:
+                r = reaction(closes.get(t, []), stamp)
+                moves[t] = {"d1": r["d1"], "d5": r["d5"]}
+            first = next(
+                (reaction(closes[t], stamp)["session"] for t in symbols if t in closes), None
+            )
+            events.append(
+                {
+                    "at": stamp.isoformat(),
+                    "session": first.isoformat() if first else None,
+                    "moves": moves,
+                }
+            )
+        return {"benchmark": bench, "events": events}
+
+    odds_cache: dict[str, Any] = {"at": 0.0, "items": None}
+
+    @router.get("/odds")
+    async def odds(limit: int = Query(6, ge=1, le=20)) -> dict[str, Any]:
+        """Open Polymarket markets on the economy, the Fed and tariffs, busiest first.
+        Cached for five minutes; a Polymarket outage returns an empty list."""
+        if odds_cache["items"] is None or time.monotonic() - odds_cache["at"] > ODDS_TTL_S:
+            try:
+                async with PolymarketClient.from_settings(settings) as poly:
+                    batches = await asyncio.gather(*(poly.events(tag) for tag in ODDS_TAGS))
+                odds_cache["items"] = pick_odds((e for b in batches for e in b), limit=20)
+                odds_cache["at"] = time.monotonic()
+            except ClientError:
+                if odds_cache["items"] is None:
+                    return {"source": "polymarket", "items": [], "error": "Polymarket unavailable"}
+        return {"source": "polymarket", "items": odds_cache["items"][:limit]}
 
     # ── watchlist ────────────────────────────────────────────────────────────
     @router.get("/watchlist")

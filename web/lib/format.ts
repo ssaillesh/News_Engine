@@ -87,13 +87,35 @@ export function shortDate(ymd: string) {
 
 export type Tone = "up" | "down" | "flat";
 export const tone = (v: number | null | undefined): Tone => (!ok(v) || v === 0 ? "flat" : v > 0 ? "up" : "down");
-export const toneText: Record<Tone, string> = { up: "text-up", down: "text-down", flat: "text-muted" };
-export const toneBg: Record<Tone, string> = {
-  up: "bg-up-soft text-up",
-  down: "bg-down-soft text-down",
-  flat: "bg-surface-2 text-muted",
-};
+/** Terminal colour class for a signed value: "up", "dn" or "dim". */
+export const cls = (v: number | null | undefined) => ({ up: "up", down: "dn", flat: "dim" })[tone(v)];
 
 /** FinBERT compound → tone, with a dead zone so faint signals read as neutral. */
 export const sentimentTone = (compound: number | null | undefined): Tone =>
   !ok(compound) ? "flat" : compound > 0.15 ? "up" : compound < -0.15 ? "down" : "flat";
+
+/** Plain grouped number with fixed decimals: 48,920.40 */
+export function fixed(v: number | null | undefined, digits = 2) {
+  if (!ok(v)) return DASH;
+  return nf(`f${digits}`, { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(v);
+}
+
+/** Signed grouped number with a true minus: +1,987.80 / −612.18 */
+export function signed(v: number | null | undefined, digits = 2) {
+  if (!ok(v)) return DASH;
+  return (v > 0 ? "+" : v < 0 ? "−" : "") + fixed(Math.abs(v), digits);
+}
+
+/** Probability-point change: "+4 PTS", "−1 PT" */
+export function pts(v: number | null | undefined) {
+  if (!ok(v)) return DASH;
+  const r = Math.round(v);
+  const s = (r > 0 ? "+" : r < 0 ? "−" : "") + Math.abs(r);
+  return `${s} ${Math.abs(r) === 1 ? "PT" : "PTS"}`;
+}
+
+/** Compact without currency, upper-case suffix: 3.06T, 240B, 61.2M */
+export function big(v: number | null | undefined) {
+  if (!ok(v)) return DASH;
+  return nf("big", { notation: "compact", maximumFractionDigits: 2 }).format(v).toUpperCase();
+}

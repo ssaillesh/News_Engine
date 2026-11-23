@@ -27,6 +27,7 @@ if TYPE_CHECKING:
 FINNHUB_BASE = "https://finnhub.io/api/v1"
 POLYGON_BASE = "https://api.polygon.io"  # Massive; api.massive.com is equivalent
 YAHOO_BASE = "https://query1.finance.yahoo.com"
+POLYMARKET_BASE = "https://gamma-api.polymarket.com"
 
 # The fundamentals worth showing on a ticker page, out of Finnhub's ~130.
 METRIC_KEYS = (
@@ -345,3 +346,40 @@ class PolygonClient(BaseHttpClient):
             params={"adjusted": "true"},
         )
         return parse_grouped(resp.data, day)
+
+
+# ── Polymarket (prediction-market odds) ──────────────────────────────────────
+class PolymarketClient(BaseHttpClient):
+    """Polymarket's public Gamma API: open events by tag, busiest first. No key."""
+
+    def __init__(self, *, transport: httpx.AsyncBaseTransport | None = None, **kwargs: Any) -> None:
+        super().__init__(POLYMARKET_BASE, **kwargs)
+        _with_transport(self, transport, {})
+
+    @classmethod
+    def from_settings(
+        cls, settings: Settings, *, transport: httpx.AsyncBaseTransport | None = None
+    ) -> PolymarketClient:
+        return cls(
+            transport=transport,
+            user_agent=settings.user_agent,
+            timeout_s=min(settings.http_timeout_s, 10.0),
+            max_retries=min(settings.http_max_retries, 1),
+            backoff_base_s=settings.backoff_base_s,
+            backoff_cap_s=min(settings.backoff_cap_s, 4.0),
+        )
+
+    async def events(self, tag: str, *, limit: int = 12) -> list[dict[str, Any]]:
+        resp = await self.request_json(
+            "GET",
+            "/events",
+            params={
+                "tag_slug": tag,
+                "active": "true",
+                "closed": "false",
+                "order": "volume24hr",
+                "ascending": "false",
+                "limit": limit,
+            },
+        )
+        return [e for e in resp.data or [] if isinstance(e, dict)]

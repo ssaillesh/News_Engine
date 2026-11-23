@@ -1,123 +1,50 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { qs, useApi, type SecuritiesPage, type SecuritySort, type Sectors } from "@/lib/api";
-import { compact, dateTime, money } from "@/lib/format";
-import { buttonCls, Card, Change, Empty, ErrorBox, inputCls, Segmented, Skeleton } from "@/components/ui";
+import { qs, useApi, type ReturnsResponse, type SecuritiesPage, type SecuritySort, type Sectors } from "@/lib/api";
+import { big, cls, fixed, num, pct } from "@/lib/format";
+import { CROSS_ASSET, SECTOR_ETFS, shortSector } from "@/lib/sectors";
+import { Empty, heat, Pane, PaneError, SkRows, Tabs, Toolbar } from "@/components/term";
 
 const PAGE_SIZE = 50;
 const SORTS = ["ticker", "name", "price", "pct_change", "market_cap"] as const satisfies readonly SecuritySort[];
-const DEFAULT_SORT: SecuritySort = "market_cap";
+const DEFAULT_SORT: SecuritySort = "pct_change";
 type Order = "asc" | "desc";
 type Param = "scope" | "q" | "sector" | "sort" | "order" | "page";
 
-type Column = {
-  key: SecuritySort | "sector";
-  label: string;
-  numeric?: boolean;
-  sortable: boolean;
-  className?: string;
-};
-
-// The API sorts by every column except sector (it filters by it instead).
-const COLUMNS: Column[] = [
-  { key: "ticker", label: "Ticker", sortable: true, className: "w-28" },
-  { key: "name", label: "Name", sortable: true },
-  { key: "sector", label: "Sector", sortable: false, className: "hidden md:table-cell" },
-  { key: "price", label: "Price", numeric: true, sortable: true },
-  { key: "pct_change", label: "% Change", numeric: true, sortable: true },
-  { key: "market_cap", label: "Market cap", numeric: true, sortable: true },
-];
-
 const isSort = (v: string | null): v is SecuritySort => SORTS.includes(v as SecuritySort);
-// First click on a text column sorts A→Z; on a number column, largest first.
 const firstOrder = (key: SecuritySort): Order => (key === "ticker" || key === "name" ? "asc" : "desc");
 
-const selectCls = `${inputCls} w-auto min-w-0 pr-7`;
+const PERIODS = [
+  { value: "1D", label: "1D" },
+  { value: "5D", label: "5D" },
+  { value: "1M", label: "1M" },
+  { value: "YTD", label: "YTD" },
+] as const;
+type Period = (typeof PERIODS)[number]["value"];
 
-function SortIcon({ dir }: { dir: Order | null }) {
-  return (
-    <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden className={dir ? "text-accent" : "text-faint"}>
-      <path d="M2 4 L5 1 L8 4" fill="none" stroke="currentColor" strokeWidth="1.4" opacity={dir === "desc" ? 0.3 : 1} />
-      <path d="M2 6 L5 9 L8 6" fill="none" stroke="currentColor" strokeWidth="1.4" opacity={dir === "asc" ? 0.3 : 1} />
-    </svg>
-  );
-}
-
-function Header({
-  sort,
-  order,
-  onSort,
-}: {
-  sort: SecuritySort;
-  order: Order;
-  onSort: (key: SecuritySort) => void;
-}) {
-  return (
-    <thead className="border-b border-border text-xs text-muted">
-      <tr>
-        {COLUMNS.map((c) => {
-          const active = c.sortable && c.key === sort;
-          return (
-            <th
-              key={c.key}
-              scope="col"
-              aria-sort={active ? (order === "asc" ? "ascending" : "descending") : undefined}
-              className={`px-4 py-2.5 font-medium ${c.numeric ? "text-right" : "text-left"} ${c.className ?? ""}`}
-            >
-              {c.sortable ? (
-                <button
-                  type="button"
-                  onClick={() => onSort(c.key as SecuritySort)}
-                  className={`inline-flex items-center gap-1.5 hover:text-text ${c.numeric ? "flex-row-reverse" : ""} ${active ? "text-text" : ""}`}
-                >
-                  {c.label}
-                  <SortIcon dir={active ? order : null} />
-                </button>
-              ) : (
-                c.label
-              )}
-            </th>
-          );
-        })}
-      </tr>
-    </thead>
-  );
-}
-
-function SkeletonRows({ rows = 10 }: { rows?: number }) {
-  return (
-    <tbody>
-      {Array.from({ length: rows }, (_, i) => (
-        <tr key={i} className="border-b border-border last:border-0">
-          {COLUMNS.map((c) => (
-            <td key={c.key} className={`px-4 py-3 ${c.className ?? ""}`}>
-              <Skeleton className={`h-4 ${c.numeric ? "ml-auto w-16" : c.key === "name" ? "w-40" : "w-20"}`} />
-            </td>
-          ))}
-        </tr>
-      ))}
-    </tbody>
-  );
+function useQuotes(tickers: readonly string[]) {
+  const res = useApi<SecuritiesPage>(`/api/hub/securities${qs({ scope: "all", tickers: tickers.join(","), limit: 100 })}`);
+  return { ...res, map: new Map((res.data?.items ?? []).map((r) => [r.ticker, r])) };
 }
 
 export function MarketsSkeleton() {
   return (
-    <div className="space-y-5">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Markets</h1>
-        <Skeleton className="mt-2 h-4 w-56" />
-      </div>
-      <Card className="overflow-hidden">
-        <div className="h-[60px] border-b border-border" />
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[640px] text-sm">
-            <SkeletonRows />
-          </table>
-        </div>
-      </Card>
+    <div className="grid-term g-mkts">
+      <Pane title="Cross-asset">
+        <SkRows rows={8} />
+      </Pane>
+      <Pane title="Sector map · S&P 500">
+        <SkRows rows={6} h={50} />
+      </Pane>
+      <Pane title="Movers · core">
+        <SkRows rows={8} />
+      </Pane>
+      <Pane title="Screener" style={{ gridColumn: "span 3" }}>
+        <SkRows rows={10} />
+      </Pane>
     </div>
   );
 }
@@ -126,18 +53,8 @@ export function MarketsView() {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
-  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const searchBox = useRef<HTMLInputElement>(null);
 
-  const scope = params.get("scope") === "all" ? "all" : "core";
-  const q = params.get("q") ?? "";
   const sector = params.get("sector") ?? "";
-  const rawSort = params.get("sort");
-  const sort: SecuritySort = isSort(rawSort) ? rawSort : DEFAULT_SORT;
-  const order: Order = params.get("order") === "asc" || params.get("order") === "desc" ? (params.get("order") as Order) : firstOrder(sort);
-  const page = Math.max(1, Number.parseInt(params.get("page") ?? "1", 10) || 1);
-
-  /** Write params to the URL; any change other than paging returns to page 1. */
   const update = (changes: Partial<Record<Param, string>>) => {
     const next = new URLSearchParams(params.toString());
     for (const [k, v] of Object.entries(changes)) {
@@ -149,198 +66,331 @@ export function MarketsView() {
     router.replace(s ? `${pathname}?${s}` : pathname, { scroll: false });
   };
 
-  const onSort = (key: SecuritySort) => {
-    const nextOrder = key === sort ? (order === "asc" ? "desc" : "asc") : firstOrder(key);
-    // Keep the URL clean when it matches the default (market cap, largest first).
-    const isDefault = key === DEFAULT_SORT && nextOrder === firstOrder(DEFAULT_SORT);
-    update({
-      sort: isDefault ? "" : key,
-      order: nextOrder === firstOrder(key) ? "" : nextOrder,
-    });
-  };
-
-  const clearFilters = () => {
-    if (searchTimer.current) clearTimeout(searchTimer.current);
-    if (searchBox.current) searchBox.current.value = "";
-    update({ q: "", sector: "" });
-  };
-
-  const offset = (page - 1) * PAGE_SIZE;
-  const list = useApi<SecuritiesPage>(
-    `/api/hub/securities${qs({ scope, q, sector, sort, order, limit: PAGE_SIZE, offset })}`,
+  return (
+    <div className="grid-term g-mkts">
+      <CrossAsset />
+      <SectorMap selected={sector} onPick={(g) => update({ sector: g === sector ? "" : g })} />
+      <Movers />
+      <Screener params={params} update={update} />
+    </div>
   );
-  const sectors = useApi<Sectors>("/api/hub/sectors");
+}
 
+// ── cross-asset ───────────────────────────────────────────────────────────
+function CrossAsset() {
+  const quotes = useQuotes(CROSS_ASSET.map((c) => c.t));
+  const rows = CROSS_ASSET.filter((c) => !quotes.data || quotes.map.get(c.t)?.price != null);
+  return (
+    <Pane title="Cross-asset" right="DAY">
+      <div className="body">
+        {quotes.error && !quotes.data ? (
+          <PaneError error={quotes.error} onRetry={() => quotes.mutate()} />
+        ) : !quotes.data ? (
+          <SkRows rows={8} />
+        ) : (
+          rows.map((c) => {
+            const q = quotes.map.get(c.t);
+            return (
+              <Link key={c.t} href={`/ticker/${c.t}`} className="r m" style={{ fontSize: 13 }}>
+                <span style={{ width: 180, flexShrink: 0 }} className="trunc">
+                  <span className="amb">{c.t}</span> <span className="dim" style={{ fontFamily: "var(--font-archivo)" }}>{c.n}</span>
+                </span>
+                <span style={{ flex: 1, textAlign: "right" }}>{fixed(q?.price)}</span>
+                <span className={cls(q?.pct_change)} style={{ width: 68, textAlign: "right" }}>
+                  {pct(q?.pct_change)}
+                </span>
+              </Link>
+            );
+          })
+        )}
+      </div>
+    </Pane>
+  );
+}
+
+// ── sector map ────────────────────────────────────────────────────────────
+function SectorMap({ selected, onPick }: { selected: string; onPick: (gics: string) => void }) {
+  const [period, setPeriod] = useState<Period>("1D");
+  const etfs = SECTOR_ETFS.map((s) => s.etf);
+  const quotes = useQuotes(etfs);
+  const rets = useApi<ReturnsResponse>(period === "1D" ? null : `/api/hub/returns${qs({ tickers: etfs.join(",") })}`);
+  const counts = useApi<Sectors>("/api/hub/sectors");
+  const count = (g: string) => counts.data?.sectors.find((s) => s.sector === g)?.count;
+  const val = (etf: string) => {
+    if (period === "1D") return quotes.map.get(etf)?.pct_change;
+    const r = rets.data?.items[etf];
+    return period === "5D" ? r?.r5d : period === "1M" ? r?.r1m : r?.rytd;
+  };
+  const ready = period === "1D" ? Boolean(quotes.data) : Boolean(rets.data);
+  const scale = period === "1D" ? 2 : period === "5D" ? 4 : 8;
+  return (
+    <Pane title="Sector map · S&P 500" right={period}>
+      <Toolbar>
+        <Tabs label="Period" value={period} onChange={setPeriod} options={PERIODS} />
+        <span className="m dim" style={{ marginLeft: "auto", fontSize: 11 }}>
+          CLICK TO FILTER SCREENER
+        </span>
+      </Toolbar>
+      <div className="body" style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gridAutoRows: "minmax(60px, 1fr)", gap: 2, padding: 2, background: "var(--rule)" }}>
+        {SECTOR_ETFS.map((s) => {
+          const v = ready ? val(s.etf) : null;
+          const on = selected === s.gics;
+          return (
+            <button
+              key={s.etf}
+              type="button"
+              aria-pressed={on}
+              onClick={() => onPick(s.gics)}
+              style={{
+                ...heat(v, scale),
+                border: 0,
+                outline: on ? "2px solid var(--amb)" : undefined,
+                outlineOffset: -2,
+                color: "var(--ink)",
+                textAlign: "left",
+                padding: 8,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                cursor: "pointer",
+                font: "inherit",
+              }}
+            >
+              <span style={{ fontSize: 13, fontWeight: 500 }}>{s.name}</span>
+              <span className="m" style={{ fontWeight: 600, fontSize: 15 }}>
+                {ready ? pct(v) : ""}
+              </span>
+              <span className="m dim" style={{ fontSize: 10 }}>
+                {s.etf} · {count(s.gics) ?? "—"} STOCKS
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </Pane>
+  );
+}
+
+// ── movers ────────────────────────────────────────────────────────────────
+function Movers() {
+  const [mv, setMv] = useState<"GAINERS" | "LOSERS">("GAINERS");
+  const res = useApi<SecuritiesPage>(`/api/hub/securities${qs({ kind: "stock", sort: "pct_change", order: mv === "GAINERS" ? "desc" : "asc", limit: 15 })}`);
+  return (
+    <Pane title="Movers · core" right="DAY">
+      <Toolbar>
+        <Tabs
+          label="Movers"
+          value={mv}
+          onChange={setMv}
+          options={[
+            { value: "GAINERS", label: "GAINERS" },
+            { value: "LOSERS", label: "LOSERS" },
+          ]}
+        />
+      </Toolbar>
+      <div className="body">
+        {res.error && !res.data ? (
+          <PaneError error={res.error} onRetry={() => res.mutate()} />
+        ) : !res.data ? (
+          <SkRows rows={8} />
+        ) : (
+          res.data.items.map((x) => (
+            <Link key={x.ticker} href={`/ticker/${encodeURIComponent(x.ticker)}`} className="r m" style={{ fontSize: 13 }}>
+              <span style={{ fontWeight: 600, width: 52, flexShrink: 0 }}>{x.ticker}</span>
+              <span className="dim trunc" style={{ flex: 1, fontFamily: "var(--font-archivo)", fontSize: 12 }}>
+                {x.name}
+              </span>
+              <span className={cls(x.pct_change)} style={{ width: 66, textAlign: "right" }}>
+                {pct(x.pct_change)}
+              </span>
+            </Link>
+          ))
+        )}
+      </div>
+    </Pane>
+  );
+}
+
+// ── screener ──────────────────────────────────────────────────────────────
+type Col = { key: string; label: string; sort?: SecuritySort; left?: boolean };
+const COLS: Col[] = [
+  { key: "ticker", label: "TICKER", sort: "ticker", left: true },
+  { key: "name", label: "NAME", sort: "name", left: true },
+  { key: "sector", label: "SECTOR", left: true },
+  { key: "price", label: "PRICE", sort: "price" },
+  { key: "day", label: "DAY", sort: "pct_change" },
+  { key: "r5d", label: "5D" },
+  { key: "cap", label: "MKT CAP", sort: "market_cap" },
+  { key: "pe", label: "P/E" },
+  { key: "news", label: "NEWS 7D" },
+];
+
+function Screener({ params, update }: { params: URLSearchParams; update: (c: Partial<Record<Param, string>>) => void }) {
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const box = useRef<HTMLInputElement>(null);
+  const scope = params.get("scope") === "all" ? "all" : "core";
+  const q = params.get("q") ?? "";
+  const sector = params.get("sector") ?? "";
+  const rawSort = params.get("sort");
+  const sort: SecuritySort = isSort(rawSort) ? rawSort : DEFAULT_SORT;
+  const order: Order = params.get("order") === "asc" || params.get("order") === "desc" ? (params.get("order") as Order) : firstOrder(sort);
+  const page = Math.max(1, Number.parseInt(params.get("page") ?? "1", 10) || 1);
+  const offset = (page - 1) * PAGE_SIZE;
+
+  const list = useApi<SecuritiesPage>(`/api/hub/securities${qs({ scope, q, sector, sort, order, limit: PAGE_SIZE, offset })}`);
+  const sectors = useApi<Sectors>("/api/hub/sectors");
   const data = list.data;
   const total = data?.total ?? 0;
   const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  const filtered = Boolean(q || sector);
   const sectorList = sectors.data?.sectors ?? [];
-  // Keep a sector from the URL selectable even before (or without) the list.
-  const knownSector = !sector || sectorList.some((s) => s.sector === sector);
-  // With keepPreviousData the old page stays on screen while the next loads.
   const stale = list.isLoading && Boolean(data);
 
+  const onSort = (key: SecuritySort) => {
+    const nextOrder = key === sort ? (order === "asc" ? "desc" : "asc") : firstOrder(key);
+    const isDefault = key === DEFAULT_SORT && nextOrder === firstOrder(DEFAULT_SORT);
+    update({ sort: isDefault ? "" : key, order: nextOrder === firstOrder(key) ? "" : nextOrder });
+  };
+
   return (
-    <div className="space-y-5">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Markets</h1>
-          <p className="mt-1 text-sm text-muted">
-            {data
-              ? `${total.toLocaleString()} ${scope === "core" ? "core" : "listed"} ${total === 1 ? "security" : "securities"}${filtered ? " match" : ""}`
-              : " "}
-          </p>
-        </div>
-        <Segmented
+    <Pane title="Screener" right={data ? `${total.toLocaleString()} SYMBOLS` : ""} style={{ gridColumn: "span 3" }}>
+      <Toolbar>
+        <Tabs
           label="Universe"
           value={scope}
           onChange={(v) => update({ scope: v === "core" ? "" : v })}
           options={[
-            { value: "core", label: "Core" },
-            { value: "all", label: "All listed" },
+            { value: "core", label: "CORE" },
+            { value: "all", label: "ALL LISTED" },
           ]}
         />
-      </div>
-
-      <Card className="overflow-hidden">
-        <div className="flex flex-wrap items-end gap-3 border-b border-border px-4 py-3">
-          <label className="flex min-w-[12rem] flex-1 flex-col gap-1 text-xs text-muted sm:max-w-xs">
-            Search
-            <input
-              ref={searchBox}
-              type="search"
-              defaultValue={q}
-              placeholder="Ticker or company…"
-              maxLength={40}
-              className={inputCls}
-              onChange={(e) => {
-                const v = e.target.value.trim();
-                if (searchTimer.current) clearTimeout(searchTimer.current);
-                searchTimer.current = setTimeout(() => update({ q: v }), 300);
-              }}
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-xs text-muted">
-            Sector
-            <select aria-label="Sector" value={sector} onChange={(e) => update({ sector: e.target.value })} className={selectCls}>
-              <option value="">All sectors</option>
-              {!knownSector ? <option value={sector}>{sector}</option> : null}
-              {sectorList.map((s) => (
-                <option key={s.sector} value={s.sector}>
-                  {/* Counts are of core symbols, so they only describe the core view. */}
-                  {scope === "core" ? `${s.sector} (${s.count})` : s.sector}
-                </option>
-              ))}
-            </select>
-          </label>
-          {filtered ? (
-            <button type="button" onClick={clearFilters} className="pb-2 text-xs font-medium text-accent hover:underline">
-              Clear filters
-            </button>
-          ) : null}
-        </div>
-
+        <label htmlFor="scr-q" className="m dim" style={{ fontSize: 11, marginLeft: 8 }}>
+          FIND
+        </label>
+        <input
+          id="scr-q"
+          ref={box}
+          className="fld"
+          type="search"
+          defaultValue={q}
+          maxLength={40}
+          placeholder="TICKER OR NAME"
+          style={{ width: 160 }}
+          onChange={(e) => {
+            const v = e.target.value.trim();
+            if (timer.current) clearTimeout(timer.current);
+            timer.current = setTimeout(() => update({ q: v }), 300);
+          }}
+        />
+        <label htmlFor="scr-sector" className="m dim" style={{ fontSize: 11, marginLeft: 8 }}>
+          SECTOR
+        </label>
+        <select id="scr-sector" className="sel" value={sector} onChange={(e) => update({ sector: e.target.value })}>
+          <option value="">All sectors</option>
+          {sector && !sectorList.some((s) => s.sector === sector) ? <option value={sector}>{sector}</option> : null}
+          {sectorList.map((s) => (
+            <option key={s.sector} value={s.sector}>
+              {scope === "core" ? `${s.sector} (${s.count})` : s.sector}
+            </option>
+          ))}
+        </select>
+        {q || sector ? (
+          <button
+            type="button"
+            className="btn"
+            onClick={() => {
+              if (timer.current) clearTimeout(timer.current);
+              if (box.current) box.current.value = "";
+              update({ q: "", sector: "" });
+            }}
+          >
+            CLEAR
+          </button>
+        ) : null}
+        <span className="m dim" style={{ marginLeft: "auto", fontSize: 11 }}>
+          CLICK A COLUMN TO SORT
+        </span>
+      </Toolbar>
+      <div className="body">
         {list.error && !data ? (
-          <ErrorBox error={list.error} onRetry={() => list.mutate()} />
+          <PaneError error={list.error} onRetry={() => list.mutate()} />
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] text-sm">
-              <caption className="sr-only">
-                Securities sorted by {COLUMNS.find((c) => c.key === sort)?.label}, {order === "asc" ? "ascending" : "descending"}
-              </caption>
-              <Header sort={sort} order={order} onSort={onSort} />
-              {!data ? (
-                <SkeletonRows />
-              ) : (
-                <tbody className={`transition-opacity ${stale ? "opacity-50" : ""}`} aria-busy={stale}>
-                  {data.items.map((s) => (
-                    <tr key={s.ticker} className="relative border-b border-border last:border-0 hover:bg-surface-2">
-                      <td className="px-4 py-2.5">
-                        {/* Stretched link: the whole row opens the ticker page. */}
-                        <Link
-                          href={`/ticker/${encodeURIComponent(s.ticker)}`}
-                          className="num font-semibold after:absolute after:inset-0 after:content-[''] hover:text-accent focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-accent"
-                        >
-                          {s.ticker}
+          <table className="tbl" style={{ minWidth: 820 }}>
+            <caption className="sr-only">Securities sorted by {COLS.find((c) => c.sort === sort)?.label}, {order === "asc" ? "ascending" : "descending"}</caption>
+            <thead>
+              <tr>
+                {COLS.map((c) => {
+                  const on = c.sort === sort;
+                  return (
+                    <th key={c.key} scope="col" className={c.left ? "l" : ""} aria-sort={on ? (order === "asc" ? "ascending" : "descending") : undefined}>
+                      {c.sort ? (
+                        <button type="button" className={on ? "on" : ""} onClick={() => onSort(c.sort!)}>
+                          {c.label}
+                          {on ? (order === "asc" ? " ▲" : " ▼") : ""}
+                        </button>
+                      ) : (
+                        c.label
+                      )}
+                    </th>
+                  );
+                })}
+              </tr>
+            </thead>
+            <tbody style={{ opacity: stale ? 0.5 : 1 }} aria-busy={stale}>
+              {!data
+                ? Array.from({ length: 10 }, (_, i) => (
+                    <tr key={i}>
+                      <td colSpan={COLS.length} className="l">
+                        <div className="sk" style={{ height: 14, width: `${50 + ((i * 29) % 45)}%` }} />
+                      </td>
+                    </tr>
+                  ))
+                : data.items.map((x) => (
+                    <tr key={x.ticker} className="lk">
+                      <td className="m l" style={{ fontWeight: 600 }}>
+                        <Link href={`/ticker/${encodeURIComponent(x.ticker)}`} style={{ color: "var(--amb)" }}>
+                          {x.ticker}
                         </Link>
                       </td>
-                      <td className="max-w-[22rem] px-4 py-2.5">
-                        <div className="flex min-w-0 items-center gap-2">
-                          <span className="truncate">{s.name ?? "—"}</span>
-                          {s.type && s.type !== "Common Stock" ? (
-                            <span className="shrink-0 rounded border border-border px-1 py-px text-[10px] font-medium text-muted">{s.type}</span>
-                          ) : null}
-                        </div>
+                      <td className="l trunc" style={{ maxWidth: 260 }}>
+                        {x.name ?? "—"}
+                        {x.type && x.type !== "Common Stock" ? <span className="m dim" style={{ fontSize: 10, marginLeft: 6 }}>{x.type === "ETP" ? "ETF" : x.type.toUpperCase()}</span> : null}
                       </td>
-                      <td className="hidden px-4 py-2.5 text-muted md:table-cell">{s.sector ?? "—"}</td>
-                      <td className="num px-4 py-2.5 text-right" title={s.quote_at ? `Quote as of ${dateTime(s.quote_at)}` : "No quote yet"}>
-                        {money(s.price)}
-                      </td>
-                      <td className="px-4 py-2.5 text-right">
-                        <Change value={s.pct_change} />
-                      </td>
-                      <td className="num px-4 py-2.5 text-right">{compact(s.market_cap, "USD")}</td>
+                      <td className="l dim">{shortSector(x.sector)}</td>
+                      <td className="m">{fixed(x.price)}</td>
+                      <td className={`m ${cls(x.pct_change)}`}>{pct(x.pct_change)}</td>
+                      <td className={`m ${cls(x.r5d)}`}>{pct(x.r5d, 1)}</td>
+                      <td className="m">{big(x.market_cap)}</td>
+                      <td className="m">{num(x.pe, 1)}</td>
+                      <td className="m">{x.news_7d || <span className="dim">0</span>}</td>
                     </tr>
                   ))}
-                </tbody>
-              )}
-            </table>
-
-            {data && data.items.length === 0 ? (
-              total > 0 ? (
-                <Empty title="This page is past the end of the list.">
-                  <button type="button" onClick={() => update({ page: pages > 1 ? String(pages) : "" })} className="font-medium text-accent hover:underline">
-                    Go to page {pages}
-                  </button>
-                </Empty>
-              ) : filtered ? (
-                <Empty title="No securities match.">
-                  {scope === "core" ? (
-                    <>
-                      Try{" "}
-                      <button type="button" onClick={() => update({ scope: "all" })} className="font-medium text-accent hover:underline">
-                        all listed securities
-                      </button>{" "}
-                      or clear the filters.
-                    </>
-                  ) : (
-                    "Try a different search or sector."
-                  )}
-                </Empty>
-              ) : (
-                <Empty title="The universe is empty.">
-                  Run <code className="num">archiver universe-sync</code> to load listed securities.
-                </Empty>
-              )
-            ) : null}
-          </div>
+            </tbody>
+          </table>
         )}
-
-        {data && total > PAGE_SIZE ? (
-          <nav aria-label="Pagination" className="flex flex-wrap items-center justify-between gap-3 border-t border-border px-4 py-3 text-xs text-muted">
-            <span className="num">
-              {Math.min(offset + 1, total).toLocaleString()}–{Math.min(offset + PAGE_SIZE, total).toLocaleString()} of {total.toLocaleString()}
-            </span>
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                disabled={page <= 1}
-                onClick={() => update({ page: page - 1 > 1 ? String(page - 1) : "" })}
-                className={buttonCls.secondary}
-              >
-                Previous
-              </button>
-              <span className="num px-1">
-                Page {page} of {pages}
-              </span>
-              <button type="button" disabled={page >= pages} onClick={() => update({ page: String(page + 1) })} className={buttonCls.secondary}>
-                Next
-              </button>
-            </div>
-          </nav>
+        {data && !data.items.length ? (
+          <Empty>
+            {total > 0 ? "THIS PAGE IS PAST THE END OF THE LIST." : q || sector ? "NO SECURITIES MATCH. TRY ALL LISTED OR CLEAR THE FILTERS." : "THE UNIVERSE IS EMPTY. RUN `archiver universe-sync`."}
+          </Empty>
         ) : null}
-      </Card>
-    </div>
+      </div>
+      {data && total > PAGE_SIZE ? (
+        <nav aria-label="Pagination" className="r m" style={{ borderTop: "1px solid var(--rule)", borderBottom: 0, fontSize: 11 }}>
+          <span className="dim">
+            {Math.min(offset + 1, total).toLocaleString()}–{Math.min(offset + PAGE_SIZE, total).toLocaleString()} OF {total.toLocaleString()}
+          </span>
+          <span style={{ display: "flex", gap: 6, alignItems: "center" }}>
+            <button type="button" className="btn" disabled={page <= 1} onClick={() => update({ page: page - 1 > 1 ? String(page - 1) : "" })}>
+              ‹ PREV
+            </button>
+            <span>
+              PAGE {page} / {pages}
+            </span>
+            <button type="button" className="btn" disabled={page >= pages} onClick={() => update({ page: String(page + 1) })}>
+              NEXT ›
+            </button>
+          </span>
+        </nav>
+      ) : null}
+    </Pane>
   );
 }

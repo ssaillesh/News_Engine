@@ -1,4 +1,5 @@
 import useSWR, { mutate as globalMutate, type SWRConfiguration } from "swr";
+import { parseUtc } from "./format";
 
 // ── types (mirror src/archiver/web/hub.py and app.py serializers) ───────────
 export type Quote = {
@@ -29,6 +30,8 @@ export type Security = {
   currency?: string | null;
   country?: string | null;
   industry?: string | null;
+  sector?: string | null;
+  security_type?: string | null;
   logo_url?: string | null;
   web_url?: string | null;
   ipo_date?: string | null;
@@ -79,7 +82,13 @@ export type Impact = {
   score: number;
   tier: string;
   stance: string | null;
+  stance_confidence?: number | null;
+  authority: number;
   authority_label: string | null;
+  topic: number;
+  actionability: number;
+  corroboration: number | null;
+  market_sensitivity: number | null;
   reasons: string[];
 };
 
@@ -102,7 +111,7 @@ export type NewsItem = {
   sectors: { key: string; label: string; etf: string | null; tickers: string[]; matched_term: string }[];
 };
 
-export type NewsPage = { items: NewsItem[] };
+export type NewsPage = { items: NewsItem[]; total?: number };
 
 export type Position = {
   ticker: string;
@@ -159,10 +168,40 @@ export type SecurityRow = {
   pct_change: number | null;
   market_cap: number | null;
   quote_at: string | null;
+  pe: number | null;
+  r5d: number | null;
+  news_7d: number;
 };
 export type SecuritiesPage = { total: number; items: SecurityRow[] };
 export type SecuritySort = "ticker" | "name" | "price" | "pct_change" | "market_cap";
 export type Sectors = { sectors: { sector: string; count: number }[] };
+
+/** GET /api/hub/returns: percent returns from stored daily bars. */
+export type PeriodReturns = {
+  date: string | null;
+  close: number | null;
+  r1d: number | null;
+  r5d: number | null;
+  r1m: number | null;
+  rytd: number | null;
+};
+export type ReturnsResponse = { items: Record<string, PeriodReturns> };
+
+/** GET /api/hub/reactions: moves after each timestamp, percent from the prior close. */
+export type Move = { d1: number | null; d5: number | null };
+export type ReactionsResponse = {
+  benchmark: string;
+  events: { at: string; session: string | null; moves: Record<string, Move> }[];
+};
+
+export type Odds = {
+  question: string;
+  probability: number;
+  change_1d: number | null;
+  volume_24h: number;
+  url: string | null;
+};
+export type OddsResponse = { source: string; items: Odds[]; error?: string };
 
 export type Facet = { key: string; label?: string; count: number; etf?: string };
 export type Facets = {
@@ -240,3 +279,27 @@ export const qs = (params: Record<string, string | number | null | undefined>) =
   const s = sp.toString();
   return s ? `?${s}` : "";
 };
+
+/** Key for /api/hub/reactions, or null when there is nothing to ask about. */
+export function reactionsKey(at: (string | null | undefined)[], tickers: string[], benchmark = "SPY") {
+  const stamps = [...new Set(at.filter((a): a is string => Boolean(a)))];
+  if (!stamps.length) return null;
+  const sp = new URLSearchParams();
+  for (const a of stamps) sp.append("at", a);
+  sp.set("tickers", tickers.join(",") || benchmark);
+  sp.set("benchmark", benchmark);
+  return `/api/hub/reactions?${sp.toString()}`;
+}
+
+/** `(at, ticker) => Move` over a reactions response, matching timestamps by instant. */
+export function movesLookup(data: ReactionsResponse | undefined) {
+  const m = new Map<number, Record<string, Move>>();
+  for (const e of data?.events ?? []) {
+    const t = parseUtc(e.at)?.getTime();
+    if (t !== undefined) m.set(t, e.moves);
+  }
+  return (at: string | null | undefined, ticker: string): Move | undefined => {
+    const t = parseUtc(at)?.getTime();
+    return t === undefined ? undefined : m.get(t)?.[ticker];
+  };
+}

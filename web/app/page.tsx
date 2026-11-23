@@ -1,5 +1,5 @@
-import { Dashboard } from "./Dashboard";
+import { TodayView } from "./TodayView";
 
 export default function Page() {
-  return <Dashboard />;
+  return <TodayView />;
 }

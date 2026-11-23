@@ -6,15 +6,22 @@ export const metadata: Metadata = { title: "Sign in" };
 
 export default function Page() {
   return (
-    <div className="grid min-h-[60vh] place-items-center">
-      <div className="w-full max-w-sm rounded-xl border border-border bg-surface p-6">
-        <h1 className="text-lg font-semibold tracking-tight">Sign in</h1>
-        <p className="mt-1 text-sm text-muted">This hub is private. Enter the site password to continue.</p>
+    <div style={{ flex: 1, display: "grid", placeItems: "center", padding: 16 }}>
+      <section className="pane" style={{ width: "100%", maxWidth: 380, border: "1px solid var(--rule)" }} aria-labelledby="signin">
+        <div className="tb">
+          <h1 id="signin" style={{ margin: 0, font: "inherit" }}>
+            Sign in
+          </h1>
+          <span>PRIVATE</span>
+        </div>
+        <p className="dim" style={{ margin: 0, padding: "12px 12px 0", fontSize: 13 }}>
+          This hub is private. Enter the site password to continue.
+        </p>
         {/* ?next and ?error are request-time data, so they are read behind a boundary. */}
         <Suspense fallback={<LoginForm next="/" error={false} />}>
           <LoginFromUrl />
         </Suspense>
-      </div>
+      </section>
     </div>
   );
 }
