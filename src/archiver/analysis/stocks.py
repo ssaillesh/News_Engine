@@ -19,7 +19,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import select
 
 from archiver.reference.tickers import find_tickers
-from archiver.storage.models import Status
+from archiver.storage.models import Status, StockMention
 from archiver.storage.repositories import StockMentionRepository
 
 if TYPE_CHECKING:
@@ -37,6 +37,9 @@ class MentionReport:
     scanned: int = 0
     mentions: int = 0
     ticker_counts: dict[str, int] = field(default_factory=dict)
+    # Rows actually written / deleted this run (the diff against what was stored).
+    added: int = 0
+    removed: int = 0
 
     def record(self, ticker: str) -> None:
         self.mentions += 1
@@ -51,30 +54,67 @@ async def detect_mentions(
 ) -> MentionReport:
     """Detect company mentions across the selected sources and persist them.
 
-    Idempotent: each status's mentions are cleared and rewritten, so a status
-    whose text changed (a company added or removed) ends up correct rather than
-    accumulating stale rows. Cheap enough to just re-run over everything.
+    Idempotent: the stored mentions for the scanned statuses end up exactly equal
+    to what the matcher finds now, so a status whose text changed (a company
+    added or removed) is corrected rather than accumulating stale rows.
+
+    Matching runs in memory and only the *difference* against what is stored is
+    written, in one transaction. Rewriting every status in its own transaction
+    cost several round trips per row — tens of thousands against a remote
+    Postgres — which outran the scheduled job's timeout and stalled every step
+    after it.
     """
     report = MentionReport()
 
-    stmt = select(Status).order_by(Status.created_at.desc())
+    # Only the two columns matching needs: full rows drag `raw`/`content_html`.
+    stmt = select(Status.id, Status.content_text).order_by(Status.created_at.desc())
     if sources:
         stmt = stmt.where(Status.source.in_(list(sources)))
     if limit is not None:
         stmt = stmt.limit(limit)
 
     async with db.session() as session:
-        statuses = list((await session.scalars(stmt)).all())
+        rows = (await session.execute(stmt)).all()
 
-    for status in statuses:
+    wanted: dict[tuple[str, str], str] = {}
+    for status_id, text in rows:
         report.scanned += 1
-        hits = find_tickers(status.content_text or "")
-        async with db.session() as session, session.begin():
-            repo = StockMentionRepository(session, db.dialect)
-            await repo.clear_for_status(status.id)
-            for ticker, alias in hits.items():
-                await repo.upsert(
-                    {"status_id": status.id, "ticker": ticker, "alias": alias}
+        for ticker, alias in find_tickers(text or "").items():
+            wanted[(status_id, ticker)] = alias
+            report.record(ticker)
+    if not rows:
+        return report
+
+    scanned_ids = [r[0] for r in rows]
+    async with db.session() as session, session.begin():
+        stored: dict[tuple[str, str], str | None] = {}
+        for chunk in _chunks(scanned_ids):
+            result = await session.execute(
+                select(StockMention.status_id, StockMention.ticker, StockMention.alias).where(
+                    StockMention.status_id.in_(chunk)
                 )
-                report.record(ticker)
+            )
+            stored.update({(sid, t): alias for sid, t, alias in result})
+
+        # A changed alias is rewritten too, so the audit column stays truthful.
+        stale = [k for k, alias in stored.items() if wanted.get(k, _GONE) != alias]
+        fresh = [k for k, alias in wanted.items() if stored.get(k, _GONE) != alias]
+
+        repo = StockMentionRepository(session, db.dialect)
+        for status_id, ticker in stale:
+            await repo.delete(status_id, ticker)
+        if fresh:
+            await repo.insert_many(
+                [{"status_id": s, "ticker": t, "alias": wanted[(s, t)]} for s, t in fresh]
+            )
+    report.added = len(fresh)
+    report.removed = len(stale)
     return report
+
+
+_GONE = object()  # sentinel: "no row", distinct from a stored NULL alias
+
+
+def _chunks(items: Sequence[str], size: int = 1000) -> list[Sequence[str]]:
+    """Split ``items`` so an IN (...) list stays well under driver parameter caps."""
+    return [items[i : i + size] for i in range(0, len(items), size)]

@@ -19,7 +19,7 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
-from sqlalchemy import func, or_, select
+from sqlalchemy import and_, func, or_, select
 from sqlalchemy.orm import selectinload
 
 from archiver.analysis.signals import (
@@ -33,7 +33,7 @@ from archiver.analysis.signals import (
 from archiver.reference.entities import find_entities
 from archiver.reference.sectors import detect_stance, find_sectors
 from archiver.reference.topics import find_topics, topic_weight
-from archiver.storage.models import Status, StatusImpact, StockMention
+from archiver.storage.models import Status, StatusImpact, StatusSentiment, StockMention
 from archiver.storage.repositories import (
     StatusEntityRepository,
     StatusImpactRepository,
@@ -114,13 +114,25 @@ async def classify_statuses(
     if sources:
         stmt = stmt.where(Status.source.in_(list(sources)))
     if not reclassify:
-        # One query covers "never classified", "text changed since", and
-        # "scored under an older weight set".
-        stmt = stmt.outerjoin(StatusImpact).where(
-            or_(
-                StatusImpact.status_id.is_(None),
-                StatusImpact.weights_version != WEIGHTS_VERSION,
-                StatusImpact.scored_content_hash.is_distinct_from(Status.content_hash),
+        # One query covers "never classified", "text changed since", "scored
+        # under an older weight set", and "sentiment arrived (or was re-scored)
+        # after the impact was computed" — market sensitivity folds in the
+        # FinBERT compound, and the sentiment pass usually runs after this one.
+        # Sentiment only moves the score when a company or sector was found
+        # (market_sensitivity > 0), so items without one are not revisited.
+        stmt = (
+            stmt.outerjoin(StatusImpact)
+            .outerjoin(StatusSentiment, StatusSentiment.status_id == Status.id)
+            .where(
+                or_(
+                    StatusImpact.status_id.is_(None),
+                    StatusImpact.weights_version != WEIGHTS_VERSION,
+                    StatusImpact.scored_content_hash.is_distinct_from(Status.content_hash),
+                    and_(
+                        StatusSentiment.scored_at > StatusImpact.scored_at,
+                        StatusImpact.market_sensitivity > 0,
+                    ),
+                )
             )
         )
     if limit is not None:

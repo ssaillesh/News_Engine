@@ -10,7 +10,7 @@ not clobbering a component another pass owns.
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 import pytest
 
@@ -40,6 +40,7 @@ from archiver.storage.repositories import (
     AccountRepository,
     StatusImpactRepository,
     StatusRepository,
+    StatusSentimentRepository,
 )
 
 ACCOUNT = {"id": "news:acct", "username": "TrumpNews"}
@@ -210,6 +211,37 @@ async def test_is_incremental_by_default(db):
     # Nothing changed, so a second run visits nothing.
     assert (await classify_statuses(db)).scanned == 0
     assert (await classify_statuses(db, reclassify=True)).scanned == 1
+
+
+async def test_sentiment_arriving_later_rescores_impact(db):
+    """Market sensitivity folds in FinBERT, which usually runs after this pass.
+
+    The item must be revisited once its reading lands, and only once.
+    """
+    await _add_status(db, "news:1", "Tariffs on steel")
+    await classify_statuses(db)
+    first = await _impact(db, "news:1")
+    before = first.market_sensitivity
+
+    async with db.session() as session, session.begin():
+        await StatusSentimentRepository(session, db.dialect).upsert(
+            {
+                "status_id": "news:1",
+                "model": "ProsusAI/finbert",
+                "label": "negative",
+                "score": 0.9,
+                "positive": 0.05,
+                "negative": 0.9,
+                "neutral": 0.05,
+                "compound": -0.85,
+                "scored_content_hash": "hash-of-Tariffs on steel",
+                "scored_at": first.scored_at + timedelta(milliseconds=1),
+            }
+        )
+
+    assert (await classify_statuses(db)).scanned == 1
+    assert (await _impact(db, "news:1")).market_sensitivity > before
+    assert (await classify_statuses(db)).scanned == 0
 
 
 async def test_rerun_preserves_components_owned_by_later_passes(db):

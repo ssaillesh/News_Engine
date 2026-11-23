@@ -276,6 +276,27 @@ class StockMentionRepository(_Repo):
             delete(StockMention).where(StockMention.status_id == status_id)
         )
 
+    async def delete(self, status_id: str, ticker: str) -> None:
+        """Drop one (status, company) mention."""
+        from sqlalchemy import delete
+
+        await self.session.execute(
+            delete(StockMention).where(
+                StockMention.status_id == status_id, StockMention.ticker == ticker
+            )
+        )
+
+    async def insert_many(self, rows: Sequence[Mapping[str, Any]]) -> None:
+        """Insert many mentions in one executemany; existing keys are left alone."""
+        if not rows:
+            return
+        now = utcnow()
+        payload = [{"first_seen_at": now, **r} for r in rows]
+        stmt = _insert_for(self.dialect)(StockMention.__table__).on_conflict_do_nothing(
+            index_elements=["status_id", "ticker"]
+        )
+        await self.session.execute(stmt, payload)
+
 
 class StatusTopicRepository(_Repo):
     """Derived topic hits — idempotent on (status_id, topic)."""

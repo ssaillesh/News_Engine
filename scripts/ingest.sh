@@ -36,6 +36,10 @@ trap 'rmdir "$LOCK" 2>/dev/null' EXIT
   # companies, sectors, topics, stance and impact score. All incremental.
   "$BIN/archiver" backfill-federal-register-text --limit 50
   "$BIN/archiver" detect-stocks
+  # FinBERT before classify: the impact score's market sensitivity folds in the
+  # sentiment compound. Incremental, so it only scores what this run brought in
+  # (the GitHub "Sentiment & summaries" job stays the backstop).
+  "$BIN/archiver" score-sentiment
   "$BIN/archiver" classify
   echo "===== $(date -u +%FT%TZ) done ====="
 } >>"$LOG" 2>&1

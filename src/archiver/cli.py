@@ -434,7 +434,8 @@ def detect_stocks_cmd(
     report = asyncio.run(_run())
     console.print(
         f"[green]✓[/] scanned {report.scanned} item(s); "
-        f"found {report.mentions} mention(s) of {len(report.ticker_counts)} company(ies)"
+        f"found {report.mentions} mention(s) of {len(report.ticker_counts)} company(ies) "
+        f"(+{report.added} / −{report.removed} stored)"
     )
     if report.ticker_counts:
         table = Table(title="Watchlist (companies Trump mentioned)")

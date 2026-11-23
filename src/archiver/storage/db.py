@@ -24,6 +24,14 @@ from sqlalchemy.ext.asyncio import (
 from archiver.storage.models import Base
 from archiver.storage.url import to_async_url
 
+_PG_CONNECT_ARGS: dict[str, Any] = {
+    "connect_timeout": 15,
+    "keepalives": 1,
+    "keepalives_idle": 30,
+    "keepalives_interval": 10,
+    "keepalives_count": 3,
+}
+
 
 def _install_sqlite_fk_pragma(engine: AsyncEngine) -> None:
     if engine.sync_engine.dialect.name != "sqlite":
@@ -49,9 +57,14 @@ class Database:
         # Providers hand out driver-less postgresql:// URLs; normalize here so
         # the CLI, the web app, and the serverless handler all accept one secret.
         self.url = to_async_url(url)
-        self.engine: AsyncEngine = create_async_engine(
-            self.url, echo=echo, **(engine_kwargs or {})
-        )
+        kwargs = dict(engine_kwargs or {})
+        if self.url.startswith("postgresql"):
+            # libpq waits forever on a connection the server or a NAT silently
+            # dropped (e.g. a serverless Postgres suspending): a scheduled job then
+            # hangs for hours and blocks every later run. Bound the connect and
+            # let TCP keepalives detect a dead peer within about a minute.
+            kwargs["connect_args"] = {**_PG_CONNECT_ARGS, **kwargs.get("connect_args", {})}
+        self.engine: AsyncEngine = create_async_engine(self.url, echo=echo, **kwargs)
         _install_sqlite_fk_pragma(self.engine)
         self.dialect: str = self.engine.sync_engine.dialect.name
         self.session_factory: async_sessionmaker[AsyncSession] = async_sessionmaker(
