@@ -745,8 +745,16 @@ class Security(Base):
     metrics: Mapped[dict[str, Any] | None] = mapped_column(JSONType)
     recommendation: Mapped[dict[str, Any] | None] = mapped_column(JSONType)
     last_error: Mapped[str | None] = mapped_column(String)
+    # Universe: every US-listed stock/ETF is a row; "core" ones (S&P 500, large
+    # Nasdaq names, major ETFs) also get daily price history.
+    security_type: Mapped[str | None] = mapped_column(String(32))
+    sector: Mapped[str | None] = mapped_column(String(64))
+    tags: Mapped[list[str] | None] = mapped_column(JSONType)
+    is_core: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     profile_refreshed_at: Mapped[datetime | None] = mapped_column(_TS)
     refreshed_at: Mapped[datetime] = mapped_column(_TS, nullable=False, default=utcnow)
+
+    __table_args__ = (Index("ix_securities_is_core", "is_core"),)
 
 
 class PriceBar(Base):

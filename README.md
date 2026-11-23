@@ -176,6 +176,23 @@ archiver serve                     # API docs at /api/docs, routes under /api/hu
 | `GET/POST/PATCH/DELETE /api/hub/holdings` | position lots (shares, average cost) |
 | `GET /api/hub/portfolio` | positions rolled up by ticker: value, P&L, day change, weights |
 
+### Whole-market universe
+
+Every US-listed stock and ETF (~12k symbols, OTC excluded) is loaded into
+`securities` so search and browsing cover the market; opening any of them
+fetches its data on demand. About 550 **core** symbols, the S&P 500 (with GICS
+sectors), large Nasdaq names outside it and the major ETFs, also keep 5 years
+of daily prices, updated each trading day.
+
+```bash
+archiver universe-sync                 # weekly: symbols + core membership (1 Finnhub call)
+archiver universe-prices --backfill 600   # first run: 5y history for core (~10 min, Yahoo)
+archiver universe-prices               # daily: new trading days for all core (POLYGON_API_KEY)
+```
+
+`GET /api/hub/securities?scope=core|all&sector=&q=&sort=pct_change` browses it;
+`GET /api/hub/sectors` lists sectors with counts.
+
 Writes need the `X-Hub-Token` header whenever `HUB_WRITE_TOKEN` is set. The
 scheduled ingest workflow runs `hub-refresh` when the `FINNHUB_API_KEY` secret
 exists.

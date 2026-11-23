@@ -193,6 +193,13 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
                         (Security.ticker.like(f"{needle}%"))
                         | (func.upper(Security.name).like(f"%{needle}%"))
                     )
+                    # Exact ticker first, then core names, then shortest tickers.
+                    .order_by(
+                        (Security.ticker == needle).desc(),
+                        Security.is_core.desc(),
+                        func.length(Security.ticker),
+                        Security.ticker,
+                    )
                     .limit(10)
                 )
             ).all()
@@ -206,6 +213,69 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
             have = {r["ticker"] for r in results}
             results += [r for r in remote if r["ticker"] not in have][: 10 - len(results)]
         return {"results": results}
+
+    @router.get("/securities")
+    async def list_securities(
+        scope: str = Query("core", pattern="^(core|all)$"),
+        q: str | None = Query(None, max_length=40),
+        sector: str | None = Query(None, max_length=64),
+        sort: str = Query("market_cap", pattern="^(ticker|name|price|pct_change|market_cap)$"),
+        order: str = Query("desc", pattern="^(asc|desc)$"),
+        limit: int = Query(50, ge=1, le=200),
+        offset: int = Query(0, ge=0),
+    ) -> dict[str, Any]:
+        """Browse the universe: core symbols by default, every listed one with scope=all."""
+        stmt = select(Security)
+        if scope == "core":
+            stmt = stmt.where(Security.is_core.is_(True))
+        if q:
+            needle = q.strip().upper()
+            stmt = stmt.where(
+                Security.ticker.like(f"{needle}%") | func.upper(Security.name).like(f"%{needle}%")
+            )
+        if sector:
+            stmt = stmt.where(Security.sector == sector)
+        column = getattr(Security, sort)
+        ordered = column.desc() if order == "desc" else column.asc()
+        async with db.session() as session:
+            total = await session.scalar(select(func.count()).select_from(stmt.subquery()))
+            rows = (
+                await session.scalars(
+                    stmt.order_by(ordered.nulls_last(), Security.ticker).limit(limit).offset(offset)
+                )
+            ).all()
+        return {
+            "total": total or 0,
+            "items": [
+                {
+                    "ticker": s.ticker,
+                    "name": s.name,
+                    "sector": s.sector,
+                    "type": s.security_type,
+                    "tags": s.tags or [],
+                    "price": s.price,
+                    "change": s.change,
+                    "pct_change": s.pct_change,
+                    "market_cap": s.market_cap,
+                    "quote_at": s.quote_at.isoformat() if s.quote_at else None,
+                }
+                for s in rows
+            ],
+        }
+
+    @router.get("/sectors")
+    async def sectors() -> dict[str, Any]:
+        """Core symbols per sector, for the browse page's filter."""
+        async with db.session() as session:
+            rows = (
+                await session.execute(
+                    select(Security.sector, func.count())
+                    .where(Security.is_core.is_(True), Security.sector.is_not(None))
+                    .group_by(Security.sector)
+                    .order_by(func.count().desc())
+                )
+            ).all()
+        return {"sectors": [{"sector": s, "count": n} for s, n in rows]}
 
     @router.get("/securities/{ticker}")
     async def security(

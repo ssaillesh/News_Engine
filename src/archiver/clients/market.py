@@ -25,6 +25,7 @@ if TYPE_CHECKING:
     from archiver.config.settings import Settings
 
 FINNHUB_BASE = "https://finnhub.io/api/v1"
+POLYGON_BASE = "https://api.polygon.io"  # Massive; api.massive.com is equivalent
 YAHOO_BASE = "https://query1.finance.yahoo.com"
 
 # The fundamentals worth showing on a ticker page, out of Finnhub's ~130.
@@ -188,6 +189,10 @@ class FinnhubClient(BaseHttpClient):
         )
         return list(rows or [])
 
+    async def symbols(self, exchange: str = "US") -> list[dict[str, Any]]:
+        """Every listed symbol on an exchange group (~30k for US) in one call."""
+        return list(await self._get("/stock/symbol", exchange=exchange) or [])
+
     async def search(self, query: str, *, limit: int = 10) -> list[dict[str, str]]:
         data = await self._get("/search", q=query) or {}
         out = []
@@ -272,9 +277,71 @@ class YahooChartClient(BaseHttpClient):
     async def daily_bars(self, ticker: str, *, range_: str = "5y") -> list[Bar]:
         if range_ not in YAHOO_RANGES:
             raise ValueError(f"range must be one of {YAHOO_RANGES}")
+        # Yahoo writes share classes with a dash: BRK.B -> BRK-B.
         resp = await self.request_json(
             "GET",
-            f"/v8/finance/chart/{ticker}",
+            f"/v8/finance/chart/{ticker.replace('.', '-')}",
             params={"range": range_, "interval": "1d", "events": "split,div"},
         )
         return parse_chart(resp.data, ticker)
+
+
+# ── Polygon / Massive (whole-market end-of-day bars) ─────────────────────────
+def parse_grouped(payload: dict[str, Any], day: date) -> dict[str, Bar]:
+    """Grouped-daily response -> {ticker: Bar}. Empty on weekends and holidays."""
+    out: dict[str, Bar] = {}
+    for row in (payload or {}).get("results") or []:
+        ticker = row.get("T")
+        close = _num(row.get("c"))
+        if not ticker or close is None:
+            continue
+        volume = _num(row.get("v"))
+        out[ticker] = Bar(
+            date=day,
+            open=_num(row.get("o")),
+            high=_num(row.get("h")),
+            low=_num(row.get("l")),
+            close=close,
+            adj_close=close,  # split-adjusted; dividends not applied
+            volume=int(volume) if volume is not None else None,
+        )
+    return out
+
+
+class PolygonClient(BaseHttpClient):
+    """Free Basic plan: end-of-day data, 2 years of history, 5 calls a minute."""
+
+    def __init__(
+        self,
+        api_key: str,
+        *,
+        transport: httpx.AsyncBaseTransport | None = None,
+        **kwargs: Any,
+    ) -> None:
+        if not api_key:
+            raise ClientError("POLYGON_API_KEY is not set")
+        super().__init__(POLYGON_BASE, **kwargs)
+        _with_transport(self, transport, {"Authorization": f"Bearer {api_key}"})
+
+    @classmethod
+    def from_settings(
+        cls, settings: Settings, *, transport: httpx.AsyncBaseTransport | None = None
+    ) -> PolygonClient:
+        return cls(
+            settings.polygon_api_key,
+            transport=transport,
+            user_agent=settings.user_agent,
+            timeout_s=min(settings.http_timeout_s, 30.0),
+            max_retries=min(settings.http_max_retries, 2),
+            backoff_base_s=settings.backoff_base_s,
+            backoff_cap_s=min(settings.backoff_cap_s, 15.0),
+            rate_limiter=TokenBucket(5 / 60),
+        )
+
+    async def grouped_daily(self, day: date) -> dict[str, Bar]:
+        resp = await self.request_json(
+            "GET",
+            f"/v2/aggs/grouped/locale/us/market/stocks/{day.isoformat()}",
+            params={"adjusted": "true"},
+        )
+        return parse_grouped(resp.data, day)

@@ -130,6 +130,9 @@ class Settings(BaseSettings):
     # your positions (holdings, portfolio, shares held). Leave empty only for a
     # local, single-user setup: a public deployment needs it.
     hub_write_token: str = Field("", repr=False)
+    # Free key from https://massive.com (formerly Polygon.io): end-of-day prices
+    # for the whole US market in one call per day. Empty skips the daily sync.
+    polygon_api_key: str = Field("", repr=False)
 
     # ── investment hub ────────────────────────────────────────────────────────
     # Finnhub's free tier allows 60 calls/minute; stay a little under it.
@@ -169,7 +172,7 @@ class Settings(BaseSettings):
         data["govinfo_api_key"] = (
             "DEMO_KEY" if self.govinfo_api_key == "DEMO_KEY" else "***set***"
         )
-        for secret in ("finnhub_api_key", "hub_write_token"):
+        for secret in ("finnhub_api_key", "hub_write_token", "polygon_api_key"):
             data[secret] = "***set***" if getattr(self, secret) else ""
         if self.database_url:
             data["database_url"] = mask_url(self.database_url)

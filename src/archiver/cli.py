@@ -298,9 +298,7 @@ def summarize(
     regenerate: bool = typer.Option(
         False, "--regenerate", help="Redo everything, not just new/changed items."
     ),
-    device: str = typer.Option(
-        None, help="Torch device, e.g. 'mps' or 'cuda' (default: CPU)."
-    ),
+    device: str = typer.Option(None, help="Torch device, e.g. 'mps' or 'cuda' (default: CPU)."),
 ) -> None:
     """Generate short abstractive summaries of archived articles.
 
@@ -359,9 +357,7 @@ def score_sentiment_cmd(
     rescore: bool = typer.Option(
         False, "--rescore", help="Re-score everything, not just new/changed items."
     ),
-    device: str = typer.Option(
-        None, help="Torch device, e.g. 'mps' or 'cuda' (default: CPU)."
-    ),
+    device: str = typer.Option(None, help="Torch device, e.g. 'mps' or 'cuda' (default: CPU)."),
 ) -> None:
     """Score archived articles with FinBERT and store the sentiment readings.
 
@@ -584,9 +580,7 @@ def classify_cmd(
         table = Table(title="Topics found")
         table.add_column("topic", style="cyan")
         table.add_column("items", justify="right")
-        for topic, count in sorted(
-            report.topic_counts.items(), key=lambda kv: kv[1], reverse=True
-        ):
+        for topic, count in sorted(report.topic_counts.items(), key=lambda kv: kv[1], reverse=True):
             table.add_row(topic, str(count))
         console.print(table)
 
@@ -727,6 +721,89 @@ def hub_refresh_cmd(
     )
     for key, err in report.errors.items():
         console.print(f"  [yellow]![/] {key}: {err}")
+
+
+@app.command(name="universe-sync")
+def universe_sync_cmd() -> None:
+    """Load every US-listed stock/ETF and mark the core set (S&P 500, large
+    Nasdaq names, major ETFs). One Finnhub call plus the public S&P 500 list.
+    Run weekly; it is idempotent."""
+    from archiver.clients.market import FinnhubClient
+    from archiver.hub.universe import sync_universe
+
+    settings = get_settings()
+    configure_logging(settings)
+    if not settings.finnhub_api_key:
+        console.print("[bold red]✗ FINNHUB_API_KEY is not set.[/]")
+        raise typer.Exit(code=1)
+
+    async def _run():  # type: ignore[no-untyped-def]
+        database = Database(settings.database_url)
+        try:
+            await database.create_all()  # dev convenience; production uses `alembic upgrade head`
+            async with FinnhubClient.from_settings(settings) as finnhub:
+                return await sync_universe(database, finnhub)
+        finally:
+            await database.dispose()
+
+    report = asyncio.run(_run())
+    console.print(
+        f"[green]✓[/] {report.symbols} symbol(s) listed; {report.core} core "
+        f"({report.sp500} from the S&P 500)"
+    )
+    for key, err in report.errors.items():
+        console.print(f"  [yellow]![/] {key}: {err}")
+
+
+@app.command(name="universe-prices")
+def universe_prices_cmd(
+    backfill: int = typer.Option(
+        100, help="Core symbols to backfill 5y history for this run (Yahoo, ~1/s). 0 skips."
+    ),
+    max_days: int = typer.Option(10, help="Most trading days to catch up via Polygon."),
+) -> None:
+    """Keep core symbols' daily prices current.
+
+    Backfills 5 years of history for core symbols that lack it (a batch per run,
+    resumable), then adds each new trading day for all of them from Polygon's
+    grouped-daily endpoint (one call per day, needs POLYGON_API_KEY).
+    """
+    from archiver.clients.market import PolygonClient, YahooChartClient
+    from archiver.hub.universe import backfill_core_prices, sync_core_eod, update_core_quotes
+
+    settings = get_settings()
+    configure_logging(settings)
+
+    async def _run():  # type: ignore[no-untyped-def]
+        database = Database(settings.database_url)
+        try:
+            await database.create_all()  # dev convenience; production uses `alembic upgrade head`
+            filled = None
+            if backfill:
+                async with YahooChartClient.from_settings(settings) as yahoo:
+                    filled = await backfill_core_prices(database, yahoo, limit=backfill)
+            eod = None
+            if settings.polygon_api_key:
+                async with PolygonClient.from_settings(settings) as polygon:
+                    eod = await sync_core_eod(database, polygon, max_days=max_days)
+            else:
+                await update_core_quotes(database)
+            return filled, eod
+        finally:
+            await database.dispose()
+
+    filled, eod = asyncio.run(_run())
+    if filled is not None:
+        console.print(f"[green]✓[/] backfilled {filled.backfilled} symbol(s), {filled.bars} bar(s)")
+        for key, err in list(filled.errors.items())[:10]:
+            console.print(f"  [yellow]![/] {key}: {err}")
+    if eod is None:
+        console.print("[yellow]POLYGON_API_KEY not set:[/] skipped the daily catch-up.")
+    else:
+        days = ", ".join(eod.days) or "none new"
+        console.print(f"[green]✓[/] end-of-day: {eod.bars} bar(s) for {days}")
+        for key, err in eod.errors.items():
+            console.print(f"  [yellow]![/] {key}: {err}")
 
 
 @app.command()
