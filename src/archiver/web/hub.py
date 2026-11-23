@@ -4,9 +4,12 @@ Mounted under ``/api/hub`` by :func:`archiver.web.app.create_app`. Reads serve
 stored data, so pages never wait on a provider; ``?refresh=true`` on a ticker
 fetches live first when a Finnhub key is configured.
 
-Writes (watchlist, holdings) require the ``X-Hub-Token`` header whenever
-``HUB_WRITE_TOKEN`` is set, so a public deployment cannot be edited by anyone
-who finds the URL.
+Whenever ``HUB_WRITE_TOKEN`` is set, the ``X-Hub-Token`` header is required on
+writes (watchlist, holdings) and on reads that expose positions (holdings,
+portfolio, shares held), so a public deployment can be neither edited nor
+read for its portfolio by anyone who finds the URL. Without the token those
+reads degrade (no totals, no held tickers) rather than fail, except the
+holdings and portfolio endpoints themselves, which return 401.
 """
 
 from __future__ import annotations
@@ -118,9 +121,12 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
     router = APIRouter(prefix="/api/hub", tags=["hub"])
     settings = get_settings()
 
-    def require_write(x_hub_token: str | None = Header(None)) -> None:
+    def authorized(x_hub_token: str | None = Header(None)) -> bool:
         expected = get_settings().hub_write_token
-        if expected and not hmac.compare_digest(x_hub_token or "", expected):
+        return not expected or hmac.compare_digest(x_hub_token or "", expected)
+
+    def require_token(ok: bool = Depends(authorized)) -> None:
+        if not ok:
             raise HTTPException(401, "missing or invalid X-Hub-Token")
 
     def _ticker(raw: str) -> str:
@@ -202,7 +208,9 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         return {"results": results}
 
     @router.get("/securities/{ticker}")
-    async def security(ticker: str, refresh: bool = False) -> dict[str, Any]:
+    async def security(
+        ticker: str, refresh: bool = False, ok: bool = Depends(authorized)
+    ) -> dict[str, Any]:
         symbol = _ticker(ticker)
         if refresh:
             await _live_refresh(symbol)
@@ -216,7 +224,11 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
             await _live_refresh(symbol, prices=True)  # first visit: fill it in
             async with db.session() as session:
                 sec = await session.get(Security, symbol)
-        return {**security_dict(sec, symbol), "watched": watched, "shares_held": held or 0}
+        return {
+            **security_dict(sec, symbol),
+            "watched": watched,
+            "shares_held": (held or 0) if ok else None,
+        }
 
     @router.get("/securities/{ticker}/prices")
     async def prices(
@@ -333,7 +345,7 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
             ]
         }
 
-    @router.post("/watchlist", status_code=201, dependencies=[Depends(require_write)])
+    @router.post("/watchlist", status_code=201, dependencies=[Depends(require_token)])
     async def watch(body: WatchIn) -> dict[str, Any]:
         async with db.session() as session, session.begin():
             item = await session.get(WatchlistItem, body.ticker)
@@ -344,7 +356,7 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         await _live_refresh(body.ticker, prices=True)
         return {"ticker": body.ticker, "watched": True}
 
-    @router.delete("/watchlist/{ticker}", dependencies=[Depends(require_write)])
+    @router.delete("/watchlist/{ticker}", dependencies=[Depends(require_token)])
     async def unwatch(ticker: str) -> dict[str, Any]:
         symbol = _ticker(ticker)
         async with db.session() as session, session.begin():
@@ -355,13 +367,13 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         return {"ticker": symbol, "watched": False}
 
     # ── holdings & portfolio ─────────────────────────────────────────────────
-    @router.get("/holdings")
+    @router.get("/holdings", dependencies=[Depends(require_token)])
     async def holdings() -> dict[str, Any]:
         async with db.session() as session:
             rows = await session.scalars(select(Holding).order_by(Holding.ticker, Holding.id))
             return {"items": [_holding_dict(h) for h in rows.all()]}
 
-    @router.post("/holdings", status_code=201, dependencies=[Depends(require_write)])
+    @router.post("/holdings", status_code=201, dependencies=[Depends(require_token)])
     async def add_holding(body: HoldingIn) -> dict[str, Any]:
         async with db.session() as session, session.begin():
             row = Holding(**body.model_dump())
@@ -371,7 +383,7 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         await _live_refresh(body.ticker, prices=True)
         return out
 
-    @router.patch("/holdings/{holding_id}", dependencies=[Depends(require_write)])
+    @router.patch("/holdings/{holding_id}", dependencies=[Depends(require_token)])
     async def edit_holding(holding_id: int, body: HoldingPatch) -> dict[str, Any]:
         async with db.session() as session, session.begin():
             row = await session.get(Holding, holding_id)
@@ -381,7 +393,7 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
                 setattr(row, key, value)
             return _holding_dict(row)
 
-    @router.delete("/holdings/{holding_id}", dependencies=[Depends(require_write)])
+    @router.delete("/holdings/{holding_id}", dependencies=[Depends(require_token)])
     async def delete_holding(holding_id: int) -> dict[str, Any]:
         async with db.session() as session, session.begin():
             row = await session.get(Holding, holding_id)
@@ -400,17 +412,19 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         }
         return summarize([Lot(h.ticker, h.shares, h.avg_cost) for h in lots], quotes)
 
-    @router.get("/portfolio")
+    @router.get("/portfolio", dependencies=[Depends(require_token)])
     async def portfolio() -> dict[str, Any]:
         return await _portfolio()
 
     # ── dashboard ────────────────────────────────────────────────────────────
     @router.get("/dashboard")
-    async def dashboard(days: int = Query(7, ge=1, le=90)) -> dict[str, Any]:
+    async def dashboard(
+        days: int = Query(7, ge=1, le=90), ok: bool = Depends(authorized)
+    ) -> dict[str, Any]:
         """Home page in one call: watchlist movers, portfolio totals, top news."""
         async with db.session() as session:
             watched = (await session.scalars(select(WatchlistItem.ticker))).all()
-            held = (await session.scalars(select(Holding.ticker).distinct())).all()
+            held = (await session.scalars(select(Holding.ticker).distinct())).all() if ok else []
         tickers = sorted({*watched, *held})
         secs = await _securities(tickers)
         movers = sorted(
@@ -438,7 +452,7 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
 
     # Kept for the frontend's sake: "is this ticker tracked at all?"
     @router.get("/tracked")
-    async def tracked() -> dict[str, Any]:
+    async def tracked(ok: bool = Depends(authorized)) -> dict[str, Any]:
         async with db.session() as session:
             watched = set((await session.scalars(select(WatchlistItem.ticker))).all())
             held = set(
@@ -448,6 +462,6 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
                     )
                 ).all()
             )
-        return {"watchlist": sorted(watched), "holdings": sorted(held)}
+        return {"watchlist": sorted(watched), "holdings": sorted(held) if ok else []}
 
     return router

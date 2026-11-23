@@ -34,6 +34,23 @@ async def test_index_serves_dashboard(client: httpx.AsyncClient):
     assert "Trump News Archive" in resp.text
 
 
+async def test_index_redirects_to_frontend_when_configured(db: Database, monkeypatch):
+    from archiver.config import settings as settings_mod
+
+    monkeypatch.setenv("FRONTEND_URL", "https://hub.example.com/")
+    settings_mod.get_settings.cache_clear()
+    try:
+        transport = ASGITransport(app=create_app(db))
+        async with httpx.AsyncClient(transport=transport, base_url="http://test") as c:
+            resp = await c.get("/")
+            assert resp.status_code == 307
+            assert resp.headers["location"] == "https://hub.example.com/"
+            assert (await c.get("/api/stats")).status_code == 200  # the API itself is unchanged
+    finally:
+        monkeypatch.delenv("FRONTEND_URL")
+        settings_mod.get_settings.cache_clear()
+
+
 async def test_stats_endpoint(client: httpx.AsyncClient):
     resp = await client.get("/api/stats")
     data = resp.json()

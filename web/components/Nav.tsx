@@ -31,13 +31,32 @@ function Links({ path }: { path: string | null }) {
   );
 }
 
-// usePathname suspends on routes with unknown dynamic params (/ticker/[symbol])
-// under Cache Components, so only this piece sits behind a boundary.
-function ActiveLinks() {
-  return <Links path={usePathname()} />;
+function Controls({ path, signOut }: { path: string | null; signOut: boolean }) {
+  if (path === "/login") return null; // signed out: nothing here would work yet
+  return (
+    <>
+      <Links path={path} />
+      <div className="ml-auto flex w-full items-center gap-2 sm:w-auto">
+        <TickerSearch className="flex-1 sm:w-72" />
+        {signOut ? (
+          <form method="post" action="/auth/logout">
+            <button type="submit" className="rounded-md px-2 py-1.5 text-xs font-medium text-muted hover:bg-surface-2 hover:text-text">
+              Sign out
+            </button>
+          </form>
+        ) : null}
+      </div>
+    </>
+  );
 }
 
-export function Nav() {
+// usePathname suspends on routes with unknown dynamic params (/ticker/[symbol])
+// under Cache Components, so only this piece sits behind a boundary.
+function ActiveControls({ signOut }: { signOut: boolean }) {
+  return <Controls path={usePathname()} signOut={signOut} />;
+}
+
+export function Nav({ signOut = false }: { signOut?: boolean }) {
   return (
     <header className="sticky top-0 z-20 border-b border-border bg-surface/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-2.5">
@@ -54,10 +73,9 @@ export function Nav() {
           </svg>
           Hub
         </Link>
-        <Suspense fallback={<Links path={null} />}>
-          <ActiveLinks />
+        <Suspense fallback={<Controls path={null} signOut={signOut} />}>
+          <ActiveControls signOut={signOut} />
         </Suspense>
-        <TickerSearch className="ml-auto w-full sm:w-72" />
       </div>
     </header>
   );

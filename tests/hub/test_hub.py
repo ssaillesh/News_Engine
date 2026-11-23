@@ -317,11 +317,11 @@ async def test_watchlist_holdings_portfolio_flow(client: httpx.AsyncClient, db: 
     async with finnhub, yahoo:
         await refresh_all(db, finnhub, yahoo)
 
-    portfolio = (await client.get("/api/hub/portfolio")).json()
+    portfolio = (await client.get("/api/hub/portfolio", headers=AUTH)).json()
     assert portfolio["totals"]["market_value"] == 2200.0
     assert portfolio["totals"]["unrealized_pnl"] == 200.0
 
-    sec = (await client.get("/api/hub/securities/AAPL")).json()
+    sec = (await client.get("/api/hub/securities/AAPL", headers=AUTH)).json()
     assert sec["name"] == "AAPL Inc" and sec["watched"] and sec["shares_held"] == 20
 
     prices = (await client.get("/api/hub/securities/AAPL/prices?range=max")).json()
@@ -333,7 +333,7 @@ async def test_watchlist_holdings_portfolio_flow(client: httpx.AsyncClient, db: 
     for sort in ("recent", "impact"):
         assert (await client.get(f"/api/hub/securities/AAPL/news?sort={sort}")).status_code == 200
 
-    dash = (await client.get("/api/hub/dashboard")).json()
+    dash = (await client.get("/api/hub/dashboard", headers=AUTH)).json()
     assert dash["tickers"] == ["AAPL"] and dash["movers"][0]["ticker"] == "AAPL"
     assert dash["portfolio"]["market_value"] == 2200.0 and len(dash["top_news"]) == 1
 
@@ -343,6 +343,27 @@ async def test_watchlist_holdings_portfolio_flow(client: httpx.AsyncClient, db: 
     assert (await client.delete(f"/api/hub/holdings/{lot['id']}", headers=AUTH)).status_code == 200
     assert (await client.delete("/api/hub/watchlist/AAPL", headers=AUTH)).status_code == 200
     assert (await client.delete("/api/hub/watchlist/AAPL", headers=AUTH)).status_code == 404
+
+
+async def test_position_reads_require_token(client: httpx.AsyncClient):
+    """A public deployment must not reveal positions to anyone without the token."""
+    await client.post("/api/hub/watchlist", json={"ticker": "MSFT"}, headers=AUTH)
+    await client.post(
+        "/api/hub/holdings", headers=AUTH, json={"ticker": "AAPL", "shares": 5, "avg_cost": 10}
+    )
+
+    assert (await client.get("/api/hub/holdings")).status_code == 401
+    assert (await client.get("/api/hub/portfolio")).status_code == 401
+    assert (await client.get("/api/hub/holdings", headers=AUTH)).status_code == 200
+
+    sec = (await client.get("/api/hub/securities/AAPL")).json()
+    assert sec["shares_held"] is None
+    dash = (await client.get("/api/hub/dashboard")).json()
+    assert dash["tickers"] == ["MSFT"] and dash["portfolio"] is None
+    assert (await client.get("/api/hub/tracked")).json() == {"watchlist": ["MSFT"], "holdings": []}
+
+    dash = (await client.get("/api/hub/dashboard", headers=AUTH)).json()
+    assert dash["tickers"] == ["AAPL", "MSFT"] and dash["portfolio"] is not None
 
 
 async def test_existing_feed_sees_market_news(client: httpx.AsyncClient, db: Database):

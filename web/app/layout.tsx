@@ -15,7 +15,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
-        <Nav />
+        {/* Server config, known at build time: show "Sign out" only when the gate is on. */}
+        <Nav signOut={Boolean(process.env.SITE_PASSWORD)} />
         <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6">{children}</main>
       </body>
     </html>

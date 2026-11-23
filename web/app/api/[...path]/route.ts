@@ -4,8 +4,9 @@ import type { NextRequest } from "next/server";
  * Same-origin proxy to the FastAPI backend.
  *
  * The browser only ever talks to this app, so there is no CORS to configure,
- * and the hub write token (HUB_WRITE_TOKEN) is attached here on the server
- * instead of being shipped to the client bundle.
+ * and the hub token (HUB_WRITE_TOKEN) is attached here on the server instead
+ * of being shipped to the client bundle. proxy.ts has already checked the
+ * visitor's sign-in by the time a request reaches this handler.
  */
 const BACKEND = (process.env.BACKEND_URL ?? "http://127.0.0.1:8137").replace(/\/$/, "");
 
@@ -17,7 +18,9 @@ async function forward(req: NextRequest, ctx: RouteContext<"/api/[...path]">) {
   const contentType = req.headers.get("content-type");
   if (contentType) headers.set("content-type", contentType);
   const token = process.env.HUB_WRITE_TOKEN;
-  if (token && req.method !== "GET") headers.set("x-hub-token", token);
+  // Sent on reads too: the backend withholds positions (holdings, portfolio)
+  // from requests without it.
+  if (token) headers.set("x-hub-token", token);
 
   const hasBody = req.method !== "GET" && req.method !== "HEAD";
   try {

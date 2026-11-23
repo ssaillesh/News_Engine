@@ -172,6 +172,13 @@ export class ApiError extends Error {
 
 async function parse<T>(res: Response): Promise<T> {
   const body = await res.json().catch(() => null);
+  // The site session expired (see proxy.ts): send the visitor to sign in again.
+  if (res.status === 401 && body?.detail === "Sign in required." && typeof window !== "undefined") {
+    const here = window.location.pathname + window.location.search;
+    // A full load on purpose: it drops every cached response along with the session.
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination
+    window.location.assign(`/login?next=${encodeURIComponent(here)}`);
+  }
   if (!res.ok) {
     const detail = body?.detail;
     const message =
@@ -205,7 +212,7 @@ export async function send<T>(method: "POST" | "PATCH" | "DELETE", url: string, 
 
 export function writeErrorMessage(err: unknown): string {
   if (err instanceof ApiError && err.status === 401) {
-    return "The backend requires a write token. Set HUB_WRITE_TOKEN in web/.env.local to match the API's .env and restart the dev server.";
+    return "The backend rejected the hub token. Set HUB_WRITE_TOKEN for the web app to the same value as the API's and restart or redeploy it.";
   }
   return err instanceof Error ? err.message : String(err);
 }

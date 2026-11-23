@@ -126,14 +126,18 @@ class Settings(BaseSettings):
     # Free key from https://finnhub.io/register: quotes, profiles, fundamentals,
     # company news. Empty disables the hub's live refresh (stored data still serves).
     finnhub_api_key: str = Field("", repr=False)
-    # Required on hub write requests (watchlist, holdings) when set. Leave empty
-    # only for a local, single-user setup: a public deployment needs it.
+    # When set, required (X-Hub-Token) on hub writes and on reads that expose
+    # your positions (holdings, portfolio, shares held). Leave empty only for a
+    # local, single-user setup: a public deployment needs it.
     hub_write_token: str = Field("", repr=False)
 
     # ── investment hub ────────────────────────────────────────────────────────
     # Finnhub's free tier allows 60 calls/minute; stay a little under it.
     finnhub_rps: float = Field(0.9, gt=0)
     market_news_days: int = Field(7, ge=1, le=365)
+    # The Next.js frontend. When set, the API's "/" redirects there instead of
+    # serving the legacy built-in dashboard.
+    frontend_url: str = Field("")
     # Browser origins allowed to call the API (e.g. a Next.js dev server).
     cors_origins: list[str] = Field(default_factory=lambda: ["http://localhost:3000"])
 

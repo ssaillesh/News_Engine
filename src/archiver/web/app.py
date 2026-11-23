@@ -21,7 +21,7 @@ from typing import Any
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, Response
 from sqlalchemy import func, select
 from sqlalchemy.orm import selectinload
 
@@ -353,8 +353,12 @@ def create_app(db: Database, *, briefer: BriefingGenerator | None = None) -> Fas
         return _analysis_payload(row)
 
     @app.get("/", response_class=HTMLResponse)
-    async def index() -> str:
-        return INDEX_HTML
+    async def index() -> Response:
+        # The Next.js app (web/) is the frontend once FRONTEND_URL is set; the
+        # built-in page remains for local use without it.
+        if settings.frontend_url:
+            return RedirectResponse(settings.frontend_url, status_code=307)
+        return HTMLResponse(INDEX_HTML)
 
     @app.get("/api/stats")
     async def stats() -> dict[str, Any]:
