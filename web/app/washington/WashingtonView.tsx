@@ -172,16 +172,14 @@ function Focus({ items, loading }: { items: NewsItem[]; loading: boolean }) {
   );
 }
 
-// ── tone ──────────────────────────────────────────────────────────────────
+// ── direction: tailwind / headwind ────────────────────────────────────────
 type Dir = 1 | -1 | 0;
 
-function Tone({ items, loading, now }: { items: NewsItem[]; loading: boolean; now: number | null }) {
-  // FinBERT scores news, not government documents, so this usually reads the
-  // impact model's stance: is the action a tailwind or a headwind for the
-  // sectors it names? When items do carry sentiment, that is used instead.
+/** FinBERT scores news, not government documents, so this usually reads the
+ *  impact model's stance: is the action a tailwind or a headwind for the
+ *  sectors it names? When items do carry sentiment, that is used instead. */
+function direction(items: NewsItem[]) {
   const useSentiment = items.some((i) => i.sentiment);
-  const up = useSentiment ? "POSITIVE" : "TAILWIND";
-  const down = useSentiment ? "NEGATIVE" : "HEADWIND";
   const dir = (i: NewsItem): Dir | null => {
     if (useSentiment) {
       if (!i.sentiment) return null;
@@ -191,6 +189,15 @@ function Tone({ items, loading, now }: { items: NewsItem[]; loading: boolean; no
     const st = i.impact?.stance;
     return st === "supportive" ? 1 : st === "restrictive" ? -1 : st ? 0 : null;
   };
+  return { useSentiment, up: useSentiment ? "POSITIVE" : "TAILWIND", down: useSentiment ? "NEGATIVE" : "HEADWIND", dir };
+}
+
+const KEY_TEXT =
+  "Tailwind: exemptions, deregulation, awards, incentives. Headwind: tariffs, bans, probes, sanctions. Judged for the sectors each action names.";
+
+// ── tone ──────────────────────────────────────────────────────────────────
+function Tone({ items, loading, now }: { items: NewsItem[]; loading: boolean; now: number | null }) {
+  const { useSentiment, up, down, dir } = direction(items);
 
   const days: string[] = [];
   if (now !== null) for (let k = 6; k >= 0; k--) days.push(etDay(new Date(now - k * 86_400_000).toISOString()));
@@ -250,7 +257,7 @@ function Tone({ items, loading, now }: { items: NewsItem[]; loading: boolean; no
               <div className="dim" style={{ fontSize: 11, lineHeight: 1.4, marginTop: 4 }}>
                 {useSentiment
                   ? "Tone of the President's actions as scored by FinBERT: positive or negative wording."
-                  : "Tailwind: exemptions, deregulation, awards, incentives. Headwind: tariffs, bans, probes, sanctions. Judged for the sectors each action names."}
+                  : KEY_TEXT}
               </div>
             </div>
 
@@ -300,45 +307,129 @@ function Tone({ items, loading, now }: { items: NewsItem[]; loading: boolean; no
 }
 
 // ── sectors most affected ────────────────────────────────────────────────
+type SectorRow = { key: string; n: string; etf: string | null; k: number; up: number; down: number; flat: number; sum: number; m: number };
+
 function SectorHits({ items, loading }: { items: NewsItem[]; loading: boolean }) {
   const reactions = useApi<ReactionsResponse>(reactionsKey(items.map((i) => i.created_at), etfsOf(items).slice(0, 30)));
   const move = movesLookup(reactions.data);
-  const agg = new Map<string, { key: string; n: string; k: number; sum: number; m: number }>();
+  const { up, down, dir } = direction(items);
+
+  const agg = new Map<string, SectorRow>();
   for (const i of items) {
+    const d = dir(i);
+    const spy = move(i.created_at, "SPY")?.d1;
     for (const s of i.sectors) {
-      const row = agg.get(s.key) ?? { key: s.key, n: s.label, k: 0, sum: 0, m: 0 };
+      const row = agg.get(s.key) ?? { key: s.key, n: s.label, etf: s.etf, k: 0, up: 0, down: 0, flat: 0, sum: 0, m: 0 };
       row.k += 1;
-      const d1 = s.etf ? move(i.created_at, s.etf)?.d1 : null;
-      if (d1 !== null && d1 !== undefined) {
-        row.sum += d1;
+      if (d === 1) row.up += 1;
+      else if (d === -1) row.down += 1;
+      else row.flat += 1;
+      // Excess over the S&P 500 that session, so a market-wide day doesn't
+      // read as the action's doing.
+      const own = s.etf ? move(i.created_at, s.etf)?.d1 : null;
+      if (own != null && spy != null) {
+        row.sum += own - spy;
         row.m += 1;
       }
       agg.set(s.key, row);
     }
   }
   const rows = [...agg.values()].sort((a, b) => b.k - a.k).slice(0, 8);
+  const max = Math.max(1, ...rows.map((r) => r.k));
+  // Rank by the balance, not the raw count, so the most-named sector doesn't
+  // top both lists just for being named most.
+  const all = [...agg.values()];
+  const helped = all.filter((r) => r.up > r.down).sort((a, b) => b.up - b.down - (a.up - a.down) || b.k - a.k)[0];
+  const hurt = all
+    .filter((r) => r.down > 0 && r.key !== helped?.key)
+    .sort((a, b) => b.down - b.up - (a.down - a.up) || b.down / b.k - a.down / a.k || b.down - a.down)[0];
+  const name = (r: SectorRow) => r.n.split(/ & | and /)[0];
+
   return (
-    <Pane title="Sectors most affected · 30D" right="AVG MOVE +1D">
-      <div className="body">
+    <Pane title="Sectors most affected · 30D" right="GAIN / LOSE">
+      <div className="body" style={{ display: "flex", flexDirection: "column" }}>
         {loading ? (
           <SkRows rows={6} />
         ) : !rows.length ? (
           <Empty>NO SECTORS TAGGED IN THE LAST 30 DAYS.</Empty>
         ) : (
-          rows.map((h) => {
-            const avg = h.m ? h.sum / h.m : null;
-            return (
-              <Link key={h.key} href={`/news${qs({ sector: h.key })}`} className="r" style={{ fontSize: 13 }}>
-                <span className="trunc">{h.n}</span>
-                <span className="m" style={{ whiteSpace: "nowrap" }}>
-                  <span className="dim">{h.k} ACT</span>&nbsp;&nbsp;
-                  <span className={cls(avg)} style={{ display: "inline-block", width: 60, textAlign: "right" }}>
-                    {reactions.data ? pct(avg, 1) : ""}
+          <>
+            <div style={{ padding: "8px 8px 6px" }}>
+              <div className="m" style={{ fontSize: 12, lineHeight: 1.5 }}>
+                <span className="dim">MOST HELPED </span>
+                {helped && helped.up ? (
+                  <span className="up">
+                    {name(helped).toUpperCase()} · {helped.up} {up.toLowerCase()}
+                    {helped.up === 1 ? "" : "s"}
                   </span>
-                </span>
-              </Link>
-            );
-          })
+                ) : (
+                  <span className="dim">—</span>
+                )}
+                <br />
+                <span className="dim">MOST HURT&nbsp;&nbsp; </span>
+                {hurt && hurt.down ? (
+                  <span className="dn">
+                    {name(hurt).toUpperCase()} · {hurt.down} {down.toLowerCase()}
+                    {hurt.down === 1 ? "" : "s"}
+                  </span>
+                ) : (
+                  <span className="dim">—</span>
+                )}
+              </div>
+              <div className="dim" style={{ fontSize: 11, lineHeight: 1.4, marginTop: 4 }}>
+                Industries the President&apos;s actions named most in the last 30 days, split by whether each action helps or hurts them.
+              </div>
+            </div>
+
+            <div className="r m dim" style={{ fontSize: 10, padding: "4px 8px" }}>
+              <span>SECTOR · ETF</span>
+              <span style={{ display: "flex", gap: 10 }}>
+                <span>ACTIONS</span>
+                <span style={{ width: 58, textAlign: "right" }}>VS S&amp;P</span>
+              </span>
+            </div>
+            {rows.map((h) => {
+              const avg = h.m ? h.sum / h.m : null;
+              const tip = `${h.n}: ${h.k} actions, ${h.up} ${up.toLowerCase()}, ${h.down} ${down.toLowerCase()}, ${h.flat} no clear direction${
+                avg == null
+                  ? h.etf
+                    ? `. No price data for ${h.etf} on those days.`
+                    : ". No sector ETF to measure."
+                  : `. On those days ${h.etf} did ${pct(avg, 1)} vs the S&P 500 on average (${h.m} measured).`
+              }`;
+              return (
+                <Link key={h.key} href={`/news${qs({ sector: h.key })}`} className="hov" title={tip} style={{ display: "block", padding: "6px 8px", borderBottom: "1px solid var(--rule)" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", gap: 8, fontSize: 13 }}>
+                    <span className="trunc">
+                      {h.n}
+                      {h.etf ? <span className="m dim" style={{ fontSize: 11 }}> · {h.etf}</span> : null}
+                    </span>
+                    <span className="m" style={{ display: "flex", gap: 10, whiteSpace: "nowrap", fontSize: 12 }}>
+                      <span>
+                        {h.k}
+                        {h.up ? <span className="up"> ▲{h.up}</span> : null}
+                        {h.down ? <span className="dn"> ▼{h.down}</span> : null}
+                      </span>
+                      <span className={reactions.data ? cls(avg) : "dim"} style={{ width: 58, textAlign: "right" }}>
+                        {reactions.data ? (avg == null ? "—" : pct(avg, 1)) : ""}
+                      </span>
+                    </span>
+                  </div>
+                  {/* Bar length = how often the sector was named; colours = the split. */}
+                  <div style={{ display: "flex", height: 6, marginTop: 4, width: `${(h.k / max) * 100}%`, background: "var(--rule)" }} aria-hidden>
+                    <span style={{ flex: h.up, background: "var(--up)" }} />
+                    <span style={{ flex: h.flat, background: "var(--dim)", opacity: 0.45 }} />
+                    <span style={{ flex: h.down, background: "var(--dn)" }} />
+                  </div>
+                </Link>
+              );
+            })}
+            <div className="m dim" style={{ fontSize: 10, lineHeight: 1.5, padding: "6px 8px" }}>
+              <span className="up">■</span> {up.toLowerCase()} <span style={{ opacity: 0.6 }}>■</span> no clear direction <span className="dn">■</span> {down.toLowerCase()}
+              <br />
+              VS S&amp;P: how the sector&apos;s ETF did against the S&amp;P 500 on the days those actions landed, on average. Click a sector for its actions.
+            </div>
+          </>
         )}
       </div>
     </Pane>

@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
-import { fetcher, qs, send, useApi, writeErrorMessage, type Holding, type NewsPage, type Portfolio, type PricesResponse, type SecuritiesPage } from "@/lib/api";
+import { fetcher, LIVE_MS, qs, send, useApi, writeErrorMessage, type Holding, type NewsPage, type Portfolio, type PricesResponse, type SecuritiesPage } from "@/lib/api";
 import { cls, fixed, num, pct, shortDate, signed } from "@/lib/format";
 import { impact100, srcShort, toneOf } from "@/lib/news";
 import { shortSector } from "@/lib/sectors";
@@ -51,7 +51,7 @@ function useHistory(positions: { ticker: string; shares: number }[], range: Rang
       const all = await Promise.all([...tickers, "SPY"].map((t) => fetcher<PricesResponse>(`/api/hub/securities/${encodeURIComponent(t)}/prices?range=${range}`)));
       return all;
     },
-    { revalidateOnFocus: false, keepPreviousData: true },
+    { refreshInterval: LIVE_MS, revalidateOnFocus: true, keepPreviousData: true },
   );
   if (!res.data) return { ...res, series: null };
   const spy = res.data[res.data.length - 1];

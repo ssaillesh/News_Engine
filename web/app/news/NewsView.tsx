@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useSWRInfinite from "swr/infinite";
-import { fetcher, movesLookup, qs, reactionsKey, useApi, type NewsItem, type NewsPage, type ReactionsResponse } from "@/lib/api";
+import { fetcher, LIVE_MS, movesLookup, qs, reactionsKey, useApi, type NewsItem, type NewsPage, type ReactionsResponse } from "@/lib/api";
 import { cls, fixed, pct } from "@/lib/format";
 import { useHotkeys } from "@/lib/hotkeys";
 import { impact100, sectorWords, SOURCE_FILTERS, srcLong, srcShort, summaryOf, toneOf, topicShort, type SourceFilter } from "@/lib/news";
@@ -52,6 +52,7 @@ export function NewsView() {
   const ticker = params.get("ticker") ?? "";
   const sector = params.get("sector") ?? "";
   const id = params.get("id");
+  const sort: "recent" | "impact" = params.get("sort") === "impact" ? "impact" : "recent";
 
   const set = (changes: Record<string, string | null>) => {
     const next = new URLSearchParams(params.toString());
@@ -67,12 +68,12 @@ export function NewsView() {
   // Searching or filtering by ticker/sector looks across all time unless a window was picked.
   const since = now === null ? null : hours && !(params.get("w") === null && (q || ticker || sector)) ? hoursAgo(now, hours) : "";
   const sources = SOURCE_FILTERS.find((f) => f.key === src)!.sources.join(",");
-  const base = since === null ? null : `/api/statuses${qs({ sort: "impact", since, source: sources, q, ticker, sector, with_total: "true" })}`;
+  const base = since === null ? null : `/api/statuses${qs({ sort, since, source: sources, q, ticker, sector, with_total: "true" })}`;
 
   const { data, error, size, setSize, isValidating, mutate } = useSWRInfinite<NewsPage>(
     (i, prev) => (!base || (prev && prev.items.length < PAGE) ? null : `${base}&limit=${PAGE}&offset=${i * PAGE}`),
     fetcher,
-    { revalidateOnFocus: false, revalidateFirstPage: false },
+    { refreshInterval: LIVE_MS, revalidateOnFocus: true, revalidateFirstPage: true },
   );
   const items = data?.flatMap((p) => p.items) ?? [];
   const total = data?.[0]?.total;
@@ -115,12 +116,22 @@ export function NewsView() {
   return (
     <div className="grid-term g-news">
       <Pane
-        title="All stories · by impact"
+        title={sort === "impact" ? "All stories · by impact" : "All stories · latest first"}
         right={total !== undefined ? `${total.toLocaleString()} · ${win === "ALL" || since === "" ? "ALL TIME" : win}` : ""}
         style={{ gridRow: "span 2" }}
       >
         <Toolbar>
           <Tabs label="Source" value={src} onChange={(v) => set({ src: v === "all" ? null : v, id: null })} options={SOURCE_FILTERS.map((f) => ({ value: f.key, label: f.label }))} />
+          <span style={{ marginLeft: "auto" }} />
+          <Tabs
+            label="Sort"
+            value={sort}
+            onChange={(v) => set({ sort: v === "impact" ? "impact" : null, id: null })}
+            options={[
+              { value: "recent", label: "LATEST" },
+              { value: "impact", label: "IMPACT" },
+            ]}
+          />
         </Toolbar>
         <Toolbar>
           <Tabs label="Window" value={win} onChange={(v) => set({ w: v === "1D" ? null : v, id: null })} options={WINDOWS} />
@@ -315,7 +326,7 @@ function Reaction({ item }: { item: NewsItem | undefined }) {
     <Pane title="Market reaction" right="VS SPY">
       <div className="r m dim" style={{ fontSize: 11 }}>
         <span style={{ width: 52 }}>TICKER</span>
-        <span style={{ flex: 1, textAlign: "right" }}>DAY OF</span>
+        <span style={{ flex: 1, textAlign: "right" }}>{session && session === res.data?.live ? "TODAY · LIVE" : "DAY OF"}</span>
         <span style={{ width: 64, textAlign: "right" }}>+5D</span>
         <span style={{ width: 64, textAlign: "right" }}>VS SPY</span>
       </div>
@@ -351,7 +362,11 @@ function Reaction({ item }: { item: NewsItem | undefined }) {
               );
             })}
             <div className="dim" style={{ fontSize: 11, padding: 8, lineHeight: 1.5 }}>
-              {session ? `Session ${session}. ` : "No trading session since this story yet. "}Excess move = ticker minus SPY over the same window (5 days when
+              {session
+                ? session === res.data?.live
+                  ? `Session ${session}, still trading: day-of is the move so far, live. `
+                  : `Session ${session}. `
+                : "No trading session since this story yet. "}Excess move = ticker minus SPY over the same window (5 days when
               available).{item.stocks.length ? "" : ` Sector ETFs shown: ${sectorWords(item, 6)}.`}
             </div>
           </>

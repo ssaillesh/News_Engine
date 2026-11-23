@@ -810,6 +810,9 @@ def universe_prices_cmd(
 def serve(
     host: str = typer.Option(None, help="Bind host (default from config: web_host)."),
     port: int = typer.Option(None, help="Bind port (default from config: web_port)."),
+    live: bool = typer.Option(
+        True, "--live/--no-live", help="Keep quotes live from Finnhub during market hours."
+    ),
 ) -> None:
     """Launch the read-only web UI for browsing the archive.
 
@@ -829,7 +832,7 @@ def serve(
     if bind_port != requested:
         console.print(f"[yellow]Port {requested} is busy — using {bind_port} instead.[/]")
 
-    application = create_app(Database(settings.database_url))
+    application = create_app(Database(settings.database_url), live_quotes=live)
     console.print(
         f"[green]Trump News Archive[/] → [bold]http://{bind_host}:{bind_port}[/]  (Ctrl+C to stop)"
     )

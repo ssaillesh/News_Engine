@@ -88,6 +88,15 @@ function Clock({ path }: { path: string | null }) {
   const spy = useApi<ReturnsResponse>(showClose ? "/api/hub/returns?tickers=SPY" : null);
   if (showClose) {
     const d = spy.data?.items.SPY?.date;
+    if (d && d === spy.data?.live)
+      return (
+        <span className="cell m">
+          <span className="up" aria-hidden>
+            ●
+          </span>
+          &nbsp;LIVE {now !== null ? etClock(now) : ""}
+        </span>
+      );
     return <span className="cell m dim">{d ? `CLOSE ${etDateShort(d)}` : "CLOSE —"}</span>;
   }
   if (now === null) return <span className="cell m dim">&nbsp;</span>;

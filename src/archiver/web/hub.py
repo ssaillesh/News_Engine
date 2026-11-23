@@ -29,9 +29,10 @@ from sqlalchemy.orm import selectinload
 from archiver.clients.exceptions import ClientError
 from archiver.clients.market import FinnhubClient, PolymarketClient, YahooChartClient
 from archiver.config.settings import get_settings
+from archiver.hub.live import market_open
 from archiver.hub.odds import ODDS_TAGS, pick_odds
 from archiver.hub.portfolio import Lot, summarize
-from archiver.hub.returns import load_closes, period_returns, reaction
+from archiver.hub.returns import ET, load_closes, overlay_quotes, period_returns, reaction
 from archiver.hub.service import normalize_ticker, refresh_prices, refresh_security
 from archiver.storage.db import Database
 from archiver.storage.models import (
@@ -457,6 +458,12 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         return {"ticker": symbol, "items": [to_item(s) for s in rows]}
 
     # ── returns, reactions, odds ─────────────────────────────────────────────
+    def _live_day(day: date | None) -> str | None:
+        """The session still trading, if live quotes extended any series into it
+        (its numbers are moves so far, not closes)."""
+        today = datetime.now(UTC).astimezone(ET).date()
+        return day.isoformat() if day == today and market_open() else None
+
     @router.get("/returns")
     async def returns(tickers: str = Query(..., max_length=1200)) -> dict[str, Any]:
         """Last close and 1D / 5D / 1M / YTD returns (percent) from stored daily bars."""
@@ -465,11 +472,12 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         start = min(today - timedelta(days=45), date(today.year - 1, 12, 20))
         async with db.session() as session:
             closes = await load_closes(session, symbols, start)
+            live = await overlay_quotes(session, closes)
         items = {}
         for t in symbols:
             r = period_returns(closes.get(t, []))
             items[t] = {**r, "date": r["date"].isoformat() if r["date"] else None}
-        return {"items": items}
+        return {"items": items, "live": _live_day(live)}
 
     @router.get("/reactions")
     async def reactions(
@@ -490,6 +498,7 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         start = min(stamps).date() - timedelta(days=10)
         async with db.session() as session:
             closes = await load_closes(session, symbols, start)
+            live = await overlay_quotes(session, closes)
         events = []
         for stamp in stamps:
             moves = {}
@@ -506,7 +515,7 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
                     "moves": moves,
                 }
             )
-        return {"benchmark": bench, "events": events}
+        return {"benchmark": bench, "events": events, "live": _live_day(live)}
 
     odds_cache: dict[str, Any] = {"at": 0.0, "items": None}
 

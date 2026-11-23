@@ -185,13 +185,15 @@ export type PeriodReturns = {
   r1m: number | null;
   rytd: number | null;
 };
-export type ReturnsResponse = { items: Record<string, PeriodReturns> };
+/** ``live``: the session still trading, whose figures are moves so far (null when closed). */
+export type ReturnsResponse = { items: Record<string, PeriodReturns>; live?: string | null };
 
 /** GET /api/hub/reactions: moves after each timestamp, percent from the prior close. */
 export type Move = { d1: number | null; d5: number | null };
 export type ReactionsResponse = {
   benchmark: string;
   events: { at: string; session: string | null; moves: Record<string, Move> }[];
+  live?: string | null;
 };
 
 export type Odds = {
@@ -250,8 +252,13 @@ async function parse<T>(res: Response): Promise<T> {
 
 export const fetcher = <T,>(url: string): Promise<T> => fetch(url).then((r) => parse<T>(r));
 
+/** How often open pages re-read the API. The backend keeps quotes live during
+ *  market hours and ingest adds stories every few minutes, so a minute is the
+ *  slowest anything on screen can lag. Polling pauses while the tab is hidden. */
+export const LIVE_MS = 60_000;
+
 export function useApi<T>(url: string | null, config?: SWRConfiguration<T>) {
-  return useSWR<T>(url, fetcher, { revalidateOnFocus: false, keepPreviousData: true, ...config });
+  return useSWR<T>(url, fetcher, { refreshInterval: LIVE_MS, revalidateOnFocus: true, keepPreviousData: true, ...config });
 }
 
 /** Write to the hub, then revalidate every cached hub read. */

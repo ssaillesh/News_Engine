@@ -14,8 +14,11 @@ logic, and the two would drift. One list endpoint, one set of filters.
 
 from __future__ import annotations
 
+import asyncio
 import re
 import socket
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager, suppress
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
@@ -290,9 +293,29 @@ def _analysis_payload(row: Any) -> dict[str, Any]:
     }
 
 
-def create_app(db: Database, *, briefer: BriefingGenerator | None = None) -> FastAPI:
-    app = FastAPI(title="Trump News Archive", docs_url="/api/docs")
+def create_app(
+    db: Database, *, briefer: BriefingGenerator | None = None, live_quotes: bool = False
+) -> FastAPI:
+    """``live_quotes`` starts the background quote loop (``archiver serve`` only:
+    a serverless deployment has no process that outlives a request)."""
     settings = get_settings()
+
+    @asynccontextmanager
+    async def lifespan(_: FastAPI) -> AsyncIterator[None]:
+        task = None
+        if live_quotes and settings.finnhub_api_key:
+            from archiver.hub.live import live_quote_loop
+
+            task = asyncio.create_task(live_quote_loop(db, settings))
+        try:
+            yield
+        finally:
+            if task is not None:
+                task.cancel()
+                with suppress(asyncio.CancelledError):
+                    await task
+
+    app = FastAPI(title="Trump News Archive", docs_url="/api/docs", lifespan=lifespan)
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,

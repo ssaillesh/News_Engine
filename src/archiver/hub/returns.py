@@ -19,7 +19,7 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import select
 
-from archiver.storage.models import PriceBar
+from archiver.storage.models import PriceBar, Security
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
@@ -114,3 +114,36 @@ async def load_closes(
     for ticker, day, close in rows.all():
         out.setdefault(ticker, []).append((day, close))
     return out
+
+
+async def overlay_quotes(
+    session: AsyncSession, closes: dict[str, list[tuple[date, float]]]
+) -> date | None:
+    """Extend each ticker's daily closes with its live quote when that is newer.
+
+    A quote stamped on a day with no bar yet is appended as that day's close
+    (so far); one on the last bar's day replaces it. Returns the latest day a
+    quote supplied, or None when every series was already up to date.
+    """
+    if not closes:
+        return None
+    rows = await session.execute(
+        select(Security.ticker, Security.price, Security.quote_at).where(
+            Security.ticker.in_(list(closes)), Security.price.is_not(None)
+        )
+    )
+    latest: date | None = None
+    for ticker, price, at in rows.all():
+        series = closes.get(ticker)
+        if not series or at is None:
+            continue
+        day = (at if at.tzinfo else at.replace(tzinfo=UTC)).astimezone(ET).date()
+        last_day, last_close = series[-1]
+        if day > last_day:
+            series.append((day, price))
+        elif day == last_day and price != last_close:
+            series[-1] = (day, price)
+        else:
+            continue
+        latest = max(latest or day, day)
+    return latest

@@ -3,7 +3,8 @@
 # Invoked by ~/Library/LaunchAgents/com.saillesh.trump-news-ingest.plist
 set -u
 
-PROJECT_DIR="/Users/saillesh/Desktop/trump_news"
+# The repo this script lives in, wherever it has been moved to.
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BIN="$PROJECT_DIR/.venv/bin"
 LOG="$PROJECT_DIR/logs/ingest.log"
 LOCK="$PROJECT_DIR/.ingest.lock"
@@ -31,5 +32,10 @@ trap 'rmdir "$LOCK" 2>/dev/null' EXIT
   "$BIN/archiver" ingest-presidential-documents
   "$BIN/archiver" ingest-federal-register --incremental
   "$BIN/archiver" ingest-white-house
+  # Same enrichment as the GitHub workflow, so new items arrive with their
+  # companies, sectors, topics, stance and impact score. All incremental.
+  "$BIN/archiver" backfill-federal-register-text --limit 50
+  "$BIN/archiver" detect-stocks
+  "$BIN/archiver" classify
   echo "===== $(date -u +%FT%TZ) done ====="
 } >>"$LOG" 2>&1
