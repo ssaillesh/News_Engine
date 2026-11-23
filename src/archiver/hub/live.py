@@ -1,14 +1,15 @@
 """Live quotes while ``archiver serve`` runs.
 
 Stored data only moves when a batch job runs, so during the trading day every
-price on the hub would otherwise sit at the last close. This loop keeps the
-quotes on ``securities`` current from Finnhub's real-time ``/quote``:
+price on the hub would otherwise sit at the last close. Each minute this loop
+refreshes the quotes on ``securities``:
 
-* every cycle it refreshes the *priority* set (the index, sector and
-  cross-asset ETFs the pages chart, the watchlist and holdings, and companies
-  in the last two days of news), then
-* spends what is left of the per-minute budget on the rest of the core
-  universe, stalest first, so screener and movers catch up within minutes.
+* the *priority* set (the index, sector and cross-asset ETFs the pages chart,
+  the watchlist and holdings, and companies in the last two days of news) from
+  Finnhub's real-time ``/quote``, which also carries the day's open/high/low;
+* everything else in the core universe from Yahoo's batch spark endpoint,
+  twenty symbols a call, so the screener and movers never mix today's moves
+  with an older session's.
 
 Outside regular hours it does one last pass after the close and then idles.
 Finnhub's free plan allows 60 calls a minute; the default budget leaves room
@@ -19,7 +20,7 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Iterable
-from datetime import UTC, datetime, time, timedelta
+from datetime import UTC, date, datetime, time, timedelta
 from typing import TYPE_CHECKING
 
 from loguru import logger
@@ -30,7 +31,7 @@ from archiver.hub.returns import ET
 from archiver.storage.models import Holding, Security, Status, StockMention, WatchlistItem
 
 if TYPE_CHECKING:
-    from archiver.clients.market import FinnhubClient
+    from archiver.clients.market import FinnhubClient, Quote, YahooChartClient
     from archiver.config.settings import Settings
     from archiver.storage.db import Database
 
@@ -88,71 +89,119 @@ async def priority_tickers(db: Database, *, news_hours: int = 48, news_cap: int 
     return [*(t for t in PRIORITY if t in known), *watched, *held, *named]
 
 
-async def stalest_core(db: Database, limit: int) -> list[str]:
+async def core_universe(db: Database) -> list[str]:
     async with db.session() as session:
         rows = await session.scalars(
-            select(Security.ticker)
-            .where(Security.is_core.is_(True))
-            .order_by(Security.quote_at.asc().nulls_first(), Security.ticker)
-            .limit(limit)
+            select(Security.ticker).where(Security.is_core.is_(True)).order_by(Security.ticker)
         )
         return list(rows.all())
 
 
-async def refresh_quotes(db: Database, finnhub: FinnhubClient, tickers: Iterable[str]) -> int:
-    """Write the latest quote for each ticker that has a ``securities`` row. Returns
-    how many were updated; a failed symbol is skipped, not fatal."""
-    rows = []
-    for t in tickers:
-        try:
-            q = await finnhub.quote(t)
-        except ClientError as exc:
-            logger.debug("live quote {} failed: {}", t, exc)
-            continue
-        rows.append(
-            {
+def _day(at: datetime | None) -> date | None:
+    return (at if at.tzinfo else at.replace(tzinfo=UTC)).astimezone(ET).date() if at else None
+
+
+async def write_quotes(db: Database, quotes: dict[str, Quote]) -> int:
+    """Store quotes on existing ``securities`` rows; returns how many were written.
+
+    A quote older than the stored one is skipped. One without a day range (Yahoo)
+    keeps the stored range only if it is from the same session, so a stale
+    high/low never sits beside today's price.
+    """
+    if not quotes:
+        return 0
+    async with db.session() as session, session.begin():
+        stored = dict(
+            (
+                await session.execute(
+                    select(Security.ticker, Security.quote_at).where(
+                        Security.ticker.in_(list(quotes))
+                    )
+                )
+            ).all()
+        )
+        # Two executemany batches (with and without a day range), keyed by
+        # primary key: one round trip each instead of one per ticker on Neon.
+        full: list[dict[str, object]] = []
+        bare: list[dict[str, object]] = []
+        for t, q in quotes.items():
+            if t not in stored or q.price is None:
+                continue
+            at = q.at or datetime.now(UTC)
+            old = stored[t]
+            if old is not None and (old if old.tzinfo else old.replace(tzinfo=UTC)) > at:
+                continue
+            values: dict[str, object] = {
                 "ticker": t,
                 "price": q.price,
                 "change": q.change,
                 "pct_change": q.pct_change,
-                "day_open": q.day_open,
-                "day_high": q.day_high,
-                "day_low": q.day_low,
                 "prev_close": q.prev_close,
-                "quote_at": q.at or datetime.now(UTC),
+                "quote_at": at,
             }
-        )
-    if rows:
-        async with db.session() as session, session.begin():
-            for r in rows:
-                t = r.pop("ticker")
-                await session.execute(update(Security).where(Security.ticker == t).values(**r))
-    return len(rows)
+            if q.day_high is not None or _day(old) != _day(at):
+                values.update(day_open=q.day_open, day_high=q.day_high, day_low=q.day_low)
+                full.append(values)
+            else:
+                bare.append(values)
+        for batch in (full, bare):
+            if batch:
+                await session.execute(update(Security), batch)
+        n = len(full) + len(bare)
+    return n
+
+
+async def finnhub_quotes(finnhub: FinnhubClient, tickers: Iterable[str]) -> dict[str, Quote]:
+    out: dict[str, Quote] = {}
+    for t in tickers:
+        try:
+            out[t] = await finnhub.quote(t)
+        except ClientError as exc:
+            logger.debug("live quote {} failed: {}", t, exc)
+    return out
+
+
+async def spark_quotes(yahoo: YahooChartClient, tickers: list[str]) -> dict[str, Quote]:
+    from archiver.clients.market import SPARK_BATCH
+
+    out: dict[str, Quote] = {}
+    for i in range(0, len(tickers), SPARK_BATCH):
+        try:
+            out.update(await yahoo.spark(tickers[i : i + SPARK_BATCH]))
+        except ClientError as exc:
+            logger.debug("spark batch {} failed: {}", i // SPARK_BATCH, exc)
+    return out
+
+
+async def refresh_quotes(db: Database, finnhub: FinnhubClient, tickers: Iterable[str]) -> int:
+    """Finnhub quotes for ``tickers``, written; a failed symbol is skipped."""
+    return await write_quotes(db, await finnhub_quotes(finnhub, tickers))
 
 
 async def live_quote_loop(db: Database, settings: Settings, *, budget: int = 40) -> None:
     """Run until cancelled. ``budget`` is Finnhub calls per cycle (one cycle a minute)."""
-    from archiver.clients.market import FinnhubClient
+    from archiver.clients.market import FinnhubClient, YahooChartClient
     from archiver.clients.rate_limit import TokenBucket
 
     # A slower bucket than the shared default, so on-demand page refreshes
     # (their own client, same key) still fit inside Finnhub's 60/min.
     rps = min(settings.finnhub_rps, budget / CYCLE_S + 0.05)
     closed_pass_done = False
-    logger.info("live quotes: on ({} calls/min)", budget)
+    logger.info("live quotes: on (Finnhub {} calls/min + Yahoo batch)", budget)
     while True:
         started = asyncio.get_running_loop().time()
         is_open = market_open()
         try:
             if is_open or not closed_pass_done:
-                prio = await priority_tickers(db)
-                rest = await stalest_core(db, budget) if is_open else []
-                todo = plan(prio, rest, budget)
-                async with FinnhubClient.from_settings(
-                    settings, rate_limiter=TokenBucket(rps)
-                ) as finnhub:
-                    n = await refresh_quotes(db, finnhub, todo)
-                logger.debug("live quotes: {}/{} updated", n, len(todo))
+                fast = plan(await priority_tickers(db), [], budget)
+                bulk = [t for t in await core_universe(db) if t not in set(fast)]
+                async with (
+                    FinnhubClient.from_settings(settings, rate_limiter=TokenBucket(rps)) as fh,
+                    YahooChartClient.from_settings(settings) as yahoo,
+                ):
+                    a, b = await asyncio.gather(finnhub_quotes(fh, fast), spark_quotes(yahoo, bulk))
+                n = await write_quotes(db, {**b, **a})
+                logger.debug("live quotes: {} written ({} finnhub, {} yahoo)", n, len(a), len(b))
                 closed_pass_done = not is_open
         except asyncio.CancelledError:
             raise

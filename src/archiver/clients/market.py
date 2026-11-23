@@ -254,6 +254,41 @@ def parse_chart(payload: dict[str, Any], ticker: str) -> list[Bar]:
     return bars
 
 
+SPARK_BATCH = 20  # Yahoo's spark endpoint accepts up to 20 symbols per call
+
+
+def parse_spark(payload: dict[str, Any]) -> dict[str, Quote]:
+    """Spark response -> {ticker: Quote} with price, change and previous close
+    (no open/high/low). Yahoo share-class dashes are mapped back: BRK-B -> BRK.B."""
+    out: dict[str, Quote] = {}
+    for symbol, row in (payload or {}).items():
+        if not isinstance(row, dict):
+            continue
+        closes = [c for c in row.get("close") or [] if c is not None]
+        price = _num(row.get("fulldayPrice")) or (_num(closes[-1]) if closes else None)
+        prev = _num(row.get("chartPreviousClose")) or _num(row.get("previousClose"))
+        if price is None:
+            continue
+        stamps = row.get("timestamp") or []
+        change = _num(row.get("fulldayChange"))
+        pct_change = _num(row.get("fulldayChangePercent"))
+        if change is None and prev:
+            change = price - prev
+        if pct_change is None and prev:
+            pct_change = (price / prev - 1) * 100
+        out[symbol.replace("-", ".")] = Quote(
+            price=price,
+            change=change,
+            pct_change=pct_change,
+            day_open=None,
+            day_high=None,
+            day_low=None,
+            prev_close=prev,
+            at=datetime.fromtimestamp(stamps[-1], UTC) if stamps else None,
+        )
+    return out
+
+
 class YahooChartClient(BaseHttpClient):
     def __init__(self, *, transport: httpx.AsyncBaseTransport | None = None, **kwargs: Any):
         kwargs.setdefault("user_agent", "Mozilla/5.0")  # Yahoo rejects bare script UAs
@@ -285,6 +320,21 @@ class YahooChartClient(BaseHttpClient):
             params={"range": range_, "interval": "1d", "events": "split,div"},
         )
         return parse_chart(resp.data, ticker)
+
+    async def spark(self, tickers: list[str]) -> dict[str, Quote]:
+        """Latest price for up to :data:`SPARK_BATCH` symbols in one call."""
+        if not tickers:
+            return {}
+        resp = await self.request_json(
+            "GET",
+            "/v8/finance/spark",
+            params={
+                "symbols": ",".join(t.replace(".", "-") for t in tickers[:SPARK_BATCH]),
+                "range": "1d",
+                "interval": "1d",
+            },
+        )
+        return parse_spark(resp.data)
 
 
 # ── Polygon / Massive (whole-market end-of-day bars) ─────────────────────────

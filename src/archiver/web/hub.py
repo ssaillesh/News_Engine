@@ -278,6 +278,15 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         column = getattr(Security, sort)
         ordered = column.desc() if order == "desc" else column.asc()
         async with db.session() as session:
+            if sort == "pct_change" and not wanted:
+                # Movers: rank only quotes from the newest session, so a stock
+                # whose quote is still last session's doesn't list its old move
+                # beside today's.
+                newest = await session.scalar(
+                    select(func.max(Security.quote_at)).where(Security.is_core.is_(True))
+                )
+                if newest is not None:
+                    stmt = stmt.where(Security.quote_at >= newest - timedelta(hours=16))
             total = await session.scalar(select(func.count()).select_from(stmt.subquery()))
             rows = (
                 await session.scalars(
