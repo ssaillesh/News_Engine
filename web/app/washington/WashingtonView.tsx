@@ -3,10 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { movesLookup, qs, reactionsKey, useApi, type NewsItem, type NewsPage, type ReactionsResponse } from "@/lib/api";
-import { cls, pct } from "@/lib/format";
+import { cls, pct, sentimentTone } from "@/lib/format";
 import { ACTION_TYPES, impact100, kindShort, summaryOf, topicShort, WASHINGTON_SOURCES } from "@/lib/news";
 import { dayHeading, dayMonth, etDay, etTime, hoursAgo, useNow } from "@/lib/time";
-import { Bar, Empty, LineChart, Pane, PaneError, SkRows, Tabs, Toolbar } from "@/components/term";
+import { Bar, Empty, Pane, PaneError, SkRows, Tabs, Toolbar } from "@/components/term";
 
 const WASH = WASHINGTON_SOURCES.join(",");
 const RANGES = [
@@ -173,57 +173,124 @@ function Focus({ items, loading }: { items: NewsItem[]; loading: boolean }) {
 }
 
 // ── tone ──────────────────────────────────────────────────────────────────
-const STANCE: Record<string, number> = { supportive: 1, restrictive: -1, mentioned: 0 };
+type Dir = 1 | -1 | 0;
 
 function Tone({ items, loading, now }: { items: NewsItem[]; loading: boolean; now: number | null }) {
-  // FinBERT scores news, not every government document; fall back to the
-  // impact model's policy stance when nothing here has a sentiment score.
+  // FinBERT scores news, not government documents, so this usually reads the
+  // impact model's stance: is the action a tailwind or a headwind for the
+  // sectors it names? When items do carry sentiment, that is used instead.
   const useSentiment = items.some((i) => i.sentiment);
-  const value = (i: NewsItem) => (useSentiment ? (i.sentiment?.compound ?? null) : i.impact?.stance ? (STANCE[i.impact.stance] ?? 0) : null);
+  const up = useSentiment ? "POSITIVE" : "TAILWIND";
+  const down = useSentiment ? "NEGATIVE" : "HEADWIND";
+  const dir = (i: NewsItem): Dir | null => {
+    if (useSentiment) {
+      if (!i.sentiment) return null;
+      const t = sentimentTone(i.sentiment.compound);
+      return t === "up" ? 1 : t === "down" ? -1 : 0;
+    }
+    const st = i.impact?.stance;
+    return st === "supportive" ? 1 : st === "restrictive" ? -1 : st ? 0 : null;
+  };
+
   const days: string[] = [];
   if (now !== null) for (let k = 6; k >= 0; k--) days.push(etDay(new Date(now - k * 86_400_000).toISOString()));
   const byDay = days.map((d) => {
-    const vals = items.filter((i) => etDay(i.created_at) === d).map(value).filter((v): v is number => v !== null);
+    const mine = items.filter((i) => etDay(i.created_at) === d);
+    const dirs = mine.map(dir).filter((v): v is Dir => v !== null);
     const topics = new Map<string, number>();
-    for (const i of items) if (etDay(i.created_at) === d) for (const t of i.topics) topics.set(t.label, (topics.get(t.label) ?? 0) + 1);
-    const topic = [...topics.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
-    return { d, avg: vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null, topic };
+    for (const i of mine) for (const t of i.topics) topics.set(t.label, (topics.get(t.label) ?? 0) + 1);
+    return {
+      d,
+      up: dirs.filter((v) => v === 1).length,
+      down: dirs.filter((v) => v === -1).length,
+      flat: dirs.filter((v) => v === 0).length,
+      topic: [...topics.entries()].sort((a, b) => b[1] - a[1])[0]?.[0],
+    };
   });
-  const scored = byDay.filter((x) => x.avg !== null) as { d: string; avg: number; topic?: string }[];
-  const lo = scored.length ? scored.reduce((a, b) => (b.avg < a.avg ? b : a)) : null;
-  const hi = scored.length ? scored.reduce((a, b) => (b.avg > a.avg ? b : a)) : null;
-  const label = (x: { d: string; topic?: string } | null) => (x ? `${dayHeading(x.d).slice(0, 3)} · ${(x.topic ?? "—").split(/[ &]/)[0].toUpperCase()}` : "—");
+  const totUp = byDay.reduce((a, x) => a + x.up, 0);
+  const totDown = byDay.reduce((a, x) => a + x.down, 0);
+  const totFlat = byDay.reduce((a, x) => a + x.flat, 0);
+  const total = totUp + totDown + totFlat;
+  const max = Math.max(1, ...byDay.map((x) => Math.max(x.up, x.down)));
+  const verdict =
+    totUp + totDown === 0
+      ? { text: "NO CLEAR DIRECTION", cls: "dim" }
+      : totDown > totUp * 1.25
+        ? { text: `LEANING ${down}`, cls: "dn" }
+        : totUp > totDown * 1.25
+          ? { text: `LEANING ${up}`, cls: "up" }
+          : { text: "BALANCED", cls: "dim" };
+  const worst = [...byDay].sort((a, b) => b.down - a.down)[0];
+  const best = [...byDay].sort((a, b) => b.up - a.up)[0];
+  const dayName = (d: string) => dayHeading(d).slice(0, 3);
+  const short = (t?: string) => (t ?? "").split(/[ &]/)[0].toUpperCase();
 
   return (
-    <Pane title="Market tone · 7D" right={useSentiment ? "AVG SENTIMENT" : "NET STANCE"}>
-      <div className="body" style={{ padding: "10px 8px", display: "flex", flexDirection: "column", gap: 8 }}>
+    <Pane title="Market tone · 7D" right={useSentiment ? "SENTIMENT" : "TAILWIND VS HEADWIND"}>
+      <div className="body" style={{ padding: "8px", display: "flex", flexDirection: "column", gap: 8 }}>
         {loading ? (
           <SkRows rows={4} />
-        ) : !scored.length ? (
+        ) : !total ? (
           <Empty>NOTHING SCORED THIS WEEK.</Empty>
         ) : (
           <>
-            <div style={{ height: 120 }}>
-              <LineChart
-                label={`Average ${useSentiment ? "sentiment" : "policy stance"} of the President's actions over seven days`}
-                height={120}
-                baseline={0}
-                series={[{ values: byDay.map((x) => x.avg), color: "var(--amb)" }]}
-                markers={lo && lo.avg < 0 ? [{ index: byDay.findIndex((x) => x.d === lo.d), color: "var(--dn)", r: 3.5 }] : []}
-              />
+            <div>
+              <div className={`m ${verdict.cls}`} style={{ fontSize: 16, fontWeight: 600 }}>
+                {verdict.text}
+              </div>
+              <div className="m" style={{ fontSize: 11, marginTop: 2 }}>
+                <span className="up">{totUp} {up.toLowerCase()}</span>
+                <span className="dim"> · </span>
+                <span className="dn">{totDown} {down.toLowerCase()}</span>
+                <span className="dim">
+                  {" "}
+                  · {totFlat} no clear direction, of {total} actions
+                </span>
+              </div>
+              <div className="dim" style={{ fontSize: 11, lineHeight: 1.4, marginTop: 4 }}>
+                {useSentiment
+                  ? "Tone of the President's actions as scored by FinBERT: positive or negative wording."
+                  : "Tailwind: exemptions, deregulation, awards, incentives. Headwind: tariffs, bans, probes, sanctions. Judged for the sectors each action names."}
+              </div>
             </div>
-            <div className="m dim" style={{ display: "flex", justifyContent: "space-between", fontSize: 11 }}>
-              <span>{days[0] ? dayHeading(days[0]).slice(0, 3) : ""}</span>
-              <span>{useSentiment ? "— NEUTRAL —" : "— BALANCED —"}</span>
-              <span>{days[6] ? dayHeading(days[6]).slice(0, 3) : ""}</span>
+
+            <div
+              role="img"
+              aria-label={byDay.map((x) => `${dayName(x.d)}: ${x.up} ${up.toLowerCase()}, ${x.down} ${down.toLowerCase()}`).join("; ")}
+              style={{ display: "grid", gridTemplateColumns: "repeat(7, minmax(0, 1fr))", gap: 4 }}
+            >
+              {byDay.map((x) => (
+                <div key={x.d} className="m" style={{ display: "flex", flexDirection: "column", alignItems: "center", fontSize: 10 }} title={`${dayName(x.d)}: ${x.up} ${up.toLowerCase()}, ${x.down} ${down.toLowerCase()}, ${x.flat} neutral`}>
+                  {/* Each count rides on the end of its own bar. */}
+                  <div style={{ height: 54, width: "60%", display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "center" }}>
+                    <span className="up">{x.up || ""}</span>
+                    <div style={{ width: "100%", height: `${(x.up / max) * 40}px`, background: "var(--up)" }} />
+                  </div>
+                  <div style={{ height: 1, width: "100%", background: "var(--dim)" }} />
+                  <div style={{ height: 54, width: "60%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                    <div style={{ width: "100%", height: `${(x.down / max) * 40}px`, background: "var(--dn)" }} />
+                    <span className="dn">{x.down || ""}</span>
+                  </div>
+                  <span className="dim">{dayName(x.d)}</span>
+                </div>
+              ))}
             </div>
+            <div className="m dim" style={{ display: "flex", justifyContent: "space-between", fontSize: 10 }}>
+              <span>
+                <span className="up">▲</span> {up.toLowerCase()} actions above the line
+              </span>
+              <span>
+                <span className="dn">▼</span> {down.toLowerCase()} below
+              </span>
+            </div>
+
             <div className="r m" style={{ borderTop: "1px solid var(--rule)", fontSize: 12 }}>
-              <span className="dim">{useSentiment ? "MOST NEGATIVE" : "MOST RESTRICTIVE"}</span>
-              <span>{label(lo)}</span>
+              <span className="dim">MOST {down}</span>
+              <span>{worst && worst.down ? `${dayName(worst.d)} · ${worst.down} · ${short(worst.topic)}` : "—"}</span>
             </div>
             <div className="r m" style={{ fontSize: 12 }}>
-              <span className="dim">{useSentiment ? "MOST POSITIVE" : "MOST SUPPORTIVE"}</span>
-              <span>{label(hi)}</span>
+              <span className="dim">MOST {up}</span>
+              <span>{best && best.up ? `${dayName(best.d)} · ${best.up} · ${short(best.topic)}` : "—"}</span>
             </div>
           </>
         )}
