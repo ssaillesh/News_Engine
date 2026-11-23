@@ -27,6 +27,7 @@ from loguru import logger
 from sqlalchemy import select, update
 
 from archiver.clients.exceptions import ClientError
+from archiver.clients.market import is_foreign
 from archiver.hub.returns import ET
 from archiver.storage.models import Holding, Security, Status, StockMention, WatchlistItem
 
@@ -193,8 +194,12 @@ async def live_quote_loop(db: Database, settings: Settings, *, budget: int = 40)
         is_open = market_open()
         try:
             if is_open or not closed_pass_done:
-                fast = plan(await priority_tickers(db), [], budget)
+                wanted = plan(await priority_tickers(db), [], budget)
+                # Finnhub's free plan refuses non-US listings: those ride the
+                # Yahoo batch with the rest of the universe.
+                fast = [t for t in wanted if not is_foreign(t)]
                 bulk = [t for t in await core_universe(db) if t not in set(fast)]
+                bulk += [t for t in wanted if is_foreign(t) and t not in set(bulk)]
                 async with (
                     FinnhubClient.from_settings(settings, rate_limiter=TokenBucket(rps)) as fh,
                     YahooChartClient.from_settings(settings) as yahoo,

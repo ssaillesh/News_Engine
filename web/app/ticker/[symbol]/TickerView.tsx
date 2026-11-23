@@ -131,6 +131,11 @@ export function TickerView({ symbol }: { symbol: string }) {
           <>
             <span className="m" style={{ fontSize: 22, fontWeight: 600 }}>
               {fixed(q.price)}
+              {s.currency && s.currency !== "USD" ? (
+                <span className="dim" style={{ fontSize: 13, marginLeft: 4 }}>
+                  {s.currency}
+                </span>
+              ) : null}
             </span>
             <span className={`m ${cls(q.change)}`} style={{ fontSize: 15 }}>
               {signed(q.change)} {pct(q.pct_change)}

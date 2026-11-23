@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import asyncio
 import hmac
+import re
 import time
 from collections.abc import Callable
 from dataclasses import dataclass, field
@@ -34,6 +35,7 @@ from archiver.clients.market import (
     PolymarketClient,
     PolymarketHistoryClient,
     YahooChartClient,
+    is_foreign,
 )
 from archiver.config.settings import get_settings
 from archiver.hub import polymarket as pm
@@ -41,7 +43,12 @@ from archiver.hub.live import market_open
 from archiver.hub.odds import ODDS_TAGS, pick_odds
 from archiver.hub.portfolio import Lot, summarize
 from archiver.hub.returns import ET, load_closes, overlay_quotes, period_returns, reaction
-from archiver.hub.service import normalize_ticker, refresh_prices, refresh_security
+from archiver.hub.service import (
+    normalize_ticker,
+    refresh_foreign_security,
+    refresh_prices,
+    refresh_security,
+)
 from archiver.storage.db import Database
 from archiver.storage.models import (
     Holding,
@@ -148,6 +155,17 @@ def _holding_dict(h: Holding) -> dict[str, Any]:
     }
 
 
+_TSX_BASE = re.compile(r"^[A-Z]{1,5}(\.[A-Z])?$")
+
+
+def _tsx_candidate(needle: str) -> str | None:
+    """The Toronto symbol a search should try: ``VFV`` -> ``VFV.TO``, ``VFV.TO``
+    itself, or None for anything that cannot be one."""
+    if needle.endswith(".TO"):
+        return needle if _TSX_BASE.match(needle[:-3]) else None
+    return f"{needle}.TO" if _TSX_BASE.match(needle) else None
+
+
 @dataclass
 class _PolyCache:
     """Per-process cache for the Polymarket page (nothing is stored)."""
@@ -183,13 +201,38 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         except ValueError as exc:
             raise HTTPException(422, str(exc)) from exc
 
+    fx_cache: dict[tuple[str, str], tuple[float, float | None]] = {}
+    tsx_cache: dict[str, tuple[float, dict[str, Any] | None]] = {}
+
+    async def _tsx_lookup(symbol: str) -> dict[str, Any] | None:
+        """Yahoo snapshot of a Toronto symbol, cached a day (listings rarely change)."""
+        at, snap = tsx_cache.get(symbol, (0.0, None))
+        if at and time.monotonic() - at <= 86_400:
+            return snap
+        try:
+            async with YahooChartClient.from_settings(settings) as yahoo:
+                snap = await yahoo.snapshot(symbol)
+        except ClientError:
+            return None  # not cached: a provider blip must not hide a listing
+        if len(tsx_cache) >= 2000:
+            tsx_cache.pop(next(iter(tsx_cache)))
+        tsx_cache[symbol] = (time.monotonic(), snap)
+        return snap
+
     async def _live_refresh(ticker: str, *, prices: bool = False) -> None:
-        """Best effort: a provider outage must not turn a read into an error."""
-        if not settings.finnhub_api_key:
+        """Best effort: a provider outage must not turn a read into an error.
+
+        Non-US listings (``VFV.TO``) come from Yahoo alone, which needs no key;
+        US ones from Finnhub when a key is configured."""
+        if not is_foreign(ticker) and not settings.finnhub_api_key:
             return
         try:
-            async with FinnhubClient.from_settings(settings) as finnhub:
-                await refresh_security(db, finnhub, ticker)
+            if is_foreign(ticker):
+                async with YahooChartClient.from_settings(settings) as yahoo:
+                    await refresh_foreign_security(db, yahoo, ticker)
+            else:
+                async with FinnhubClient.from_settings(settings) as finnhub:
+                    await refresh_security(db, finnhub, ticker)
             if prices:
                 async with YahooChartClient.from_settings(settings) as yahoo:
                     await refresh_prices(db, yahoo, ticker)
@@ -260,7 +303,24 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
                 remote = []
             have = {r["ticker"] for r in results}
             results += [r for r in remote if r["ticker"] not in have][: 10 - len(results)]
-        return {"results": results}
+        # Toronto: the universe is US-only, so look the symbol up on the TSX too
+        # ("VFV" finds VFV.TO; "TD" finds both the NYSE and the Toronto line).
+        # It ranks right after an exact US match, ahead of mere prefix matches
+        # (VFV.TO before VFVA), whether or not it is already stored.
+        tsx = _tsx_candidate(needle)
+        if tsx:
+            stored = next((r for r in results if r["ticker"] == tsx), None)
+            hit = stored
+            if stored is None:
+                snap = await _tsx_lookup(tsx)
+                if snap:
+                    label = f"{snap.get('name') or tsx} · {snap.get('exchange') or 'Toronto'}"
+                    hit = {"ticker": tsx, "name": label}
+            if hit is not None:
+                results = [r for r in results if r["ticker"] != tsx]
+                exact = 1 if results and results[0]["ticker"] == needle else 0
+                results.insert(exact, hit)
+        return {"results": results[:10]}
 
     @router.get("/securities")
     async def list_securities(
@@ -383,8 +443,11 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
             held = await session.scalar(
                 select(func.coalesce(func.sum(Holding.shares), 0)).where(Holding.ticker == symbol)
             )
-        if sec is None and not refresh and settings.finnhub_api_key:
-            await _live_refresh(symbol, prices=True)  # first visit: fill it in
+        # First visit, or a universe row that was listed but never priced
+        # (any non-core symbol until someone opens it): fill it in now.
+        never_priced = sec is None or (sec.quote_at is None and sec.price is None)
+        if never_priced and not refresh and (settings.finnhub_api_key or is_foreign(symbol)):
+            await _live_refresh(symbol, prices=True)
             async with db.session() as session:
                 sec = await session.get(Security, symbol)
         return {
@@ -797,11 +860,43 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
         async with db.session() as session:
             lots = (await session.scalars(select(Holding))).all()
         secs = await _securities(sorted({h.ticker for h in lots}))
-        quotes = {
-            t: {"price": s.price, "change": s.change, "pct_change": s.pct_change, "name": s.name}
+        quotes: dict[str, dict[str, Any]] = {
+            t: {
+                "price": s.price,
+                "change": s.change,
+                "pct_change": s.pct_change,
+                "name": s.name,
+                "currency": s.currency or "USD",
+            }
             for t, s in secs.items()
         }
-        return summarize([Lot(h.ticker, h.shares, h.avg_cost) for h in lots], quotes)
+        base = settings.portfolio_currency
+        fx = await _fx_rates({str(q["currency"]) for q in quotes.values()} - {base}, base)
+        return summarize(
+            [Lot(h.ticker, h.shares, h.avg_cost) for h in lots], quotes, base=base, fx=fx
+        )
+
+    async def _fx_rates(currencies: set[str], base: str) -> dict[str, float]:
+        """Live rates to ``base``, cached five minutes; a failed fetch falls back
+        to the last good rate, and a currency never fetched is simply absent
+        (its positions are then flagged, not converted at a guess)."""
+        out: dict[str, float] = {}
+        for ccy in sorted(currencies):
+            at, cached = fx_cache.get((ccy, base), (0.0, None))
+            if cached is not None and time.monotonic() - at <= ODDS_TTL_S:
+                out[ccy] = cached
+                continue
+            try:
+                async with YahooChartClient.from_settings(settings) as yahoo:
+                    fresh = await yahoo.fx_rate(ccy, base)
+            except ClientError:
+                fresh = None
+            if fresh:
+                fx_cache[(ccy, base)] = (time.monotonic(), fresh)
+            value = fresh or cached
+            if value:
+                out[ccy] = value
+        return out
 
     @router.get("/portfolio", dependencies=[Depends(require_token)])
     async def portfolio() -> dict[str, Any]:

@@ -257,6 +257,68 @@ def parse_chart(payload: dict[str, Any], ticker: str) -> list[Bar]:
 
 SPARK_BATCH = 20  # Yahoo's spark endpoint accepts up to 20 symbols per call
 
+# ── non-US listings ──────────────────────────────────────────────────────────
+# Exchange suffixes, as Yahoo writes them: Toronto, TSX Venture, Cboe Canada
+# (NEO), Canadian Securities Exchange. Finnhub's free plan refuses all of these,
+# so their profile, quote and history come from Yahoo alone.
+EXCHANGE_SUFFIXES = (".TO", ".V", ".NE", ".CN")
+
+
+def is_foreign(ticker: str) -> bool:
+    """True for a symbol carrying a non-US exchange suffix (``VFV.TO``)."""
+    return ticker.upper().endswith(EXCHANGE_SUFFIXES)
+
+
+def yahoo_symbol(ticker: str) -> str:
+    """Our ticker -> Yahoo's. Share-class dots become dashes (``BRK.B`` ->
+    ``BRK-B``), but an exchange suffix keeps its dot (``BBD.B.TO`` -> ``BBD-B.TO``)."""
+    if is_foreign(ticker):
+        base, suffix = ticker.rsplit(".", 1)
+        return f"{base.replace('.', '-')}.{suffix}"
+    return ticker.replace(".", "-")
+
+
+def from_yahoo_symbol(symbol: str) -> str:
+    """Yahoo's symbol -> ours; the inverse of :func:`yahoo_symbol`."""
+    if is_foreign(symbol):
+        base, suffix = symbol.rsplit(".", 1)
+        return f"{base.replace('-', '.')}.{suffix}"
+    return symbol.replace("-", ".")
+
+
+_YAHOO_TYPE = {"ETF": "ETP", "EQUITY": "Common Stock", "MUTUALFUND": "Mutual Fund"}
+
+
+def parse_chart_meta(payload: dict[str, Any]) -> dict[str, Any] | None:
+    """A 1-day chart's ``meta`` -> a ``securities`` row's profile and quote fields.
+
+    With ``range=1d`` Yahoo's ``chartPreviousClose`` is the prior session's
+    close, so the change it implies is the day's change.
+    """
+    results = ((payload or {}).get("chart") or {}).get("result") or []
+    meta = results[0].get("meta") if results and isinstance(results[0], dict) else None
+    if not isinstance(meta, dict):
+        return None
+    price = _num(meta.get("regularMarketPrice"))
+    if price is None:
+        return None
+    prev = _num(meta.get("chartPreviousClose")) or _num(meta.get("previousClose"))
+    at = _num(meta.get("regularMarketTime"))
+    kind = meta.get("instrumentType")
+    return {
+        "name": meta.get("longName") or meta.get("shortName"),
+        "exchange": meta.get("fullExchangeName") or meta.get("exchangeName"),
+        "currency": meta.get("currency"),
+        "security_type": _YAHOO_TYPE.get(str(kind), kind),
+        "price": price,
+        "prev_close": prev,
+        "change": price - prev if prev else None,
+        "pct_change": (price / prev - 1) * 100 if prev else None,
+        "day_high": _num(meta.get("regularMarketDayHigh")),
+        "day_low": _num(meta.get("regularMarketDayLow")),
+        "quote_at": datetime.fromtimestamp(at, UTC) if at else None,
+    }
+
 
 def parse_spark(payload: dict[str, Any]) -> dict[str, Quote]:
     """Spark response -> {ticker: Quote} with price, change and previous close
@@ -277,7 +339,7 @@ def parse_spark(payload: dict[str, Any]) -> dict[str, Quote]:
             change = price - prev
         if pct_change is None and prev:
             pct_change = (price / prev - 1) * 100
-        out[symbol.replace("-", ".")] = Quote(
+        out[from_yahoo_symbol(symbol)] = Quote(
             price=price,
             change=change,
             pct_change=pct_change,
@@ -314,13 +376,29 @@ class YahooChartClient(BaseHttpClient):
     async def daily_bars(self, ticker: str, *, range_: str = "5y") -> list[Bar]:
         if range_ not in YAHOO_RANGES:
             raise ValueError(f"range must be one of {YAHOO_RANGES}")
-        # Yahoo writes share classes with a dash: BRK.B -> BRK-B.
         resp = await self.request_json(
             "GET",
-            f"/v8/finance/chart/{ticker.replace('.', '-')}",
+            f"/v8/finance/chart/{yahoo_symbol(ticker)}",
             params={"range": range_, "interval": "1d", "events": "split,div"},
         )
         return parse_chart(resp.data, ticker)
+
+    async def snapshot(self, ticker: str) -> dict[str, Any] | None:
+        """Name, exchange, currency, type and the latest quote for one symbol
+        (any listing Yahoo carries, ``VFV.TO`` included); None if unknown."""
+        resp = await self.request_json(
+            "GET",
+            f"/v8/finance/chart/{yahoo_symbol(ticker)}",
+            params={"range": "1d", "interval": "1d"},
+        )
+        return parse_chart_meta(resp.data)
+
+    async def fx_rate(self, from_ccy: str, to_ccy: str) -> float | None:
+        """Units of ``to_ccy`` per one ``from_ccy`` (USD->CAD reads ``USDCAD=X``)."""
+        if from_ccy == to_ccy:
+            return 1.0
+        snap = await self.snapshot(f"{from_ccy}{to_ccy}=X")
+        return snap["price"] if snap else None
 
     async def spark(self, tickers: list[str]) -> dict[str, Quote]:
         """Latest price for up to :data:`SPARK_BATCH` symbols in one call."""
@@ -330,7 +408,7 @@ class YahooChartClient(BaseHttpClient):
             "GET",
             "/v8/finance/spark",
             params={
-                "symbols": ",".join(t.replace(".", "-") for t in tickers[:SPARK_BATCH]),
+                "symbols": ",".join(yahoo_symbol(t) for t in tickers[:SPARK_BATCH]),
                 "range": "1d",
                 "interval": "1d",
             },

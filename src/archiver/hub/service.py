@@ -21,6 +21,7 @@ from loguru import logger
 from sqlalchemy import func, select
 
 from archiver.clients.exceptions import ClientError
+from archiver.clients.market import is_foreign
 from archiver.domain.hashing import content_hash
 from archiver.storage.models import Holding, PriceBar, Security, WatchlistItem, utcnow
 from archiver.storage.repositories import (
@@ -130,7 +131,15 @@ async def refresh_security(
     )
     if stale:
         try:
-            row.update(await finnhub.profile(ticker))
+            profile = await finnhub.profile(ticker)
+            # Finnhub's profile describes the *company*: for TD or SHOP that is
+            # its home market (Toronto, CAD). The quote above is the US listing
+            # in US dollars, so the row must say so, or a portfolio would read a
+            # USD price as CAD. Keep the listing's exchange if we already have it.
+            profile["currency"] = "USD"
+            if existing is not None and existing.exchange:
+                profile.pop("exchange", None)
+            row.update(profile)
             row["profile_refreshed_at"] = utcnow()
         except ClientError as exc:
             report.fail(ticker, "profile", exc)
@@ -141,6 +150,31 @@ async def refresh_security(
     except ClientError as exc:
         report.fail(ticker, "metrics", exc)
 
+    await _upsert_rows(db, Security.__table__, [row], ["ticker"])
+    return row["last_error"] is None
+
+
+async def refresh_foreign_security(
+    db: Database, yahoo: YahooChartClient, ticker: str, *, report: HubReport | None = None
+) -> bool:
+    """Profile and quote for a non-US listing (``VFV.TO``) from Yahoo alone.
+
+    Finnhub's free plan refuses these symbols, so there are no fundamentals or
+    analyst trends for them; the row still carries its real name, exchange and
+    *currency*, which the portfolio needs to convert it correctly.
+    """
+    report = report or HubReport()
+    row: dict[str, Any] = {"ticker": ticker, "refreshed_at": utcnow(), "last_error": None}
+    try:
+        snap = await yahoo.snapshot(ticker)
+    except ClientError as exc:
+        report.fail(ticker, "quote", exc)
+        snap, row["last_error"] = None, f"quote: {exc}"
+    if snap is None and row["last_error"] is None:
+        row["last_error"] = "quote: no such listing on Yahoo"
+    if snap:
+        row.update(snap)
+        row["profile_refreshed_at"] = utcnow()
     await _upsert_rows(db, Security.__table__, [row], ["ticker"])
     return row["last_error"] is None
 
@@ -287,9 +321,13 @@ async def refresh_all(
     symbols = tickers if tickers is not None else await tracked_tickers(db)
     report.tickers = len(symbols)
     for ticker in symbols:
-        await refresh_security(db, finnhub, ticker, report=report)
+        if is_foreign(ticker):
+            await refresh_foreign_security(db, yahoo, ticker, report=report)
+        else:
+            await refresh_security(db, finnhub, ticker, report=report)
         if prices:
             await refresh_prices(db, yahoo, ticker, report=report)
-    if news and symbols:
-        await ingest_company_news(db, finnhub, symbols, days=news_days, report=report)
+    us = [t for t in symbols if not is_foreign(t)]  # Finnhub news is US-only on free
+    if news and us:
+        await ingest_company_news(db, finnhub, us, days=news_days, report=report)
     return report

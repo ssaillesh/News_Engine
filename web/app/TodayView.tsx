@@ -304,7 +304,7 @@ function Watchlist() {
     <Pane title="Watchlist" right={<Link href="/ticker">5 STOCK ›</Link>} style={{ gridColumn: 3, gridRow: 2 }}>
       {t ? (
         <Link href="/portfolio" className="r m" style={{ fontSize: 12, background: "var(--sel)" }}>
-          <span className="amb">PORT</span>
+          <span className="amb">PORT{t.currency ? ` ${t.currency}` : ""}</span>
           <span>{fixed(t.market_value)}</span>
           <span className={cls(t.day_change)}>
             {signed(t.day_change)} {pct(t.day_change_pct)}

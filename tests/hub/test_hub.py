@@ -274,6 +274,7 @@ async def test_news_ingest_is_idempotent(db: Database):
 async def client(db: Database, monkeypatch) -> AsyncIterator[httpx.AsyncClient]:
     monkeypatch.setenv("FINNHUB_API_KEY", "")  # reads never hit a provider in tests
     monkeypatch.setenv("HUB_WRITE_TOKEN", "secret")
+    monkeypatch.setenv("PORTFOLIO_CURRENCY", "USD")  # these fixtures are all USD
     from archiver.config import settings as settings_mod
 
     settings_mod.get_settings.cache_clear()

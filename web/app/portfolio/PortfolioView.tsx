@@ -42,7 +42,7 @@ export function PortfolioSkeleton() {
 }
 
 /** Today's holdings valued over the range: Σ shares × close, with SPY alongside, both indexed to 100. */
-function useHistory(positions: { ticker: string; shares: number }[], range: Range) {
+function useHistory(positions: { ticker: string; shares: number; rate: number }[], range: Range) {
   const tickers = positions.map((p) => p.ticker);
   const key = positions.length ? ["pf-history", range, ...tickers] : null;
   const res = useSWR(
@@ -67,7 +67,9 @@ function useHistory(positions: { ticker: string; shares: number }[], range: Rang
       return last;
     });
   });
-  const value = calendar.map((_, i) => positions.reduce((sum, p, k) => sum + p.shares * (filled[k][i] ?? 0), 0));
+  // Each position in the base currency at today's rate, so CAD and USD lines
+  // weigh what they are actually worth against each other.
+  const value = calendar.map((_, i) => positions.reduce((sum, p, k) => sum + p.shares * p.rate * (filled[k][i] ?? 0), 0));
   const spyVals = filled[filled.length - 1];
   const index = (vals: (number | null)[]) => {
     const base = vals.find((v) => v !== null && v > 0);
@@ -89,20 +91,23 @@ export function PortfolioView() {
   const [range, setRange] = useState<Range>("6m");
   const p = pf.data;
   const t = p?.totals;
-  const priced = (p?.positions ?? []).filter((x) => x.price !== null);
+  const base = p?.totals.currency ?? null;
+  const rateOf = (ccy: string) => (!base || ccy === base ? 1 : (p?.fx[ccy] ?? null));
+  const priced = (p?.positions ?? []).filter((x) => x.price !== null && rateOf(x.currency) !== null);
   const hist = useHistory(
-    priced.map((x) => ({ ticker: x.ticker, shares: x.shares })),
+    priced.map((x) => ({ ticker: x.ticker, shares: x.shares, rate: rateOf(x.currency) ?? 1 })),
     range,
   );
+  const ccyTag = base ? ` · ${base}` : "";
   const s = hist.series;
   const vs = s && s.portRet !== null && s.benchRet !== null ? s.portRet - s.benchRet : null;
 
   const kpis: { l: string; v: string; s?: string; c?: string }[] = t
     ? [
-        { l: "MARKET VALUE", v: fixed(t.market_value) },
+        { l: `MARKET VALUE${ccyTag}`, v: fixed(t.market_value) },
         { l: "DAY", v: signed(t.day_change), s: pct(t.day_change_pct), c: cls(t.day_change) },
         { l: "UNREALIZED P&L", v: signed(t.unrealized_pnl), s: pct(t.unrealized_pnl_pct), c: cls(t.unrealized_pnl) },
-        { l: "COST BASIS", v: fixed(t.cost_basis) },
+        { l: `COST BASIS${ccyTag}`, v: fixed(t.cost_basis) },
         {
           l: `VS S&P 500 · ${range.toUpperCase()}`,
           v: vs === null ? "—" : `${signed(vs, 1)} PTS`,
@@ -142,6 +147,20 @@ export function PortfolioView() {
         {p.unpriced.length ? (
           <div className="kpi" style={{ alignSelf: "center", color: "var(--hot)", fontSize: 11, borderRight: 0 }}>
             NO QUOTE YET FOR {p.unpriced.join(", ")}: LISTED BUT LEFT OUT OF TOTALS.
+          </div>
+        ) : null}
+        {p.unconverted?.length ? (
+          <div className="kpi" style={{ alignSelf: "center", color: "var(--hot)", fontSize: 11, borderRight: 0 }}>
+            NO EXCHANGE RATE FOR {p.unconverted.join(", ")}: LEFT OUT OF {base} TOTALS.
+          </div>
+        ) : null}
+        {base && Object.keys(p.fx ?? {}).length ? (
+          <div className="kpi dim" style={{ alignSelf: "center", fontSize: 11, borderRight: 0 }} title="Positions are shown in their own currency; totals convert them at today's rate, so P&L leaves out currency moves since purchase.">
+            {Object.entries(p.fx)
+              .map(([c, r]) => `1 ${c} = ${r.toFixed(4)} ${base}`)
+              .join(" · ")}
+            <br />
+            TOTALS IN {base} AT TODAY&apos;S RATE
           </div>
         ) : null}
       </div>
@@ -197,6 +216,7 @@ export function PortfolioView() {
 // ── holdings / lots ───────────────────────────────────────────────────────
 function Holdings({ portfolio, initialTab, addTicker }: { portfolio: Portfolio; initialTab: "holdings" | "lots"; addTicker: string }) {
   const [tab, setTab] = useState<"holdings" | "lots">(initialTab);
+  const base = portfolio.totals.currency;
   const lots = useApi<{ items: Holding[] }>("/api/hub/holdings");
   const n = portfolio.positions.length;
   const lotCount = portfolio.positions.reduce((a, x) => a + x.lots, 0);
@@ -225,6 +245,7 @@ function Holdings({ portfolio, initialTab, addTicker }: { portfolio: Portfolio; 
               <thead>
                 <tr>
                   <th className="l">TICKER</th>
+                  <th>CCY</th>
                   <th>SHARES</th>
                   <th>AVG COST</th>
                   <th>PRICE</th>
@@ -243,6 +264,7 @@ function Holdings({ portfolio, initialTab, addTicker }: { portfolio: Portfolio; 
                         {x.ticker}
                       </Link>
                     </td>
+                    <td className={`m ${x.currency === base ? "dim" : "amb"}`}>{x.currency}</td>
                     <td className="m">{num(x.shares, 4)}</td>
                     <td className="m">{fixed(x.avg_cost)}</td>
                     <td className="m">{fixed(x.price)}</td>
@@ -476,8 +498,8 @@ function Allocation({ portfolio }: { portfolio: Portfolio }) {
     const k = sectorOf.get(x.ticker) ?? "Other";
     const g = groups.get(k) ?? { w: 0, day: 0, prev: 0 };
     g.w += x.weight_pct;
-    g.day += x.day_change ?? 0;
-    g.prev += (x.market_value ?? 0) - (x.day_change ?? 0);
+    g.day += x.day_change_base ?? 0;
+    g.prev += (x.market_value_base ?? 0) - (x.day_change_base ?? 0);
     groups.set(k, g);
   }
   const rows = [...groups.entries()].map(([n, g]) => ({ n, w: g.w, d: g.prev ? (g.day / g.prev) * 100 : null })).sort((a, b) => b.w - a.w);

@@ -116,6 +116,8 @@ export type NewsPage = { items: NewsItem[]; total?: number };
 export type Position = {
   ticker: string;
   name: string | null;
+  /** The currency this position is quoted (and its average cost entered) in. */
+  currency: string;
   lots: number;
   shares: number;
   avg_cost: number | null;
@@ -126,10 +128,16 @@ export type Position = {
   unrealized_pnl_pct: number | null;
   day_change: number | null;
   day_change_pct: number | null;
+  /** The same figures in the portfolio's base currency (null if unconverted). */
+  market_value_base: number | null;
+  unrealized_pnl_base: number | null;
+  day_change_base: number | null;
   weight_pct: number | null;
 };
 
 export type PortfolioTotals = {
+  /** Base currency of every total (e.g. "CAD"). */
+  currency?: string | null;
   market_value: number | null;
   cost_basis: number | null;
   unrealized_pnl: number | null;
@@ -138,7 +146,15 @@ export type PortfolioTotals = {
   day_change_pct: number | null;
 };
 
-export type Portfolio = { positions: Position[]; totals: PortfolioTotals; unpriced: string[] };
+export type Portfolio = {
+  positions: Position[];
+  totals: PortfolioTotals;
+  /** Units of the base currency per one unit of each other currency held. */
+  fx: Record<string, number>;
+  unpriced: string[];
+  /** Positions in a currency with no rate: listed, kept out of the totals. */
+  unconverted: string[];
+};
 
 export type Holding = {
   id: number;

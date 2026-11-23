@@ -138,6 +138,9 @@ class Settings(BaseSettings):
     # Finnhub's free tier allows 60 calls/minute; stay a little under it.
     finnhub_rps: float = Field(0.9, gt=0)
     market_news_days: int = Field(7, ge=1, le=365)
+    # Currency the portfolio's totals are reported in; positions quoted in any
+    # other currency are converted at the live rate.
+    portfolio_currency: str = Field("CAD", pattern=r"^[A-Z]{3}$")
     # The Next.js frontend. When set, the API's "/" redirects there instead of
     # serving the legacy built-in dashboard.
     frontend_url: str = Field("")
