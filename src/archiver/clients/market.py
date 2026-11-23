@@ -119,10 +119,12 @@ class FinnhubClient(BaseHttpClient):
             settings.finnhub_api_key,
             transport=transport,
             user_agent=settings.user_agent,
-            timeout_s=settings.http_timeout_s,
-            max_retries=settings.http_max_retries,
+            timeout_s=min(settings.http_timeout_s, 15.0),
+            # Fail fast: a blocked or down provider should cost seconds, not
+            # minutes. The shared defaults (5 retries, 60s cap) suit bulk archiving.
+            max_retries=min(settings.http_max_retries, 2),
             backoff_base_s=settings.backoff_base_s,
-            backoff_cap_s=settings.backoff_cap_s,
+            backoff_cap_s=min(settings.backoff_cap_s, 8.0),
             rate_limiter=rate_limiter or TokenBucket(settings.finnhub_rps),
         )
 
@@ -258,10 +260,12 @@ class YahooChartClient(BaseHttpClient):
     ) -> YahooChartClient:
         return cls(
             transport=transport,
-            timeout_s=settings.http_timeout_s,
-            max_retries=settings.http_max_retries,
+            timeout_s=min(settings.http_timeout_s, 15.0),
+            # Fail fast: a blocked or down provider should cost seconds, not
+            # minutes. The shared defaults (5 retries, 60s cap) suit bulk archiving.
+            max_retries=min(settings.http_max_retries, 2),
             backoff_base_s=settings.backoff_base_s,
-            backoff_cap_s=settings.backoff_cap_s,
+            backoff_cap_s=min(settings.backoff_cap_s, 8.0),
             rate_limiter=TokenBucket(1.0),
         )
 
