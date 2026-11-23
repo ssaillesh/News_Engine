@@ -28,6 +28,7 @@ FINNHUB_BASE = "https://finnhub.io/api/v1"
 POLYGON_BASE = "https://api.polygon.io"  # Massive; api.massive.com is equivalent
 YAHOO_BASE = "https://query1.finance.yahoo.com"
 POLYMARKET_BASE = "https://gamma-api.polymarket.com"
+POLYMARKET_CLOB_BASE = "https://clob.polymarket.com"
 
 # The fundamentals worth showing on a ticker page, out of Finnhub's ~130.
 METRIC_KEYS = (
@@ -419,6 +420,11 @@ class PolymarketClient(BaseHttpClient):
             backoff_cap_s=min(settings.backoff_cap_s, 4.0),
         )
 
+    async def event(self, event_id: str) -> dict[str, Any] | None:
+        """One event, with all of its markets, by Gamma id."""
+        resp = await self.request_json("GET", f"/events/{event_id}")
+        return resp.data if isinstance(resp.data, dict) else None
+
     async def events(self, tag: str, *, limit: int = 12) -> list[dict[str, Any]]:
         resp = await self.request_json(
             "GET",
@@ -433,3 +439,42 @@ class PolymarketClient(BaseHttpClient):
             },
         )
         return [e for e in resp.data or [] if isinstance(e, dict)]
+
+
+class PolymarketHistoryClient(BaseHttpClient):
+    """Polymarket's public CLOB price history for one outcome token. No key."""
+
+    def __init__(self, *, transport: httpx.AsyncBaseTransport | None = None, **kwargs: Any) -> None:
+        super().__init__(POLYMARKET_CLOB_BASE, **kwargs)
+        _with_transport(self, transport, {})
+
+    @classmethod
+    def from_settings(
+        cls, settings: Settings, *, transport: httpx.AsyncBaseTransport | None = None
+    ) -> PolymarketHistoryClient:
+        return cls(
+            transport=transport,
+            user_agent=settings.user_agent,
+            timeout_s=min(settings.http_timeout_s, 10.0),
+            max_retries=min(settings.http_max_retries, 1),
+            backoff_base_s=settings.backoff_base_s,
+            backoff_cap_s=min(settings.backoff_cap_s, 4.0),
+        )
+
+    async def history(
+        self, token_id: str, *, interval: str = "1m", fidelity_min: int = 60
+    ) -> list[tuple[datetime, float]]:
+        """``[(at, price 0–1)]`` oldest first: the last month at hourly resolution."""
+        resp = await self.request_json(
+            "GET",
+            "/prices-history",
+            params={"market": token_id, "interval": interval, "fidelity": fidelity_min},
+        )
+        rows = resp.data.get("history") if isinstance(resp.data, dict) else None
+        out: list[tuple[datetime, float]] = []
+        for row in rows or []:
+            t, p = _num(row.get("t")), _num(row.get("p"))
+            if t is not None and p is not None and 0.0 <= p <= 1.0:
+                out.append((datetime.fromtimestamp(t, UTC), p))
+        out.sort(key=lambda r: r[0])
+        return out

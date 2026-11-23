@@ -433,4 +433,8 @@ table.tbl th button.on {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
   }
+  .g-poly {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr);
+    grid-template-rows: minmax(0, 11fr) minmax(0, 9fr);
+  }
 }

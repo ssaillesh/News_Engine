@@ -205,6 +205,87 @@ export type Odds = {
 };
 export type OddsResponse = { source: string; items: Odds[]; error?: string };
 
+// ── polymarket × coverage (mirror src/archiver/hub/polymarket.py) ──────────
+export type PmKey = { kind: "person" | "company" | "country" | "bloc" | "agency" | "named" | "topic" | string; key: string; label: string };
+export type PmOutcome = {
+  id: string;
+  label: string;
+  question: string;
+  probability: number;
+  change_1d: number | null;
+  change_1w: number | null;
+  volume_24h: number;
+  end_date: string | null;
+};
+export type PmHeadline = {
+  id: string;
+  created_at: string;
+  source: string;
+  title: string;
+  publisher: string | null;
+  url: string | null;
+  /** FinBERT compound, −1…1; null when the source is not scored. */
+  sentiment: number | null;
+  impact: number | null;
+  /** The keys this headline shares with the market: why it is linked. */
+  why: PmKey[];
+};
+export type PmCoverage = {
+  count_7d: number;
+  count_30d: number;
+  scored_7d: number;
+  avg_sentiment_7d: number | null;
+  latest: PmHeadline | null;
+};
+export type PmEvent = {
+  id: string;
+  slug: string;
+  title: string;
+  url: string | null;
+  end_date: string | null;
+  volume_24h: number;
+  liquidity: number;
+  themes: string[];
+  keys: PmKey[];
+  topics: PmKey[];
+  lead: PmOutcome;
+  outcome_count: number;
+  outcomes: PmOutcome[];
+  coverage: PmCoverage | null;
+};
+export type PmTheme = { key: string; label: string; count?: number };
+export type PmListResponse = {
+  source: string;
+  fetched_at?: string | null;
+  window_days?: number;
+  total?: number;
+  themes: PmTheme[];
+  items: PmEvent[];
+  error?: string;
+};
+export type PmDay = {
+  date: string;
+  probability: number | null;
+  change: number | null;
+  news_count: number;
+  scored: number;
+  sentiment: number | null;
+};
+export type PmStat = { r: number | null; n: number; strength: "none" | "weak" | "moderate" | "strong" | "insufficient" };
+export type PmDetail = {
+  event: PmEvent;
+  outcome: PmOutcome;
+  window_days: number;
+  today: string;
+  days: PmDay[];
+  stats: { co_movement: PmStat; attention: PmStat; min_days: number };
+  big_moves: { date: string; change: number; probability: number | null; news_count: number; headlines: PmHeadline[] }[];
+  headlines: PmHeadline[];
+  headline_total: number;
+  stocks: { ticker: string; name: string | null; price: number | null; pct_change: number | null; quote_at: string | null; mentions: number }[];
+  history_error: string | null;
+};
+
 export type Facet = { key: string; label?: string; count: number; etf?: string };
 export type Facets = {
   total: number;

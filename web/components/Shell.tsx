@@ -18,6 +18,7 @@ const PAGES = [
   { key: "4", label: "MARKETS", href: "/markets", match: (p: string) => p.startsWith("/markets") },
   { key: "5", label: "STOCK", href: "/ticker", match: (p: string) => p.startsWith("/ticker") },
   { key: "6", label: "PORTFOLIO", href: "/portfolio", match: (p: string) => p.startsWith("/portfolio") },
+  { key: "7", label: "POLYMARKET", href: "/polymarket", match: (p: string) => p.startsWith("/polymarket") },
 ] as const;
 
 const ALIASES: Record<string, string> = {
@@ -31,6 +32,10 @@ const ALIASES: Record<string, string> = {
   MARKETS: "/markets",
   PORT: "/portfolio",
   PORTFOLIO: "/portfolio",
+  POLY: "/polymarket",
+  POLYMARKET: "/polymarket",
+  ODDS: "/polymarket",
+  PM: "/polymarket",
 };
 
 const PLACEHOLDER: [string, string][] = [
@@ -38,6 +43,7 @@ const PLACEHOLDER: [string, string][] = [
   ["/news", "Filter: TARIFFS  |  NVDA  |  ENERGY   then ENTER"],
   ["/markets", "NVDA  |  ENERGY  |  XLK   then ENTER"],
   ["/portfolio", "BUY 10 AAPL @ 340  |  NVDA   then ENTER"],
+  ["/polymarket", "POLY  |  NVDA  |  WASH   then ENTER"],
   ["/ticker", "TICKER  |  TOPIC   then ENTER"],
   ["/", "NVDA  |  TARIFFS  |  WASH   then ENTER"],
 ];
@@ -187,7 +193,7 @@ function Command({ path, inputRef }: { path: string | null; inputRef: React.RefO
       }
       return;
     }
-    if (/^[1-6]$/.test(up)) {
+    if (/^[1-7]$/.test(up)) {
       const href = pageHref(up);
       if (href) {
         done();
@@ -313,7 +319,7 @@ function Command({ path, inputRef }: { path: string | null; inputRef: React.RefO
 function Hint({ path, signOut }: { path: string; signOut: boolean }) {
   const core = useApi<SecuritiesPage>(path.startsWith("/markets") ? "/api/hub/securities?limit=1" : null);
   const all = useApi<SecuritiesPage>(path.startsWith("/markets") ? "/api/hub/securities?scope=all&limit=1" : null);
-  let text = "1–6 PAGES · / SEARCH · J/K NEXT STORY · ENTER OPEN";
+  let text = "1–7 PAGES · / SEARCH · J/K NEXT STORY · ENTER OPEN";
   if (path.startsWith("/washington")) text = "SOURCES: WHITE HOUSE · PRESIDENTIAL DOCS · FEDERAL REGISTER";
   else if (path.startsWith("/news")) text = "J/K MOVE · ENTER OPEN SOURCE";
   else if (path.startsWith("/markets"))

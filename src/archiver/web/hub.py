@@ -18,17 +18,25 @@ import asyncio
 import hmac
 import time
 from collections.abc import Callable
+from dataclasses import dataclass, field
 from datetime import UTC, date, datetime, timedelta
 from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Query
+from fastapi import Path as ApiPath
 from pydantic import BaseModel, Field, field_validator
 from sqlalchemy import Float, cast, func, or_, select
 from sqlalchemy.orm import selectinload
 
 from archiver.clients.exceptions import ClientError
-from archiver.clients.market import FinnhubClient, PolymarketClient, YahooChartClient
+from archiver.clients.market import (
+    FinnhubClient,
+    PolymarketClient,
+    PolymarketHistoryClient,
+    YahooChartClient,
+)
 from archiver.config.settings import get_settings
+from archiver.hub import polymarket as pm
 from archiver.hub.live import market_open
 from archiver.hub.odds import ODDS_TAGS, pick_odds
 from archiver.hub.portfolio import Lot, summarize
@@ -138,6 +146,22 @@ def _holding_dict(h: Holding) -> dict[str, Any]:
         "opened_at": h.opened_at.isoformat() if h.opened_at else None,
         "note": h.note,
     }
+
+
+@dataclass
+class _PolyCache:
+    """Per-process cache for the Polymarket page (nothing is stored)."""
+
+    events: list[pm.Event] | None = None
+    events_at: float = 0.0
+    fetched_at: str | None = None
+    coverage: pm.CoverageIndex | None = None
+    coverage_at: float = 0.0
+    history: dict[str, tuple[float, list[tuple[datetime, float]]]] = field(default_factory=dict)
+
+
+def _iso(at: datetime | None) -> str | None:
+    return at.isoformat() if at else None
 
 
 def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) -> APIRouter:
@@ -542,6 +566,157 @@ def build_hub_router(db: Database, to_item: Callable[[Status], dict[str, Any]]) 
                 if odds_cache["items"] is None:
                     return {"source": "polymarket", "items": [], "error": "Polymarket unavailable"}
         return {"source": "polymarket", "items": odds_cache["items"][:limit]}
+
+    # ── polymarket × coverage ────────────────────────────────────────────────
+    # Live reads, nothing stored: events and the coverage index are cached for
+    # five minutes per process, price histories per outcome token.
+    poly = _PolyCache()
+
+    async def _poly_events() -> list[pm.Event]:
+        fresh = time.monotonic() - poly.events_at <= ODDS_TTL_S
+        if poly.events is not None and fresh:
+            return poly.events
+        async with PolymarketClient.from_settings(settings) as client:
+            batches = await asyncio.gather(
+                *(client.events(tag, limit=25) for tag in pm.FETCH_TAGS),
+                return_exceptions=True,
+            )
+        good = [b for b in batches if isinstance(b, list)]
+        if good:  # a tag that failed this time just sits out one cycle
+            poly.events = pm.collect_events(good)
+            poly.events_at = time.monotonic()
+            poly.fetched_at = datetime.now(UTC).isoformat()
+        if poly.events is None:
+            raise HTTPException(503, "Polymarket unavailable")
+        return poly.events
+
+    async def _poly_coverage() -> pm.CoverageIndex:
+        if poly.coverage is None or time.monotonic() - poly.coverage_at > ODDS_TTL_S:
+            since = datetime.now(UTC) - timedelta(days=pm.WINDOW_DAYS + 1)
+            poly.coverage = await pm.load_coverage(db, since=since)
+            poly.coverage_at = time.monotonic()
+        return poly.coverage
+
+    async def _poly_history(token: str) -> list[tuple[datetime, float]]:
+        hit = poly.history.get(token)
+        if hit and time.monotonic() - hit[0] <= ODDS_TTL_S:
+            return hit[1]
+        async with PolymarketHistoryClient.from_settings(settings) as client:
+            rows = await client.history(token)
+        if len(poly.history) >= 200:  # bounded: drop the oldest entry
+            poly.history.pop(next(iter(poly.history)))
+        poly.history[token] = (time.monotonic(), rows)
+        return rows
+
+    @router.get("/polymarket")
+    async def polymarket(
+        theme: str = Query("all", pattern=r"^[a-z]{1,20}$"),
+        sort: str = Query("volume", pattern=r"^(volume|news|movers)$"),
+        limit: int = Query(80, ge=1, le=200),
+    ) -> dict[str, Any]:
+        """Open Polymarket events on the economy, trade, geopolitics, leaders and
+        politics, each with the archive coverage linked to it (and why)."""
+        themes = [{"key": k, "label": label} for k, label in pm.THEMES]
+        try:
+            events = await _poly_events()
+        except HTTPException:
+            return {
+                "source": "polymarket",
+                "themes": themes,
+                "items": [],
+                "error": "Polymarket unavailable",
+            }
+        coverage = await _poly_coverage()
+        now = datetime.now(UTC)
+        rows = [(ev, pm.coverage_summary(coverage.linked(ev.keys), now=now)) for ev in events]
+        counts = {k: sum(1 for ev, _ in rows if k in ev.themes) for k, _ in pm.THEMES}
+        if theme != "all":
+            rows = [(ev, c) for ev, c in rows if theme in ev.themes]
+        if sort == "news":
+            rows.sort(key=lambda r: (r[1]["count_7d"], r[0].volume_24h), reverse=True)
+        elif sort == "movers":
+            rows.sort(key=lambda r: abs(r[0].lead.get("change_1d") or 0.0), reverse=True)
+        return {
+            "source": "polymarket",
+            "fetched_at": poly.fetched_at,
+            "window_days": pm.WINDOW_DAYS,
+            "total": len(events),
+            "themes": [{**t, "count": counts[t["key"]]} for t in themes],
+            "items": [pm.event_dict(ev, c) for ev, c in rows[:limit]],
+        }
+
+    @router.get("/polymarket/{event_id}")
+    async def polymarket_event(
+        event_id: Annotated[str, ApiPath(pattern=r"^\d{1,12}$")],
+        market: str | None = Query(None, pattern=r"^\d{1,12}$"),
+    ) -> dict[str, Any]:
+        """One event set against its coverage: the chosen outcome's daily odds
+        beside the linked headlines per day, two descriptive correlations, the
+        days the odds moved most and what ran on them, and the stocks named."""
+        events = await _poly_events()
+        ev = next((e for e in events if e.id == event_id), None)
+        if ev is None:  # not in the busiest lists: fetch it directly
+            try:
+                async with PolymarketClient.from_settings(settings) as client:
+                    raw = await client.event(event_id)
+            except ClientError as exc:
+                raise HTTPException(404, "event not found") from exc
+            ev = pm.parse_event(raw) if raw else None
+            if ev is None:
+                raise HTTPException(404, "event not found or no longer open")
+        outcome = next((o for o in ev.outcomes if o["id"] == market), None) or ev.lead
+
+        history_error = None
+        history: list[tuple[datetime, float]] = []
+        if outcome.get("token"):
+            try:
+                history = await _poly_history(outcome["token"])
+            except ClientError:
+                history_error = "Polymarket price history unavailable"
+
+        coverage = await _poly_coverage()
+        linked = coverage.linked(ev.keys)
+        now = datetime.now(UTC)
+        today = now.astimezone(ET).date()
+        days = pm.build_days(
+            pm.daily_closes(history),
+            linked,
+            start=today - timedelta(days=pm.WINDOW_DAYS - 1),
+            end=today,
+        )
+
+        # Companies the market names, then those its coverage names most.
+        named: dict[str, int] = {k.key: 0 for k in ev.keys.values() if k.kind == "company"}
+        for h, _ in linked:
+            for k in h.keys.values():
+                if k.kind == "company":
+                    named[k.key] = named.get(k.key, 0) + 1
+        tickers = sorted(named, key=lambda t: named[t], reverse=True)[:8]
+        secs = await _securities(tickers)
+        stocks = [
+            {
+                "ticker": t,
+                "name": secs[t].name if t in secs else None,
+                "price": secs[t].price if t in secs else None,
+                "pct_change": secs[t].pct_change if t in secs else None,
+                "quote_at": _iso(secs[t].quote_at) if t in secs else None,
+                "mentions": named[t],
+            }
+            for t in tickers
+        ]
+        return {
+            "event": pm.event_dict(ev, pm.coverage_summary(linked, now=now), outcomes=60),
+            "outcome": {k: v for k, v in outcome.items() if k != "token"},
+            "window_days": pm.WINDOW_DAYS,
+            "today": today.isoformat(),
+            "days": days,
+            "stats": pm.correlation_stats(days),
+            "big_moves": pm.big_moves(days, linked),
+            "headlines": [h.as_dict(why) for h, why in linked[:80]],
+            "headline_total": len(linked),
+            "stocks": stocks,
+            "history_error": history_error,
+        }
 
     # ── watchlist ────────────────────────────────────────────────────────────
     @router.get("/watchlist")

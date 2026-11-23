@@ -197,6 +197,29 @@ Writes need the `X-Hub-Token` header whenever `HUB_WRITE_TOKEN` is set. The
 scheduled ingest workflow runs `hub-refresh` when the `FINNHUB_API_KEY` secret
 exists.
 
+## Prediction markets (Polymarket)
+
+The **POLYMARKET** tab (key `7`, or type `POLY`) sets open Polymarket events on
+the economy and the Fed, trade, geopolitics, world leaders, politics and
+companies against the archive's own coverage. Nothing is stored: events, the
+coverage index and price histories are read live and cached for five minutes.
+
+| Route | What it returns |
+| --- | --- |
+| `GET /api/hub/polymarket?theme=&sort=volume\|news\|movers` | open events, each with its leading outcome and linked coverage (7d/30d counts, average tone, latest headline) |
+| `GET /api/hub/polymarket/{event_id}?market=` | one outcome's 30 daily ET closes beside that day's linked headlines, two correlations, the biggest moves and what ran those days, stocks named |
+
+How it stays accurate:
+
+* **Links are lexical and explained.** An event and a headline link only when
+  they name the same person (`reference/people.py`), company, country, bloc,
+  agency or place; every link lists the keys it was made on. A shared topic
+  alone never links. Long-shot outcomes (under 2%) are left out of an event's
+  signature, so a celebrity on a ballot list does not pull in their news.
+* **YES is read by name**, not position, from Polymarket's own prices.
+* **Correlations are descriptive.** Pearson's r is shown with its sample size
+  and withheld under 8 days; the page says plainly it is not causation.
+
 ## Sentiment (FinBERT)
 
 `archiver score-sentiment` runs [ProsusAI/finbert](https://huggingface.co/ProsusAI/finbert)
