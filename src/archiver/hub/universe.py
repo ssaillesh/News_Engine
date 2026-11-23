@@ -289,9 +289,11 @@ async def backfill_core_prices(
             )
         ).all()
     hub = HubReport()
-    for ticker in todo:
+    for i, ticker in enumerate(todo, 1):
         await refresh_prices(db, yahoo, ticker, report=hub)
         report.backfilled += 1
+        if i % 25 == 0 or i == len(todo):
+            logger.info("backfill {}/{} ({} bars so far)", i, len(todo), hub.bars)
     report.bars = hub.bars
     report.errors.update(hub.errors)
     return report

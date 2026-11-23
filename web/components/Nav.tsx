@@ -7,6 +7,7 @@ import { TickerSearch } from "./TickerSearch";
 
 const LINKS = [
   { href: "/", label: "Dashboard" },
+  { href: "/markets", label: "Markets" },
   { href: "/news", label: "News" },
   { href: "/portfolio", label: "Portfolio" },
 ] as const;

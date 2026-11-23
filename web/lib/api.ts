@@ -147,6 +147,23 @@ export type Dashboard = {
   top_news: NewsItem[];
 };
 
+/** One row of GET /api/hub/securities (the universe browser). */
+export type SecurityRow = {
+  ticker: string;
+  name: string | null;
+  sector: string | null;
+  type: string | null;
+  tags: string[];
+  price: number | null;
+  change: number | null;
+  pct_change: number | null;
+  market_cap: number | null;
+  quote_at: string | null;
+};
+export type SecuritiesPage = { total: number; items: SecurityRow[] };
+export type SecuritySort = "ticker" | "name" | "price" | "pct_change" | "market_cap";
+export type Sectors = { sectors: { sector: string; count: number }[] };
+
 export type Facet = { key: string; label?: string; count: number; etf?: string };
 export type Facets = {
   total: number;

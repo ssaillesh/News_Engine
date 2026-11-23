@@ -80,12 +80,18 @@ async def tracked_tickers(db: Database) -> list[str]:
 async def _upsert_rows(
     db: Database, table: Any, rows: list[dict[str, Any]], keys: list[str]
 ) -> None:
+    """Multi-row upsert in chunks: one round trip per 500 rows, not per row.
+
+    That matters on a remote database: 1,255 daily bars one statement at a time
+    cost ~40s per ticker against Neon; batched it is well under a second.
+    """
     if not rows:
         return
+    columns = [c for c in rows[0] if c not in keys]
     async with db.session() as session, session.begin():
-        for row in rows:
-            stmt = _insert_for(db.dialect)(table).values(**row)
-            update = {c: getattr(stmt.excluded, c) for c in row if c not in keys}
+        for start in range(0, len(rows), 500):
+            stmt = _insert_for(db.dialect)(table).values(rows[start : start + 500])
+            update = {c: getattr(stmt.excluded, c) for c in columns}
             await session.execute(stmt.on_conflict_do_update(index_elements=keys, set_=update))
 
 
