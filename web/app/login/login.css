@@ -1,72 +1,24 @@
-/* Landing + sign-in page. Plain (global) CSS with an lg- prefix: the Turbopack rule
-   in next.config.ts sends every *.css through Tailwind, which turns off CSS Modules.
+/* Sign-in page. Plain (global) CSS with an lg- prefix: the Turbopack rule in
+   next.config.ts sends every *.css through Tailwind, which turns off CSS Modules.
    Colours come from the theme tokens, so it follows the light/dark toggle. */
 
-/* On desktop the app shell is a fixed 100vh frame, so this page scrolls itself. */
-.lg-page {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  background: var(--bg);
-}
-
-.lg-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-  font: 500 12px var(--font-plex-mono), "IBM Plex Mono", monospace;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--amb);
-}
-
-.lg-mark {
-  display: inline-block;
-  flex: none;
-  aspect-ratio: 107 / 127;
-  background: var(--amb);
-  -webkit-mask: url("/sm-mark.png") center / contain no-repeat;
-  mask: url("/sm-mark.png") center / contain no-repeat;
-}
-
-.lg-dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--rule);
-}
-.lg-dot.open {
-  background: var(--up);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--up) 22%, transparent);
-}
-.lg-dot.lunch {
-  background: var(--amb);
-}
-.lg-dot.closed {
-  background: color-mix(in srgb, var(--dim) 60%, transparent);
-}
-
-/* ── hero ─────────────────────────────────────────────────────────────── */
-.lg-hero {
+.lg-stage {
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  flex: 1;
+  min-height: calc(100vh - 35px);
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 35px - 92px);
-  padding: 56px 16px 72px;
-  border-bottom: 1px solid var(--rule);
+  padding: 48px 16px 0;
   background:
-    radial-gradient(70% 90% at 15% 10%, color-mix(in srgb, var(--amb) 13%, transparent), transparent 65%),
-    radial-gradient(50% 60% at 90% 90%, color-mix(in srgb, var(--amb) 6%, transparent), transparent 70%),
+    radial-gradient(60% 55% at 50% 38%, color-mix(in srgb, var(--amb) 12%, transparent), transparent 70%),
     var(--bg);
 }
-/* A fine grid fading out toward the edges. */
-.lg-hero::before {
+/* A fine grid that fades out away from the card. */
+.lg-stage::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -74,10 +26,11 @@
   background-image:
     linear-gradient(var(--rule) 1px, transparent 1px),
     linear-gradient(90deg, var(--rule) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity: 0.35;
-  -webkit-mask-image: radial-gradient(ellipse at 40% 40%, #000 20%, transparent 75%);
-  mask-image: radial-gradient(ellipse at 40% 40%, #000 20%, transparent 75%);
+  background-size: 56px 56px;
+  background-position: center;
+  opacity: 0.4;
+  -webkit-mask-image: radial-gradient(ellipse 55% 50% at 50% 42%, #000, transparent);
+  mask-image: radial-gradient(ellipse 55% 50% at 50% 42%, #000, transparent);
 }
 .lg-canvas {
   position: absolute;
@@ -85,116 +38,87 @@
   width: 100%;
   height: 100%;
   z-index: -1;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 40%, #000 80%);
-  mask-image: linear-gradient(to bottom, transparent 40%, #000 80%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 45%, #000 85%);
+  mask-image: linear-gradient(to bottom, transparent 45%, #000 85%);
 }
 
-.lg-hero-grid {
+.lg-center {
   width: 100%;
-  max-width: 1168px;
-  margin: 0 auto;
-  display: grid;
-  gap: 48px;
+  max-width: 380px;
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
-@media (min-width: 1000px) {
-  .lg-hero-grid {
-    grid-template-columns: minmax(0, 1.35fr) minmax(360px, 400px);
-    gap: 72px;
-  }
-}
 
-.lg-title h1 {
+/* ── brand ────────────────────────────────────────────────────────────── */
+.lg-brand {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.18em;
-  margin: 22px 0 0;
-  font: 700 clamp(64px, 11vw, 148px) / 0.9 var(--font-archivo), Archivo, sans-serif;
-  letter-spacing: -0.045em;
-  color: var(--ink);
-  animation: lg-up 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  text-align: center;
+  animation: lg-up 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-.lg-title h1 .lg-mark {
-  height: 0.86em;
-  filter: drop-shadow(0 0 24px color-mix(in srgb, var(--amb) 45%, transparent));
+.lg-mark {
+  display: block;
+  height: 64px;
+  aspect-ratio: 107 / 127;
+  background: var(--amb);
+  -webkit-mask: url("/sm-mark.png") center / contain no-repeat;
+  mask: url("/sm-mark.png") center / contain no-repeat;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--amb) 50%, transparent));
 }
-.lg-lead {
-  margin: 28px 0 0;
-  font: 600 clamp(22px, 2.4vw, 30px) / 1.2 var(--font-archivo), Archivo, sans-serif;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  animation: lg-up 0.7s 0.08s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-.lg-sub {
-  margin: 14px 0 0;
-  max-width: 54ch;
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--dim);
-  animation: lg-up 0.7s 0.14s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-.lg-facts {
-  list-style: none;
-  margin: 28px 0 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  animation: lg-up 0.7s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-.lg-facts li {
-  padding: 6px 12px;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--pane) 70%, transparent);
-  font: 500 12px var(--font-plex-mono), "IBM Plex Mono", monospace;
+.lg-brand h1 {
+  margin: 18px 0 0;
+  font: 700 44px / 1 var(--font-archivo), Archivo, sans-serif;
+  letter-spacing: -0.035em;
   color: var(--ink);
 }
-@keyframes lg-up {
-  from { opacity: 0; transform: translateY(12px); }
-}
-
-.lg-scroll {
-  position: absolute;
-  left: 50%;
-  bottom: 20px;
-  transform: translateX(-50%);
-  font-size: 13px;
+.lg-brand p {
+  margin: 10px 0 0;
+  font-size: 15px;
   color: var(--dim);
 }
-.lg-scroll:hover {
-  color: var(--ink);
-}
 
-/* ── sign-in card ─────────────────────────────────────────────────────── */
+/* ── card ─────────────────────────────────────────────────────────────── */
 .lg-card {
   position: relative;
-  padding: 32px;
-  border: 1px solid color-mix(in srgb, var(--amb) 30%, var(--rule));
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--pane) 88%, transparent);
+  width: 100%;
+  margin-top: 32px;
+  padding: 24px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--pane) 90%, transparent);
   backdrop-filter: blur(10px);
   box-shadow:
-    0 30px 80px -30px rgb(0 0 0 / 0.6),
-    0 0 80px -30px color-mix(in srgb, var(--amb) 45%, transparent);
-  animation: lg-up 0.7s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    0 24px 60px -24px rgb(0 0 0 / 0.55),
+    0 0 70px -28px color-mix(in srgb, var(--amb) 50%, transparent);
+  animation: lg-up 0.6s 0.08s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-.lg-card h2 {
-  margin: 0;
-  font: 600 24px / 1.2 var(--font-archivo), Archivo, sans-serif;
-  letter-spacing: -0.02em;
-  color: var(--ink);
+/* Hairline border that is brighter at the top, like light catching an edge. */
+.lg-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--amb) 55%, var(--rule)),
+    var(--rule) 45%,
+    color-mix(in srgb, var(--rule) 60%, transparent)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
 }
-.lg-card-sub {
-  margin: 6px 0 0;
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--dim);
+@keyframes lg-up {
+  from { opacity: 0; transform: translateY(10px); }
 }
+
 .lg-form {
   display: flex;
   flex-direction: column;
-  margin-top: 24px;
 }
 .lg-form label {
   margin-bottom: 8px;
@@ -253,13 +177,13 @@
   color: var(--dn);
 }
 
-.lg-submit,
-.lg-cta {
+.lg-submit {
+  margin-top: 16px;
+  height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 46px;
   border: 0;
   border-radius: 8px;
   background: var(--amb);
@@ -268,26 +192,23 @@
   cursor: pointer;
   transition: filter 0.15s, transform 0.05s;
 }
-.lg-submit {
-  margin-top: 18px;
+.lg-submit span {
+  transition: transform 0.15s;
 }
-.lg-cta {
-  padding: 0 28px;
-}
-.lg-submit:hover,
-.lg-cta:hover {
+.lg-submit:hover {
   filter: brightness(1.08);
 }
-.lg-submit:active,
-.lg-cta:active {
+.lg-submit:hover span {
+  transform: translateX(3px);
+}
+.lg-submit:active {
   transform: translateY(1px);
 }
 .lg-submit:disabled {
   cursor: progress;
   filter: saturate(0.7);
 }
-.lg-submit:focus-visible,
-.lg-cta:focus-visible {
+.lg-submit:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
@@ -303,8 +224,7 @@
   to { transform: rotate(360deg); }
 }
 /* Light theme amber is darker: black text on it falls below 4.5:1, white is ~7.6:1. */
-:root[data-theme="light"] .lg-submit,
-:root[data-theme="light"] .lg-cta {
+:root[data-theme="light"] .lg-submit {
   color: #fff;
 }
 :root[data-theme="light"] .lg-spin {
@@ -314,291 +234,47 @@
 .lg-note {
   margin: 16px 0 0;
   font-size: 12px;
+  line-height: 1.5;
   color: var(--dim);
+  text-align: center;
 }
 
-/* ── world markets band ───────────────────────────────────────────────── */
-.lg-band {
-  border-bottom: 1px solid var(--rule);
-  background: var(--pane);
-}
-.lg-band-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 4px 16px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 14px 16px 0;
-}
-.lg-band-sum {
-  font-size: 12px;
-  color: var(--dim);
-}
-.lg-band ul {
-  list-style: none;
-  margin: 0 auto;
-  padding: 10px 16px 16px;
-  max-width: 1200px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-}
-@media (min-width: 720px) {
-  .lg-band ul {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-@media (min-width: 1100px) {
-  .lg-band ul {
-    grid-template-columns: repeat(8, minmax(0, 1fr));
-  }
-}
-.lg-band li {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2px 8px;
-  padding: 10px 12px;
-  border: 1px solid var(--rule);
-  border-radius: 8px;
-  background: var(--bg);
-}
-.lg-band-code {
+/* ── market line + footer ─────────────────────────────────────────────── */
+.lg-market {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  font: 600 13px var(--font-plex-mono), "IBM Plex Mono", monospace;
-  color: var(--ink);
-}
-.lg-band-city {
-  grid-column: 1;
-  font-size: 11px;
-  text-transform: capitalize;
-  color: var(--dim);
-}
-.lg-band-time {
-  grid-column: 2;
-  grid-row: 1;
-  font-size: 13px;
-  color: var(--ink);
-  text-align: right;
-}
-.lg-band-state {
-  grid-column: 2;
-  grid-row: 2;
-  font-size: 11px;
-  text-align: right;
-  color: var(--dim);
-}
-.lg-band-state.open {
-  color: var(--up);
-}
-.lg-band-state.lunch {
-  color: var(--amb);
-}
-
-/* ── content sections ─────────────────────────────────────────────────── */
-.lg-section {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 96px 16px;
-}
-.lg-section-alt {
-  max-width: none;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  background:
-    radial-gradient(60% 100% at 50% 0%, color-mix(in srgb, var(--amb) 7%, transparent), transparent 70%),
-    var(--pane);
-}
-.lg-section-alt > * {
-  max-width: 1168px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.lg-section-head h2 {
-  margin: 14px 0 0;
-  max-width: 22ch;
-  font: 700 clamp(30px, 4vw, 48px) / 1.08 var(--font-archivo), Archivo, sans-serif;
-  letter-spacing: -0.03em;
-  color: var(--ink);
-}
-.lg-section-head > p:not(.lg-eyebrow) {
-  margin: 14px 0 0;
-  max-width: 56ch;
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--dim);
-}
-
-.lg-modules {
-  list-style: none;
-  margin: 48px 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 12px;
-}
-.lg-modules li {
-  padding: 22px;
+  gap: 8px;
+  margin: 24px 0 0;
+  padding: 6px 12px;
   border: 1px solid var(--rule);
-  border-radius: 10px;
-  background: var(--pane);
-  transition: border-color 0.2s, transform 0.2s;
-}
-.lg-modules li:hover {
-  border-color: color-mix(in srgb, var(--amb) 60%, var(--rule));
-  transform: translateY(-2px);
-}
-/* The command-line card reads as an extra, not an eighth page. */
-.lg-modules .lg-module-cmd {
-  border-style: dashed;
-  background: transparent;
-}
-.lg-module-cmd kbd {
-  background: transparent;
-  color: var(--amb) !important;
-  border: 1px solid var(--amb);
-}
-.lg-module-cmd code {
-  font-size: 12px;
-  color: var(--ink);
-  white-space: nowrap;
-}
-.lg-modules kbd {
-  display: inline-grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
-  background: var(--amb);
-  color: #000;
-  font-size: 13px;
-  font-weight: 600;
-}
-:root[data-theme="light"] /* The command-line card reads as an extra, not an eighth page. */
-.lg-modules .lg-module-cmd {
-  border-style: dashed;
-  background: transparent;
-}
-.lg-module-cmd kbd {
-  background: transparent;
-  color: var(--amb) !important;
-  border: 1px solid var(--amb);
-}
-.lg-module-cmd code {
-  font-size: 12px;
-  color: var(--ink);
-  white-space: nowrap;
-}
-.lg-modules kbd {
-  color: #fff;
-}
-.lg-modules h3,
-.lg-steps h3 {
-  margin: 16px 0 0;
-  font: 600 18px var(--font-archivo), Archivo, sans-serif;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-}
-.lg-modules p,
-.lg-steps p {
-  margin: 8px 0 0;
-  font-size: 14px;
-  line-height: 1.6;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--pane) 70%, transparent);
+  font: 500 12px var(--font-plex-mono), "IBM Plex Mono", monospace;
   color: var(--dim);
+  animation: lg-up 0.6s 0.16s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-
-.lg-steps {
-  list-style: none;
-  margin-top: 48px;
-  padding: 0;
-  display: grid;
-  gap: 32px;
-  counter-reset: step;
+.lg-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
 }
-@media (min-width: 800px) {
-  .lg-steps {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-  }
+.lg-dot.open {
+  background: var(--up);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--up) 22%, transparent);
 }
-.lg-steps li {
-  padding-top: 20px;
-  border-top: 2px solid var(--amb);
+.lg-dot.closed {
+  background: var(--dn);
 }
-.lg-step-n {
-  font-size: 12px;
-  color: var(--amb);
-}
-.lg-steps h3 {
-  margin-top: 8px;
-  font-size: 22px;
-}
-.lg-steps p {
-  font-size: 15px;
-}
-
-/* ── closing + footer ─────────────────────────────────────────────────── */
-.lg-closing {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 96px 16px;
-}
-.lg-mark-lg {
-  height: 56px;
-  margin-bottom: 20px;
-}
-.lg-closing h2 {
-  margin: 0;
-  font: 700 clamp(28px, 3.4vw, 40px) / 1.1 var(--font-archivo), Archivo, sans-serif;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-}
-.lg-closing p {
-  margin: 10px 0 28px;
-  font-size: 16px;
+.lg-legal {
+  padding: 32px 0 20px;
+  font-size: 11px;
   color: var(--dim);
-}
-.lg-footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 8px 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px 16px 32px;
-  border-top: 1px solid var(--rule);
-  font-size: 12px;
-  color: var(--dim);
-}
-
-@media (max-width: 999px) {
-  .lg-hero {
-    min-height: 0;
-    padding-top: 40px;
-  }
-  .lg-scroll {
-    display: none;
-  }
-  .lg-section {
-    padding: 64px 16px;
-  }
-}
-@media (max-width: 480px) {
-  .lg-card {
-    padding: 24px 20px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lg-page {
-    scroll-behavior: auto;
-  }
-  .lg-page *,
-  .lg-page *::before {
+  .lg-stage *,
+  .lg-stage *::before {
     animation: none !important;
     transition: none !important;
   }

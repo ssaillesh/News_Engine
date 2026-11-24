@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-/** Decorative only: faint random-walk lines drifting slowly behind the brand panel.
+/** Decorative only: faint random-walk lines drifting slowly behind the sign-in.
  *  No real prices are drawn. Static under prefers-reduced-motion. */
 export function Backdrop() {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -20,12 +20,10 @@ export function Backdrop() {
     let frame = 0;
     let offset = 0;
     let amb = "#fb8b1e";
-    let rule = "#262626";
 
     const readColors = () => {
       const cs = getComputedStyle(document.documentElement);
       amb = cs.getPropertyValue("--amb").trim() || amb;
-      rule = cs.getPropertyValue("--rule").trim() || rule;
     };
 
     type Series = { ys: number[]; base: number; vol: number; alpha: number };
@@ -54,16 +52,6 @@ export function Backdrop() {
 
     const draw = () => {
       ctx.clearRect(0, 0, w, h);
-      ctx.strokeStyle = rule;
-      ctx.globalAlpha = 0.5;
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      for (let y = 64; y < h; y += 64) {
-        ctx.moveTo(0, y + 0.5);
-        ctx.lineTo(w, y + 0.5);
-      }
-      ctx.stroke();
-
       for (const sr of series) {
         ctx.globalAlpha = sr.alpha;
         ctx.strokeStyle = amb;

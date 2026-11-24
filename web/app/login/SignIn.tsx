@@ -56,7 +56,7 @@ export function SignInForm({ next, error }: { next: string; error: boolean }) {
           </>
         ) : (
           <>
-            Enter The Hub <span aria-hidden>→</span>
+            Sign in <span aria-hidden>→</span>
           </>
         )}
       </button>
@@ -67,21 +67,4 @@ export function SignInForm({ next, error }: { next: string; error: boolean }) {
 export function SignInFromUrl() {
   const params = useSearchParams();
   return <SignInForm next={params.get("next") ?? "/"} error={params.get("error") === "1"} />;
-}
-
-/** Scrolls back to the form and puts the cursor in the password field. */
-export function SignInButton({ children }: { children: React.ReactNode }) {
-  return (
-    <button
-      type="button"
-      className="lg-cta"
-      onClick={() => {
-        const input = document.getElementById("password");
-        input?.scrollIntoView({ behavior: "smooth", block: "center" });
-        input?.focus({ preventScroll: true });
-      }}
-    >
-      {children}
-    </button>
-  );
 }
