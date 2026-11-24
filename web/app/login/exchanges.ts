@@ -53,14 +53,38 @@ export function status(ex: Exchange, ms: number): { clock: string; status: Statu
   return { clock, status: "CLOSED" };
 }
 
-/** Epoch ms ticking every second; null until mounted (nothing time-based prerenders). */
-export function useTick(ms = 1000): number | null {
+const span = (m: number) => {
+  const d = Math.floor(m / 1440);
+  const h = Math.floor((m % 1440) / 60);
+  const mm = m % 60;
+  return d ? `${d}d ${h}h` : h ? `${h}h ${String(mm).padStart(2, "0")}m` : `${mm}m`;
+};
+
+/** "Closes in 2h 05m", "Opens in 13h 58m": time to the next bell in local hours. */
+export function nextBell(ex: Exchange, ms: number): string {
+  const { day, mins } = local(ms, ex.tz);
+  const weekday = day !== "Sat" && day !== "Sun";
+  if (weekday) {
+    const now = ex.sessions.find(([a, b]) => mins >= a && mins < b);
+    if (now) return `Closes in ${span(now[1] - mins)}`;
+    const later = ex.sessions.find(([a]) => mins < a);
+    if (later) return `${mins < ex.sessions[0][0] ? "Opens" : "Reopens"} in ${span(later[0] - mins)}`;
+  }
+  const ahead = ({ Fri: 3, Sat: 2 } as Record<string, number>)[day] ?? 1;
+  return `Opens in ${span(ahead * 1440 - mins + ex.sessions[0][0])}`;
+}
+
+/** Epoch ms, refreshed every ``ms``; null until mounted (nothing time-based prerenders). */
+export function useTick(ms = 15_000): number | null {
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
     const tick = () => setNow(Date.now());
-    tick();
+    const first = setTimeout(tick, 0);
     const id = setInterval(tick, ms);
-    return () => clearInterval(id);
+    return () => {
+      clearTimeout(first);
+      clearInterval(id);
+    };
   }, [ms]);
   return now;
 }

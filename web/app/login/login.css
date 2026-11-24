@@ -1,544 +1,367 @@
-/* Sign-in terminal. Plain (global) CSS with an lg- prefix: the Turbopack rule in
+/* Sign-in page. Plain (global) CSS with an lg- prefix: the Turbopack rule in
    next.config.ts sends every *.css through Tailwind, which turns off CSS Modules.
-   Colours come from the theme tokens, so it follows the light/dark toggle, and
-   all motion stops under prefers-reduced-motion. */
+   Colours come from the theme tokens, so it follows the light/dark toggle. */
 
-.lg-stage {
-  position: relative;
+.lg-split {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   min-height: calc(100vh - 35px);
-  overflow: hidden;
-  isolation: isolate;
+}
+@media (min-width: 960px) {
+  .lg-split {
+    grid-template-columns: minmax(0, 1.15fr) minmax(420px, 1fr);
+  }
 }
 
+/* ── brand panel ──────────────────────────────────────────────────────── */
+.lg-brand {
+  display: none;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-right: 1px solid var(--rule);
+  background:
+    radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--amb) 9%, transparent), transparent 60%),
+    var(--pane);
+}
+@media (min-width: 960px) {
+  .lg-brand {
+    display: block;
+  }
+}
 .lg-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: -2;
-}
-
-/* Scanlines, a vignette and a slow rolling refresh bar, like an old trading monitor. */
-.lg-crt {
-  position: absolute;
-  inset: 0;
   z-index: -1;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(to bottom, transparent 0 2px, color-mix(in srgb, var(--bg) 40%, transparent) 2px 3px),
-    radial-gradient(ellipse at center, transparent 30%, color-mix(in srgb, var(--bg) 90%, transparent) 100%);
-  animation: lg-flicker 7s infinite steps(1);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 45%, #000 75%);
+  mask-image: linear-gradient(to bottom, transparent 45%, #000 75%);
 }
-.lg-crt::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--amb) 5%, transparent), transparent);
-  animation: lg-roll 9s linear infinite;
-}
-@keyframes lg-flicker {
-  0%, 96%, 100% { opacity: 1; }
-  97% { opacity: 0.8; }
-  98% { opacity: 1; }
-  99% { opacity: 0.9; }
-}
-@keyframes lg-roll {
-  from { top: -120px; }
-  to { top: 100%; }
-}
-
-/* ── tape ─────────────────────────────────────────────────────────────── */
-.lg-tape {
-  overflow: hidden;
-  white-space: nowrap;
-  border-bottom: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--pane) 88%, transparent);
-  font-size: 11px;
-  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
-}
-.lg-tape-run {
-  display: inline-flex;
-  animation: lg-tape 60s linear infinite;
-}
-.lg-tick {
-  display: inline-flex;
-  gap: 8px;
-  padding: 5px 18px;
-  border-right: 1px solid var(--rule);
-}
-.lg-tick b {
-  color: var(--amb);
-  font-weight: 600;
-}
-@keyframes lg-tape {
-  to { transform: translateX(-50%); }
-}
-
-/* ── layout ───────────────────────────────────────────────────────────── */
-.lg-main {
-  flex: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 460px);
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  padding: 28px 16px;
-}
-.lg-panel {
-  display: none;
-}
-@media (min-width: 1180px) {
-  .lg-main {
-    grid-template-columns: minmax(0, 340px) minmax(0, 460px) minmax(0, 340px);
-  }
-  .lg-panel {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--rule);
-    background: color-mix(in srgb, var(--pane) 80%, transparent);
-    backdrop-filter: blur(4px);
-    animation: lg-rise 0.7s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-  }
-}
-.lg-foot {
-  margin: 0;
-  padding: 6px 8px;
-  border-top: 1px solid var(--rule);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-}
-
-/* World clock. */
-.lg-wclk {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 11px;
-}
-.lg-wclk td {
-  padding: 5px 8px;
-  border-bottom: 1px solid color-mix(in srgb, var(--rule) 60%, transparent);
-  white-space: nowrap;
-}
-.lg-wclk td:last-child {
-  text-align: right;
-  font-weight: 600;
-  font-size: 10px;
-  letter-spacing: 0.06em;
-}
-.lg-wclk tr:hover td {
-  background: var(--sel);
-}
-
-/* Hex stream. */
-.lg-hex {
-  padding: 6px 8px;
-  font-size: 10.5px;
-  line-height: 1.62;
-  overflow: hidden;
-  height: calc(20 * 1.62 * 10.5px + 12px);
-}
-.lg-hex > div {
+.lg-brand-inner {
+  height: 100%;
   display: flex;
-  gap: 10px;
-  white-space: nowrap;
-}
-.lg-hex > div > span:nth-child(2) {
-  flex: 1;
-  color: color-mix(in srgb, var(--ink) 75%, transparent);
-}
-.lg-hex > div:last-child {
-  color: var(--hot);
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 48px clamp(32px, 5vw, 72px);
+  max-width: 680px;
 }
 
-/* ── card ─────────────────────────────────────────────────────────────── */
-.lg-card {
-  --d: 0s;
-  position: relative;
-  width: 100%;
-  background: color-mix(in srgb, var(--pane) 86%, transparent);
-  backdrop-filter: blur(6px);
-  border: 1px solid color-mix(in srgb, var(--amb) 45%, var(--rule));
-  box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--bg) 60%, transparent),
-    0 0 70px -12px color-mix(in srgb, var(--amb) 40%, transparent);
-  padding: 22px 22px 0;
-  animation: lg-rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-.lg-card::before,
-.lg-card::after {
-  content: "";
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--amb);
-  pointer-events: none;
-}
-.lg-card::before {
-  top: -5px;
-  left: -5px;
-  border-right: 0;
-  border-bottom: 0;
-}
-.lg-card::after {
-  bottom: -5px;
-  right: -5px;
-  border-left: 0;
-  border-top: 0;
-}
-@keyframes lg-rise {
-  from { opacity: 0; transform: translateY(14px) scale(0.98); }
-  to { opacity: 1; transform: none; }
-}
-
-.lg-denied {
-  border-color: var(--dn);
-  box-shadow: 0 0 70px -12px color-mix(in srgb, var(--dn) 50%, transparent);
-  animation: lg-shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-}
-.lg-denied::before,
-.lg-denied::after {
-  border-color: var(--dn);
-}
-@keyframes lg-shake {
-  10%, 90% { transform: translateX(-2px); }
-  20%, 80% { transform: translateX(4px); }
-  30%, 50%, 70% { transform: translateX(-7px); }
-  40%, 60% { transform: translateX(7px); }
-}
-
-/* ── logo mark ────────────────────────────────────────────────────────── */
-.lg-head {
+.lg-lockup {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
 }
-/* "THE HUB": big, tight, with a faint amber glow. */
-.lg-name {
-  margin: 0;
-  font: 700 44px / 0.95 var(--font-archivo), Archivo, sans-serif;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  text-shadow: 0 0 22px color-mix(in srgb, var(--amb) 30%, transparent);
-  white-space: nowrap;
-}
-/* Three copies of the mark: the amber one, plus two that slice and jitter. */
 .lg-mark {
-  position: relative;
-  flex: none;
-  width: 92px;
+  display: block;
+  width: 34px;
   aspect-ratio: 107 / 127;
-  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--amb) 55%, transparent));
-}
-.lg-mark > span {
-  position: absolute;
-  inset: 0;
+  background: var(--amb);
   -webkit-mask: url("/sm-mark.png") center / contain no-repeat;
   mask: url("/sm-mark.png") center / contain no-repeat;
-  background: var(--amb);
 }
-.lg-mark > span:nth-child(2) {
-  background: var(--hot);
-  animation: lg-slice-a 5s infinite steps(1);
-}
-.lg-mark > span:nth-child(3) {
-  background: var(--dn);
-  mix-blend-mode: screen;
-  animation: lg-slice-b 5s infinite steps(1);
-}
-@keyframes lg-slice-a {
-  0%, 88%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
-  89% { clip-path: inset(12% 0 62% 0); transform: translateX(-6px); }
-  91% { clip-path: inset(58% 0 18% 0); transform: translateX(5px); }
-  93% { clip-path: inset(32% 0 44% 0); transform: translateX(-3px); }
-}
-@keyframes lg-slice-b {
-  0%, 89%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
-  90% { clip-path: inset(66% 0 8% 0); transform: translateX(6px); }
-  92% { clip-path: inset(6% 0 76% 0); transform: translateX(-5px); }
-}
-
-/* Typed tagline, revealed left to right. */
-.lg-type {
-  margin: 6px 0 0;
-  font-size: 11px;
-  color: var(--amb);
-  white-space: nowrap;
-  animation: lg-typing 1s steps(38) 0.2s both;
-}
-@keyframes lg-typing {
-  from { clip-path: inset(0 100% 0 0); }
-  to { clip-path: inset(0 0 0 0); }
-}
-
-/* ── boot log ─────────────────────────────────────────────────────────── */
-.lg-boot {
-  list-style: none;
-  margin: 18px 0 0;
-  padding: 10px 0 0;
-  border-top: 1px dashed var(--rule);
-  font-size: 11px;
-  line-height: 1.85;
+.lg-word {
+  font: 600 20px var(--font-archivo), Archivo, sans-serif;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
-.lg-boot li,
-.lg-keys > span {
-  animation: lg-appear 0.01s var(--d) both;
+
+.lg-pitch h2 {
+  margin: 0;
+  max-width: 18ch;
+  font: 600 clamp(34px, 3.6vw, 48px) / 1.08 var(--font-archivo), Archivo, sans-serif;
+  letter-spacing: -0.025em;
+  color: var(--ink);
 }
-@keyframes lg-appear {
-  from { opacity: 0; }
+.lg-pitch > p {
+  margin: 18px 0 0;
+  max-width: 46ch;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--dim);
 }
-.lg-cursor {
-  display: inline-block;
-  width: 7px;
-  height: 12px;
-  margin-left: 6px;
-  vertical-align: -2px;
-  background: var(--amb);
-  animation: lg-blink 1s steps(1) infinite;
+.lg-pitch dl {
+  margin: 32px 0 0;
+  display: grid;
+  gap: 18px;
+  max-width: 48ch;
 }
-.lg-cursor-dn {
-  background: var(--dn);
+.lg-pitch dl > div {
+  padding-left: 16px;
+  border-left: 2px solid var(--amb);
 }
-@keyframes lg-blink {
-  50% { opacity: 0; }
+.lg-pitch dt {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.lg-pitch dd {
+  margin: 3px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dim);
 }
 
-/* ── form ─────────────────────────────────────────────────────────────── */
+/* Market board. */
+.lg-markets {
+  max-width: 520px;
+  border: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(4px);
+}
+.lg-markets header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.lg-markets h2 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.lg-markets header span {
+  font-size: 11px;
+  color: var(--dim);
+}
+.lg-markets ul {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.lg-markets li {
+  display: grid;
+  grid-template-columns: 8px 64px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+}
+.lg-markets li b {
+  font-weight: 500;
+  color: var(--ink);
+}
+.lg-city {
+  display: none;
+}
+.lg-time {
+  color: var(--dim);
+}
+.lg-state {
+  font-size: 11px;
+  color: var(--dim);
+  text-align: right;
+  min-width: 44px;
+}
+.lg-state.open {
+  color: var(--up);
+}
+.lg-state.lunch {
+  color: var(--amb);
+}
+.lg-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rule);
+}
+.lg-dot.open {
+  background: var(--up);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--up) 22%, transparent);
+}
+.lg-dot.lunch {
+  background: var(--amb);
+}
+.lg-dot.closed {
+  background: color-mix(in srgb, var(--dim) 60%, transparent);
+}
+.lg-markets p {
+  margin: 0;
+  padding: 10px 14px;
+  border-top: 1px solid var(--rule);
+  font-size: 11px;
+  color: var(--ink);
+}
+.lg-markets p span {
+  color: var(--dim);
+}
+
+/* ── sign-in panel ────────────────────────────────────────────────────── */
+.lg-auth {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 16px 0;
+  background: var(--bg);
+}
+.lg-panel {
+  width: 100%;
+  max-width: 360px;
+  margin: auto 0;
+  animation: lg-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes lg-in {
+  from { opacity: 0; transform: translateY(8px); }
+}
+.lg-lockup-sm {
+  margin-bottom: 40px;
+}
+@media (min-width: 960px) {
+  .lg-lockup-sm {
+    display: none;
+  }
+}
+.lg-panel h1 {
+  margin: 0;
+  font: 600 28px / 1.2 var(--font-archivo), Archivo, sans-serif;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.lg-lede {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--dim);
+}
+
 .lg-form {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 16px;
+  margin-top: 28px;
 }
 .lg-form label {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: var(--amb);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 8px;
 }
-.lg-prompt {
+.lg-field {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 0 12px;
   border: 1px solid var(--rule);
-  background: var(--bg);
+  background: var(--pane);
+  border-radius: 6px;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
-.lg-prompt:focus-within {
+.lg-field:focus-within {
   border-color: var(--amb);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amb) 18%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amb) 20%, transparent);
 }
-.lg-prompt > span {
-  color: var(--amb);
-  font-size: 12px;
-  font-weight: 600;
+.lg-field-err,
+.lg-field-err:focus-within {
+  border-color: var(--dn);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--dn) 16%, transparent);
 }
-.lg-prompt input {
+.lg-field input {
   flex: 1;
   min-width: 0;
-  padding: 11px 0;
+  height: 44px;
+  padding: 0 12px;
   background: transparent;
   border: 0;
   outline: 0;
-  color: var(--hot);
-  caret-color: var(--amb);
-  font: 500 16px var(--font-plex-mono), "IBM Plex Mono", monospace;
-  letter-spacing: 0.25em;
+  color: var(--ink);
+  font: 400 16px var(--font-archivo), Archivo, sans-serif;
 }
-.lg-prompt input::placeholder {
-  color: var(--rule);
+.lg-reveal {
+  margin-right: 6px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--dim);
+  font: 500 12px var(--font-archivo), Archivo, sans-serif;
+  cursor: pointer;
 }
-.lg-err {
-  margin: 0;
-  font-size: 11px;
+.lg-reveal:hover {
+  color: var(--ink);
+  background: var(--sel);
+}
+.lg-msg {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--dim);
+}
+.lg-msg-err {
   color: var(--dn);
 }
 
-/* The sign-in key, styled after a terminal's GO key. */
-.lg-go {
-  position: relative;
-  overflow: hidden;
-  display: flex;
+.lg-submit {
+  margin-top: 20px;
+  height: 44px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 42px;
   border: 0;
-  cursor: pointer;
+  border-radius: 6px;
   background: var(--amb);
   color: #000;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
+  font: 600 15px var(--font-archivo), Archivo, sans-serif;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.05s;
 }
-.lg-go::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
-  transform: translateX(-100%);
+.lg-submit:hover {
+  filter: brightness(1.08);
 }
-.lg-go:hover::after {
-  transition: transform 0.6s;
-  transform: translateX(100%);
+.lg-submit:active {
+  transform: translateY(1px);
 }
-.lg-go:disabled {
+.lg-submit:disabled {
   cursor: progress;
+  filter: saturate(0.7);
 }
-.lg-go kbd {
-  font: inherit;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  padding: 2px 6px;
-  background: #0b7a3b;
+/* Light theme amber is darker: black text on it falls below 4.5:1, white is ~7.6:1. */
+:root[data-theme="light"] .lg-submit {
   color: #fff;
-  border-radius: 2px;
-  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.35);
 }
-.lg-dots::after {
-  content: "";
-  display: inline-block;
-  width: 3ch;
-  text-align: left;
-  animation: lg-dots 1.2s steps(4) infinite;
+:root[data-theme="light"] .lg-spin {
+  border-color: rgb(255 255 255 / 0.35);
+  border-top-color: #fff;
 }
-@keyframes lg-dots {
-  0% { content: ""; }
-  25% { content: "."; }
-  50% { content: ".."; }
-  75% { content: "..."; }
+.lg-submit:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
 }
-.lg-progress {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--hot), transparent);
-  background-size: 40% 100%;
-  background-repeat: no-repeat;
-  animation: lg-sweep 0.9s linear infinite;
+.lg-spin {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgb(0 0 0 / 0.25);
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: lg-spin 0.7s linear infinite;
 }
-@keyframes lg-sweep {
-  from { background-position: -40% 0; }
-  to { background-position: 140% 0; }
+@keyframes lg-spin {
+  to { transform: rotate(360deg); }
 }
 
-/* ── market bell (card footer) ────────────────────────────────────────── */
-.lg-bell {
+.lg-note {
+  margin: 20px 0 0;
+  font-size: 12px;
+  color: var(--dim);
+}
+.lg-legal {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 4px 12px;
-  margin: 18px -22px 0;
-  padding: 8px 22px;
-  border-top: 1px solid var(--rule);
-  font: 500 10px var(--font-plex-mono), "IBM Plex Mono", monospace;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-}
-.lg-bell b {
-  font-weight: 600;
-}
-.lg-dotUp,
-.lg-dotDn {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-right: 6px;
-  border-radius: 50%;
-  vertical-align: 1px;
-}
-.lg-dotUp {
-  background: var(--up);
-  animation: lg-ping 1.8s infinite;
-}
-.lg-dotDn {
-  background: var(--dn);
-}
-@keyframes lg-ping {
-  0% { box-shadow: 0 0 0 0 var(--up); }
-  70%, 100% { box-shadow: 0 0 0 6px transparent; }
-}
-
-/* ── function-key strip: the pages the sign-in unlocks ────────────────── */
-.lg-keys {
-  display: flex;
-  flex-wrap: wrap;
-  border-top: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--pane) 90%, transparent);
+  gap: 4px 16px;
+  width: 100%;
+  max-width: 520px;
+  padding: 20px 0;
   font-size: 11px;
-}
-.lg-keys > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-right: 1px solid var(--rule);
   color: var(--dim);
-}
-.lg-keys b {
-  color: #000;
-  background: var(--amb);
-  padding: 0 5px;
-  font-weight: 600;
-}
-.lg-keys em {
-  font-style: normal;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  color: color-mix(in srgb, var(--dim) 70%, transparent);
-}
-.lg-keys > span[data-state="denied"] em {
-  color: var(--dn);
-}
-.lg-keys > span[data-state="denied"] b {
-  background: var(--dn);
-}
-.lg-keys > span[data-state="verify"] {
-  color: var(--ink);
-  animation: lg-pulse 0.6s var(--d) infinite alternate;
-}
-.lg-keys > span[data-state="verify"] em {
-  color: var(--amb);
-}
-@keyframes lg-pulse {
-  from { background: transparent; }
-  to { background: color-mix(in srgb, var(--amb) 20%, transparent); }
-}
-
-@media (max-width: 480px) {
-  .lg-card {
-    padding: 18px 16px 0;
-  }
-  .lg-bell {
-    margin: 16px -16px 0;
-    padding: 8px 16px;
-  }
-  .lg-mark {
-    width: 68px;
-  }
-  .lg-name {
-    font-size: 34px;
-  }
-  .lg-type {
-    white-space: normal;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .lg-stage *,
-  .lg-stage *::before,
-  .lg-stage *::after,
-  .lg-crt,
-  .lg-crt::after {
-    animation: none !important;
-    transition: none !important;
-  }
-  .lg-mark > span:nth-child(n + 2) {
-    display: none;
+  .lg-panel,
+  .lg-spin {
+    animation: none;
   }
 }

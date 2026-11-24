@@ -149,6 +149,9 @@ a {
   -webkit-mask: url("/sm-mark.png") center / contain no-repeat;
   mask: url("/sm-mark.png") center / contain no-repeat;
 }
+:root[data-theme="light"] .logo-mark {
+  background: #fff;
+}
 input.cmd {
   flex: 1;
   min-width: 120px;
