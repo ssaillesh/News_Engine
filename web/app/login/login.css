@@ -1,15 +1,16 @@
-/* Sign-in "boot screen". Colours come from the theme tokens in globals.css,
-   so it follows the light/dark toggle. All motion stops under reduced motion. */
+/* Sign-in terminal. Plain (global) CSS with an lg- prefix: the Turbopack rule in
+   next.config.ts sends every *.css through Tailwind, which turns off CSS Modules.
+   Colours come from the theme tokens, so it follows the light/dark toggle, and
+   all motion stops under prefers-reduced-motion. */
 
 .lg-stage {
   position: relative;
   flex: 1;
-  display: grid;
-  place-items: center;
-  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 35px);
   overflow: hidden;
   isolation: isolate;
-  min-height: calc(100vh - 35px);
 }
 
 .lg-canvas {
@@ -20,20 +21,138 @@
   z-index: -2;
 }
 
-/* Scanlines and a vignette over the chart, like an old trading monitor. */
+/* Scanlines, a vignette and a slow rolling refresh bar, like an old trading monitor. */
 .lg-crt {
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
-    repeating-linear-gradient(to bottom, transparent 0 2px, color-mix(in srgb, var(--bg) 35%, transparent) 2px 3px),
-    radial-gradient(ellipse at center, transparent 35%, color-mix(in srgb, var(--bg) 85%, transparent) 100%);
-  animation: flicker 6s infinite steps(1);
+    repeating-linear-gradient(to bottom, transparent 0 2px, color-mix(in srgb, var(--bg) 40%, transparent) 2px 3px),
+    radial-gradient(ellipse at center, transparent 30%, color-mix(in srgb, var(--bg) 90%, transparent) 100%);
+  animation: lg-flicker 7s infinite steps(1);
 }
-@keyframes flicker {
-  0%, 97%, 100% { opacity: 1; }
-  98% { opacity: 0.85; }
+.lg-crt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--amb) 5%, transparent), transparent);
+  animation: lg-roll 9s linear infinite;
+}
+@keyframes lg-flicker {
+  0%, 96%, 100% { opacity: 1; }
+  97% { opacity: 0.8; }
+  98% { opacity: 1; }
+  99% { opacity: 0.9; }
+}
+@keyframes lg-roll {
+  from { top: -120px; }
+  to { top: 100%; }
+}
+
+/* ── tape ─────────────────────────────────────────────────────────────── */
+.lg-tape {
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--pane) 88%, transparent);
+  font-size: 11px;
+  mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+.lg-tape-run {
+  display: inline-flex;
+  animation: lg-tape 60s linear infinite;
+}
+.lg-tick {
+  display: inline-flex;
+  gap: 8px;
+  padding: 5px 18px;
+  border-right: 1px solid var(--rule);
+}
+.lg-tick b {
+  color: var(--amb);
+  font-weight: 600;
+}
+@keyframes lg-tape {
+  to { transform: translateX(-50%); }
+}
+
+/* ── layout ───────────────────────────────────────────────────────────── */
+.lg-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 460px);
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  padding: 28px 16px;
+}
+.lg-panel {
+  display: none;
+}
+@media (min-width: 1180px) {
+  .lg-main {
+    grid-template-columns: minmax(0, 340px) minmax(0, 460px) minmax(0, 340px);
+  }
+  .lg-panel {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--rule);
+    background: color-mix(in srgb, var(--pane) 80%, transparent);
+    backdrop-filter: blur(4px);
+    animation: lg-rise 0.7s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+}
+.lg-foot {
+  margin: 0;
+  padding: 6px 8px;
+  border-top: 1px solid var(--rule);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+/* World clock. */
+.lg-wclk {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+.lg-wclk td {
+  padding: 5px 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--rule) 60%, transparent);
+  white-space: nowrap;
+}
+.lg-wclk td:last-child {
+  text-align: right;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+.lg-wclk tr:hover td {
+  background: var(--sel);
+}
+
+/* Hex stream. */
+.lg-hex {
+  padding: 6px 8px;
+  font-size: 10.5px;
+  line-height: 1.62;
+  overflow: hidden;
+  height: calc(20 * 1.62 * 10.5px + 12px);
+}
+.lg-hex > div {
+  display: flex;
+  gap: 10px;
+  white-space: nowrap;
+}
+.lg-hex > div > span:nth-child(2) {
+  flex: 1;
+  color: color-mix(in srgb, var(--ink) 75%, transparent);
+}
+.lg-hex > div:last-child {
+  color: var(--hot);
 }
 
 /* ── card ─────────────────────────────────────────────────────────────── */
@@ -41,17 +160,15 @@
   --d: 0s;
   position: relative;
   width: 100%;
-  max-width: 440px;
-  background: color-mix(in srgb, var(--pane) 82%, transparent);
+  background: color-mix(in srgb, var(--pane) 86%, transparent);
   backdrop-filter: blur(6px);
   border: 1px solid color-mix(in srgb, var(--amb) 45%, var(--rule));
   box-shadow:
     0 0 0 1px color-mix(in srgb, var(--bg) 60%, transparent),
-    0 0 60px -10px color-mix(in srgb, var(--amb) 35%, transparent);
+    0 0 70px -12px color-mix(in srgb, var(--amb) 40%, transparent);
   padding: 22px 22px 0;
-  animation: rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: lg-rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-/* Corner brackets. */
 .lg-card::before,
 .lg-card::after {
   content: "";
@@ -73,101 +190,106 @@
   border-left: 0;
   border-top: 0;
 }
-@keyframes rise {
+@keyframes lg-rise {
   from { opacity: 0; transform: translateY(14px) scale(0.98); }
   to { opacity: 1; transform: none; }
 }
 
 .lg-denied {
   border-color: var(--dn);
-  box-shadow: 0 0 60px -10px color-mix(in srgb, var(--dn) 45%, transparent);
-  animation: shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  box-shadow: 0 0 70px -12px color-mix(in srgb, var(--dn) 50%, transparent);
+  animation: lg-shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 .lg-denied::before,
 .lg-denied::after {
   border-color: var(--dn);
 }
-@keyframes shake {
+@keyframes lg-shake {
   10%, 90% { transform: translateX(-2px); }
   20%, 80% { transform: translateX(4px); }
   30%, 50%, 70% { transform: translateX(-7px); }
   40%, 60% { transform: translateX(7px); }
 }
 
-/* ── wordmark ─────────────────────────────────────────────────────────── */
-.lg-head > span {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 0.6em;
-  color: var(--dim);
+/* ── logo mark ────────────────────────────────────────────────────────── */
+.lg-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
-.lg-glitch {
+/* "THE HUB": big, tight, with a faint amber glow. */
+.lg-name {
+  margin: 0;
+  font: 700 44px / 0.95 var(--font-archivo), Archivo, sans-serif;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-shadow: 0 0 22px color-mix(in srgb, var(--amb) 30%, transparent);
+  white-space: nowrap;
+}
+/* Three copies of the mark: the amber one, plus two that slice and jitter. */
+.lg-mark {
   position: relative;
-  margin: 2px 0 4px;
-  font: 700 clamp(64px, 18vw, 92px) / 0.9 var(--font-archivo), Archivo, sans-serif;
-  letter-spacing: -0.02em;
-  color: var(--amb);
-  text-shadow: 0 0 24px color-mix(in srgb, var(--amb) 45%, transparent);
+  flex: none;
+  width: 92px;
+  aspect-ratio: 107 / 127;
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--amb) 55%, transparent));
 }
-.lg-glitch::before,
-.lg-glitch::after {
-  content: attr(data-text);
+.lg-mark > span {
   position: absolute;
   inset: 0;
-  pointer-events: none;
+  -webkit-mask: url("/sm-mark.png") center / contain no-repeat;
+  mask: url("/sm-mark.png") center / contain no-repeat;
+  background: var(--amb);
 }
-.lg-glitch::before {
-  color: var(--hot);
-  animation: slice-a 4.5s infinite steps(1);
+.lg-mark > span:nth-child(2) {
+  background: var(--hot);
+  animation: lg-slice-a 5s infinite steps(1);
 }
-.lg-glitch::after {
-  color: var(--dn);
+.lg-mark > span:nth-child(3) {
+  background: var(--dn);
   mix-blend-mode: screen;
-  animation: slice-b 4.5s infinite steps(1);
+  animation: lg-slice-b 5s infinite steps(1);
 }
-@keyframes slice-a {
+@keyframes lg-slice-a {
   0%, 88%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
-  89% { clip-path: inset(12% 0 62% 0); transform: translateX(-5px); }
-  91% { clip-path: inset(58% 0 18% 0); transform: translateX(4px); }
-  93% { clip-path: inset(32% 0 44% 0); transform: translateX(-2px); }
+  89% { clip-path: inset(12% 0 62% 0); transform: translateX(-6px); }
+  91% { clip-path: inset(58% 0 18% 0); transform: translateX(5px); }
+  93% { clip-path: inset(32% 0 44% 0); transform: translateX(-3px); }
 }
-@keyframes slice-b {
+@keyframes lg-slice-b {
   0%, 89%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
-  90% { clip-path: inset(66% 0 8% 0); transform: translateX(5px); }
-  92% { clip-path: inset(6% 0 76% 0); transform: translateX(-4px); }
+  90% { clip-path: inset(66% 0 8% 0); transform: translateX(6px); }
+  92% { clip-path: inset(6% 0 76% 0); transform: translateX(-5px); }
 }
 
-/* Typed tagline. */
+/* Typed tagline, revealed left to right. */
 .lg-type {
-  margin: 0;
-  font-size: 12px;
-  color: var(--ink);
-  width: 30ch;
-  max-width: 100%;
-  overflow: hidden;
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: var(--amb);
   white-space: nowrap;
-  border-right: 2px solid transparent;
-  animation: typing 1s steps(30) 0.2s both;
+  animation: lg-typing 1s steps(38) 0.2s both;
 }
-@keyframes typing {
-  from { width: 0; }
+@keyframes lg-typing {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
 }
 
 /* ── boot log ─────────────────────────────────────────────────────────── */
 .lg-boot {
   list-style: none;
-  margin: 16px 0 0;
+  margin: 18px 0 0;
   padding: 10px 0 0;
   border-top: 1px dashed var(--rule);
   font-size: 11px;
-  line-height: 1.8;
+  line-height: 1.85;
   color: var(--ink);
 }
 .lg-boot li,
-.lg-mods li {
-  animation: appear 0.01s var(--d) both;
+.lg-keys > span {
+  animation: lg-appear 0.01s var(--d) both;
 }
-@keyframes appear {
+@keyframes lg-appear {
   from { opacity: 0; }
 }
 .lg-cursor {
@@ -177,60 +299,13 @@
   margin-left: 6px;
   vertical-align: -2px;
   background: var(--amb);
-  animation: blink 1s steps(1) infinite;
+  animation: lg-blink 1s steps(1) infinite;
 }
-@keyframes blink {
+.lg-cursor-dn {
+  background: var(--dn);
+}
+@keyframes lg-blink {
   50% { opacity: 0; }
-}
-
-/* ── modules (one per page) ───────────────────────────────────────────── */
-.lg-mods {
-  list-style: none;
-  margin: 12px 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
-  gap: 4px;
-  font-size: 11px;
-}
-.lg-mods li {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-  padding: 4px 6px;
-  border: 1px solid var(--rule);
-  background: color-mix(in srgb, var(--bg) 50%, transparent);
-}
-.lg-mods b {
-  color: var(--amb);
-}
-.lg-mods span {
-  flex: 1;
-  min-width: 0;
-}
-.lg-mods em {
-  font-style: normal;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  color: var(--dim);
-}
-.lg-mods li[data-state="denied"] {
-  border-color: color-mix(in srgb, var(--dn) 50%, var(--rule));
-}
-.lg-mods li[data-state="denied"] em {
-  color: var(--dn);
-}
-.lg-mods li[data-state="verify"] {
-  border-color: var(--amb);
-  animation: pulse 0.7s var(--d) infinite alternate;
-}
-.lg-mods li[data-state="verify"] em {
-  color: var(--amb);
-}
-@keyframes pulse {
-  from { background: transparent; }
-  to { background: color-mix(in srgb, var(--amb) 18%, transparent); }
 }
 
 /* ── form ─────────────────────────────────────────────────────────────── */
@@ -238,18 +313,20 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 18px;
+  margin-top: 16px;
 }
 .lg-form label {
+  display: flex;
+  justify-content: space-between;
   font-size: 10px;
   letter-spacing: 0.14em;
-  color: var(--dim);
+  color: var(--amb);
 }
 .lg-prompt {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 10px;
+  gap: 10px;
+  padding: 0 12px;
   border: 1px solid var(--rule);
   background: var(--bg);
   transition: border-color 0.15s, box-shadow 0.15s;
@@ -260,13 +337,13 @@
 }
 .lg-prompt > span {
   color: var(--amb);
-  font-size: 18px;
-  line-height: 1;
+  font-size: 12px;
+  font-weight: 600;
 }
 .lg-prompt input {
   flex: 1;
   min-width: 0;
-  padding: 10px 0;
+  padding: 11px 0;
   background: transparent;
   border: 0;
   outline: 0;
@@ -284,6 +361,7 @@
   color: var(--dn);
 }
 
+/* The sign-in key, styled after a terminal's GO key. */
 .lg-go {
   position: relative;
   overflow: hidden;
@@ -291,16 +369,15 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 40px;
+  min-height: 42px;
   border: 0;
   cursor: pointer;
   background: var(--amb);
   color: #000;
   font-size: 13px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
 }
-/* A light sweep across the button on hover. */
 .lg-go::after {
   content: "";
   position: absolute;
@@ -318,17 +395,21 @@
 .lg-go kbd {
   font: inherit;
   font-size: 11px;
-  padding: 1px 5px;
-  border: 1px solid rgb(0 0 0 / 0.4);
+  letter-spacing: 0.06em;
+  padding: 2px 6px;
+  background: #0b7a3b;
+  color: #fff;
+  border-radius: 2px;
+  box-shadow: inset 0 -2px 0 rgb(0 0 0 / 0.35);
 }
 .lg-dots::after {
   content: "";
   display: inline-block;
   width: 3ch;
   text-align: left;
-  animation: dots 1.2s steps(4) infinite;
+  animation: lg-dots 1.2s steps(4) infinite;
 }
-@keyframes dots {
+@keyframes lg-dots {
   0% { content: ""; }
   25% { content: "."; }
   50% { content: ".."; }
@@ -339,14 +420,14 @@
   background: linear-gradient(90deg, transparent, var(--hot), transparent);
   background-size: 40% 100%;
   background-repeat: no-repeat;
-  animation: sweep 0.9s linear infinite;
+  animation: lg-sweep 0.9s linear infinite;
 }
-@keyframes sweep {
+@keyframes lg-sweep {
   from { background-position: -40% 0; }
   to { background-position: 140% 0; }
 }
 
-/* ── market bell ──────────────────────────────────────────────────────── */
+/* ── market bell (card footer) ────────────────────────────────────────── */
 .lg-bell {
   display: flex;
   flex-wrap: wrap;
@@ -373,17 +454,63 @@
 }
 .lg-dotUp {
   background: var(--up);
-  box-shadow: 0 0 0 0 var(--up);
-  animation: ping 1.8s infinite;
+  animation: lg-ping 1.8s infinite;
 }
 .lg-dotDn {
   background: var(--dn);
 }
-@keyframes ping {
-  70% { box-shadow: 0 0 0 6px transparent; }
+@keyframes lg-ping {
+  0% { box-shadow: 0 0 0 0 var(--up); }
+  70%, 100% { box-shadow: 0 0 0 6px transparent; }
 }
 
-@media (max-width: 420px) {
+/* ── function-key strip: the pages the sign-in unlocks ────────────────── */
+.lg-keys {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--pane) 90%, transparent);
+  font-size: 11px;
+}
+.lg-keys > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-right: 1px solid var(--rule);
+  color: var(--dim);
+}
+.lg-keys b {
+  color: #000;
+  background: var(--amb);
+  padding: 0 5px;
+  font-weight: 600;
+}
+.lg-keys em {
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: color-mix(in srgb, var(--dim) 70%, transparent);
+}
+.lg-keys > span[data-state="denied"] em {
+  color: var(--dn);
+}
+.lg-keys > span[data-state="denied"] b {
+  background: var(--dn);
+}
+.lg-keys > span[data-state="verify"] {
+  color: var(--ink);
+  animation: lg-pulse 0.6s var(--d) infinite alternate;
+}
+.lg-keys > span[data-state="verify"] em {
+  color: var(--amb);
+}
+@keyframes lg-pulse {
+  from { background: transparent; }
+  to { background: color-mix(in srgb, var(--amb) 20%, transparent); }
+}
+
+@media (max-width: 480px) {
   .lg-card {
     padding: 18px 16px 0;
   }
@@ -391,18 +518,27 @@
     margin: 16px -16px 0;
     padding: 8px 16px;
   }
+  .lg-mark {
+    width: 68px;
+  }
+  .lg-name {
+    font-size: 34px;
+  }
+  .lg-type {
+    white-space: normal;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .lg-stage *,
   .lg-stage *::before,
   .lg-stage *::after,
-  .lg-crt {
+  .lg-crt,
+  .lg-crt::after {
     animation: none !important;
     transition: none !important;
   }
-  .lg-glitch::before,
-  .lg-glitch::after {
+  .lg-mark > span:nth-child(n + 2) {
     display: none;
   }
 }

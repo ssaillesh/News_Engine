@@ -7,7 +7,7 @@ const archivo = Archivo({ variable: "--font-archivo", subsets: ["latin"], weight
 const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500", "600"] });
 
 export const metadata: Metadata = {
-  title: { default: "Investment Hub", template: "%s · Investment Hub" },
+  title: { default: "The Hub", template: "%s · The Hub" },
   description: "Policy to markets: Washington, news impact, prices and your portfolio in one terminal.",
 };
 

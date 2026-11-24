@@ -20,6 +20,7 @@ export async function proxy(req: NextRequest) {
   return NextResponse.redirect(login);
 }
 
+// The logo and app icon are public: the sign-in page shows them before a session exists.
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|icon.png|sm-mark.png).*)"],
 };

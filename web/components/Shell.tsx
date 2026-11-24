@@ -381,8 +381,8 @@ function Header({ path, signOut }: { path: string | null; signOut: boolean }) {
   return (
     <>
       <header className="hdr">
-        <Link href="/" className="logo m" aria-label="Investment Hub home">
-          HUB
+        <Link href="/" className="logo m" aria-label="The Hub home">
+          <span className="logo-mark" aria-hidden />
         </Link>
         {login ? <span style={{ flex: 1 }} /> : <Command path={path} inputRef={cmd} />}
         <Clock path={path} />

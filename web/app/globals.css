@@ -140,6 +140,15 @@ a {
   display: flex;
   align-items: center;
 }
+/* The SM mark, cut out of the logo image and painted in the title colour. */
+.logo-mark {
+  display: block;
+  width: 20px;
+  height: 22px;
+  background: #000;
+  -webkit-mask: url("/sm-mark.png") center / contain no-repeat;
+  mask: url("/sm-mark.png") center / contain no-repeat;
+}
 input.cmd {
   flex: 1;
   min-width: 120px;
