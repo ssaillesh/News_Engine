@@ -6,9 +6,17 @@ import "./globals.css";
 const archivo = Archivo({ variable: "--font-archivo", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500", "600"] });
 
+const DESCRIPTION =
+  "A markets terminal linking Washington, the news and prices: every story scored for sentiment and market impact, next to the stocks, sectors and prediction markets it moves.";
+
+// The link preview (app/opengraph-image.png) is what people see when the URL is
+// shared, so every page carries the same name, description and card.
 export const metadata: Metadata = {
   title: { default: "The Hub", template: "%s · The Hub" },
-  description: "Policy to markets: Washington, news impact, prices and your portfolio in one terminal.",
+  description: DESCRIPTION,
+  applicationName: "The Hub",
+  openGraph: { type: "website", siteName: "The Hub", title: "The Hub · From policy to price", description: DESCRIPTION },
+  twitter: { card: "summary_large_image", title: "The Hub · From policy to price", description: DESCRIPTION },
 };
 
 // Applied before first paint so a light-theme choice never flashes dark.
