@@ -1,0 +1,408 @@
+/* Sign-in "boot screen". Colours come from the theme tokens in globals.css,
+   so it follows the light/dark toggle. All motion stops under reduced motion. */
+
+.lg-stage {
+  position: relative;
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: calc(100vh - 35px);
+}
+
+.lg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+/* Scanlines and a vignette over the chart, like an old trading monitor. */
+.lg-crt {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 2px, color-mix(in srgb, var(--bg) 35%, transparent) 2px 3px),
+    radial-gradient(ellipse at center, transparent 35%, color-mix(in srgb, var(--bg) 85%, transparent) 100%);
+  animation: flicker 6s infinite steps(1);
+}
+@keyframes flicker {
+  0%, 97%, 100% { opacity: 1; }
+  98% { opacity: 0.85; }
+}
+
+/* ── card ─────────────────────────────────────────────────────────────── */
+.lg-card {
+  --d: 0s;
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: color-mix(in srgb, var(--pane) 82%, transparent);
+  backdrop-filter: blur(6px);
+  border: 1px solid color-mix(in srgb, var(--amb) 45%, var(--rule));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--bg) 60%, transparent),
+    0 0 60px -10px color-mix(in srgb, var(--amb) 35%, transparent);
+  padding: 22px 22px 0;
+  animation: rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+/* Corner brackets. */
+.lg-card::before,
+.lg-card::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--amb);
+  pointer-events: none;
+}
+.lg-card::before {
+  top: -5px;
+  left: -5px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.lg-card::after {
+  bottom: -5px;
+  right: -5px;
+  border-left: 0;
+  border-top: 0;
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.lg-denied {
+  border-color: var(--dn);
+  box-shadow: 0 0 60px -10px color-mix(in srgb, var(--dn) 45%, transparent);
+  animation: shake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+.lg-denied::before,
+.lg-denied::after {
+  border-color: var(--dn);
+}
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-7px); }
+  40%, 60% { transform: translateX(7px); }
+}
+
+/* ── wordmark ─────────────────────────────────────────────────────────── */
+.lg-head > span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.6em;
+  color: var(--dim);
+}
+.lg-glitch {
+  position: relative;
+  margin: 2px 0 4px;
+  font: 700 clamp(64px, 18vw, 92px) / 0.9 var(--font-archivo), Archivo, sans-serif;
+  letter-spacing: -0.02em;
+  color: var(--amb);
+  text-shadow: 0 0 24px color-mix(in srgb, var(--amb) 45%, transparent);
+}
+.lg-glitch::before,
+.lg-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.lg-glitch::before {
+  color: var(--hot);
+  animation: slice-a 4.5s infinite steps(1);
+}
+.lg-glitch::after {
+  color: var(--dn);
+  mix-blend-mode: screen;
+  animation: slice-b 4.5s infinite steps(1);
+}
+@keyframes slice-a {
+  0%, 88%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
+  89% { clip-path: inset(12% 0 62% 0); transform: translateX(-5px); }
+  91% { clip-path: inset(58% 0 18% 0); transform: translateX(4px); }
+  93% { clip-path: inset(32% 0 44% 0); transform: translateX(-2px); }
+}
+@keyframes slice-b {
+  0%, 89%, 100% { clip-path: inset(100% 0 0 0); transform: none; }
+  90% { clip-path: inset(66% 0 8% 0); transform: translateX(5px); }
+  92% { clip-path: inset(6% 0 76% 0); transform: translateX(-4px); }
+}
+
+/* Typed tagline. */
+.lg-type {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink);
+  width: 30ch;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid transparent;
+  animation: typing 1s steps(30) 0.2s both;
+}
+@keyframes typing {
+  from { width: 0; }
+}
+
+/* ── boot log ─────────────────────────────────────────────────────────── */
+.lg-boot {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 10px 0 0;
+  border-top: 1px dashed var(--rule);
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--ink);
+}
+.lg-boot li,
+.lg-mods li {
+  animation: appear 0.01s var(--d) both;
+}
+@keyframes appear {
+  from { opacity: 0; }
+}
+.lg-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 12px;
+  margin-left: 6px;
+  vertical-align: -2px;
+  background: var(--amb);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ── modules (one per page) ───────────────────────────────────────────── */
+.lg-mods {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  gap: 4px;
+  font-size: 11px;
+}
+.lg-mods li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  padding: 4px 6px;
+  border: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--bg) 50%, transparent);
+}
+.lg-mods b {
+  color: var(--amb);
+}
+.lg-mods span {
+  flex: 1;
+  min-width: 0;
+}
+.lg-mods em {
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+}
+.lg-mods li[data-state="denied"] {
+  border-color: color-mix(in srgb, var(--dn) 50%, var(--rule));
+}
+.lg-mods li[data-state="denied"] em {
+  color: var(--dn);
+}
+.lg-mods li[data-state="verify"] {
+  border-color: var(--amb);
+  animation: pulse 0.7s var(--d) infinite alternate;
+}
+.lg-mods li[data-state="verify"] em {
+  color: var(--amb);
+}
+@keyframes pulse {
+  from { background: transparent; }
+  to { background: color-mix(in srgb, var(--amb) 18%, transparent); }
+}
+
+/* ── form ─────────────────────────────────────────────────────────────── */
+.lg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 18px;
+}
+.lg-form label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--dim);
+}
+.lg-prompt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.lg-prompt:focus-within {
+  border-color: var(--amb);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--amb) 18%, transparent);
+}
+.lg-prompt > span {
+  color: var(--amb);
+  font-size: 18px;
+  line-height: 1;
+}
+.lg-prompt input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: var(--hot);
+  caret-color: var(--amb);
+  font: 500 16px var(--font-plex-mono), "IBM Plex Mono", monospace;
+  letter-spacing: 0.25em;
+}
+.lg-prompt input::placeholder {
+  color: var(--rule);
+}
+.lg-err {
+  margin: 0;
+  font-size: 11px;
+  color: var(--dn);
+}
+
+.lg-go {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 40px;
+  border: 0;
+  cursor: pointer;
+  background: var(--amb);
+  color: #000;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+/* A light sweep across the button on hover. */
+.lg-go::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
+  transform: translateX(-100%);
+}
+.lg-go:hover::after {
+  transition: transform 0.6s;
+  transform: translateX(100%);
+}
+.lg-go:disabled {
+  cursor: progress;
+}
+.lg-go kbd {
+  font: inherit;
+  font-size: 11px;
+  padding: 1px 5px;
+  border: 1px solid rgb(0 0 0 / 0.4);
+}
+.lg-dots::after {
+  content: "";
+  display: inline-block;
+  width: 3ch;
+  text-align: left;
+  animation: dots 1.2s steps(4) infinite;
+}
+@keyframes dots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
+}
+.lg-progress {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--hot), transparent);
+  background-size: 40% 100%;
+  background-repeat: no-repeat;
+  animation: sweep 0.9s linear infinite;
+}
+@keyframes sweep {
+  from { background-position: -40% 0; }
+  to { background-position: 140% 0; }
+}
+
+/* ── market bell ──────────────────────────────────────────────────────── */
+.lg-bell {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin: 18px -22px 0;
+  padding: 8px 22px;
+  border-top: 1px solid var(--rule);
+  font: 500 10px var(--font-plex-mono), "IBM Plex Mono", monospace;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+.lg-bell b {
+  font-weight: 600;
+}
+.lg-dotUp,
+.lg-dotDn {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  vertical-align: 1px;
+}
+.lg-dotUp {
+  background: var(--up);
+  box-shadow: 0 0 0 0 var(--up);
+  animation: ping 1.8s infinite;
+}
+.lg-dotDn {
+  background: var(--dn);
+}
+@keyframes ping {
+  70% { box-shadow: 0 0 0 6px transparent; }
+}
+
+@media (max-width: 420px) {
+  .lg-card {
+    padding: 18px 16px 0;
+  }
+  .lg-bell {
+    margin: 16px -16px 0;
+    padding: 8px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lg-stage *,
+  .lg-stage *::before,
+  .lg-stage *::after,
+  .lg-crt {
+    animation: none !important;
+    transition: none !important;
+  }
+  .lg-glitch::before,
+  .lg-glitch::after {
+    display: none;
+  }
+}
